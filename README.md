@@ -1,21 +1,26 @@
-![dataeasegit](https://github.com/Phoenix-Team-Fatec/DataEase/assets/69217649/7b36309a-c0fa-4f39-8e69-e46377f52392)
+![dataeasegit](https://github.com/Phoenix-Team-Fatec/)
 
 <span id="topo">
-<h1 align="center"> FATEC SJC - 3º Semestre ADS - DataEase </h1>
+<h1 align="center"> FATEC SJC - 3º Semestre ADS - OAK RH </h1>
   
 ### Backlog do Produto
 
 | Rank     | Prioridade |  US   | Item | Sprint | 
 | :----: | :----: | :----: | :----: | :----: |
-| #01    | Alta | EU, enquanto cliente, quero utilizar o DataEase para que eu não precise me preocupar com configurações de hardware do meu computador, sendo ele o servidor local  | Desktop App |  2  |
-| #02    | Alta |EU, enquanto cliente, quero traduzir linguagem natural em código SQL | Desktop App |  2  | 
-| #03    | Alta |EU, enquanto cliente, quero que o DataEase retorne as informações do banco de dados | Desktop App |  2  | 
-| #04    | Média |EU, enquanto cliente, quero uma interface contendo 3 principais itens, uma caixa de input do texto do usuário, botão de enviar e dados do banco | Desktop App | 2  |
-| #05    | Média |EU, enquanto cliente, quero conseguir mudar meu banco de dados, que será consultado de acordo com a minha necessidade | Desktop App | 3 |
-| #06    | Média |EU, enquanto cliente, quero conseguir criar um usuário para utilizar o aplicativo | Desktop App | 3 |
-| #07    | Média |EU, enquanto cliente, quero conseguir fazer o cadastro do meu banco de dados no aplicativo | Desktop App | 3 |
-| #08    | Média |EU, enquanto cliente, quero fazer login no aplicativo | Desktop App | 3 | 
-| #09    | Média |EU, enquanto cliente, quero conseguir mudar meu modelo de linguagem (LM), de acordo com a minhha necesssidade | Desktop App| 4 |
+| #01    | Alta |EU, enquanto cliente, quero utilizar o "WEB RH" para que eu possa gerenciar os membros de minha empresa por meio  da vizualização de dashboards que relatem feedback e pesquisa de clima e cultura  | Web App | 2  |
+| #02    | Alta |EU, enquanto Admin, quero cadastrar novos usuários e classificá-los como Líder, Liderado ou ambos para definir os níveis de acesso ao fazer login.| Web App |  1  |
+| #03    | Alta |EU, enquanto Admin, quero cadastrar novas equipes e gerenciá-las | Web App |  1  | 
+| #04    | Alta |EU, enquanto Admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | Web App |  2  | 
+| #05    | Média |EU, enquanto cliente, quero uma interface que permita login seguro e acesso personalizado para Admins, Líderes, e Liderados. A interface deve possibilitar o cadastro e gestão de pesquisas e categorias, visualização de Dashboards personalizados (Pessoal, Liderados, Geral) com filtros de data e exportação em PDF, além de garantir a organização das respostas para acompanhamento da evolução das equipes e colaboradores ao longo do tempo. | Web App | 2  |
+| #06    | Média |EU, enquanto Admin, quero poder  escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado.  | Web App | 2 |
+| #07    | Média |EU, enquanto cliente, quero fazer login no site variando pelos niveis de acesso Admin, Líder e Liderado | Web App | 1 |
+| #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| Web App | 3 |
+| #09    | Média |EU, enquanto cliente, quero exportar as informações do meu dashboard em formato PDF para arquivamento e consulta futura| Web App | 4 | 
+| #10    | Média |EU, enquanto cliente, quero uma interface com filtros de data que permita visualizar a evolução dos resultados ao longo do tempo ou em um período específico, para acompanhar o progresso de forma detalhada.   | Web App| 4 |
+| #11    | Alta |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards dos Liderados e Líderes para analisar e comparar as avaliações de diferentes períodos e identificar tendências e áreas de melhoria ao longo do tempo.| Web App |  1  | 
+
+
+
 
 
 
@@ -36,15 +41,16 @@
 | ITEM   | STATUS |
 | :----: | :----: |
 |Criar repositório no GitHub| :white_check_mark: |
-|Backlog do produto| :white_check_mark: |
-|Backlog da sprint| :white_check_mark: |
-|Desenvolvimento de Protótipo no Figma| :white_check_mark: |
-|Estudo da biblioteca LangChain4J| :white_check_mark: |
-|Estudo da biblioteca Java Swing| :white_check_mark: |
-|Estudo do GGUF| :white_check_mark: |
-|Estudo do LMStudio| :white_check_mark: |
+|Backlog do produto| |
+|Backlog da sprint| |
+|Desenvolvimento de Protótipo no Figma|  |
+|Cadastro e Login de Usuários e o seus níveis de acesso|  |
+|Cadastro de equipes e seu gerenciamento| |
+|Criação de interface usando React| |
+
 
 ### Sprint 2 - 
+
 
 ### Sprint 3 -
 
