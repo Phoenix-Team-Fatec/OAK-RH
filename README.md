@@ -5,19 +5,19 @@
   
 ### Backlog do Produto
 
-| Rank     | Prioridade |  US   | Item | Sprint | 
-| :----: | :----: | :----: | :----: | :----: |
-| #01    | Alta |EU, enquanto cliente, quero utilizar o "WEB RH" para que eu possa gerenciar os membros de minha empresa por meio  da vizualização de dashboards que relatem feedback e pesquisa de clima e cultura  | Web App | 2  |
-| #02    | Alta |EU, enquanto Admin, quero cadastrar novos usuários e classificá-los como Líder, Liderado ou ambos para definir os níveis de acesso ao fazer login.| Web App |  1  |
-| #03    | Alta |EU, enquanto Admin, quero cadastrar novas equipes e gerenciá-las | Web App |  1  | 
-| #04    | Alta |EU, enquanto Admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | Web App |  2  | 
-| #05    | Média |EU, enquanto cliente, quero uma interface que permita login seguro e acesso personalizado para Admins, Líderes, e Liderados. A interface deve possibilitar o cadastro e gestão de pesquisas e categorias, visualização de Dashboards personalizados (Pessoal, Liderados, Geral) com filtros de data e exportação em PDF, além de garantir a organização das respostas para acompanhamento da evolução das equipes e colaboradores ao longo do tempo. | Web App | 2  |
-| #06    | Média |EU, enquanto Admin, quero poder  escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado.  | Web App | 2 |
-| #07    | Média |EU, enquanto cliente, quero fazer login no site variando pelos niveis de acesso Admin, Líder e Liderado | Web App | 1 |
-| #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| Web App | 3 |
-| #09    | Média |EU, enquanto cliente, quero exportar as informações do meu dashboard em formato PDF para arquivamento e consulta futura| Web App | 4 | 
-| #10    | Média |EU, enquanto cliente, quero uma interface com filtros de data que permita visualizar a evolução dos resultados ao longo do tempo ou em um período específico, para acompanhar o progresso de forma detalhada.   | Web App| 4 |
-| #11    | Alta |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards dos Liderados e Líderes para analisar e comparar as avaliações de diferentes períodos e identificar tendências e áreas de melhoria ao longo do tempo.| Web App |  1  | 
+| Rank     | Prioridade |  US   | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
+| :----: | :----: | :----: | :----: | :----: | :----: | :----: |
+| #01    | Alta |EU, enquanto cliente, quero utilizar o "WEB RH" para que eu possa gerenciar os membros de minha empresa por meio  da vizualização de dashboards que relatem feedback e pesquisa de clima e cultura  | Horas | 2  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
+| #02    | Alta |EU, enquanto Admin, quero cadastrar novos usuários e classificá-los como Líder, Liderado ou ambos para definir os níveis de acesso ao fazer login.| Horas |  1  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #03    | Alta |EU, enquanto Admin, quero cadastrar novas equipes e gerenciá-las | Horas |  1  |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #04    | Alta |EU, enquanto Admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | Horas |  2  |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #05    | Média |EU, enquanto cliente, quero uma interface que permita visualizar todo conteúdo requisitado. | Horas | 2  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #06    | Média |EU, enquanto Admin, quero poder  escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado.  | Horas | 2 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #07    | Média |EU, enquanto cliente, quero fazer login no site variando pelos niveis de acesso Admin, Líder e Liderado | Horas | 1 |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| Horas | 3 |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #09    | Média |EU, enquanto cliente, quero exportar as informações do meu dashboard em formato PDF para arquivamento e consulta futura| Horas | 4 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
+| #10    | Média |EU, enquanto cliente, quero uma interface com filtros de data que permita visualizar a evolução dos resultados ao longo do tempo ou em um período específico, para acompanhar o progresso de forma detalhada.   | Horas | 4 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
+| #11    | Alta |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards dos Liderados e Líderes para analisar e comparar as avaliações de diferentes períodos e identificar tendências e áreas de melhoria ao longo do tempo.| Horas |  1  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
 
 
 
