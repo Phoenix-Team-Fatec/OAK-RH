@@ -7,17 +7,17 @@
 
 | Rank     | Prioridade |  US   | Estimativa | Sprint | Requisito do Parceiro | Critério de aceitação |
 | :----: | :----: | :----: | :----: | :----: | :----: | :----: |
-| #01    | Alta |EU, enquanto cliente, quero utilizar o "WEB RH" para que eu possa gerenciar os membros de minha empresa por meio  da vizualização de dashboards que relatem feedback e pesquisa de clima e cultura  | Horas | 2  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
-| #02    | Alta |EU, enquanto Admin, quero cadastrar novos usuários e classificá-los como Líder, Liderado ou ambos para definir os níveis de acesso ao fazer login.| Horas |  1  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #03    | Alta |EU, enquanto Admin, quero cadastrar novas equipes e gerenciá-las | Horas |  1  |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #04    | Alta |EU, enquanto Admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | Horas |  2  |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #05    | Média |EU, enquanto cliente, quero uma interface que permita visualizar todo conteúdo requisitado. | Horas | 2  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #06    | Média |EU, enquanto Admin, quero poder  escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado.  | Horas | 2 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #07    | Média |EU, enquanto cliente, quero fazer login no site variando pelos niveis de acesso Admin, Líder e Liderado | Horas | 1 |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| Horas | 3 |  Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #09    | Média |EU, enquanto cliente, quero exportar as informações do meu dashboard em formato PDF para arquivamento e consulta futura| Horas | 4 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
-| #10    | Média |EU, enquanto cliente, quero uma interface com filtros de data que permita visualizar a evolução dos resultados ao longo do tempo ou em um período específico, para acompanhar o progresso de forma detalhada.   | Horas | 4 | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   |
-| #11    | Alta |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards dos Liderados e Líderes para analisar e comparar as avaliações de diferentes períodos e identificar tendências e áreas de melhoria ao longo do tempo.| Horas |  1  | Requisito Funcional 1(RF1)  | Possibilidade de gerenciamento   | 
+| #01    | Alta |EU, enquanto cliente, quero usar a 'OAK-RH' para gerenciar membros da empresa, visualizando dashboards com feedbacks e pesquisa de clima e cultura.  | 24 Horas | 2  | (RF1)  | O cliente consegue visualizar e gerenciar membros via dashboards que mostram feedback e clima e cultura. | 
+| #02    | Alta |EU, enquanto admin, quero gerenciar usuários e classificá-los como Líder, Liderado ou ambos, para definir níveis de acesso na realização do login.| 30 Horas |  1  | (RF1)  | O Admin consegue cadastrar e classificar usuários, definindo os níveis de acesso (Líder, Liderado, ambos). |
+| #03    | Alta |EU, enquanto admin, quero cadastrar novas equipes e gerenciá-las. | 20 Horas |  1  | (RF1) | O Admin pode criar e gerenciar equipes no sistema. |
+| #04    | Alta |EU, enquanto admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | 30 Horas |  2  | (RF1) | O Admin consegue cadastrar formulários de avaliação com diferentes tipos de perguntas e categorias |
+| #05    | Média |EU, enquanto cliente, quero visualizar todas as respostas de feedback das pesquisas de clima e cultura. | 20 Horas | 2  | (RF1)  | O cliente visualiza os resultados das respostas fornecidas nas pesquisas de clima e cultura. |
+| #06    | Média |EU, enquanto Admin, quero associar perguntas a avaliações específicas de autoavaliação, liderança ou liderado.| 25 Horas | 2 | (RF1)  | O Admin pode vincular perguntas a avaliações específicas (Autoavaliação, Liderança ou Liderado).  |
+| #07    | Média |EU, enquanto cliente, quero fazer login no site utilizando os perfis de Admin, Líder ou Liderado. | 15 Horas | 1 | (RF1)  |O cliente consegue logar usando perfis diferenciados com permissões adequadas. |
+| #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| 24 Horas | 3 |  (RF1)  | O cliente consegue utiliazar o site em dispositivos de resoluções diferentes sem perder a qualidade e atributos originais do produto. |
+| #09    | Média |EU, enquanto cliente, queroexportar informações dos Dashboards em formato PDF para análise posterior.| 20 Horas | 4 | (RF1)  | O cliente consegue exportar as informações do Dashboard em formato PDF. | 
+| #10    | Média |EU, enquanto cliente, quero ver relatórios que compararem avaliações anteriores com as atuais. | 30 Horas | 4 | (RF1)  | O cliente consegue visualizar comparações entre resultados antigos e novos de forma clara."   |
+| #11    | Alta |EU, enquanto Admin, queroaplicar filtros de data nos Dashboards de Líderes para analisar a evolução de times e indivíduos.| 15 Horas |  1  | (RF1)  | O Admin pode visualizar a evolução das equipes ao aplicar filtros de data  | 
 
 
 
@@ -27,7 +27,7 @@
 ## MVP
 <span id="mvp">
 
-![PHOENIX TEAM - 2SEM - DATAEASE](https://github.com/Phoenix-Team-Fatec/DataEase/assets/69217649/6169ea66-3a54-45be-af09-f715f152119b)
+![PHOENIX TEAM - 2SEM - DATAEASE]()
 
 ## Protótipo
 <span id="prototipo">
@@ -47,6 +47,7 @@
 |Cadastro e Login de Usuários e o seus níveis de acesso|  |
 |Cadastro de equipes e seu gerenciamento| |
 |Criação de interface usando React| |
+|Configuração do banco de dados para o cadastro de usuários e equipes | |
 
 
 ### Sprint 2 - 
@@ -60,10 +61,7 @@
 
 As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na construção do projeto:
 
-* <p>
-   <img align="left" title="html5-logo" height="30px" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/java.svg"/>
-   Java - Linguagem de Programação
- </p>
+
  
 * <p>
   <img align="left" title="figma-logo" height="30px" src="https://user-images.githubusercontent.com/76211125/227502784-c94d5e2d-2e39-449b-ba85-053b9106b979.png"/>
@@ -78,23 +76,16 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
 
 * <p>
    <img align="left" title="vscode" height="30px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/Idea-Dark.svg"/>
-   InteliJ - IDE
+   Vscode - IDE
  </p>
 
 * <p>
    <img align="left" title="vscode" height="30px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/MySQL-Dark.svg"/>
-   MySQL - Banco de dados
+  PostgreSQL - Banco de dados
  </p>
  
-* <p>
-   <img align="left" title="vscode" height="30px" src="https://camo.githubusercontent.com/d1f8b9902e03d83c107b07a7194886dec1176f748afa6eeb425023ef0a4a6642/68747470733a2f2f6c6d73747564696f2e61692f6173736574732f616e64726f69642d6368726f6d652d353132783531322e706e67"/>
-   LM Studio - Local AI
- </p>
- 
-* <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/DataEase/assets/69217649/1a8d8fbf-f2ae-4b75-bfe5-4ee7a7c53925"/>
-   LangChain4j - Biblioteca Java
- </p>
+
+
  
 
 <span id="equipe">
