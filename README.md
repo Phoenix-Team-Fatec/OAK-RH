@@ -10,14 +10,14 @@
 | #01    | Alta |EU, enquanto cliente, quero usar a 'OAK-RH' para gerenciar membros da empresa, visualizando dashboards com feedbacks e pesquisa de clima e cultura.  | 24 Horas | 2  | (RF1)  | O cliente consegue visualizar e gerenciar membros via dashboards que mostram feedback e clima e cultura. | 
 | #02    | Alta |EU, enquanto admin, quero gerenciar usuários e classificá-los como Líder, Liderado ou ambos, para definir níveis de acesso na realização do login.| 30 Horas |  1  | (RF1)  | O Admin consegue cadastrar e classificar usuários, definindo os níveis de acesso (Líder, Liderado, ambos). |
 | #03    | Alta |EU, enquanto admin, quero cadastrar novas equipes e gerenciá-las. | 20 Horas |  1  | (RF1) | O Admin pode criar e gerenciar equipes no sistema. |
-| #04    | Alta |EU, enquanto admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros  | 30 Horas |  2  | (RF1) | O Admin consegue cadastrar formulários de avaliação com diferentes tipos de perguntas e categorias |
+| #04    | Alta |EU, enquanto admin, quero cadastrar formulários com perguntas de avaliação com diferentes formatos (texto longo, escolha única, múltipla escolha) e diferentes tipos de categorias como Hard Skill, Soft Skill, Expectativas, Satisfação, entre outros.  | 30 Horas |  2  | (RF1) | O Admin consegue cadastrar formulários de avaliação com diferentes tipos de perguntas e categorias. |
 | #05    | Média |EU, enquanto cliente, quero visualizar todas as respostas de feedback das pesquisas de clima e cultura. | 20 Horas | 2  | (RF1)  | O cliente visualiza os resultados das respostas fornecidas nas pesquisas de clima e cultura. |
 | #06    | Média |EU, enquanto Admin, quero associar perguntas a avaliações específicas de autoavaliação, liderança ou liderado.| 25 Horas | 2 | (RF1)  | O Admin pode vincular perguntas a avaliações específicas (Autoavaliação, Liderança ou Liderado).  |
 | #07    | Média |EU, enquanto cliente, quero fazer login no site utilizando os perfis de Admin, Líder ou Liderado. | 15 Horas | 1 | (RF1)  |O cliente consegue logar usando perfis diferenciados com permissões adequadas. |
 | #08    | Média |EU, enquanto cliente, quero que o site tenha interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela.| 24 Horas | 3 |  (RF1)  | O cliente consegue utiliazar o site em dispositivos de resoluções diferentes sem perder a qualidade e atributos originais do produto. |
-| #09    | Média |EU, enquanto cliente, queroexportar informações dos Dashboards em formato PDF para análise posterior.| 20 Horas | 4 | (RF1)  | O cliente consegue exportar as informações do Dashboard em formato PDF. | 
-| #10    | Média |EU, enquanto cliente, quero ver relatórios que compararem avaliações anteriores com as atuais. | 30 Horas | 4 | (RF1)  | O cliente consegue visualizar comparações entre resultados antigos e novos de forma clara."   |
-| #11    | Alta |EU, enquanto Admin, queroaplicar filtros de data nos Dashboards de Líderes para analisar a evolução de times e indivíduos.| 15 Horas |  1  | (RF1)  | O Admin pode visualizar a evolução das equipes ao aplicar filtros de data  | 
+| #09    | Média |EU, enquanto cliente, quero exportar informações dos Dashboards em formato PDF para análise posterior.| 20 Horas | 4 | (RF1)  | O cliente consegue exportar as informações do Dashboard em formato PDF. | 
+| #10    | Média |EU, enquanto cliente, quero ver relatórios que compararem avaliações anteriores com as atuais. | 30 Horas | 4 | (RF1)  | O cliente consegue visualizar comparações entre resultados antigos e novos de forma clara.   |
+| #11    | Alta |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards de Líderes para analisar a evolução de times e indivíduos.| 15 Horas |  3  | (RF1)  | O Admin pode visualizar a evolução das equipes ao aplicar filtros de data.  | 
 
 
 
@@ -36,7 +36,7 @@
 
 ## Backlog das Sprints
 
-### Sprint 1 - Metodologia, tecnologias e protótipo
+### Sprint 1 - Metodologia, tecnologias , protótipo , cadastro ,  login , interface e banco de dados .
 
 | ITEM   | STATUS |
 | :----: | :----: |
@@ -48,6 +48,11 @@
 |Cadastro de equipes e seu gerenciamento| |
 |Criação de interface usando React| |
 |Configuração do banco de dados para o cadastro de usuários e equipes | |
+|Estudo do Node.js| |
+|Estudo do React| |
+|Estudo do JavaScript| |
+|Estudo do TypeScript| |
+|Estudo do PostgreSQL| |
 
 
 ### Sprint 2 - 
@@ -80,13 +85,30 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
  </p>
 
 * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/MySQL-Dark.svg"/>
+   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/postgresql.png"/>
   PostgreSQL - Banco de dados
  </p>
  
+* <p>
+   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/nodejs%20icon.png"/>
+  Node.js - Ambiente de execução de JavaScript
+ </p>
 
+ * <p>
+   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/js%20icon.jpeg"/> 
+   JavaScript - Linguagem de programação interpretada de alto nível
+ </p>
 
+ * <p>
+   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/React%20icon.jpeg"/> 
+   React - Biblioteca de código aberto para interfaces gráficas
+ </p>
  
+ * <p>
+   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/TypeScript%20icon.png"/> 
+   TypeScript - Linguagem de programação de código aberto
+ </p>
+
 
 <span id="equipe">
 
