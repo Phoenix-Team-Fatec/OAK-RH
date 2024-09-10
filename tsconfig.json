@@ -12,7 +12,7 @@
   },
   "include": [
     "server/src/**/*"
-  ]
+, "server/src/classes", "server/src/config", "server/src/controllers"  ]
 }
 
 
