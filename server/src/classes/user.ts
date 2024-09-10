@@ -10,6 +10,8 @@ export default abstract class User{
         this.password = password;
     }
 
+    
+
 
 
     abstract login(): void;

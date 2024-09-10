@@ -2,10 +2,13 @@ import { Pool } from "pg";
 import dotenv from "dotenv"
 
 
-dotenv.config({path:"src/classes/.env"});
+dotenv.config({path:"server/src/config/.env"});
 
 
 export default class ConnectionDB {
+    query(arg0: string, arg1: (string | boolean)[]) {
+        throw new Error("Method not implemented.");
+    }
 
     private pool: Pool
 
