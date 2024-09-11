@@ -4,15 +4,21 @@
   "description": "![dataeasegit](https://github.com/Phoenix-Team-Fatec/DataEase/assets/69217649/7b36309a-c0fa-4f39-8e69-e46377f52392)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node dist/index.js",
+    "cli": "ts-node scripts/cli.ts",
+    "dev": "ts-node-dev --respaw --transpile-only src/index.js",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "pg": "^8.12.0"
+    "pg": "^8.12.0",
+    "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.5.4"
+    "@types/node": "^22.5.4",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.5"
   }
 }
