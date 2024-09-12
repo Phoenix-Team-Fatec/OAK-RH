@@ -1,13 +1,18 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import cors from 'cors';
 import userRoutes from './routes/userRoutes';
+import dotenv from 'dotenv';
+import path = require('path');
+
+dotenv.config({ path: path.resolve(__dirname, 'config/.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
+app.use(cors())
+app.use(express.json());
 
-app.use('/api', userRoutes);
+app.use('/', userRoutes);
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

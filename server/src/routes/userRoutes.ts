@@ -4,6 +4,12 @@ import UserController from "../controllers/userController";
 const router = Router();
 const userController = new UserController();
 
-router.post("/users", (req, res) => userController.cadastrarUsuario(req, res));
+router.get("/", (req, res) => {
+    res.send("Servidor rodando")
+});
+
+router.post("/users", (req, res) => {
+    userController.cadastrarUsuario(req, res)
+});
 
 export default router

@@ -1,6 +1,7 @@
-import { Pool } from "pg";
+import { Pool } from "pg";  // Pool é usada para gerenciar um pool de conexões com banco de dados
 import dotenv from "dotenv";
 
+// Carrega as variáveis de ambiente
 dotenv.config({ path: "server/src/config/.env" });
 
 export default class ConnectionDB {
@@ -14,12 +15,11 @@ export default class ConnectionDB {
             password: String(process.env.DB_PASSWORD),
             port: Number(process.env.DB_PORT),
         });
-
-        // Opcional, Pool já gerencia automaticamente
+        
         this.connect();
     }
 
-    // Método que realiza a conexão ao banco, opcional se estiver usando apenas o pool
+    // Método privado para conectar com o banco de dados
     private async connect(): Promise<void> {
         try {
             const client = await this.pool.connect();
@@ -30,7 +30,7 @@ export default class ConnectionDB {
         }
     }
 
-    // Método para executar consultas ao banco de dados
+    // Método público para executar consultas ao banco de dados
     public async query(queryText: string, params: (string | boolean)[]): Promise<any> {
         try {
             const result = await this.pool.query(queryText, params);
