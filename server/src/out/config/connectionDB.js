@@ -46,11 +46,11 @@ dotenv_1.default.config({ path: "server/src/config/.env" });
 var ConnectionDB = /** @class */ (function () {
     function ConnectionDB() {
         this.pool = new pg_1.Pool({
-            user: process.env.DB_USER,
-            host: process.env.DB_HOST,
-            database: process.env.DB_NAME,
-            password: String(process.env.DB_PASSWORD),
-            port: Number(process.env.DB_PORT),
+            user: 'postgres',
+            host: 'localhost',
+            database: 'oak',
+            password: '1234',
+            port: 5432,
         });
         this.connect();
     }

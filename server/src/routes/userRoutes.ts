@@ -5,11 +5,16 @@ const router = Router();
 const userController = new UserController();
 
 router.get("/", (req, res) => {
-    res.send("Servidor rodando")
+  res.send("Servidores rodando");
 });
 
 router.post("/users", (req, res) => {
-    userController.cadastrarUsuario(req, res)
+  userController.cadastrarUsuario(req, res);
 });
 
-export default router
+router.get("/users", (req, res) => {
+    userController.listarUsuarios(req, res);
+  });
+  
+
+export default router;

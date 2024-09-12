@@ -18,18 +18,39 @@ export default class Admin extends User {
     }
 
     // Método para cadastrar novo usuário
-    public async cadastrarUsuario(nome: string, senha: string, email: string, is_admin: boolean): Promise<void>{
+    public async cadastrarUsuario(nome: string, email: string, senha: string, is_admin: boolean): Promise<void>{
         const db = new ConnectionDB();
 
         try{
             // Inserindo usuário no banco de dados
             await db.query(
-                "INSERT INTO users (nome, senha, email, is_admin) VALUES ($1, $2, $3, $4)",
-                [nome, senha, email, is_admin]
+                "INSERT INTO users (nome, email, senha, is_admin) VALUES ($1, $2, $3, $4)",
+                [nome, email, senha, is_admin]
             );
             console.log("Uusuário cadastrado com sucesso!");
         }catch(err){
             console.error("Erro ao cadastrar usuário:", err);
         }
     }
+
+    public async listarUsuario(): Promise<void> {
+        const db = new ConnectionDB();
+    
+        try {
+            // Consultando todos os usuários no banco de dados
+            const result = await db.query("SELECT * FROM users", []);
+    
+            if (result.rows.length > 0) {
+                console.log("Lista de usuários:");
+                result.rows.forEach((row: any) => {
+                    console.log(`ID: ${row.id}, Nome: ${row.nome}, Email: ${row.email}, Admin: ${row.is_admin}`);
+                });
+            } else {
+                console.log("Nenhum usuário encontrado.");
+            }
+        } catch (err) {
+            console.error("Erro ao listar usuários:", err);
+        }
+    }
+    
 }
