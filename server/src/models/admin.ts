@@ -33,6 +33,19 @@ export default class Admin extends User {
         }
     }
 
+    // Método para deletar usuário
+    public async deletarUsuario(id: number): Promise<void>{
+        const db = new ConnectionDB();
+        
+        try {
+            await db.query("DELETE FROM users WHERE id = $1", [id]);
+            console.log(`Usuário com ID ${id} deletado com sucesso!`);
+        }catch (err) {
+            console.error("Erro ao deletar usuário: ", err)
+        }
+    }
+
+    // Método para listar usuários
     public async listarUsuario(): Promise<void> {
         const db = new ConnectionDB();
     
@@ -43,7 +56,7 @@ export default class Admin extends User {
             if (result.rows.length > 0) {
                 console.log("Lista de usuários:");
                 result.rows.forEach((row: any) => {
-                    console.log(`ID: ${row.id}, Nome: ${row.nome}, Email: ${row.email}, Admin: ${row.is_admin}`);
+                    console.log(`ID: ${row.id}, Nome: ${row.nome}, Email: ${row.email}, Senha: ${row.senha} Admin: ${row.is_admin}`);
                 });
             } else {
                 console.log("Nenhum usuário encontrado.");

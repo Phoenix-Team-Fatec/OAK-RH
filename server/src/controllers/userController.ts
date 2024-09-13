@@ -34,5 +34,20 @@ export default class UserController {
       res.status(500).json({ error: "Erro ao listar os usuários" });
     }
   }
+
+  // Método assíncrono para deletar algum usuário
+  public async deletarUsuario(req: Request, res: Response): Promise<void> {
+    const { id } = req.params; // Obtendo o ID dos parâmetros da URL
+
+    try {
+      const admin = new Admin("Admin", "admin@example", "password", true);
+      await admin.deletarUsuario(parseInt(id));
+
+      res.status(200).json({ message: `Usuário com ID  ${id} deleta com sucesso!`});
+    }catch (err) {
+      console.log("Erro ao deletar usuário:", err);
+      res.status(500).json({ error: "Erro ao deletar usuário "})
+    }
+  }
 }
 

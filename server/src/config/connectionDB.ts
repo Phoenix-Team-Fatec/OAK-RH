@@ -31,7 +31,7 @@ export default class ConnectionDB {
     }
 
     // Método público para executar consultas ao banco de dados
-    public async query(queryText: string, params: (string | boolean)[]): Promise<any> {
+    public async query(queryText: string, params: (string | boolean | number)[]): Promise<any> {
         try {
             const result = await this.pool.query(queryText, params);
             return result;

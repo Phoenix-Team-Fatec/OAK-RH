@@ -14,7 +14,10 @@ router.post("/users", (req, res) => {
 
 router.get("/users", (req, res) => {
     userController.listarUsuarios(req, res);
-  });
-  
+});
 
+router.delete("/users/:id", (req, res) => {
+  userController.deletarUsuario(req, res);
+})
+  
 export default router;
