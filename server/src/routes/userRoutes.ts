@@ -1,23 +1,14 @@
 import { Router } from "express";
-import UserController from "../controllers/userController";
+import { createUser, getAllUser, getUserById, updateUser, deleteuser } from '../controllers/userController';
+import { verifyToken, verifyAdmin } from "../middleware/authMiddleware";
 
 const router = Router();
-const userController = new UserController();
 
-router.get("/", (req, res) => {
-  res.send("Servidores rodando");
-});
+// Apenas administradores podem acessar essas rotas
+router.post('/users', verifyToken, verifyAdmin, createUser);
+router.get('/users', verifyToken, verifyAdmin getAllUser);
+router.get('/users/:id', verifyToken, verifyAdmin, getUserById);
+router.put('users/:id', verifyToken, verifyAdmin, updateUser);
+router.delete('/users/:id,', verifyToken, verifyAdmin, deleteuser);
 
-router.post("/users", (req, res) => {
-  userController.cadastrarUsuario(req, res);
-});
-
-router.get("/users", (req, res) => {
-    userController.listarUsuarios(req, res);
-});
-
-router.delete("/users/:id", (req, res) => {
-  userController.deletarUsuario(req, res);
-})
-  
 export default router;
