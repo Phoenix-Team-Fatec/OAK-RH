@@ -1,18 +1,46 @@
-export default abstract class User{
+import { DataTypes, Model } from 'sequelize';
+import sequelize from '../config/connectionDB'
 
-    private name: string;
-    private email: string;
-    private password: string;
-    
-    constructor(name: string, email: string, password: string){
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+class User extends Model {
+    public id!: number;
+    public nome!: string;
+    public email!: string;
+    public senha!: string;
+    public is_admin!: boolean;
 
-
-
-    abstract login(): void;
-    abstract logout(): void;
-    
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 }
+
+User.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        nome: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+            unique: true,
+        },
+        senha: {
+            type: DataTypes.STRING(30),
+            allowNull: false,
+        },
+        is_admin: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+    },
+    {
+        sequelize,
+        tableName: 'Usuario',
+    }
+);
+
+export default User;
