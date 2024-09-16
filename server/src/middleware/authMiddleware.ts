@@ -1,4 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: JwtPayload;
+  }
+}
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
@@ -29,13 +35,16 @@ export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
             res.status(401).json({message:"Token Inválido"});
 
       }
+        if(!req.user?.is_admin){
+            return res.status(401).json({message:"Acesso negado"});
+        }
 
-}
+    }
 
 
 export const verifyAdmin = (req: Request, res: Response, next: NextFunction) =>{
 
-        if(!req.user?is_admin){
+        if(!req.user?.is_admin){
             return res.status(401).json({message:"Acesso restrito a administradores"});
         }
 
@@ -47,11 +56,13 @@ export const verifyAdmin = (req: Request, res: Response, next: NextFunction) =>{
 
 
 export const verifyLider = (req: Request, res: Response, next: NextFunction) =>{
-    if(!req.user?is_lider && !req.user?is_admin){
+    if(!req.user?.is_lider && !req.user?.is_admin){
         return res.status(401).json({message:"Acesso restrito a líderes e administradores"});
     }
     next();
 }
+
+
 
 
 

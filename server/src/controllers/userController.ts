@@ -1,53 +1,66 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
+import User from '../models/userModel';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 
-export default class UserController {
-  // Método assíncrono para cadastrar novos usuários
-  public async cadastrarUsuario(req: Request, res: Response): Promise<void> {
-    const { nome, email, senha, is_admin } = req.body;
+export const createUser = async(req: Request, res: Response) =>{
+  
+  const {nome,email,senha,is_admin} = req.body;
 
-    try {
-      const admin = new Admin(nome, email, senha, is_admin);
-      await admin.cadastrarUsuario(nome, email, senha, is_admin);
+  try{
+    const hashedPassword = await bcrypt.hash(senha,10);
+    const newUser = await User.create({
 
-      res.status(201).json({ message: "Usuário cadastrado com sucesso!" });
-    } catch (err) {
-      console.error("Erro ao cadastrar usuário:", err);
-      res.status(500).json({ error: "Erro ao cadastrar o usuário" });
-    }
+        nome,
+        email,
+        senha: hashedPassword,
+        is_admin
+
+
+    })
+
+    res.status(201).json(newUser);
+
+  }catch(error){
+    res.status(500).json({message:"Erro ao criar usuário"})
   }
 
-  // Método assíncrono para listar todos os usuários
-  public async listarUsuarios(req: Request, res: Response): Promise<void> {
-    try {
-      // Instancia o objeto Admin para usar o método listarUsuario
-      const admin = new Admin("", "", "", false);
-      const usuarios = await admin.listarUsuario();
 
-      if (true) {
-        res.status(200).json(usuarios);
-      } else {
-        res.status(404).json({ message: "Nenhum usuário encontrado" });
+
+
+}
+
+
+
+export const login = async(req: Request, res: Response) => {
+  const {email,senha} = req.body;
+
+  try{
+    const user = await User.findOne({where:{email}})
+
+    if(!user || !(await bcrypt.compare(senha, user.senha))){
+      return res.status(401).json({message:"Email ou senha inválidos"})
+    }
+
+
+    const token = jwt.sign(
+      {
+        id: user.id, is_admin: user.is_admin
+      },
+      process.env.JWT_SECRET ,
+      {
+        expiresIn: "1d"
       }
-    } catch (err) {
-      console.error("Erro ao listar usuários:", err);
-      res.status(500).json({ error: "Erro ao listar os usuários" });
-    }
-  }
+    )
 
-  // Método assíncrono para deletar algum usuário
-  public async deletarUsuario(req: Request, res: Response): Promise<void> {
-    const { id } = req.params; // Obtendo o ID dos parâmetros da URL
+    res.json({ token })
 
-    try {
-      const admin = new Admin("Admin", "admin@example", "password", true);
-      await admin.deletarUsuario(parseInt(id));
-
-      res.status(200).json({ message: `Usuário com ID  ${id} deleta com sucesso!`});
-    }catch (err) {
-      console.log("Erro ao deletar usuário:", err);
-      res.status(500).json({ error: "Erro ao deletar usuário "})
-    }
+  }catch(error){
+    res.status(500).json({message:"Erro ao fazer o login"})
   }
 }
+
+
+//outros métodos CRUD(listar, deletar, atualizar) 
 
