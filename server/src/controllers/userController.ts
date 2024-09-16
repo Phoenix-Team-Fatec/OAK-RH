@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Admin from "../models/admin";
+
 
 export default class UserController {
   // Método assíncrono para cadastrar novos usuários
