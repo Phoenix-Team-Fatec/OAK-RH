@@ -2,7 +2,10 @@ import { Request, Response } from 'express';
 import User from '../models/userModels';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+
+dotenv.config();
 
 export const createUser = async(req: Request, res: Response) =>{
   
@@ -46,7 +49,7 @@ export const login = async (req: Request, res: Response) => {
     const isPasswordValid = await user.validatePassword(senha);
  
 
-    const token = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_KEY as string, {
+    const token = jwt.sign({ id: user.id, email: user.email, is_admin:user.is_admin }, process.env.JWT_SECRET as string, {
       expiresIn: '1h',
     });
 

@@ -15,6 +15,7 @@ app.use(express.json());
 app.use('/', userRoutes);
 
 app.listen(PORT, () => {
+    console.log(dotenv.config());
     
     console.log(`Servidor rodando na porta ${PORT}`);
 });

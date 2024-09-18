@@ -1,14 +1,13 @@
 // TypeScript
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/connectionDB';
+import sequelize from '../database/connectionDB';
+import bcrypt from 'bcrypt';
 
 
 
 
 class User extends Model {
-  validatePassword(senha: any) {
-    throw new Error('Method not implemented.');
-  }
+ 
   public id!: number;
   public nome!: string;
   public email!: string;
@@ -16,7 +15,16 @@ class User extends Model {
   public is_admin!: boolean;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+
+
+  public async validatePassword(password: string): Promise<boolean> {
+    return await bcrypt.compare(password, this.senha);
+  }
+
 }
+
+
+
 
 User.init(
   {
