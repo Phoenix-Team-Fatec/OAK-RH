@@ -25,9 +25,9 @@ export const verifyToken = (req:Request, res:Response, next:NextFunction) => {
         return res.status(401).json({message:"Acesso negado"});
       }
 
-
+      const secret = process.env.JW_SECRET;
       try{
-        const decoded = jwt.verify(token, process.env.JW_SECRET) as JwtPayload;
+        const decoded = jwt.verify(token, secret) as JwtPayload;
         req.user = decoded;
         next();
 

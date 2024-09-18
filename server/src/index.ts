@@ -4,7 +4,7 @@ import userRoutes from './routes/userRoutes';
 import dotenv from 'dotenv';
 import path = require('path');
 
-dotenv.config({ path: path.resolve(__dirname, 'config/.env') });
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +15,7 @@ app.use(express.json());
 app.use('/', userRoutes);
 
 app.listen(PORT, () => {
+    
     console.log(`Servidor rodando na porta ${PORT}`);
 });
 

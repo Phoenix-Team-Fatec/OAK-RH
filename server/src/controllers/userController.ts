@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import User from '../models/userModel';
+import User from '../models/userModels';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -33,34 +33,29 @@ export const createUser = async(req: Request, res: Response) =>{
 
 
 
-export const login = async(req: Request, res: Response) => {
-  const {email,senha} = req.body;
+export const login = async (req: Request, res: Response) => {
+  try {
+    const { email, senha } = req.body;
+    const user = await User.findOne({ where: { email } });
 
-  try{
-    const user = await User.findOne({where:{email}})
-
-    if(!user || !(await bcrypt.compare(senha, user.senha))){
-      return res.status(401).json({message:"Email ou senha inválidos"})
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
 
+    // Assuming you have a method to validate the password
+    const isPasswordValid = await user.validatePassword(senha);
+ 
 
-    const token = jwt.sign(
-      {
-        id: user.id, is_admin: user.is_admin
-      },
-      process.env.JWT_SECRET ,
-      {
-        expiresIn: "1d"
-      }
-    )
+    const token = jwt.sign({ id: user.id, email: user.email }, process.env.TOKEN_KEY as string, {
+      expiresIn: '1h',
+    });
 
-    res.json({ token })
-
-  }catch(error){
-    res.status(500).json({message:"Erro ao fazer o login"})
+    return res.status(200).json({ token });
+  } catch (err) {
+    console.error('Error in login function:', err); // Log the error
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
-}
-
+};
 
 //outros métodos CRUD(listar, deletar, atualizar) 
 
