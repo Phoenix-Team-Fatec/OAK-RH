@@ -1,64 +1,39 @@
-import { Request, Response } from 'express';
-import User from '../models/userModels';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
+import { Request, Response } from "express";
+import { createUserService, deleteUserService, loginService } from "../services/userService";
+import { NUMBER } from "sequelize";
 
+export const createUser = async (req: Request, res: Response) => {
+  const { nome, email, senha, is_admin} = req.body;
 
-dotenv.config();
-
-export const createUser = async(req: Request, res: Response) =>{
-  
-  const {nome,email,senha,is_admin} = req.body;
-
-  try{
-    const hashedPassword = await bcrypt.hash(senha,10);
-    const newUser = await User.create({
-
-        nome,
-        email,
-        senha: hashedPassword,
-        is_admin
-
-
-    })
-
+  try {
+    const newUser = await createUserService(nome, email, senha, is_admin);
     res.status(201).json(newUser);
-
-  }catch(error){
-    res.status(500).json({message:"Erro ao criar usuário"})
+  }catch (error) {
+    console.log("Error in createUser function:", error);
+    res.status(500).json({ message: error.message });
   }
+};
 
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
 
-
-
+  try {
+    const userId = parseInt(id, 10);
+    const result = await deleteUserService(userId);
+    return res.status(200).json(result);
+  }catch (error) {
+    console.error("Error in deleteUser function:", error);
+    return res.status(500).json({ message: error.message})
+  }
 }
-
-
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, senha } = req.body;
-    const user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Assuming you have a method to validate the password
-    const isPasswordValid = await user.validatePassword(senha);
- 
-
-    const token = jwt.sign({ id: user.id, email: user.email, is_admin:user.is_admin }, process.env.JWT_SECRET as string, {
-      expiresIn: '1h',
-    });
-
+    const token = await loginService(email, senha);
     return res.status(200).json({ token });
-  } catch (err) {
-    console.error('Error in login function:', err); // Log the error
-    return res.status(500).json({ message: 'Internal Server Error' });
+  }catch (error) {
+    console.log("Error in login function:", error);
+    return res.status(500).json({ messsage: error.message });
   }
 };
-
-//outros métodos CRUD(listar, deletar, atualizar) 
-
