@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 export const createUserService = async (nome: string, email: string, senha: string, is_admin: boolean) => {
     try {
         const hashedPassword = await bcrypt.hash(senha, 10);
-        console.log(hashedPassword)
         const newUser = await User.create({
             nome,
             email,
