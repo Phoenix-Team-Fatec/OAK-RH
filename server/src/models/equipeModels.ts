@@ -24,6 +24,8 @@ Equipe.init(
     {
         sequelize,
         tableName: 'equipe',
-        timestamps: true,
+        timestamps: false,
     }
 );
+
+export default Equipe;
