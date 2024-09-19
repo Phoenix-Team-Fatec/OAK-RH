@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 export const createUserService = async (nome: string, email: string, senha: string, is_admin: boolean) => {
     try {
         const hashedPassword = await bcrypt.hash(senha, 10);
+        console.log(hashedPassword)
         const newUser = await User.create({
             nome,
             email,
@@ -44,14 +45,11 @@ export const loginService = async (email: string, senha: string) => {
         }
 
         const isPasswordValid = await user.validatePassword(senha);
-        if(!isPasswordValid) {
-            throw new Error("Invalid password");
-        }
         
         const token = jwt.sign(
             { id: user.id, email: user.email, is_admin: user.is_admin },
             process.env.JWT_SECRET as string,
-            { expiresIn: '1d'}
+            { expiresIn: '1h'}
         );
 
         return token;

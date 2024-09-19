@@ -23,9 +23,6 @@ class User extends Model {
 
 }
 
-
-
-
 User.init(
   {
     id: {

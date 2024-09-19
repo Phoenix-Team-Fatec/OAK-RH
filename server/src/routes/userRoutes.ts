@@ -5,7 +5,7 @@ import { verifyToken, verifyAdmin } from "../middleware/authMiddleware";
 const router = Router();
 
 // Apenas administradores podem acessar essas rotas
-router.post('/users', verifyToken, createUser);
+router.post('/users', verifyToken,verifyAdmin, createUser);
 router.get('/users', verifyToken, verifyAdmin);
 router.post('/users/login', login);
 router.delete('/users/:id', verifyToken, verifyAdmin, deleteUser);
