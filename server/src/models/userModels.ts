@@ -2,6 +2,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
 import bcrypt from 'bcrypt';
+import Equipe_user from './equipe_userModel';
 
 
 
@@ -54,5 +55,9 @@ User.init(
     timestamps: false,
   }
 );
+
+Equipe_user.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+User.hasMany(Equipe_user, { foreignKey: 'user_id', as: 'user' });
 
 export default User;

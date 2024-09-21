@@ -1,31 +1,36 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model } from 'sequelize';
 import sequelize from '../database/connectionDB';
+import Equipe_user from './equipe_userModel';
 
-class Equipe extends Model{
-    public id!: number;
-    public nome!: string;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+class Equipe extends Model {
+  public id!: number;
+  public nome!: string;
 }
 
-
 Equipe.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true,
-          },
-          nome: {
-            type: DataTypes.STRING,
-            allowNull: false,
-          }
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
-    {
-        sequelize,
-        tableName: 'equipe',
-        timestamps: false,
-    }
+    nome: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    sequelize,
+    tableName: 'equipe',
+    timestamps: false,
+  }
 );
+
+// Associações
+
+Equipe.hasMany(Equipe_user, { foreignKey: 'equipe_id', as: 'users' });
+
+
+
 
 export default Equipe;
