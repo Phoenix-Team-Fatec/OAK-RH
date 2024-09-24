@@ -1,0 +1,38 @@
+/* Estilo base para os botões da sidebar */
+.sidebar-button {
+    background-color: white; /* Cor branca para o fundo */
+    border-radius: 50px;
+    gap: 12px;
+    color: black;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px;
+    width: 100%;
+    text-transform: none; /* Evita texto em maiúsculas */
+    transition: background-color 0.3s;
+  }
+  
+  /* Estilo para o texto */
+  .sidebar-button .MuiListItemText-root {
+    color: black;
+  }
+  
+  /* Estilo para hover */
+  .sidebar-button:hover {
+    background-color: #6B8E23; /* Cor verde mais clara no hover */
+  }
+  
+  .sidebar-button:hover .MuiListItemText-root {
+    color: white; /* Texto fica branco no hover */
+  }
+  
+  /* Estilo para o botão ativo */
+  .sidebar-button.active {
+    background-color: #556B2F; /* Cor de fundo verde musgo quando ativo */
+  }
+  
+  .sidebar-button.active .MuiListItemText-root {
+    color: white; /* Texto branco para o botão ativo */
+  }
+  

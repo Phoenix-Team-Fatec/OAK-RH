@@ -1,29 +1,14 @@
 import * as React from 'react';
-import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Toolbar } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { styled } from '@mui/material/styles';
+import { Box, Drawer, List, ListItemText, Toolbar, Button } from '@mui/material';
+import { useLocation, useNavigate } from 'react-router-dom';
+import './index.css'; // Importe o arquivo CSS
 
 const drawerWidth = 240;
 
-const CustomListem = styled(ListItem)(() => ({
-  backgroundColor: '#556B2F', // Cor verde musgo
-  borderRadius: '12px',
-  gap: '12px', // Bordas redondas
-  color: 'white', // Cor do texto branco
-  marginBottom: '10px', // Margem entre os itens
-  '&:hover': {
-    backgroundColor: '#6B8E23', // Fundo verde mais claro no hover
-  },
-  '& .MuiListItemText-root': {
-    color: 'white', // Cor branca para o texto
-  },
-  '& .MuiListItemIcon-root': {
-    color: 'white', // Cor branca para o ícone
-  },
-}));
-
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -41,24 +26,48 @@ const Sidebar: React.FC = () => {
         <Toolbar />
         <List>
           {/* Botão Dashboard */}
-          <CustomListem>
-            <ListItem component="a" href="/dashboard" key="Dashboard">
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          </CustomListem>
+          <Button
+            onClick={() => navigate('/dashboard')}
+            fullWidth
+            className={`sidebar-button ${location.pathname === '/dashboard' ? 'active' : ''}`}
+          >
+            <ListItemText primary="Dashboard" />
+          </Button>
 
-          {/* Botão Configurações */}
-          <CustomListem>
-            <ListItem component="a" href="/configuracoes" key="Configurações">
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Configurações" />
-            </ListItem>
-          </CustomListem>
+         
+
+          {/* Botão Formulários */}
+          <Button
+            onClick={() => navigate('/formularios')}
+            fullWidth
+            className={`sidebar-button ${location.pathname === '/formularios' ? 'active' : ''}`}
+          >
+            <ListItemText primary="Formulários" />
+          </Button>
+
+
+          {/* Botão Cadastro */}
+          <Button
+            onClick={() => navigate('/equipes')}
+            fullWidth
+            className={`sidebar-button ${location.pathname === '/equipes' ? 'active' : ''}`}
+          >
+            <ListItemText primary="Equipes" />
+          </Button>
+
+
+
+
+
+
+           {/* Botão Cadastro */}
+           <Button
+            onClick={() => navigate('/cadastro')}
+            fullWidth
+            className={`sidebar-button ${location.pathname === '/cadastro' ? 'active' : ''}`}
+          >
+            <ListItemText primary="Cadastro" />
+          </Button>
         </List>
       </Drawer>
     </Box>
