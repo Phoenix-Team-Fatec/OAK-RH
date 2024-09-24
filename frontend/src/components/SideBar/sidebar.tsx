@@ -9,6 +9,11 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const is_admin = localStorage.getItem('is_admin') === 'true';
+
+
+
+
   const handleLogout = () => {
     // Redireciona para a rota de logout
     navigate('/logout');
@@ -58,6 +63,8 @@ const Sidebar: React.FC = () => {
           </Button>
 
           {/* Botão Cadastro */}
+         
+         { is_admin && (
           <Button
             onClick={() => navigate('/cadastro')}
             fullWidth
@@ -65,6 +72,8 @@ const Sidebar: React.FC = () => {
           >
             <ListItemText primary="Cadastro" />
           </Button>
+         )
+}
         </List>
 
         {/* Botão de Logout */}

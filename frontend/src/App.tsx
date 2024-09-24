@@ -4,6 +4,7 @@ import LoginPage from './components/Login/login';
 import AdminPage from './components/Admin/admin';
 import ProtectedRoute from './components/ProtectedLayout/protectedRoutes';
 import Logout from './components/Logout/logout';
+import UserPage from './components/UserScream/user';
 
 const App: React.FC = () => {
   return (
@@ -18,11 +19,16 @@ const App: React.FC = () => {
             </ProtectedRoute>
           } 
         />
-        <Route 
-          path="/user" 
-        />
+      
         {/* Adicione a rota para logout */}
         <Route path="/logout" element={<Logout />} />
+
+
+
+        <Route path="/user" element={<UserPage />} />
+
+
+
       </Routes>
     </Router>
   );
