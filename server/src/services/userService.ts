@@ -91,6 +91,7 @@ export const loginService = async (email: string, senha: string) => {
         }
 
         const isPasswordValid = await user.validatePassword(senha);
+        console.log("Validação da senha", isPasswordValid);
         
         const token = jwt.sign(
             { id: user.id, email: user.email, is_admin: user.is_admin },
@@ -98,7 +99,7 @@ export const loginService = async (email: string, senha: string) => {
             { expiresIn: '1h'}
         );
 
-        return token;
+        return { token, is_admin: user.is_admin };
     }catch (error) {
         throw new Error(error.message || "Internal Server Error");
     }

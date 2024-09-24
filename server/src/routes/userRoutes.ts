@@ -8,7 +8,7 @@ import router from "./defaultRoutes";
 // Apenas administradores podem acessar essas rotas
 router.post('/users/create', verifyToken,verifyAdmin, createUser);
 router.get('/users', verifyToken, verifyAdmin);
-router.post('/users/login', login);
+router.post('/', login);
 router.delete('/users/:id', verifyToken, verifyAdmin, deleteUser);
 //router.get('/users/:id', verifyToken, verifyAdmin, getUserById);
 //router.put('users/:id', verifyToken, verifyAdmin, updateUser);
