@@ -22,6 +22,7 @@ const LoginPage: React.FC = () => {
 
       const { token, is_admin } = response.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('is_admin', is_admin);
 
       if (is_admin) {
         navigate('/admin');

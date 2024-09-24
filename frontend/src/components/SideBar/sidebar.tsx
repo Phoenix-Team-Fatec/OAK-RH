@@ -9,6 +9,11 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const handleLogout = () => {
+    // Redireciona para a rota de logout
+    navigate('/logout');
+  };
+
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -34,8 +39,6 @@ const Sidebar: React.FC = () => {
             <ListItemText primary="Dashboard" />
           </Button>
 
-         
-
           {/* Botão Formulários */}
           <Button
             onClick={() => navigate('/formularios')}
@@ -45,8 +48,7 @@ const Sidebar: React.FC = () => {
             <ListItemText primary="Formulários" />
           </Button>
 
-
-          {/* Botão Cadastro */}
+          {/* Botão Equipes */}
           <Button
             onClick={() => navigate('/equipes')}
             fullWidth
@@ -55,13 +57,8 @@ const Sidebar: React.FC = () => {
             <ListItemText primary="Equipes" />
           </Button>
 
-
-
-
-
-
-           {/* Botão Cadastro */}
-           <Button
+          {/* Botão Cadastro */}
+          <Button
             onClick={() => navigate('/cadastro')}
             fullWidth
             className={`sidebar-button ${location.pathname === '/cadastro' ? 'active' : ''}`}
@@ -69,6 +66,18 @@ const Sidebar: React.FC = () => {
             <ListItemText primary="Cadastro" />
           </Button>
         </List>
+
+        {/* Botão de Logout */}
+        <Box sx={{ marginTop: 'auto', padding: 2 }}>
+          <Button
+            onClick={handleLogout}
+            fullWidth
+            color="error"
+            variant="contained"
+          >
+            Logout
+          </Button>
+        </Box>
       </Drawer>
     </Box>
   );

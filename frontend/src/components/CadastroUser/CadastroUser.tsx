@@ -1,7 +1,10 @@
 import React from 'react';
+import Sidebar from '../SideBar/sidebar';
 
 const CadastroUser: React.FC = () => {
-  return <h1>Aqui será feito o cadastro</h1>;
+
+  return <Sidebar/>;
+
 };
 
 export default CadastroUser;
