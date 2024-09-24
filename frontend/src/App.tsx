@@ -1,20 +1,27 @@
+// src/App.tsx
 import React from 'react';
-import Sidebar from './components/SideBar/sidebar'; // Importe o componente Sidebar
-import { Box, Typography } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './components/Login/login';
+import AdminPage from './components/Admin/admin';
+import { createTheme, ThemeProvider } from '@mui/material';
+
+const theme = createTheme({
+  typography: {
+    fontFamily: 'Popins, Arial, sans-serif',
+  }
+})
 
 function App() {
   return (
-    <Box sx={{ display: 'flex' }}>
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Conteúdo Principal */}
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Typography variant="h4">Bem-vindo ao Dashboard</Typography>
-        <Typography>Conteúdo da página principal vai aqui.</Typography>
-      </Box>
-    </Box>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 }
-  
+
 export default App;
