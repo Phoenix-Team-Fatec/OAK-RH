@@ -64,4 +64,38 @@
     border: none;
     cursor: pointer;
   }
+  .team-members-container {
+    max-height: 400px; /* Altura máxima da área de membros */
+    overflow-y: auto;  /* Adiciona scroll vertical quando necessário */
+    padding: 10px;     /* Espaçamento interno */
+    border: 1px solid #ddd; /* Borda para destacar o contêiner */
+    border-radius: 4px;
+    background-color: #f9f9f9; /* Cor de fundo para destacar */
+  }
+  
+  .member-item {
+    margin-bottom: 10px; /* Espaçamento entre os membros */
+  }  
+  /* Estilo do scrollbar */
+  .team-members-container::-webkit-scrollbar {
+    width: 8px; /* Define a largura da barra de rolagem */
+  }
+  
+  /* Estilo da "trilha" da barra de rolagem */
+  .team-members-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Cor de fundo da trilha */
+    border-radius: 10px; /* Borda arredondada */
+  }
+  
+  /* Estilo do "polegar" da barra de rolagem */
+  .team-members-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Cor do polegar */
+    border-radius: 10px; /* Arredonda as bordas */
+    border: 2px solid #f1f1f1; /* Adiciona um espaço ao redor do polegar */
+  }
+  
+  /* Estilo do polegar ao passar o mouse */
+  .team-members-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Cor mais escura ao passar o mouse */
+  }
   
