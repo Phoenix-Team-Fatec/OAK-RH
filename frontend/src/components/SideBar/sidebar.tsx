@@ -20,7 +20,11 @@ const Sidebar: React.FC = () => {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            paddingTop: '88px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            height: '100vh',
+
           },
         }}
         variant="permanent"

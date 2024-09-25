@@ -17,6 +17,25 @@ import axios from "axios";
         
     }
 
+// Função para registrar equipe 
+export async function registerTeam(nome: string) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.post(
+            'http://localhost:3000/equipe/criar',
+            { nome: nome },
+            { 
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+        return response;
+    }catch (error) {
+        console.log("Error in registerTeam funcion", error);
+    }
+}
+
 export async function getIdUser(email: string) {
 
     try{
