@@ -1,8 +1,9 @@
+// src/components/Admin/admin.tsx
+import React from 'react';
 import { Typography, Box } from '@mui/material';
 import Sidebar from '../SideBar/sidebar';
-import TeamMembers from '../Listagem/listagem';
 
-function EquipeAdmin() {
+function AdminPage() {
   return (
     <Box sx={{ display: 'flex' }}>
       {/* Sidebar */}
@@ -10,15 +11,11 @@ function EquipeAdmin() {
 
       {/* Conteúdo da página */}
       <Box sx={{ flexGrow: 1, mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h4" gutterBottom>Equipes Admin!</Typography>
-        
-        {/* Componente de Listagem de Membros */}
-        <Box sx={{ width: '100%', maxWidth: 400 }}>
-          <TeamMembers />
-        </Box>
+        <Typography variant="h4">Bem-vindo à página do Admin!</Typography>
+        <Typography>Você está logado como administrador.</Typography>
       </Box>
     </Box>
   );
 }
 
-export default EquipeAdmin;
+export default AdminPage;
