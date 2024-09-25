@@ -98,7 +98,7 @@ const LoginPage: React.FC = () => {
                     <Button onClick={() => setShowPassword(!showPassword)}
                     sx={{ padding: 0 }}
                   >
-                    {showPassword ? <VisibilityOff sx={{ color: 'black' }} /> : <Visibility sx = {{ color: 'black' }} />}
+                    {showPassword ? <VisibilityOff sx={{ color: 'gray' }} /> : <Visibility sx = {{ color: 'gray' }} />}
                   </Button>
                   </InputAdornment>
                 )
