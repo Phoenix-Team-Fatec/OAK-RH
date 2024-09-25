@@ -3,18 +3,58 @@ import Box from '@mui/material/Box';
 import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, Alert } from '@mui/material';
 import Sidebar from '../SideBar/sidebar';
 import './index.css';  // Importando o CSS
-import { registerTeam } from './cadastro';
+import { registerTeam, registerUser } from './cadastro';
 
 const CadastroUser: React.FC = () => {
+
+  //cadastro de equipes
   const [open, setOpen] = useState(false);
   const [teamName, setTeamName] = useState('');
   const [teamNameError, setTeamNameError] = useState(false);
+
+  // Modal de confirmação
   const [modalMessage, setModalMessage] = useState('');
   const [modalSeverity, setModalSeverity] = useState<'success' | 'error'>('success'); // Define a severidade da mensagem
+
+
+  //cadastro user
+  const[nome,setNome] = useState('');
+  const[senha,setSenha] = useState('');
+  const[email,setEmail] = useState('');
+  const[userError,setError] = useState(false);
+
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+  //handle cadastro user
+  const handleUserRegister = async() =>{
+    if(!nome.trim() || !senha.trim() || !email.trim()){
+      setError(true);
+      return;
+    }
+    setError(false);
+    try{
+      const response = await registerUser(nome,email,senha);
+      if(response){
+        setModalMessage("Usuário cadastrado com sucesso!");
+        setModalSeverity('success');
+        setNome("");
+        setEmail("");
+        setSenha("");
+      }
+
+    }catch(error){
+      setModalMessage("Erro ao cadastrar usuário. Tente novamente.");
+      setModalSeverity('error');
+    }
+    handleOpen();
+  }
+
+
+  //handle para cadastro de equipe
   const handleTeamRegister = async () => {
     if (!teamName.trim()) {
       setTeamNameError(true);
@@ -29,7 +69,7 @@ const CadastroUser: React.FC = () => {
         setModalSeverity('success');
         setTeamName(""); // Limpa o campo após sucesso
       }
-    } catch (error) {
+    } catch (error){
       setModalMessage("Erro ao cadastrar equipe. Tente novamente.");
       setModalSeverity('error');
     }
@@ -39,7 +79,7 @@ const CadastroUser: React.FC = () => {
   return (
     <>
       <Box className="container">
-        <Sidebar className="sidebar" />
+        <Sidebar />
         
         {/* Conteúdo principal */}
         <Box className="main-content">
@@ -54,10 +94,44 @@ const CadastroUser: React.FC = () => {
           >
             {/* Coluna esquerda - Campos principais */}
             <Box className="form-column">
-              <TextField id="cadastro_usuario" label="Usuário" variant="outlined" fullWidth />
-              <TextField id="cadastro_email" label="E-Mail" variant="outlined" type="email" fullWidth />
-              <TextField id="cadastro_senha" label="Senha" variant="outlined" type="password" fullWidth />
-              <Button onClick={handleTeamRegister} variant="contained" size="medium" className="button">Confirmar</Button>
+              
+              <TextField 
+                id="cadastro_usuario" 
+                label="Usuário"
+                variant="outlined" 
+                fullWidth  
+                onChange={(e) => setNome(e.target.value)} 
+                value={nome}
+                error={userError}
+                helperText={userError ? "Por favor, preencha este campo." : ""} />
+                
+
+              <TextField 
+               id="cadastro_email" 
+               label="E-Mail"
+               variant="outlined" 
+               type="email" 
+               fullWidth 
+               onChange={(e) => setEmail(e.target.value)} 
+               value={email}
+               error={userError}
+               helperText={userError ? "Por favor, preencha este campo." : ""} />
+
+
+              <TextField 
+              id="cadastro_senha" 
+              label="Senha" 
+              variant="outlined" 
+              type="password" 
+              fullWidth 
+              onChange={(e) => setSenha(e.target.value)} 
+              value={senha}
+              error={userError}
+              helperText={userError ? "Por favor, preencha este campo." : ""} />
+
+
+
+              <Button onClick={handleUserRegister} variant="contained" size="medium" className="button">Confirmar</Button>
             </Box>
 
             {/* Coluna direita - Campo de Equipes */}
