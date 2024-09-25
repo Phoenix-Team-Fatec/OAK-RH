@@ -56,8 +56,8 @@ User.init(
   }
 );
 
-Equipe_user.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+Equipe_user.belongsTo(User, { foreignKey: 'user_id', as: 'user', onDelete: 'CASCADE' });
 
-User.hasMany(Equipe_user, { foreignKey: 'user_id', as: 'user' });
+User.hasMany(Equipe_user, { foreignKey: 'user_id', as: 'user' ,onDelete: 'CASCADE' });
 
 export default User;

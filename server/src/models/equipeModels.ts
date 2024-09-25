@@ -28,7 +28,7 @@ Equipe.init(
 
 // Associações
 
-Equipe.hasMany(Equipe_user, { foreignKey: 'equipe_id', as: 'users' });
+Equipe.hasMany(Equipe_user, { foreignKey: 'equipe_id', as: 'users', onDelete: 'CASCADE' });
 
 
 

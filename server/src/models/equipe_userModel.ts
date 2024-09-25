@@ -24,6 +24,7 @@ Equipe_user.init(
         model: 'usuario', // Nome da tabela referenciada
         key: 'id',
       },
+      onDelete: 'CASCADE',
     },
     equipe_id: {
       type: DataTypes.INTEGER,
@@ -31,7 +32,9 @@ Equipe_user.init(
       references: {
         model: 'equipe', // Nome da tabela referenciada
         key: 'id',
+        
       },
+      onDelete: 'CASCADE',
     },
     is_lider: {
       type: DataTypes.BOOLEAN,

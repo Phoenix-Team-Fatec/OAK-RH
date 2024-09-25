@@ -5,7 +5,7 @@ import AdminPage from './components/Admin/admin';
 import ProtectedRoute from './components/ProtectedLayout/protectedRoutes';
 import Logout from './components/Logout/logout';
 import UserPage from './components/UserScream/user';
-
+import CadastroUser from './components/CadastroUser/CadastroUser';
 const App: React.FC = () => {
   return (
     <Router>
@@ -26,6 +26,20 @@ const App: React.FC = () => {
 
 
         <Route path="/user" element={<UserPage />} />
+
+
+
+        <Route path="/cadastro" element={
+           <ProtectedRoute adminOnly>
+           <CadastroUser />
+         </ProtectedRoute>
+          
+          } />
+
+       
+
+
+
 
 
 

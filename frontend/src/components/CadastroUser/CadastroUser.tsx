@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import { TextField, Autocomplete, Button, Typography, Modal, Card, CardActionArea, Grid } from '@mui/material'; 
+import Sidebar from '../SideBar/sidebar';
 
 const style = {
-  position: 'absolute' as 'absolute',
+  position: 'absolute' as const,
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -33,6 +34,8 @@ const CadastroUser: React.FC = () => {
     <>
       <h1>Cadastro</h1>
 
+      
+
       {/* Estrutura principal usando Flexbox */}
       <Box
         component="form"
@@ -46,6 +49,7 @@ const CadastroUser: React.FC = () => {
         noValidate
         autoComplete="off"
       >
+        <Sidebar/>
         {/* Coluna esquerda - Campos principais */}
         <Box
           sx={{

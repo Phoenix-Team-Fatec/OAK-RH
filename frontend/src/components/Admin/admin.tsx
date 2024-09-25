@@ -1,5 +1,5 @@
 // src/components/Admin/admin.tsx
-import React from 'react';
+
 import { Typography, Box } from '@mui/material';
 import Sidebar from '../SideBar/sidebar';
 
