@@ -37,27 +37,27 @@ const Sidebar: React.FC = () => {
         <List>
           {/* Botão Dashboard */}
           <Button
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/dashboardAdmin')}
             fullWidth
-            className={`sidebar-button ${location.pathname === '/dashboard' ? 'active' : ''}`}
+            className={`sidebar-button ${location.pathname === '/dashboardAdmin' ? 'active' : ''}`}
           >
             <ListItemText primary="Dashboard" />
           </Button>
 
           {/* Botão Formulários */}
           <Button
-            onClick={() => navigate('/formularios')}
+            onClick={() => navigate('/formsAdmin')}
             fullWidth
-            className={`sidebar-button ${location.pathname === '/formularios' ? 'active' : ''}`}
+            className={`sidebar-button ${location.pathname === '/formsAdmin' ? 'active' : ''}`}
           >
             <ListItemText primary="Formulários" />
           </Button>
 
           {/* Botão Equipes */}
           <Button
-            onClick={() => navigate('/equipes')}
+            onClick={() => navigate('/equipesAdmin')}
             fullWidth
-            className={`sidebar-button ${location.pathname === '/equipes' ? 'active' : ''}`}
+            className={`sidebar-button ${location.pathname === '/equipesAdmin' ? 'active' : ''}`}
           >
             <ListItemText primary="Equipes" />
           </Button>

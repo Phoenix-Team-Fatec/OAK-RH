@@ -1,24 +1,42 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './components/Login/login';
-import AdminPage from './components/Admin/admin';
+import DashboardAdmin from './components/DashboardAdmin/dashboardAdmin';
 import ProtectedRoute from './components/ProtectedLayout/protectedRoutes';
 import Logout from './components/Logout/logout';
 import UserPage from './components/UserScream/user';
 import CadastroUser from './components/CadastroUser/CadastroUser';
+import FormsAdmin from './components/FormsAdmin/formsAdmin';
+import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route 
-          path="/admin" 
+          path="/dashboardAdmin" 
           element={
             <ProtectedRoute adminOnly>
-              <AdminPage />
+              <DashboardAdmin />
             </ProtectedRoute>
           } 
-        />
+          />
+          <Route 
+            path="/formsAdmin"
+            element={
+              <ProtectedRoute adminOnly>
+                <FormsAdmin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/equipesAdmin'
+            element={
+                <ProtectedRoute>
+                  <EquipeAdmin />
+                </ProtectedRoute>
+            }
+          />
       
         {/* Adicione a rota para logout */}
         <Route path="/logout" element={<Logout />} />

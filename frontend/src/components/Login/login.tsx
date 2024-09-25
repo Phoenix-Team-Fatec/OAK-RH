@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Box, TextField, Button, Typography, Grid, Paper } from '@mui/material';
+import { Box, TextField, Button, Typography, Grid, Paper, InputAdornment } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LockIcon from '@mui/icons-material/Lock';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -25,7 +27,7 @@ const LoginPage: React.FC = () => {
       localStorage.setItem('is_admin', is_admin);
 
       if (is_admin) {
-        navigate('/admin');
+        navigate('/dashboardAdmin');
       } else {
         navigate('/user');
       }
@@ -86,11 +88,20 @@ const LoginPage: React.FC = () => {
               required
               fullWidth
               label="Senha"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
               InputProps={{
                 startAdornment: <LockIcon sx={{ mr: 1 }} />,
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <Button onClick={() => setShowPassword(!showPassword)}
+                    sx={{ padding: 0 }}
+                  >
+                    {showPassword ? <VisibilityOff sx={{ color: 'black' }} /> : <Visibility sx = {{ color: 'black' }} />}
+                  </Button>
+                  </InputAdornment>
+                )
               }}
             />
             {error && (
