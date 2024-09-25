@@ -46,6 +46,25 @@ export const readAllUsersService = async () => {
 };
 
 
+//Pegar o id do usuário pelo email
+export const getIdUserService = async (email: string) => {
+    try{
+        const users = await User.findOne({where: {email}});  
+        if(!users){
+            throw new Error("User not found");
+        }
+        return users;  
+
+    }catch(error){
+        throw new Error("Error  user");
+    }
+
+
+
+}
+       
+
+
 // Funão de atualizar
 export const updateUserService = async (id: number, nome?: string, email?: string, senha?: string) => {
     try {
