@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUserService, deleteUserService, loginService, readAllUsersService, readUserService, updateUserService } from "../services/userService";
+import { createUserService, deleteUserService, loginService, readAllUsersService, readUserService, updateUserService, getIdUserService } from "../services/userService";
 
 export const createUser = async (req: Request, res: Response) => {
   const { nome, email, senha, is_admin} = req.body;
@@ -79,3 +79,19 @@ export const login = async (req: Request, res: Response) => {
     return res.status(500).json({ messsage: error.message });
   }
 };
+
+
+
+
+export const getIdUser = async (req: Request, res: Response) => {
+
+       try {
+        const { email } = req.params;
+        const user = await getIdUserService(email as string);
+        return res.status(200).json(user['id']);
+    }catch (error) {
+        console.log("Error in getIdUser function:", error);
+        return res.status(500).json({ message: error.message });
+    }
+
+}

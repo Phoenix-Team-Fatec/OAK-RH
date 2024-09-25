@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createUser, deleteUser, login } from '../controllers/userController';
+import { createUser, deleteUser, login, getIdUser } from '../controllers/userController';
 import { verifyToken, verifyAdmin } from "../middleware/authMiddleware";
 import { createEquipe, getAllEquipes, getEquipeById, updateEquipe, deleteEquipe } from "../controllers/equipeController";
 import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, removerUsuario } from "../controllers/equipe_userController";
@@ -10,6 +10,7 @@ router.post('/users/create', verifyToken,verifyAdmin, createUser);
 router.get('/users', verifyToken, verifyAdmin);
 router.post('/', login);
 router.delete('/users/:id', verifyToken, verifyAdmin, deleteUser);
+router.get('/users/getId/:email', verifyToken, verifyAdmin, getIdUser);
 //router.get('/users/:id', verifyToken, verifyAdmin, getUserById);
 //router.put('users/:id', verifyToken, verifyAdmin, updateUser);
 
