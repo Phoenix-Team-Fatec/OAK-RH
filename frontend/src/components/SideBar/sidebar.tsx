@@ -11,14 +11,6 @@ const Sidebar: React.FC = () => {
 
   const is_admin = localStorage.getItem('is_admin') === 'true';
 
-
-
-
-  const handleLogout = () => {
-    // Redireciona para a rota de logout
-    navigate('/logout');
-  };
-
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -28,6 +20,7 @@ const Sidebar: React.FC = () => {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            paddingTop: '88px',
           },
         }}
         variant="permanent"
@@ -75,18 +68,6 @@ const Sidebar: React.FC = () => {
          )
 }
         </List>
-
-        {/* Botão de Logout */}
-        <Box sx={{ marginTop: 'auto', padding: 2 }}>
-          <Button
-            onClick={handleLogout}
-            fullWidth
-            color="error"
-            variant="contained"
-          >
-            Logout
-          </Button>
-        </Box>
       </Drawer>
     </Box>
   );
