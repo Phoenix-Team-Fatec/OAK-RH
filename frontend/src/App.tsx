@@ -4,7 +4,7 @@ import LoginPage from './components/Login/login';
 import DashboardAdmin from './components/DashboardAdmin/dashboardAdmin';
 import ProtectedRoute from './components/ProtectedLayout/protectedRoutes';
 import Logout from './components/Logout/logout';
-import UserPage from './components/UserScream/user';
+import UserPage from './components/UserScreen/user';
 import CadastroUser from './components/CadastroUser/CadastroUser';
 import FormsAdmin from './components/FormsAdmin/formsAdmin';
 import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';

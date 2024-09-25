@@ -1,24 +1,25 @@
-import { Typography, Box } from '@mui/material';
+import React from 'react';
+import TopMenu from '../Menu/menu'; // ajuste o caminho conforme necessário
 import Sidebar from '../SideBar/sidebar';
-import TeamMembers from '../Listagem/listagem';
+import { Box } from '@mui/material';
 
-function EquipeAdmin() {
+const EquipeAdmin= () => {
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* Sidebar */}
+      {/* Sidebar fixa */}
       <Sidebar />
 
-      {/* Conteúdo da página */}
-      <Box sx={{ flexGrow: 1, mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography variant="h4" gutterBottom>Equipes Admin!</Typography>
-        
-        {/* Componente de Listagem de Membros */}
-        <Box sx={{ width: '100%', maxWidth: 400 }}>
-          <TeamMembers />
+      {/* Conteúdo principal com o Menu e a dashboard */}
+      <Box sx={{ flexGrow: 1 }}>
+        <TopMenu />
+        {/* Aqui você pode colocar o conteúdo principal do dashboard */}
+        <Box sx={{ p: 2 }}>
+          {/* Dashboard content */}
+          {/* Outras partes da sua dashboard */}
         </Box>
       </Box>
     </Box>
   );
-}
+};
 
 export default EquipeAdmin;
