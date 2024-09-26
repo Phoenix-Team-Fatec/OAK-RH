@@ -31,6 +31,12 @@
     background-color: #588157;
     color: white;
   }  
+  li:hover {
+    transform: scale(1.03);
+    transition: 0.25s;
+    background-color: #588157;
+    color: white;
+  } 
   .member-actions button {
     background-color: transparent;
     border: none;
@@ -38,6 +44,9 @@
   }
 
   li.selected .member-actions button{
+    color: white;
+  }
+  li:hover .member-actions button{
     color: white;
   }
 

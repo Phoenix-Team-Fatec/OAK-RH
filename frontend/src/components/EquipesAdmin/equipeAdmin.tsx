@@ -1,23 +1,26 @@
-import { useState } from 'react';
-import { Typography, Box, Button, Modal} from '@mui/material';
+import React, { useState } from 'react';
+import { Typography, Box, Button, Modal } from '@mui/material';
 import Sidebar from '../SideBar/sidebar';
-import TeamMembers from '../Listagem/listagem';
+import TeamMembers from '../TeamMembers/TeamMembers';
+import { Delete, Edit } from '@mui/icons-material';
 import './EquipeAdmin.css'; // Importa o arquivo CSS
+import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModalTeam';
+import EditMemberModal from '../EditMemberModal/EditMemberModal';
 
-// Dados das equipes com membros
 const teams = [
   {
     name: 'Equipe Alpha',
     members: [
       { name: 'Raquel Simões', role: 'Líder' },
       { name: 'Katia Silva', role: 'Liderado' },
-
+      { name: 'Matheus Santos', role: 'Líder' },
+      { name: 'Vinicius Masanori', role: 'Liderado' },
     ],
   },
   {
     name: 'Equipe Beta',
     members: [
-      { name: 'Matheus Santos', role: 'Lider' },
+      { name: 'Matheus Santos', role: 'Líder' },
       { name: 'Vinicius Masanori', role: 'Liderado' },
     ],
   },
@@ -26,72 +29,40 @@ const teams = [
     members: [
       { name: 'Carlos Silva', role: 'Líder' },
       { name: 'Ana Paula', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Delta',
-    members: [
-      { name: 'Fernanda Costa', role: 'Líder' },
-      { name: 'Roberto Lopes', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Epsilon',
-    members: [
-      { name: 'Gabriel Oliveira', role: 'Líder' },
-      { name: 'Maria Souza', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Zeta',
-    members: [
-      { name: 'Paulo Henrique', role: 'Líder' },
-      { name: 'Lara Mendes', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Eta',
-    members: [
-      { name: 'Bruno Torres', role: 'Líder' },
-      { name: 'Luciana Reis', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Theta',
-    members: [
-      { name: 'Carolina Rocha', role: 'Líder' },
-      { name: 'Felipe Cardoso', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Iota',
-    members: [
-      { name: 'Pedro Marques', role: 'Líder' },
-      { name: 'Juliana Costa', role: 'Liderado' },
-    ],
-  },
-  {
-    name: 'Equipe Kappa',
-    members: [
-      { name: 'Rafael Duarte', role: 'Líder' },
-      { name: 'Marcela Alves', role: 'Liderado' },
+      { name: 'Matheus Santos', role: 'Líder' },
+      { name: 'Vinicius Masanori', role: 'Liderado' },
     ],
   },
 ];
 
 function EquipeAdmin() {
-  const [selectedTeam, setSelectedTeam] = useState(null); // Armazena a equipe selecionada
-  const [open, setOpen] = useState(false); // Controle do modal
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false); // Estado para abrir modal de edição
+  const [openDeleteModal, setOpenDeleteModal] = useState(false); // Estado para abrir modal de exclusão
+  const [selectedMember, setSelectedMember] = useState(null); // Membro selecionado para editar ou excluir
 
-  // Função para abrir o modal e definir a equipe selecionada
   const handleOpen = (team) => {
     setSelectedTeam(team);
     setOpen(true);
   };
 
-  // Função para fechar o modal
   const handleClose = () => {
     setOpen(false);
+    setOpenEditModal(false);
+    setOpenDeleteModal(false);
+  };
+
+  // Função para abrir o modal de edição de um membro
+  const handleEdit = (member) => {
+    setSelectedMember(member);
+    setOpenEditModal(true);
+  };
+
+  // Função para abrir o modal de exclusão de um membro
+  const handleDelete = (member) => {
+    setSelectedMember(member);
+    setOpenDeleteModal(true);
   };
 
   return (
@@ -106,25 +77,34 @@ function EquipeAdmin() {
         {/* Lista de Equipes */}
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mb: 4 }}>
           {teams.map((team, index) => (
-            <Button
-              key={index}
-              variant="contained"
-              sx={{
-                width: 150,
-                height: 150,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: 'grey.500',
-                '&:hover': {
-                  backgroundColor: 'grey.700',
-                },
-              }}
-              onClick={() => handleOpen(team)}
-            >
-              {team.name}
-            </Button>
-          ))}
+            <Box key={index} sx={{ position: 'relative' }}>
+              <Button
+                variant="contained"
+                sx={{
+                  width: 150,
+                  height: 150,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'grey.500',
+                  '&:hover': {
+                    backgroundColor: 'grey.700',
+                  },
+                }}
+                onClick={() => handleOpen(team)}
+              >
+                {team.name}
+              </Button>
+
+              {/* Botões de Excluir e Editar */}
+              <Box sx={{ position: 'absolute', top: 0, display:'flex', gap:"25px"}}>
+                <Button onClick={() => handleEdit(team.members[0])} sx={{color:"white"}}><Edit /></Button>
+                <Button onClick={() => handleDelete(team.members[0])} sx={{color:"white"}}><Delete /></Button>
+              </Box>
+            </Box>
+          ))}             
+          
         </Box>
 
         {/* Modal para exibir os membros da equipe */}
@@ -133,7 +113,7 @@ function EquipeAdmin() {
           onClose={handleClose}
           aria-labelledby="team-members-modal"
           aria-describedby="team-members-list"
-          sx={{ backdropFilter: 'blur(8px)', bgcolor: 'rgba(0, 0, 0, 0.5)' }} // Opacidade no fundo
+          sx={{ backdropFilter: 'blur(8px)', bgcolor: 'rgba(0, 0, 0, 0.5)' }}
         >
           <Box
             sx={{
@@ -141,13 +121,12 @@ function EquipeAdmin() {
               top: '50%',
               left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 400,
               bgcolor: 'background.paper',
               boxShadow: 24,
               p: 4,
               borderRadius: 2,
               backdropFilter: 'blur(5px)',
-              opacity: 0.9, // Aplicando opacidade ao modal
+              opacity: 0.9,
             }}
           >
             {selectedTeam ? (
