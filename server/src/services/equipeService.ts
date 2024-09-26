@@ -3,10 +3,17 @@ import Equipe from "../models/equipeModels";
 // Função para criar equipe
 export const createEquipeService = async (nome: string) => {
     try {
+        const equipeExistente = await Equipe.findOne({ where: {nome}});
+        if(equipeExistente) {
+            throw new Error("Equipe já cadastrada");
+        }
         const newEquipe = await Equipe.create({ nome });
         return newEquipe;
-    } catch (error) {
-        throw new Error("Erro ao criar equipe");
+    }catch(error: any) {
+        if(error.message === "Equipe já cadastrada") {
+            throw new Error("Equipe já cadastrada");
+        }
+        throw new Error("Erro ao criar equipe")
     }
 };
 

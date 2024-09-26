@@ -17,6 +17,7 @@ Equipe.init(
     nome: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
   },
   {

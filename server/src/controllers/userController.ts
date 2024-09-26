@@ -80,9 +80,6 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-
-
-
 export const getIdUser = async (req: Request, res: Response) => {
 
        try {

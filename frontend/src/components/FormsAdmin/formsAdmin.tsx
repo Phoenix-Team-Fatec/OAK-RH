@@ -17,7 +17,7 @@ const FormsAdmin = () => {
           {/* Dashboard content */}
           {/* Outras partes da sua dashboard */}
         </Box>
-      </Box>
+      </Box> 
     </Box>
   );
 };

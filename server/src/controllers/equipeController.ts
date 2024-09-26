@@ -6,15 +6,21 @@ import {
     updateEquipeService, 
     deleteEquipeService 
 } from "../services/equipeService";
+import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
 export const createEquipe = async (req: Request, res: Response) => {
     const { nome } = req.body;  
     try {
-        const newEquipe = await createEquipeService(nome);
+        const equipeExistente = await Equipe.findOne({ where: {nome} });
+        if(equipeExistente) {
+            return res.status(409).json({ message: "Equipe já cadastrada" })
+        }
+        const newEquipe = await Equipe.create({ nome });
         res.status(201).json(newEquipe);
-    } catch (error) {
-        res.status(500).json({ message: "Erro ao criar equipe" });
+    }catch(error) {
+        console.log(error);
+        res.status(500).json({ message: "Erro ao criar equipe" })
     }
 }
 

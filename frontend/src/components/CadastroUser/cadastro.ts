@@ -38,10 +38,15 @@ export async function registerTeam(nome: string) {
                 }
             }
         );
-        return response;
-    }catch (error) {
-        console.log("Error in registerTeam funcion", error);
-    }
+        if (response.status === 201) {
+            return response.data // Retorna os dados da equipe criada
+        }else {
+            throw new Error("Falha no cadastro de equipes");
+        }
+      }catch (error) {
+        console.log("Error in registerTeam", error);
+        throw error;
+      }  
 }
 
 export async function getIdUser(email: string) {
@@ -54,7 +59,6 @@ export async function getIdUser(email: string) {
         return error;
     }
 }
-
 
 export async function registerEquipe_user(userId: number, equipeId: number) {
     try{
@@ -70,10 +74,6 @@ export async function registerEquipe_user(userId: number, equipeId: number) {
                  Authorization: `Bearer ${token}`}
                 
                 }
-           
-             
-                   
-        
         );
         return response;
 
