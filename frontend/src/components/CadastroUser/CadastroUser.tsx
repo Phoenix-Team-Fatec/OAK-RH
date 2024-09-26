@@ -4,6 +4,7 @@ import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, A
 import Sidebar from '../SideBar/sidebar';
 import './index.css';  // Importando o CSS
 import { registerTeam, registerUser } from './cadastro';
+import TopMenu from '../Menu/menu';
 
 const CadastroUser: React.FC = () => {
 
@@ -77,7 +78,8 @@ const CadastroUser: React.FC = () => {
   };
 
   return (
-    <>
+    <> 
+      <TopMenu/>
       <Box className="container">
         <Sidebar />
         

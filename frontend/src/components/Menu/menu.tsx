@@ -40,12 +40,12 @@ export default function TopMenu() {
         justifyContent: 'space-between',
         backgroundColor: '#fff', // Adiciona cor de fundo para sobrepor
         p: 2,
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Opcional: Adiciona sombra para destaque
+        boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)', // Opcional: Adiciona sombra para destaque
       }}
     >
       {/* Logo e Botão Voltar */}
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: 'green', mr: 1 }}>OAK</Typography>
+        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#556B2F', mr: 1 }}>OAK</Typography>
         <Typography variant="h5" sx={{ color: 'grey', mr: 3 }}>RH</Typography>
       </Box>
 
