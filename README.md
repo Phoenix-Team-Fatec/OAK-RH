@@ -107,32 +107,32 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
  </p>
 
 * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/tandpfun/skill-icons/raw/main/icons/Idea-Dark.svg"/>
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vscode/vscode-original.svg"/>
    Vscode - IDE
  </p>
 
 * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/postgresql.png"/>
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg"/>
   PostgreSQL - Banco de dados
  </p>
  
 * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/nodejs%20icon.png"/>
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg"/>
   Node.js - Ambiente de execução de JavaScript
  </p>
 
  * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/js%20icon.jpeg"/> 
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"/> 
    JavaScript - Linguagem de programação interpretada de alto nível
  </p>
 
  * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/React%20icon.jpeg"/> 
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"/> 
    React - Biblioteca de código aberto para interfaces gráficas
  </p>
  
  * <p>
-   <img align="left" title="vscode" height="30px" src="https://github.com/Phoenix-Team-Fatec/API-3/blob/master/src/src/assets/TypeScript%20icon.png"/> 
+   <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"/> 
    TypeScript - Linguagem de programação de código aberto
  </p>
 
