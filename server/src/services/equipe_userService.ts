@@ -3,30 +3,30 @@ import User from "../models/userModels";
 import Equipe from "../models/equipeModels";
 
 // Função para associar um usuário a uma equipe
-export const setUsarioEquipe = async (
-  userId: number,
-  equipeId: number,
-  isLider: boolean
-) => {
-  try {
-    const newAssociation = await Equipe_user.create({
-      user_id: userId,
-      equipe_id: equipeId,
-      is_lider: isLider,
-    });
+  export const setUsarioEquipe = async (
+    userId: number,
+    equipeId: number,
+    isLider: boolean
+  ) => {
+    try {
+      const newAssociation = await Equipe_user.create({
+        user_id: userId,
+        equipe_id: equipeId,
+        is_lider: isLider,
+      });
 
-    return newAssociation;
-  } catch (error) {
-    console.log("Error in setUsuarioEquipe function:", error);
-    throw new Error("Erro ao associar usuário à equipe");
-  }
-};
+      return newAssociation;
+    } catch (error) {
+      console.log("Error in setUsuarioEquipe function:", error);
+      throw new Error("Erro ao associar usuário à equipe");
+    }
+  };
 
 // Função para listar equipes com seus respectivos usuários
 export const listarEquipe_User = async () => {
   try {
     const teamsWithUsers = await Equipe.findAll({
-      attributes: ['nome'], // Inclua apenas o ID da equipe
+      attributes: ['id','nome'], // Inclua apenas o ID da equipe
       include: [
         {
           model: Equipe_user,
@@ -60,7 +60,7 @@ export const getEquipe_user = async(equipeId: number) =>{
       where:{
         id: equipeId
       },
-      attributes: ['nome'],
+      attributes: ['id','nome'],
       include: [
         {
           model: Equipe_user,
