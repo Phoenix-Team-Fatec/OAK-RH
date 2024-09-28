@@ -71,6 +71,7 @@ function EquipeAdmin() {
   const handleClose = () => {
     localStorage.removeItem('teamId');
     setOpen(false);
+    fetchTeams();
   };
 
   const handleEdit = (team) => {
