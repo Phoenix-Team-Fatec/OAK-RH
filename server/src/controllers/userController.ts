@@ -27,11 +27,7 @@ export const readUser = async (req: Request, res: Response) => {
 };
 
 export const readAllUsers = async (req: Request, res: Response) => {
-  const { is_admin } = req.body;
-
-  if(!is_admin) {
-    return res.status(403).json({ message: "Access denied" });
-  }
+  
 
   try {
     const users = await readAllUsersService();

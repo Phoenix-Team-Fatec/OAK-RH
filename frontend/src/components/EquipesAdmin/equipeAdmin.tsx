@@ -1,39 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Typography, Box, Button, Modal, TextField, Fab } from '@mui/material';
 import { Delete, Edit, Add } from '@mui/icons-material';
 import Sidebar from '../SideBar/sidebar';
 import TeamMembers from '../TeamMembers/TeamMembers';
 import './EquipeAdmin.css';
 import TopMenu from '../Menu/menu';
+import { listEquipeUser } from './equipes';
 
-const initialTeams = [
-  {
-    name: 'Equipe Gamma',
-    members: [
-      { name: 'Carlos Silva', role: 'Líder' },
-      { name: 'Ana Paula', role: 'Liderado' },
-      { name: 'Matheus Santos', role: 'Líder' },
-      { name: 'Vinicius Masanori', role: 'Liderado' },
-    ],
-  },
-];
+const equipe_user = async () => {
+  try {
+    const response = await listEquipeUser();
+    return response;
+  } catch (error) {
+    console.log("Error in equipe_user function:", error);
+    return error;
+  }
+};
+
+// Mapear os dados da resposta
+ const listEquipe = async () => {
+  try {
+    const response = await equipe_user();
+    
+    const teams = response.map((equipe: any) => {
+      return {
+        id: equipe.id, //ID da equipe
+        name: equipe.nome, // Nome da equipe
+        members: equipe.users.map((user: any) => ({
+          id: user.user.id, // ID do membro
+          name: user.user.nome, // Nome do membro
+          role: user.is_lider ? 'Líder' : 'Liderado', // Definir o papel como 'Líder' ou 'Liderado'
+        })),
+      };
+    });
+  
+    return teams;
+  } catch (error) {
+    console.log("Error in listEquipe function:", error);
+    return [];
+  }
+}
 
 function EquipeAdmin() {
-  const [teams, setTeams] = useState(initialTeams);
+  const [teams, setTeams] = useState([]); // Inicializa com um array vazio
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [open, setOpen] = useState(false);
-  const [openEditModal, setOpenEditModal] = useState(false); // Modal para editar equipe
-  const [openDeleteModal, setOpenDeleteModal] = useState(false); // Modal para excluir equipe
-  const [openAddModal, setOpenAddModal] = useState(false); // Modal para adicionar equipe
-  const [newTeamName, setNewTeamName] = useState(''); // Novo nome da equipe
-  const [selectedMember, setSelectedMember] = useState(null); // Membro selecionado
+  const [openEditModal, setOpenEditModal] = useState(false); 
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [newTeamName, setNewTeamName] = useState(''); 
 
-  const handleOpen = (team) => {
-    setSelectedTeam(team);
-    setOpen(true);
+
+  const fetchTeams = async () => {
+    const teamsData = await listEquipe();
+    setTeams(teamsData); // Atualiza o estado com os dados retornados de listEquipe
   };
 
+  // Utiliza o useEffect para chamar listEquipe ao montar o componente
+  useEffect(() => {
+    
+    fetchTeams();
+  }, []); // [] significa que só será chamado uma vez, ao montar o componente
+
+  const handleOpen = async (team) => {
+    setSelectedTeam(team);
+    localStorage.setItem('teamId', team.id);
+    setOpen(true);
+};
+
   const handleClose = () => {
+    localStorage.removeItem('teamId');
     setOpen(false);
   };
 
@@ -58,14 +94,19 @@ function EquipeAdmin() {
   };
 
   const handleAddTeam = () => {
-    setTeams([...teams, { name: newTeamName, members: [] }]);
-    setOpenAddModal(false);
-    setNewTeamName('');
+    // Adiciona a nova equipe ao estado sem recarregar a página
+  const newTeam = { id: teams.length + 1, name: newTeamName, members: [] }; // Criando a nova equipe com um ID único e nome
+  setTeams([...teams, newTeam]); // Atualiza o estado com a nova equipe
+  
+
+
+  setOpenAddModal(false); // Fecha o modal
+  setNewTeamName(''); // Limpa o campo de entrada
   };
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <Sidebar />
+      <Sidebar /> 
       <TopMenu />
       <Box sx={{ flexGrow: 1, mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography sx={{ margin: 5 }} variant="h4" gutterBottom>Equipes Admin!</Typography>
@@ -100,7 +141,8 @@ function EquipeAdmin() {
             </Box>
           ))}
         </Box>
-
+        
+{/* É NECESSÁRIO REFATORAR ESTE CÓDIGO ABAIXO PARA OS COMPONENTES A FIM DE FACILITAR A LEGIBILIDADE */}
         {/* Modal para adicionar equipe */}
         <Modal
           open={openAddModal}

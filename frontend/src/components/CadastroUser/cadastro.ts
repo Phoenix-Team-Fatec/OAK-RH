@@ -56,33 +56,7 @@ export async function getIdUser(email: string) {
 }
 
 
-export async function registerEquipe_user(userId: number, equipeId: number) {
-    try{
-        const token = localStorage.getItem('token');
-        const response = axios.post('http://localhost:3000/equipe_user/associar', 
-            {
-            userId: userId,
-            equipeId: equipeId,
-            isLider: false
-           },
-              {
-                headers: {
-                 Authorization: `Bearer ${token}`}
-                
-                }
-           
-             
-                   
-        
-        );
-        return response;
 
-    }catch (error) {
-
-        console.log("Error in registerEquipe_user function:", error);
-        return error;
-    }
-}
 
 
 
