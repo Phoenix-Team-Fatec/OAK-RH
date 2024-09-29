@@ -89,10 +89,21 @@ function EquipeAdmin() {
     setOpenEditModal(false);
   };
 
-  const handleConfirmDelete = () => {
-    setTeams(teams.filter(t => t !== selectedTeam));
-    setOpenDeleteModal(false);
-  };
+// Função para confirmar exclusão da equipe
+const handleConfirmDelete = async () => {
+  if (selectedTeam) {
+      try {
+          // Faz a requisição para excluir a equipe no banco de dados
+          await deleteEquipeById(selectedTeam.id);
+
+          // Remove a equipe do estado local após a exclusão no banco
+          setTeams(teams.filter(t => t.id !== selectedTeam.id));
+          setOpenDeleteModal(false);
+      } catch (error) {
+          console.log("Error deleting team:", error);
+      }
+  }
+};
 
   const handleAddTeam = () => {
     // Adiciona a nova equipe ao estado sem recarregar a página
