@@ -73,12 +73,12 @@
 |Desenvolvimento de Protótipo no Figma| :white_check_mark: |
 |Cadastro e Login de Usuários e o seus níveis de acesso|  |
 |Cadastro de equipes e seu gerenciamento| |
-|Criação de Telas do site usando React| |
-|Configuração do banco de dados para o cadastro de usuários e equipes | |
-|Estudo do Node.js| |
-|Estudo do React| |
+|Criação de Telas do site usando React|:white_check_mark: |
+|Configuração do banco de dados para o cadastro de usuários e equipes |:white_check_mark: |
+|Estudo do Node.js| :white_check_mark:|
+|Estudo do React|:white_check_mark: |
 |Estudo do JavaScript| :white_check_mark: |
-|Estudo do TypeScript| |
+|Estudo do TypeScript| :white_check_mark:|
 |Estudo do PostgreSQL|:white_check_mark: |
 
 

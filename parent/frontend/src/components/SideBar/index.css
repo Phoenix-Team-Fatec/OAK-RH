@@ -1,0 +1,62 @@
+/* Estilo base para os botões da sidebar */
+*{
+  font-family: "Poppins", sans-serif;
+}
+
+.sidebar-button {
+  background-color: white;
+  border-radius: 50px;
+  gap: 12px;
+  color: black;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 12px;
+  width: 80%; /* Define a largura em 80% */
+  margin: 0 auto; /* Centraliza os botões */
+  text-transform: none;
+  transition: background-color 0.3s, transform 0.3s ease;
+  
+}
+
+
+  
+  /* Estilo para o texto */
+  .sidebar-button .MuiListItemText-root {
+    color: black;
+  }
+  
+  /* Estilo para hover */
+  .sidebar-button:hover {
+    background-color: #6B8E23; /* Cor verde mais clara no hover */
+    transform: scale(1.05); /* Aplica um leve zoom de 5% */
+    transition: transform 0.3s ease; /* Transição suave do efeito */
+  }
+  
+  
+  .sidebar-button:hover .MuiListItemText-root {
+    color: white; /* Texto fica branco no hover */
+  }
+
+  .sidebar-button:hover .icone_sidebar {
+    color: white; /* Texto fica branco no hover */
+  }
+  
+  /* Estilo para o botão ativo */
+  .sidebar-button.active {
+    background-color: #556B2F; /* Cor de fundo verde musgo quando ativo */
+  
+  }
+  
+  .sidebar-button.active .MuiListItemText-root {
+    color: white; /* Texto branco para o botão ativo */
+  }
+  .sidebar-button.active .icone_sidebar {
+    color: white; /* Texto branco para o botão ativo */
+  }
+  
+  .icone_sidebar{
+    color: black;
+  }
+ 
+  
