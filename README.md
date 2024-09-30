@@ -64,6 +64,7 @@
 ## ➯ Backlog das Sprints
 
 ### Sprint 1 - Metodologia, tecnologias , protótipo , cadastro ,  login , interface e banco de dados .
+### Sprint 1 - Metodologia, tecnologias , protótipo , cadastro ,  login , interface e banco de dados .
 
 | ITEM   | STATUS |
 | :----: | :----: |
@@ -85,6 +86,7 @@
 ### Sprint 2 - 
 
 
+
 ### Sprint 3 -
 
 ### Sprint 4 -
@@ -92,6 +94,7 @@
 ## 🛠️ Tecnologias
 
 As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na construção do projeto:
+
 
 
  
@@ -135,6 +138,7 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
    <img align="left" title="vscode" height="30px" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg"/> 
    TypeScript - Linguagem de programação de código aberto
  </p>
+
 
 
 <span id="equipe">
