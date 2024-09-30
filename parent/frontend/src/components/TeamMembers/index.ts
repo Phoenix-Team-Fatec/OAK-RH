@@ -44,3 +44,20 @@ export async function changeLeader(userId: number, equipeId: number, isLider: bo
         return error;
     }
 }
+
+
+//função para listar apenas uma equipe com seus usuários
+export async function getEquipe_user(equipeId: number) {
+    try{
+        const token = localStorage.getItem('token');
+        const response = await axios.get(`http://localhost:3000/equipe_user/${equipeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response.data;
+    }catch (error) {
+        console.log("Error in getEquipe_user function:", error);
+        return error;
+    }
+}

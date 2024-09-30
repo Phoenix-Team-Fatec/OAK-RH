@@ -2,10 +2,10 @@ import axios from 'axios';
 
 
 //função para listar as equipes com seus respectivos membros
-export async function listEquipeUser() {
+export async function listEquipe() {
     try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:3000/equipe_user/listar', {
+        const response = await axios.get('http://localhost:3000/equipe/listar', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

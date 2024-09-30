@@ -1,6 +1,6 @@
 import User from "../models/userModels"
 import bcrypt from 'bcrypt';
-import e from "express";
+
 import jwt from 'jsonwebtoken';
 
 // Função de criar usuário
@@ -115,7 +115,7 @@ export const loginService = async (email: string, senha: string) => {
         const token = jwt.sign(
             { id: user.id, email: user.email, is_admin: user.is_admin },
             process.env.JWT_SECRET as string,
-            { expiresIn: '1h'}
+            { expiresIn: '1d'}
         );
 
         return { token, is_admin: user.is_admin };

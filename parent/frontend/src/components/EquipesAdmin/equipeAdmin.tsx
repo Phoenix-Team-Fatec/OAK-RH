@@ -5,11 +5,11 @@ import Sidebar from '../SideBar/sidebar';
 import TeamMembers from '../TeamMembers/TeamMembers';
 import './EquipeAdmin.css';
 import TopMenu from '../Menu/menu';
-import { listEquipeUser } from './equipes';
+import { listEquipe } from './equipes';
 
-const equipe_user = async () => {
+const equipes = async () => {
   try {
-    const response = await listEquipeUser();
+    const response = await listEquipe();
     return response;
   } catch (error) {
     console.log("Error in equipe_user function:", error);
@@ -18,19 +18,15 @@ const equipe_user = async () => {
 };
 
 // Mapear os dados da resposta
- const listEquipe = async () => {
+ const listEquipes = async () => {
   try {
-    const response = await equipe_user();
+    const response = await equipes();
     
     const teams = response.map((equipe: any) => {
       return {
         id: equipe.id, //ID da equipe
         name: equipe.nome, // Nome da equipe
-        members: equipe.users.map((user: any) => ({
-          id: user.user.id, // ID do membro
-          name: user.user.nome, // Nome do membro
-          role: user.is_lider ? 'Líder' : 'Liderado', // Definir o papel como 'Líder' ou 'Liderado'
-        })),
+       
       };
     });
   
@@ -52,7 +48,7 @@ function EquipeAdmin() {
 
 
   const fetchTeams = async () => {
-    const teamsData = await listEquipe();
+    const teamsData = await listEquipes();
     setTeams(teamsData); // Atualiza o estado com os dados retornados de listEquipe
   };
 
@@ -107,7 +103,7 @@ const handleConfirmDelete = async () => {
 
   const handleAddTeam = () => {
     // Adiciona a nova equipe ao estado sem recarregar a página
-  const newTeam = { id: teams.length + 1, name: newTeamName, members: [] }; // Criando a nova equipe com um ID único e nome
+  const newTeam = { id: teams.length + 1, name: newTeamName }; // Criando a nova equipe com um ID único e nome
   setTeams([...teams, newTeam]); // Atualiza o estado com a nova equipe
   
 
@@ -214,7 +210,7 @@ const handleConfirmDelete = async () => {
                 <Typography id="team-members-modal" variant="h5" gutterBottom>
                   {selectedTeam.name} - Membros
                 </Typography>
-                <TeamMembers members={selectedTeam.members} />
+                <TeamMembers/>
                 <Button sx={{ mt: 2 }} variant="contained" onClick={handleClose}>Fechar</Button>
               </>
             ) : (
