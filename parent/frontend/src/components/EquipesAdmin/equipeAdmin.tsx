@@ -5,7 +5,7 @@ import Sidebar from '../SideBar/sidebar';
 import TeamMembers from '../TeamMembers/TeamMembers';
 import './EquipeAdmin.css';
 import TopMenu from '../Menu/menu';
-import { listEquipe } from './equipes';
+import { listEquipe, deleteEquipeById, updateEquipe } from './equipes';
 
 const equipes = async () => {
   try {
@@ -81,8 +81,23 @@ function EquipeAdmin() {
   };
 
   const handleSaveEdit = () => {
-    setTeams(teams.map(t => t === selectedTeam ? { ...t, name: newTeamName } : t));
-    setOpenEditModal(false);
+    if(selectedTeam){
+      updateEquipe(selectedTeam.id, newTeamName); // Faz a requisição para atualizar o nome da equipe no banco de dados
+      try{
+
+        //requisição para atualizar o nome da equipe
+        updateEquipe(selectedTeam.id, newTeamName);
+
+        setTeams(teams.map(t => t.id === selectedTeam.id ? { ...t, name: newTeamName } : t)); // Atualiza o estado local com o novo nome
+        setOpenEditModal(false); // Fecha o modal
+
+      }catch(error){
+        console.log("Error updating team:", error);
+      }
+      
+    }
+   
+   
   };
 
 // Função para confirmar exclusão da equipe
