@@ -13,7 +13,6 @@ class User extends Model {
   public nome!: string;
   public email!: string;
   public senha!: string;
-  public is_admin!: boolean;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
@@ -44,10 +43,16 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    is_admin: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
+    id_admin:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'admin', // Nome da tabela referenciada
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    }
+    
   },
   {
     sequelize,
@@ -57,6 +62,7 @@ User.init(
 );
 
 Equipe_user.belongsTo(User, { foreignKey: 'user_id', as: 'user', onDelete: 'CASCADE' });
+
 
 User.hasMany(Equipe_user, { foreignKey: 'user_id', as: 'user' ,onDelete: 'CASCADE' });
 

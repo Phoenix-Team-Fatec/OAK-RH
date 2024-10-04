@@ -21,7 +21,8 @@ import Equipe from "../models/equipeModels";
       throw new Error("Erro ao associar usuário à equipe");
     }
   };
-// Função para listar equipes com seus respectivos usuários
+
+  
 // Função para listar equipes com seus respectivos usuários
 export const listarEquipe_User = async () => {
   try {

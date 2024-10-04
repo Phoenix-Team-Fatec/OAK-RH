@@ -234,14 +234,7 @@ const handleConfirmDelete = async () => {
           </Box>
         </Modal>
 
-        {/* Botão flutuante para adicionar nova equipe */}
-        <Fab
-          color="primary"
-          sx={{ position: 'fixed', bottom: 16, right: 16 }}
-          onClick={() => setOpenAddModal(true)}
-        >
-          <Add />
-        </Fab>
+       
       </Box>
     </Box>
   );
