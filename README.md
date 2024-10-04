@@ -20,7 +20,7 @@
 | #05    | Média |EU, enquanto cliente, quero visualizar todas as respostas de feedback das pesquisas de clima e cultura. | 20 Horas | 2  | (RF3)  |O cliente visualiza os resultados das respostas fornecidas nas pesquisas de clima e cultura. |
 | #06    | Média |EU, enquanto Admin, quero associar perguntas a avaliações específicas de autoavaliação, liderança ou liderado.| 25 Horas | 2 | (RF2)  | O Admin pode vincular perguntas a avaliações específicas (Autoavaliação, Liderança ou Liderado). |
 | #07    | Média |EU, enquanto cliente, quero usar a 'OAK-RH' para gerenciar membros da empresa, visualizando dashboards com feedbacks e pesquisa de clima e cultura. | 24 Horas | 3 | (RF1)  |O cliente consegue visualizar e gerenciar membros via dashboards que mostram feedback e clima e cultura. |
-| #08    | Média |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards de Líderes para analisar a evolução de times e indivíduos.| 15 Horas | 3 |  (RNF3)  | O Admin pode visualizar a evolução das equipes ao aplicar filtros de data. |
+| #08    | Média |EU, enquanto Admin, quero aplicar filtros de data nos Dashboards de Líderes para analisar a evolução de times e indivíduos.| 15 Horas | 3 |  (RF3)  | O Admin pode visualizar a evolução das equipes ao aplicar filtros de data. |
 | #09    | Média |EU, enquanto cliente, quero exportar informações dos Dashboards em formato PDF para análise posterior.| 20 Horas | 4 | (RF3)  |O cliente consegue exportar as informações do Dashboard em formato PDF. | 
 | #10    | Média |EU, enquanto cliente, quero ver relatórios que compararem avaliações anteriores com as atuais| 30 Horas | 4 | (RF3)  |O cliente consegue visualizar comparações entre resultados antigos e novos de forma clara.|
 
@@ -56,8 +56,15 @@
 ![MVP_OAK_Readme](https://github.com/user-attachments/assets/e4ac3981-d25b-42c9-92a0-57debd974c03)
 
 
-## Protótipo
-<span id="prototipo">
+## ➯ Protótipo
+
+<br>
+  <img align="left" title="figma-logo" height="60px" src="https://user-images.githubusercontent.com/76211125/227502784-c94d5e2d-2e39-449b-ba85-053b9106b979.png"/>
+https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5&t=Jp8r0mNTQ2El6JWK-1
+<br>
+<br>
+<br>
+<br>
 
 
 
@@ -72,8 +79,8 @@
 |Backlog do produto| :white_check_mark: |
 |Backlog da sprint| :white_check_mark: |
 |Desenvolvimento de Protótipo no Figma| :white_check_mark: |
-|Cadastro e Login de Usuários e o seus níveis de acesso|  |
-|Cadastro de equipes e seu gerenciamento| |
+|Cadastro e Login de Usuários e o seus níveis de acesso| :white_check_mark: |
+|Cadastro de equipes e seu gerenciamento|:white_check_mark: |
 |Criação de Telas do site usando React|:white_check_mark: |
 |Configuração do banco de dados para o cadastro de usuários e equipes |:white_check_mark: |
 |Estudo do Node.js| :white_check_mark:|
