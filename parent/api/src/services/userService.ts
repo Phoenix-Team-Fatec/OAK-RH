@@ -1,37 +1,13 @@
-import Admin from "../models/adminModels";
-import User from "../models/userModels";
+import User from "../models/userModels"
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-
-
-
-
-
-
-// Função de criar admin
-export const createAdminService = async (nome: string, email: string, senha: string, empresa: string, cnpj ) => {
-    try {
-        const hashedPassword = await bcrypt.hash(senha, 10);
-        const newAdmin = await Admin.create({
-            nome,
-            senha: hashedPassword,
-            email,
-            empresa,
-            cnpj
-            
-        });
-        return newAdmin;
-    }catch(error) {
-        throw new Error("Error creating user");
-    }
-};
 
 
 
 // Função de login
 export const loginService = async (email: string, senha: string) => {
     try {
-        const user = await Admin.findOne({ where: { email } });
+        const user = await User.findOne({ where: { email } });
         if(!user) {
             throw new Error("User not found");
         }
@@ -40,7 +16,7 @@ export const loginService = async (email: string, senha: string) => {
         console.log("Validação da senha", isPasswordValid);
         
         const token = jwt.sign(
-            { id: user.id, email: user.email},
+            { id: user.id, email: user.email },
             process.env.JWT_SECRET as string,
             { expiresIn: '1d'}
         );
@@ -50,12 +26,6 @@ export const loginService = async (email: string, senha: string) => {
         throw new Error(error.message || "Internal Server Error");
     }
 };
-
-
-
-
-//função de criar, listar, atualizar e deletar usuário
-
 
 // Função de criar usuário
 export const createUserService = async (nome: string, email: string, senha: string, id_admin: number) => {

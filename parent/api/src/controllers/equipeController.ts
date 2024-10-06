@@ -1,11 +1,5 @@
 import { Request, Response } from "express";
-import { 
-    createEquipeService, 
-    getAllEquipesService, 
-    getEquipeByIdService, 
-    updateEquipeService, 
-    deleteEquipeService 
-} from "../services/equipeService";
+import { createEquipeService, getAllEquipesService, getEquipeByIdService, updateEquipeService, deleteEquipeService } from "../services/equipeService";
 import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
@@ -16,7 +10,7 @@ export const createEquipe = async (req: Request, res: Response) => {
         if(equipeExistente) {
             return res.status(409).json({ message: "Equipe já cadastrada" })
         }
-        const newEquipe = await Equipe.create({ nome });
+        const newEquipe = await createEquipeService(nome);
         res.status(201).json(newEquipe);
     }catch(error) {
         console.log(error);
