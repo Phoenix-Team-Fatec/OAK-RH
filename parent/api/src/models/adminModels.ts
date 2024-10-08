@@ -2,21 +2,15 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../database/connectionDB";
 import User from "./userModels";
-import bcrypt from 'bcrypt';
+import Equipe from "./equipeModels";
 
 
 class Admin extends Model {
   public id!: number;
   public nome!: string;
   public email!: string;
-  public senha!: string;
   public empresa!: string;
   public cnpj!: string;
-
-
-  public async validatePassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.senha);
-  }
 
 
 }
@@ -35,10 +29,6 @@ Admin.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        senha:{
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         email:{
             type: DataTypes.STRING,
             allowNull: false,
@@ -50,7 +40,8 @@ Admin.init(
         },
         cnpj:{
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
 },
         {
@@ -61,8 +52,11 @@ Admin.init(
 
 );
 
-User.belongsTo(Admin, { foreignKey: 'admin_id', as: 'admin', onDelete: 'CASCADE' });
+User.belongsTo(Admin, { foreignKey: 'id_admin', as: 'admin', onDelete: 'CASCADE' });
+Equipe.belongsTo(Admin, { foreignKey: 'id_admin', as: 'admin', onDelete: 'CASCADE' });
+
 Admin.hasMany(User, { foreignKey: 'admin_id', as: 'users' ,onDelete: 'CASCADE' });
+Admin.hasMany(Equipe, { foreignKey: 'admin_id', as: 'equipes', onDelete: 'CASCADE' });
 
 
 export default Admin;

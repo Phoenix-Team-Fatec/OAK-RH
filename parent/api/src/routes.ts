@@ -11,7 +11,7 @@ router.post('/adm', createAdmin)
 
 // Apenas administradores podem acessar essas rotas
 router.post('/users/create', createUser);
-router.get('/users', readAllUsers);
+router.get('/users/:id_admin', readAllUsers);
 router.post('/', login);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
@@ -21,7 +21,7 @@ router.get('/users/getId/:email', getIdUser);
 
 // ROTAS DE EQUIPE
 router.post('/equipe/criar', createEquipe);
-router.get('/equipe/listar', getAllEquipes);
+router.get('/equipe/listar/:id_admin', getAllEquipes);
 router.get('/equipe/:id', getEquipeById);       
 router.put('/equipe/:id', updateEquipe);         
 router.delete('/equipe/:id', deleteEquipe);   

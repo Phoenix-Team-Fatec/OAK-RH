@@ -12,8 +12,6 @@ export const loginService = async (email: string, senha: string) => {
             throw new Error("User not found");
         }
 
-        const isPasswordValid = await user.validatePassword(senha);
-        console.log("Validação da senha", isPasswordValid);
         
         const token = jwt.sign(
             { id: user.id, email: user.email },
@@ -100,7 +98,7 @@ export const updateUserService = async (id: number, nome?: string, email?: strin
         // Atualiza somente os campos fornecidos
         if (nome) user.nome = nome;
         if (email) user.email = email;
-        if (senha) user.senha = await bcrypt.hash(senha, 10);
+
 
         await user.save();
 

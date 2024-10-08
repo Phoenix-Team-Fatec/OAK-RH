@@ -30,11 +30,11 @@ export const createUser = async (req: Request, res: Response) => {
 
 //listar informações de um usuário
 export const readUser = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
-      const userId = parseInt(id, 10);
-      const user = await readUserService(userId);
+      
+      const user = await readUserService(Number(id));
       return res.status(200).json(user);
   }catch (error) {
       console.log("Error in readUser function:", error);
@@ -46,11 +46,11 @@ export const readUser = async (req: Request, res: Response) => {
 //listar todas as informações de todos os usuários
 export const readAllUsers = async (req: Request, res: Response) => {
    
-    const { id_admin } = req.body;
+    const { id_admin } = req.params;
 
   try {
     
-    const users = await listUserService(id_admin);
+    const users = await listUserService(Number(id_admin));
     return res.status(200).json(users);
   }catch (error) {
     console.log("Error in readAllUsers function:", error);

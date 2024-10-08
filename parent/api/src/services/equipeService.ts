@@ -18,9 +18,9 @@ export const createEquipeService = async (nome: string) => {
 };
 
 // Função para obter todas as equipes
-export const getAllEquipesService = async () => {
+export const getAllEquipesService = async (id_admin: number) => {
     try {
-        const allEquipes = await Equipe.findAll();
+        const allEquipes = await Equipe.findAll({where: {id_admin}});
         return allEquipes;
     } catch (error) {
         throw new Error("Erro ao buscar equipes");

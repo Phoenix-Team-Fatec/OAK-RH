@@ -20,8 +20,9 @@ export const createEquipe = async (req: Request, res: Response) => {
 
 // Função para listar todas as equipes
 export const getAllEquipes = async (req: Request, res: Response) => {
+    const { id_admin } = req.params;
     try {
-        const allEquipes = await getAllEquipesService();
+        const allEquipes = await getAllEquipesService(Number(id_admin));
         res.status(200).json(allEquipes);
     } catch (error) {
         res.status(500).json({ message: "Erro ao buscar equipes" });

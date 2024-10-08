@@ -12,14 +12,10 @@ class User extends Model {
   public id!: number;
   public nome!: string;
   public email!: string;
-  public senha!: string;
+  
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-
-  public async validatePassword(password: string): Promise<boolean> {
-    return await bcrypt.compare(password, this.senha);
-  }
 
 }
 
@@ -38,10 +34,6 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    senha: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     id_admin:{
       type: DataTypes.INTEGER,
