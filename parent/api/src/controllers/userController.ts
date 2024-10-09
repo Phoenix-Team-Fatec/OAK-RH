@@ -1,16 +1,17 @@
 import { Request, Response } from "express";
-import {  loginService,  createUserService, listUserService, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
-  import { generateRandomPassword } from "../config/generateRandomPassword";
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail } from "../config/firebase.cjs";
+import { loginService, createUserService, listUserService, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
+import { generateRandomPassword } from "../config/generateRandomPassword";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
 
 
-export const login = async (req: Request, res: Response) => {
+export const loginUser = async (req: Request, res: Response) => {
   try {
-    const { email, senha } = req.body;
-    const { token } = await loginService(email, senha);
-    return res.status(200).json({ token });
-  }catch (error) {
+    const { email, password } = req.body;
+    const userFind = await loginService(email);
+    const userVerify = await signInWithEmailAndPassword(getAuth(), email, password);
+    return res.status(200).json(userFind);
+  } catch (error) {
     console.log("Error in login function:", error);
     return res.status(500).json({ messsage: error.message });
   }
@@ -21,12 +22,14 @@ export const createUser = async (req: Request, res: Response) => {
   const { nome, email, id_admin } = req.body;
 
   try {
-    const newUser = await createUserService(nome, email, id_admin);
     const randomPassword = generateRandomPassword();
     const newAdmFirebase = await createUserWithEmailAndPassword(getAuth(), email, randomPassword);
+
+    const newUser = await createUserService(nome, email, id_admin);
+
     const resetPassword = await sendPasswordResetEmail(getAuth(), email);
     return res.status(201).json(newUser);
-  }catch (error) {
+  } catch (error) {
     console.log("Error in createUser function:", error);
     return res.status(500).json({ message: error.message });
   }
@@ -38,26 +41,26 @@ export const readUser = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-      
-      const user = await readUserService(Number(id));
-      return res.status(200).json(user);
-  }catch (error) {
-      console.log("Error in readUser function:", error);
-      return res.status(500).json({ message: error.message });
+
+    const user = await readUserService(Number(id));
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log("Error in readUser function:", error);
+    return res.status(500).json({ message: error.message });
   }
 };
 
 
 //listar todas as informações de todos os usuários
 export const readAllUsers = async (req: Request, res: Response) => {
-   
-    const { id_admin } = req.params;
+
+  const { id_admin } = req.params;
 
   try {
-    
+
     const users = await listUserService(Number(id_admin));
     return res.status(200).json(users);
-  }catch (error) {
+  } catch (error) {
     console.log("Error in readAllUsers function:", error);
     return res.status(500).json({ message: error.message });
   }
@@ -73,7 +76,7 @@ export const updateUser = async (req: Request, res: Response) => {
     const userId = parseInt(id, 10);
     const updatedUser = await updateUserService(userId, nome, email, senha);
     return res.status(200).json(updateUser);
-  }catch (error) {
+  } catch (error) {
     console.log("Error in updatedUser function:", error);
     return res.status(500).json({ message: error.message });
   }
@@ -88,9 +91,9 @@ export const deleteUser = async (req: Request, res: Response) => {
     const userId = parseInt(id, 10);
     const result = await deleteUserService(userId);
     return res.status(200).json(result);
-  }catch (error) {
+  } catch (error) {
     console.error("Error in deleteUser function:", error);
-    return res.status(500).json({ message: error.message})
+    return res.status(500).json({ message: error.message })
   }
 };
 
@@ -99,13 +102,13 @@ export const deleteUser = async (req: Request, res: Response) => {
 //função para pegar o id do usuário pelo email
 export const getIdUser = async (req: Request, res: Response) => {
 
-       try {
-        const { email } = req.params;
-        const user = await getIdUserService(email as string);
-        return res.status(200).json(user['id']);
-    }catch (error) {
-        console.log("Error in getIdUser function:", error);
-        return res.status(500).json({ message: error.message });
-    }
+  try {
+    const { email } = req.params;
+    const user = await getIdUserService(email as string);
+    return res.status(200).json(user['id']);
+  } catch (error) {
+    console.log("Error in getIdUser function:", error);
+    return res.status(500).json({ message: error.message });
+  }
 
 }
