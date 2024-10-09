@@ -5,6 +5,8 @@ node_modules/
 firebaseService.json
 firebase-adm-config.json
 
+parent/api/src/config/config.json
+
 # Build output
 /.dist/
 
