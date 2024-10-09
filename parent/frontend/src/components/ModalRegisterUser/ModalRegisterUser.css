@@ -1,0 +1,55 @@
+.modal_overlay_register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro e semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Certifique-se de que o modal fique acima do conteúdo */
+}
+
+.modal_content_register {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 500px; /* Ajuste a largura conforme necessário */
+}
+
+.modal_content_register h2 {
+    margin-top: 0;
+    font-size: 14px;
+    color: #A563A8;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Estilização dos inputs */
+.modal_content_register input {
+    width: calc(100% - 20px); /* Largura total menos as margens */
+    padding: 10px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin-bottom: 15px; /* Espaçamento entre os inputs */
+    font-size: 12px; /* Tamanho da fonte */
+    
+}
+
+.button_register_user_modal,
+.button_close_user_modal {
+    margin: 5px; /* Espaçamento entre os botões */
+    padding: 10px 15px; /* Espaçamento interno dos botões */
+    border: none; /* Remove a borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    background-color: #A563A8; /* Cor de fundo dos botões */
+    color: white; /* Cor do texto dos botões */
+    cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
+    font-size: 12px; /* Tamanho da fonte dos botões */
+}
+
+
+
+

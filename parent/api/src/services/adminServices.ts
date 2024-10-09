@@ -2,30 +2,23 @@ import Admin from "../models/adminModels";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-
-
-
-
-
 // Função de criar admin
-export const createAdminService = async (nome: string, email: string, senha: string, empresa: string, cnpj: string ) => {
+export const createAdminService = async (nome: string, email: string, empresa: string, cnpj: string, senha:string) => {
     try {
         const hashedPassword = await bcrypt.hash(senha, 10);
         console.log(nome, email, hashedPassword, empresa, cnpj)
         const newAdmin = await Admin.create({
             nome,
-            senha: hashedPassword,
             email,
             empresa,
-            cnpj
-            
+            cnpj,
+            senha: hashedPassword       
         });
         return newAdmin;
     }catch(error) {
         throw new Error("Error creating user");
     }
 };
-
 
 
 // Função de login

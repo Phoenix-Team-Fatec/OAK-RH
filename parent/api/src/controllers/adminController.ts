@@ -17,10 +17,10 @@ export const login = async (req: Request, res: Response) => {
 
 //Função para criar admin
 export const createAdmin = async (req: Request, res: Response) => {
-  const { nome, senha, email, empresa, cnpj} = req.body;
+  const { nome, email, empresa, cnpj, senha} = req.body;
 
   try {
-    const newAdmin = await createAdminService(nome, senha, email, empresa, cnpj);
+    const newAdmin = await createAdminService(nome, email, empresa, cnpj, senha);
     res.status(201).json(newAdmin);
   }catch (error) {
     console.log("Error in createUser function:", error);

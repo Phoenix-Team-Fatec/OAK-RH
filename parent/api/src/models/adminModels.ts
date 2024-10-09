@@ -4,7 +4,6 @@ import sequelize from "../database/connectionDB";
 import User from "./userModels";
 import bcrypt from 'bcrypt';
 
-
 class Admin extends Model {
   public id!: number;
   public nome!: string;
@@ -12,7 +11,6 @@ class Admin extends Model {
   public senha!: string;
   public empresa!: string;
   public cnpj!: string;
-
 
   public async validatePassword(password: string): Promise<boolean> {
     return await bcrypt.compare(password, this.senha);

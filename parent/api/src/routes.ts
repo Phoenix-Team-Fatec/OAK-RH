@@ -3,6 +3,7 @@ import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, remov
 import { createUser, deleteUser, getIdUser, login, readAllUsers } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin } from "./controllers/adminController";
+import { loginController } from "./controllers/authController";
 
 const router = Router();
 
@@ -12,7 +13,7 @@ router.post('/adm', createAdmin)
 // Apenas administradores podem acessar essas rotas
 router.post('/users/create', createUser);
 router.get('/users', readAllUsers);
-router.post('/', login);
+router.post('/', loginController);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
 //router.get('/users/:id', getUserById);

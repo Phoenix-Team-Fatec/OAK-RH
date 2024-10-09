@@ -368,12 +368,12 @@
     z-index: 1;
   }
   
-  
   .register{
     z-index: 2; 
     width: 410px; 
     height: 420px;
     background-color: #201e23cd;
+    color: #F2EEF7;
     border-radius: 20px;
     border: 1px solid white;
     display: flex;
@@ -416,3 +416,7 @@
     padding: 0.2em 1.2em;
     cursor: pointer;
   }
+
+  .register button:hover {
+    background-color: #3d663d;
+  } 
