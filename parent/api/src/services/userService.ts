@@ -26,18 +26,17 @@ export const loginService = async (email: string, senha: string) => {
 };
 
 // Função de criar usuário
-export const createUserService = async (nome: string, email: string, senha: string, id_admin: number) => {
+export const createUserService = async (nome: string, email: string, id_admin: number) => {
     try {
-        const hashedPassword = await bcrypt.hash(senha, 10);
+        console.log(nome, email, id_admin);
         const newUser = await User.create({
             nome,
             email,
-            senha: hashedPassword,
             id_admin,
         });
         return newUser;
     }catch(error) {
-        throw new Error("Error creating user");
+        console.log("Error creating user",error);
     }
 };
 

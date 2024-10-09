@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import {  loginService,  createUserService, listUserService, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
-
+  import { generateRandomPassword } from "../config/generateRandomPassword";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail } from "../config/firebase.cjs";
+import { get } from "http";
 
 
 export const login = async (req: Request, res: Response) => {
@@ -16,10 +18,13 @@ export const login = async (req: Request, res: Response) => {
 
 //criar usuário
 export const createUser = async (req: Request, res: Response) => {
-  const { nome, email, senha, id_admin } = req.body;
+  const { nome, email, id_admin } = req.body;
 
   try {
-    const newUser = await createUserService(nome, email, senha, id_admin);
+    const newUser = await createUserService(nome, email, id_admin);
+    const randomPassword = generateRandomPassword();
+    const newAdmFirebase = await createUserWithEmailAndPassword(getAuth(), email, randomPassword);
+    const resetPassword = await sendPasswordResetEmail(getAuth(), email);
     return res.status(201).json(newUser);
   }catch (error) {
     console.log("Error in createUser function:", error);

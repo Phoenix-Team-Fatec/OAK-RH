@@ -13,12 +13,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors())
 app.use(express.json());
 
-app.post('/generate-token', async (req, res) => {
+/*app.post('/generate-token', async (req, res) => {
     const {id, nome, email, empresa, cnpj} = req
     const token = jwt.sign({id, nome, email, empresa, cnpj}, process.env.JWT_SECRET, { expiresIn: '1h' })
 
     res.json({ token });
-});
+});*/
   
 
 app.use('/', routes);
