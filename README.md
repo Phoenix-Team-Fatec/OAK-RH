@@ -71,7 +71,6 @@ https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5
 ## ➯ Backlog das Sprints
 
 ### Sprint 1 - Metodologia, tecnologias , protótipo , cadastro ,  login , interface e banco de dados .
-### Sprint 1 - Metodologia, tecnologias , protótipo , cadastro ,  login , interface e banco de dados .
 
 | ITEM   | STATUS |
 | :----: | :----: |
@@ -90,8 +89,21 @@ https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5
 |Estudo do PostgreSQL|:white_check_mark: |
 
 
-### Sprint 2 - 
+### Sprint 2 - Criação e gestão de Formulários , Integração de  Colaboradores,  e Banco de Dados para formulários .
 
+| ITEM   | STATUS |
+| :----: | :----: |
+| Implementar funcionalidade de criação de formulários com limite de perguntas e formatos | |
+| Seleção de categorias e tipos de avaliações nas perguntas	 |  |
+| Interface para gerenciar formulários criados |  |
+| Associação de perguntas aos tipos de avaliação	 |  |
+| Edição e exclusão de perguntas e categorias	 |  |
+| Validações para impedir exclusão de perguntas com respostas associadas	 |  |
+| Mudanças no Git	 |  |
+| Criação de tela de colaboradores/usuários/funcionários	 |  |
+| Alterações de design	 |  |
+| Configuração e integração do PostgreSQL para formulários e Migration |  |
+| Exibição de resultados (respostas) de pesquisas	 |  |
 
 
 ### Sprint 3 -
@@ -160,6 +172,9 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
 | Dev Team    | Matheus Andrade                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/matheus-andrade-b1a65b1ba/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/MatheusAndrade1999)      | 
 | Dev Team  | Hoton Oliveira                   |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/hoton-oliveira/)                                                   |         [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/hfoliveira90)     |
 | Dev Team | Vinicius Peretta                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/vinicius-peretta-5a2436227/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/Peretta)        |
+| Dev Team | Pedro Machado                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/pedro-henrique-machado-martins-968855305/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/PedrooMachado23)        |
+| Dev Team | Larissa Colucci                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/larissa-colucci-996393295/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/LarissaCGomes)        |
+| Dev Team | João Victor                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/jo%C3%A3o-victor-menezes-88a6b9264/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/jvictormo)        |
 
  
 
