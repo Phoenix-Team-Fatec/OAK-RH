@@ -2,7 +2,8 @@
 node_modules/
 node_modules/
 
-
+firebaseService.json
+firebase-adm-config.json
 
 # Build output
 /.dist/
