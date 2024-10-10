@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../database/connectionDB';
 import Equipe_user from './equipe_userModel';
-import Admin from './adminModels';
 
 class Equipe extends Model {
   public id!: number;
