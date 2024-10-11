@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { loginService, createUserService, listUserService, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
 import { generateRandomPassword } from "../config/generateRandomPassword";
-import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
+import { admin, createUserWithEmailAndPassword, deleteUserByEmail, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
 
 
@@ -88,8 +88,20 @@ export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
-    const userId = parseInt(id, 10);
+    const user_info = await readUserService(Number(id));
+    const email = user_info['email'];
+
+    const userRecord = await admin.auth().getUserByEmail(email);
+    const user_id = userRecord.uid;
+    await admin.auth().deleteUser(user_id);
+
+
+
+
+
+    const userId = parseInt(id);
     const result = await deleteUserService(userId);
+    
     return res.status(200).json(result);
   } catch (error) {
     console.error("Error in deleteUser function:", error);
