@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { createAdminService, loginService } from "../services/adminServices";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "../config/firebase.cjs";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
+import { generateRandomPassword } from "../config/generateRandomPassword";
 
 
 
@@ -22,11 +23,12 @@ export const createAdmin = async (req: Request, res: Response) => {
   const { nome, password, email, empresa, cnpj} = req.body;
 
   try {
-
-    const newAdmFirebase = await createUserWithEmailAndPassword(getAuth(), email, password);
+    const randomPassword = generateRandomPassword();
+    const newAdmFirebase = await createUserWithEmailAndPassword(getAuth(), email, randomPassword);
 
     const newAdmin = await createAdminService(nome, email, empresa, cnpj);
 
+    const resetPassword = await sendPasswordResetEmail(getAuth(), email);
     res.status(201).json(newAdmin);
   }catch (error) {
     console.log("Error in createUser function:", error);

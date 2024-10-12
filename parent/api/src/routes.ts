@@ -28,7 +28,6 @@ router.put('/equipe/:id', updateEquipe);
 router.delete('/equipe/:id', deleteEquipe);   
 
 // ROTAS EQUIPE_USER
-
 router.post('/equipe_user/associar', setUsuarioEquipe);
 router.get('/equipe_user/listar', listEquipeUser);
 router.post('/equipe_user/mudarLider', mudarEstadoLider);

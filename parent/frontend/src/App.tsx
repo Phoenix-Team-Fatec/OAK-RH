@@ -1,50 +1,50 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
-import Logout from "./components/Logout/logout";
-
 import EquipeAdmin from "./pages/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
+import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
+import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
+import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
+
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RegisterLogin />} />
-        <Route
-          path="/dashboardAdmin"
+        
+        <Route 
+          path="/dashboard-admin"
           element={
-            <ProtectedRoute adminOnly>
+            <ProtectedRoute>
               <DashboardAdmin />
             </ProtectedRoute>
           }
         />
+        
         <Route
-          path="/formsAdmin"
-          element={
-            <ProtectedRoute adminOnly>
-              <FormsAdmin />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/equipesAdmin"
+          path="/equipes-admin"
           element={
             <ProtectedRoute>
               <EquipeAdmin />
             </ProtectedRoute>
           }
         />
-
-        {/* Adicione a rota para logout */}
-        <Route path="/logout" element={<Logout />} />
-
-        <Route path="/user" element={<UserPage />} />
-
+        
         <Route
-          path="/cadastro"
+          path="/funcionarios"
           element={
-            <ProtectedRoute adminOnly>
-              <CadastroUser />
+            <ProtectedRoute>
+              <MembersAdmin />
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/formularios-admin"
+          element={
+            <ProtectedRoute>
+              <FormsAdmin />
             </ProtectedRoute>
           }
         />

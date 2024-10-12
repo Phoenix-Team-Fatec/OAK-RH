@@ -1,0 +1,82 @@
+.modal_overlay_register {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6); /* Fundo escuro e semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Certifique-se de que o modal fique acima do conteúdo */
+    backdrop-filter: blur(1px);
+}
+
+.modal_content_register {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Largura responsiva */
+    max-width: 600px; /* Largura máxima */
+    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
+}
+
+.modal_content_register h2 {
+    margin-top: 0;
+    font-size: 18px; /* Tamanho da fonte do título */
+    color: #A380A5;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Estilização dos inputs */
+.modal_content_register input {
+    width: 125% !important; /* Ocupa todo o espaço disponível */
+    padding: 12px !important; /* Aumenta o espaçamento interno */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin-bottom: 15px; /* Espaçamento entre os inputs */
+    font-size: 14px; /* Tamanho da fonte */
+    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
+    outline: none; /* Remove o contorno padrão do input */
+    transition: border-color 0.3s; /* Transição suave para foco */
+}
+
+.modal_content_register input:focus {
+    border-color: #A563A8; /* Altera a cor da borda ao focar no input */
+}
+
+.container_button_register {
+    display: flex;
+    justify-content: center; /* Centraliza os botões */
+    margin-left: 23.5%;
+}
+
+
+
+.button_register_user_modal,
+.button_close_user_modal {
+    margin: 5px;
+    padding: 10px 20px !important; /* Aumenta o padding horizontal */
+    border: none;
+    border-radius: 8px;
+    background-color: #A380A5; /* Cor de fundo dos botões */
+    color: white; 
+    cursor: pointer;
+    font-size: 12px; 
+    transition: background-color 0.3s; /* Transição suave para hover */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    width: 100% !important; /* Ocupa todo o espaço disponível */
+}
+
+.button_register_user_modal:hover,
+.button_close_user_modal:hover {
+    background-color: #704772; /* Cor do botão ao passar o mouse */
+}
+
+@media (max-width: 500px) {
+    .modal_content_register {
+        width: 95%; /* Largura máxima para dispositivos menores */
+    }
+}
