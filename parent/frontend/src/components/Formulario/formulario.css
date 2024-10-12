@@ -1,0 +1,115 @@
+.form-container {
+  display: flex; /* Adiciona flexbox */
+  flex-direction: column; /* Organiza os elementos em coluna */
+  align-items: center; /* Centraliza os elementos horizontalmente */
+  justify-content: center; /* Centraliza os elementos verticalmente */
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto; /* Centraliza a div principal na página */
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+h2 {
+  text-align: center; /* Centraliza o título */
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: space-around; /* Distribui os dropdowns de forma centralizada */
+  background-color: #e0e0e0;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  margin: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  border-color: #005c0c;
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type="text"], select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column; /* Empilha as opções na vertical */
+  gap: 10px; /* Adiciona um espaço entre as opções */
+}
+
+.options div {
+  display: flex;
+  align-items: center;
+}
+
+.options label {
+  margin-left: 5px;
+}
+
+.options input {
+  width: 100%; /* Garante que os inputs tenham 100% da largura */
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: #6B7755;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #556644;
+}
+
+/* Retângulo em volta de cada pergunta */
+.question-container {
+  background-color: #e0e0e0;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  width: 100%; /* Garante que o container da pergunta tenha 100% de largura */
+  max-width: 600px; /* Define uma largura máxima para as perguntas */
+  display: flex; /* Adiciona flexbox */
+  flex-direction: column; /* Organiza os elementos em coluna */
+  align-items: center; /* Centraliza os elementos */
+}
+
