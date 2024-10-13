@@ -15,8 +15,6 @@ class Admin extends Model {
 
 }
 
-
-
 Admin.init(
     {
 
@@ -55,8 +53,8 @@ Admin.init(
 User.belongsTo(Admin, { foreignKey: 'id_admin', as: 'admin', onDelete: 'CASCADE' });
 Equipe.belongsTo(Admin, { foreignKey: 'id_admin', as: 'admin', onDelete: 'CASCADE' });
 
-Admin.hasMany(User, { foreignKey: 'admin_id', as: 'users' ,onDelete: 'CASCADE' });
-Admin.hasMany(Equipe, { foreignKey: 'admin_id', as: 'equipes', onDelete: 'CASCADE' });
+Admin.hasMany(User, { foreignKey: 'id_admin', as: 'users' ,onDelete: 'CASCADE' });
+Admin.hasMany(Equipe, { foreignKey: 'id_admin', as: 'equipes', onDelete: 'CASCADE' });
 
 
 export default Admin;

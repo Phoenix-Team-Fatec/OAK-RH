@@ -1,18 +1,19 @@
 import { Router } from "express";
 import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
-import { createUser, deleteUser, getIdUser, login, readAllUsers } from "./controllers/userController";
+import { createUser, deleteUser, getIdUser, loginUser, readAllUsers } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
-import { createAdmin } from "./controllers/adminController";
+import { createAdmin, loginAdm } from "./controllers/adminController";
 
 const router = Router();
 
 //Rotas de cadastro de administrador
 router.post('/adm', createAdmin)
+router.post('/adm/login', loginAdm)
 
 // Apenas administradores podem acessar essas rotas
 router.post('/users/create', createUser);
 router.get('/users/:id_admin', readAllUsers);
-router.post('/', login);
+router.post('/users/login', loginUser);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
 //router.get('/users/:id', getUserById);

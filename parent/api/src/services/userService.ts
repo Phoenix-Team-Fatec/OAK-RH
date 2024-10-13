@@ -5,39 +5,31 @@ import jwt from 'jsonwebtoken';
 
 
 // Função de login
-export const loginService = async (email: string, senha: string) => {
+export const loginService = async (email: string) => {
     try {
         const user = await User.findOne({ where: { email } });
         if(!user) {
             throw new Error("User not found");
         }
 
-        
-        const token = jwt.sign(
-            { id: user.id, email: user.email },
-            process.env.JWT_SECRET as string,
-            { expiresIn: '1d'}
-        );
-
-        return { token };
+        return { user };
     }catch (error) {
         throw new Error(error.message || "Internal Server Error");
     }
 };
 
 // Função de criar usuário
-export const createUserService = async (nome: string, email: string, senha: string, id_admin: number) => {
+export const createUserService = async (nome: string, email: string, id_admin: number) => {
     try {
-        const hashedPassword = await bcrypt.hash(senha, 10);
+        console.log(nome, email, id_admin);
         const newUser = await User.create({
             nome,
             email,
-            senha: hashedPassword,
             id_admin,
         });
         return newUser;
     }catch(error) {
-        throw new Error("Error creating user");
+        console.log("Error creating user",error);
     }
 };
 
