@@ -3,6 +3,7 @@ import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, remov
 import { createUser, deleteUser, getIdUser, loginUser, readAllUsers } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
+import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl } from "./controllers/formularioController";
 
 const router = Router();
 
@@ -37,6 +38,17 @@ router.get('/equipe_user/listar', listEquipeUser);
 router.post('/equipe_user/mudarLider', mudarEstadoLider);
 router.get('/equipe_user/:id', getEquipeUser);
 router.delete('/equipe_user/remover', removerUsuario);
+
+
+
+// ROTAS FORMULÁRIO
+router.post('/formulario/criar', criarFormularioControl);
+router.get('/formulario/listar/:admin_id', listarFormularioControl);
+router.get('/formulario/:id', listarUmFormularioControl);       
+router.put('/formulario/:id', atuaizarFormularioControl);         
+router.delete('/formulario/:id', deletarFormularioControl);  
+
+
 
 
 

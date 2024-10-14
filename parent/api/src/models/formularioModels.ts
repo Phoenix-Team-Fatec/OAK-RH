@@ -5,6 +5,7 @@ class Formulario extends Model {
   public nome!: string;
   public descricao: string;
   public criado_em!: Date;
+  public admin_id!: number;
 }
 Formulario.init(
   {
@@ -25,6 +26,15 @@ Formulario.init(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
+    admin_id:{
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references:{
+        model:'admin',
+        key: 'id'
+      },
+      onDelete: 'cascade'
+    }
   },
   {
     sequelize,
