@@ -9,6 +9,9 @@ import CadastroUser from './components/CadastroUser/CadastroUser';
 import FormsAdmin from './components/FormsAdmin/formsAdmin';
 import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';
 import Formulario from './components/Formulario/Formulario';
+import SelecaoFormularioMembro from './components/SelecaoFormularioMembro/SelecaoFormularioMembro';
+
+
 const App: React.FC = () => {
   return (
     <Router>
@@ -59,6 +62,9 @@ const App: React.FC = () => {
           <Formulario/>
        }/>
 
+       <Route path="/selecaoFormularioMembro" element={       
+            <SelecaoFormularioMembro/>
+        }/>
 
 
 
