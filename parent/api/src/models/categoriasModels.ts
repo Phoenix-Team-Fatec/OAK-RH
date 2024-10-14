@@ -1,3 +1,22 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
 // npx sequelize-cli db:migrate:undo
