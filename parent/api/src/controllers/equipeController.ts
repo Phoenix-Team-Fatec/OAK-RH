@@ -4,13 +4,13 @@ import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
 export const createEquipe = async (req: Request, res: Response) => {
-    const { nome } = req.body;  
+    const { nome, id_admin , descricao} = req.body;  
     try {
         const equipeExistente = await Equipe.findOne({ where: {nome} });
         if(equipeExistente) {
             return res.status(409).json({ message: "Equipe já cadastrada" })
         }
-        const newEquipe = await createEquipeService(nome);
+        const newEquipe = await createEquipeService(nome, id_admin, descricao);
         res.status(201).json(newEquipe);
     }catch(error) {
         console.log(error);
@@ -43,9 +43,9 @@ export const getEquipeById = async (req: Request, res: Response) => {
 // Função para atualizar equipe por ID
 export const updateEquipe = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { nome } = req.body;
+    const { nome, descricao } = req.body;
     try {
-        const updatedEquipe = await updateEquipeService(parseInt(id), nome);
+        const updatedEquipe = await updateEquipeService(parseInt(id), nome, descricao);
         res.status(200).json(updatedEquipe);
     } catch (error) {
         res.status(500).json({ message: "Erro ao atualizar equipe" });
