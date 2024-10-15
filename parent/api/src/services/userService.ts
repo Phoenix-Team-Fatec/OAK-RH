@@ -72,15 +72,10 @@ export const getIdUserService = async (email: string) => {
     }catch(error){
         throw new Error("Error  user");
     }
-
-
-
 }
        
-
-
 // Funão de atualizar
-export const updateUserService = async (id: number, nome?: string, email?: string, senha?: string) => {
+export const updateUserService = async (id: number, nome?: string, email?: string) => {
     try {
         const user = await User.findByPk(id);
         if(!user) {
@@ -90,7 +85,6 @@ export const updateUserService = async (id: number, nome?: string, email?: strin
         // Atualiza somente os campos fornecidos
         if (nome) user.nome = nome;
         if (email) user.email = email;
-
 
         await user.save();
 

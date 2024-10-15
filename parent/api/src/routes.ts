@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
-import { createUser, deleteUser, getIdUser, loginUser, readAllUsers } from "./controllers/userController";
+import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
 
@@ -17,7 +17,7 @@ router.post('/users/login', loginUser);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
 //router.get('/users/:id', getUserById);
-//router.put('users/:id', updateUser);
+router.put('/users/:id', updateUser);
 
 
 // ROTAS DE EQUIPE

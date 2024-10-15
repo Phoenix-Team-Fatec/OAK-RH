@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faTimes, faTachometerAlt, faUsers, faUserFriends, faFileAlt } from "@fortawesome/free-solid-svg-icons";
+import {faBars,faTimes,faTachometerAlt,faUsers,faUserFriends,faFileAlt,faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import "./SidebarAdmin.css";
 import { NavLink } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const SidebarAdmin = () => {
         setIsExpanded(!isExpanded);
     };
 
-    return ( 
+    return (
         <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
             <div className="logo_sidebar">
                 <div>
@@ -56,7 +56,11 @@ const SidebarAdmin = () => {
                     <img src="./images.jpg" alt="Perfil do Admin" />
                 </li>
                 <li className="logout">
-                    <span>Logout</span>
+                    {isExpanded ? (
+                        <span>Logout</span>
+                    ) : (
+                        <FontAwesomeIcon icon={faSignOutAlt} /> 
+                    )}
                 </li>
             </ul>
         </div>

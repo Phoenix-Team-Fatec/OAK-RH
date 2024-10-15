@@ -16,7 +16,7 @@ export const loginAdm = async (req: Request, res: Response) => {
       console.log("Error in login function:", error);
       return res.status(500).json({ messsage: error.message });
     }
-  };
+};
 
 //Função para criar admin
 export const createAdmin = async (req: Request, res: Response) => {

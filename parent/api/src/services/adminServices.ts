@@ -2,11 +2,6 @@ import Admin from "../models/adminModels";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-
-
-
-
-
 // Função de criar admin
 export const createAdminService = async (nome: string, email: string, empresa: string, cnpj: string ) => {
     try {
@@ -24,8 +19,6 @@ export const createAdminService = async (nome: string, email: string, empresa: s
         throw new Error("Error creating user");
     }
 };
-
-
 
 // Função de login
 export const loginService = async (email: string) => {
