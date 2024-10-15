@@ -4,7 +4,7 @@ class Pergunta extends Model {
   public id!: number;
   public formulario_id!: number;
   public texto!: string;
-  public descricao: string; // FAREMOS DESTA FORMA?
+  public descricao: string[]; // FAREMOS DESTA FORMA?
   public tipo!: string;
   public categoria_id!: number;
 }
@@ -33,7 +33,7 @@ Pergunta.init(
       allowNull: false,
     },
     descricao:{
-        type: DataTypes.ARRAY,
+        type: DataTypes.ARRAY(DataTypes.STRING),
     },
     categoria_id: {
       type: DataTypes.INTEGER,

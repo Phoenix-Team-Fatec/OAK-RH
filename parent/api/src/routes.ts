@@ -6,6 +6,9 @@ import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
+import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
+
+
 
 const router = Router();
 
@@ -61,7 +64,16 @@ router.post('/categorias', criarCategoriaControl);
 router.get('/categorias', listarCategoriasControl);                
 router.get('/categorias/:id', listarUmaCategoriaControl);            
 router.put('/categorias/:id', atualizarCategoriaControl);            
-router.delete('/categorias/:id', deletarCategoriaControl);          
+router.delete('/categorias/:id', deletarCategoriaControl); 
+
+
+// Rotas de Perguntas
+router.post('/perguntas', criarPergunta);
+router.get('/perguntas/listar/:formulario_id', listarPerguntas);
+router.get('/perguntas/:id', listarUmaPergunta);
+router.put('/perguntas/:id', atualizarPergunta);
+router.delete('/perguntas/:id', deletarPergunta);
+
 
 export default router;
  
