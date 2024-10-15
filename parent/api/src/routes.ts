@@ -5,7 +5,7 @@ import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe 
 import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
-
+import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 
 const router = Router();
 
@@ -56,6 +56,12 @@ router.post('/formulario_equipe/associar', associarFormularioEquipeController);
 router.get('/formulario_equipe/listar/:equipe_id', listarFormulariosEquipeController);
 router.delete('/formulario_equipe/:id', deletarFormularioEquipeController);
 
+// Rotas de Categoria
+router.post('/categorias', criarCategoriaControl);                 
+router.get('/categorias', listarCategoriasControl);                
+router.get('/categorias/:id', listarUmaCategoriaControl);            
+router.put('/categorias/:id', atualizarCategoriaControl);            
+router.delete('/categorias/:id', deletarCategoriaControl);          
 
 export default router;
  
