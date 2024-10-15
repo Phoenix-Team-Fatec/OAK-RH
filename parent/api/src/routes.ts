@@ -7,6 +7,7 @@ import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioCon
 import { associarFormularioEquipeController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
+import { createAnswer, findAnswerById, findAnswerByQuestionsId, findAnswerByUser } from "./controllers/respostaControllers";
 
 
 
@@ -73,6 +74,12 @@ router.get('/perguntas/listar/:formulario_id', listarPerguntas);
 router.get('/perguntas/:id', listarUmaPergunta);
 router.put('/perguntas/:id', atualizarPergunta);
 router.delete('/perguntas/:id', deletarPergunta);
+
+//Rotas de Respostas
+router.post('/respostas', createAnswer);
+router.get('/respostas/:answerId', findAnswerById);
+router.get('/respostas/listar/:answerId', findAnswerByQuestionsId);
+router.get('/respostas/user/:userId', findAnswerByUser)
 
 
 export default router;
