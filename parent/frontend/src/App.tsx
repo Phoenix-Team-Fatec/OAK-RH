@@ -8,6 +8,7 @@ import UserPage from './components/UserScreen/user';
 import CadastroUser from './components/CadastroUser/CadastroUser';
 import FormsAdmin from './components/FormsAdmin/formsAdmin';
 import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';
+import AdminFormulario from './components/AdminFormulario/adminFormulario';
 const App: React.FC = () => {
   return (
     <Router>
@@ -44,7 +45,9 @@ const App: React.FC = () => {
 
 
         <Route path="/user" element={<UserPage />} />
-
+        <Route path="/adminFormulario" element={
+          <AdminFormulario/>
+        }/>
 
 
         <Route path="/cadastro" element={

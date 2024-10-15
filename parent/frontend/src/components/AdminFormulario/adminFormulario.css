@@ -1,0 +1,13 @@
+h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .MuiTableCell-root {
+    font-size: 14px;
+  }
+  
+  .MuiIconButton-root {
+    color: #000; /* cor para os ícones */
+  }
+  
