@@ -15,6 +15,7 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const { id } = useUser(); // Obtém o ID do admin
+  const [isAdding, setIsAdding] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +23,8 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
       alert("Admin ID not found. Please login.");
       return;
     }
+
+    setIsAdding(true)
 
     try {
       const response = await axios.post('http://localhost:3000/users/create', {
@@ -31,6 +34,9 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
       });
 
       console.log("User created", response.data);
+
+      alert("Usuário criado com sucesso!")
+
       onSubmit({ name, email });
       onFetchUsers();
       setName('');
@@ -39,6 +45,8 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
     } catch (error) {
       console.log("Error creating user:", error);
       alert("Error creating user, please try again.");
+    } finally {
+      setIsAdding(false);
     }
   };
 
@@ -66,8 +74,8 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
             required
           />
           <div className='container_button_register'>
-            <button type="submit" className='button_register_user_modal'>Cadastrar</button>
-            <button type="button" onClick={onClose} className='button_close_user_modal'>Fechar</button>
+            <button type="submit" className='button_register_user_modal' disabled={isAdding}>{isAdding ? <span className="spinner"></span> : 'Cadastrar'}</button>
+            <button type="button" onClick={onClose} className='button_close_user_modal' disabled={isAdding}>{isAdding ? <span className="spinner"></span> : 'Fechar'}</button>
           </div>
         </form>
       </div>

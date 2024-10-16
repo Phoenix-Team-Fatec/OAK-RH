@@ -1,20 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import Paper from '@mui/material/Paper';
 import Modal from "../../components/ModalRegisterUser/ModalRegisterUser";
 import './MemberAdmin.css';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import axios from 'axios';
 import { useUser } from '../../context/UserContext';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import ModalEditUser from '../../components/ModalEditUser/ModalEditUser';
+import { Checkbox } from '@mui/material';
 
 const MembersAdmin = () => {
     const [rows, setRows] = useState<any[]>([]);
     const [modalOpen, setModalOpen] = useState(false);
     const [editModalOpen, setEditModalOpen] = useState(false);
-    const [editingUser, setEditingUser] = useState<{id: number; nome: string; email: string} | null>(null);
+    const [editingUser, setEditingUser] = useState<{ id: number; nome: string; email: string } | null>(null);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const { id } = useUser();
+
+    // Estados de carregamento
+    const [isDeleting, setIsDeleting] = useState(false);
 
     // Listagem de usuários do administrador
     const fetchUsers = async () => {
@@ -46,6 +50,14 @@ const MembersAdmin = () => {
             return;
         }
 
+        if (confirm('Tem certeza que deseja deletar esses usuários ?')) {
+
+        } else {
+
+        }
+
+        setIsDeleting(true)
+
         try {
             await Promise.all(
                 selectedIds.map(async (userId) => {
@@ -55,23 +67,25 @@ const MembersAdmin = () => {
             const updatedRows = rows.filter(row => !selectedIds.includes(row.id));
             setRows(updatedRows);
             setSelectedIds([]);
-            alert("Usuário deletados com sucesso.");
+            alert("Usuários deletados com sucesso.");
         } catch (error) {
             console.error("Error in deleting user", error);
-            alert("Erro ao deletar usuário. Tente novamente");
+            alert("Erro ao deletar usuário. Tente novamente.");
+        } finally {
+            setIsDeleting(false);
         }
-    };
+    }
 
     const handleEdit = () => {
-        if(selectedIds.length === 0) {
+        if (selectedIds.length === 0) {
             alert("Selecione um usuário para editar"); // Caso não tenha selecionado nenhum usuário
             return
-        }else if(selectedIds.length > 1) { // Caso tenha selecionado mais de um usuário
+        } else if (selectedIds.length > 1) { // Caso tenha selecionado mais de um usuário
             alert("Selecione apenas um usuário para editar")
         }
 
         const userToEdit = rows.find(row => row.id === selectedIds[0]);
-        if(userToEdit) {
+        if (userToEdit) {
             setEditingUser(userToEdit);
             setEditModalOpen(true);
         }
@@ -88,38 +102,95 @@ const MembersAdmin = () => {
         });
     };
 
-    const columns = [
-        { field: 'select', headerName: 'Selecionar', width: 120, renderCell: (params) => (
-            <input
-                type="checkbox"
-                checked={selectedIds.includes(params.row.id)}
-                onChange={() => handleSelect(params.row.id)}
-            />
-        )},
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'nome', headerName: 'Nome', width: 200 },
-        { field: 'email', headerName: 'Email', width: 300 },
-    ];
+    const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.checked) {
+            const allIds = rows.map(row => row.id);
+            setSelectedIds(allIds);
+        } else {
+            setSelectedIds([]);
+        }
+    };
+
+    const isAllSelected = rows.length > 0 && selectedIds.length === rows.length;
+    const isSomeSelected = selectedIds.length > 0 && selectedIds.length < rows.length;
+
+    const columns: GridColDef[] = useMemo(() => [
+        {
+            field: 'select',
+            headerName: 'Selecionar',
+            renderHeader: () => (
+                <Checkbox
+                    indeterminate={isSomeSelected}
+                    checked={isAllSelected}
+                    onChange={handleSelectAll}
+                    inputProps={{ 'aria-label': 'select all rows' }}
+                    disabled={isDeleting} // Desabilita durante operações
+                />
+            ),
+            width: 180,
+            sortable: false,
+            filterable: false,
+            disableColumnMenu: true,
+            renderCell: (params: any) => (
+                <Checkbox
+                    checked={selectedIds.includes(params.row.id)}
+                    onChange={() => handleSelect(params.row.id)}
+                    inputProps={{ 'aria-label': `select row ${params.row.id}` }}
+                    disabled={isDeleting} // Desabilita durante operações
+                />
+            )
+        },
+        { field: 'id', headerName: 'ID', width: 120 },
+        { field: 'nome', headerName: 'Nome', width: 298 },
+        { field: 'email', headerName: 'Email', width: 400 },
+    ], [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]);
 
     return (
         <>
             <SidebarAdmin />
             <div className='admin_members_container'>
                 <h2 className='h2_admin_members_register'>Gerenciamento de Funcionários</h2>
-                <div style={{ marginBottom: '20px' }}>
-                    <div style={{ display: 'flex', gap: '1px', justifyContent: 'flex-start', width: "100%" }}>
-                        <button className='button_register_user' onClick={() => setModalOpen(true)}>Cadastrar</button>
-                        <button className='button_edit_member' onClick={handleEdit}>Editar</button>
-                        <button className='button_delete_member' onClick={handleDelete}>Deletar</button>
+                <div style={{ marginBottom: '20px', width: "1000px" }}>
+                    <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-start', width: "100%" }}>
+                        <button
+                            className='button_register_user'
+                            onClick={() => setModalOpen(true)}
+                            disabled={isDeleting} // Desabilita durante operações
+                        >
+                            Cadastrar
+                        </button>
+                        <button
+                            className='button_edit_member'
+                            onClick={handleEdit}
+                            disabled={isDeleting} // Desabilita durante operações
+                        >
+                            Editar
+                        </button>
+                        <button
+                            className='button_delete_member'
+                            onClick={handleDelete}
+                            disabled={isDeleting} // Desabilita durante operações
+                        >
+                            {isDeleting ? <span className="spinner"></span> : 'Deletar'}
+                        </button>
                     </div>
                     <div className='dataGridContainer'>
-                        <Paper style={{ height:600, width: '100%', marginTop: '10px' }}>
+                        <Paper style={{ height: 600, width: '100%', marginTop: '10px' }}>
                             <DataGrid
                                 rows={rows}
                                 columns={columns}
-                                pageSize={5}
-                                rowsPerPageOptions={[5]}
+                                pageSizeOptions={[10, 25, 30]}
                                 checkboxSelection={false}
+                                initialState={{
+                                    pagination: { paginationModel: { pageSize: 10 } },
+                                    sorting: {
+                                        sortModel: [
+                                            { field: 'id', sort: 'asc' }
+                                        ],
+                                    },
+                                }}
+                                pagination
+                                getRowId={(row) => row.id}
                             />
                         </Paper>
                     </div>
@@ -130,7 +201,7 @@ const MembersAdmin = () => {
                     onSubmit={handleAddMember}
                     onFetchUsers={fetchUsers}
                 />
-                <ModalEditUser 
+                <ModalEditUser
                     open={editModalOpen}
                     onClose={() => setEditModalOpen(false)}
                     onFetchUsers={fetchUsers}

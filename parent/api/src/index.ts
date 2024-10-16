@@ -28,26 +28,6 @@ app.listen(PORT, async () => {
 
     try{
 
-        const adminForTest = {
-            "nome": "adm",
-            "senha": "adm",
-            "email": "adm@example.com",
-            "empresa": "Exemplo S/A",
-            "cnpj": "12.345.678/0001-95"
-          }
-
-          const [admin, created] = await Admin.findOrCreate({
-            where: { email: adminForTest.email },
-            defaults: adminForTest,
-        });
-
-        if (created) {
-            console.log(`Admin ${adminForTest.nome} criado com sucesso.`);
-        } else {
-            console.log(`Admin ${adminForTest.nome} já existe.`);
-        }
-
-
         console.log(`Servidor rodando na porta ${PORT}`);
     } catch (error) {
         console.error('Erro ao inicializar o banco de dados:', error);
