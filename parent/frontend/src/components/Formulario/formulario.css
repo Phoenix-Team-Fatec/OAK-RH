@@ -3,14 +3,12 @@
   flex-direction: column; /* Organiza os elementos em coluna */
   align-items: center; /* Centraliza os elementos horizontalmente */
   justify-content: center; /* Centraliza os elementos verticalmente */
-  width: 90%;
-  max-width: 1200px;
+  width: 100%;
+  max-width: 100%; /* Define uma largura máxima para o formulário */
   margin: 0 auto; /* Centraliza a div principal na página */
   padding: 20px;
   background-color: #f7f7f7;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-  position: relative;
+  position: relative; 
 }
 
 h2 {
@@ -100,6 +98,20 @@ button:hover {
   background-color: #556644;
 }
 
+.delete-button {
+  background-color: #882727;
+}
+.delete-button:hover {
+  background-color: #662020;
+}
+
+.delete-option {
+  background-color: #882727;
+}
+.delete-option:hover {
+  background-color: #662020;
+}
+
 /* Retângulo em volta de cada pergunta */
 .question-container {
   background-color: #e0e0e0;
@@ -113,3 +125,19 @@ button:hover {
   align-items: center; /* Centraliza os elementos */
 }
 
+.question-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.delete-icon {
+  color: #882727;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.form-group {
+  width: 100%;
+}
