@@ -83,8 +83,8 @@ export const updateUserService = async (id: number, nome?: string, email?: strin
         }
 
         // Atualiza somente os campos fornecidos
-        if (nome) user.nome = nome;
-        if (email) user.email = email;
+        if (nome) {user.nome = nome;}
+        if (email) {user.email = email;}
 
         await user.save();
 

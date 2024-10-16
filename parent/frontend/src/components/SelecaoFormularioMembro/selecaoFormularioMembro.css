@@ -1,0 +1,86 @@
+*{
+    background-color: #F2EFE6;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    gap: 100px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.header button {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: solid 1px #c5c5c5;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header button.active {
+    background-color: #556644;
+    color: white;
+}
+/* Container dos cards */
+.container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Estilo dos cards */
+.card {
+    width: 130px;
+    height: 130px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Conteúdo interno do card */
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0;
+}
+
+/* Parte superior do card */
+.card-header {
+    background-color: #E1DED5;
+    color: black;
+    text-align: center;
+    padding: 10px;
+    flex: 1; /* Ocupa o espaço restante */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Parte inferior do card */
+.card-footer {
+    background-color: #2F3B6B;
+    color: white;
+    height: 30%; /* 30% da altura total */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Zoom suave no hover */
+.card:hover {
+    transform: scale(1.1);
+}

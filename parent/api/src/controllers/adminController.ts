@@ -20,7 +20,7 @@ export const loginAdm = async (req: Request, res: Response) => {
 
 //Função para criar admin
 export const createAdmin = async (req: Request, res: Response) => {
-  const { nome, password, email, empresa, cnpj} = req.body;
+  const { nome,  email, empresa, cnpj} = req.body;
 
   try {
     const randomPassword = generateRandomPassword();

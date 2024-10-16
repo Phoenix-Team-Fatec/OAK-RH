@@ -1,13 +1,13 @@
 import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
-export const createEquipeService = async (nome: string) => {
+export const createEquipeService = async (nome: string, id_admin:number, descricao:string) => {
     try {
         const equipeExistente = await Equipe.findOne({ where: {nome}});
         if(equipeExistente) {
             throw new Error("Equipe já cadastrada");
         }
-        const newEquipe = await Equipe.create({ nome });
+        const newEquipe = await Equipe.create({ nome, id_admin, descricao });
         return newEquipe;
     }catch(error: any) {
         if(error.message === "Equipe já cadastrada") {
@@ -41,7 +41,7 @@ export const getEquipeByIdService = async (id: number) => {
 };
 
 // Função para atualizar equipe por ID
-export const updateEquipeService = async (id: number, nome: string) => {
+export const updateEquipeService = async (id: number, nome: string, descricao:string) => {
     try {
         const equipe = await Equipe.findByPk(id);
         if (!equipe) {
