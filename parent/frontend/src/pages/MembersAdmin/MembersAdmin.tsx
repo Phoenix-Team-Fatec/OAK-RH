@@ -63,9 +63,11 @@ const MembersAdmin = () => {
     };
 
     const handleEdit = () => {
-        if(selectedIds.length !== 1) {
-            alert("Selecione apenas um usuário para editar");
-            return;
+        if(selectedIds.length === 0) {
+            alert("Selecione um usuário para editar"); // Caso não tenha selecionado nenhum usuário
+            return
+        }else if(selectedIds.length > 1) { // Caso tenha selecionado mais de um usuário
+            alert("Selecione apenas um usuário para editar")
         }
 
         const userToEdit = rows.find(row => row.id === selectedIds[0]);

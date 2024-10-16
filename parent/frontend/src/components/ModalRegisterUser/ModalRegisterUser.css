@@ -32,49 +32,49 @@
 
 /* Estilização dos inputs */
 .modal_content_register input {
-    width: 125% !important; /* Ocupa todo o espaço disponível */
-    padding: 12px !important; /* Aumenta o espaçamento interno */
-    border: 1px solid #ccc; /* Borda padrão */
-    border-radius: 8px; /* Bordas arredondadas */
-    margin-bottom: 15px; /* Espaçamento entre os inputs */
-    font-size: 14px; /* Tamanho da fonte */
-    box-sizing: border-box; /* Para incluir padding e border no tamanho total */
-    outline: none; /* Remove o contorno padrão do input */
-    transition: border-color 0.3s; /* Transição suave para foco */
+    width: 125% !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
 .modal_content_register input:focus {
-    border-color: #A563A8; /* Altera a cor da borda ao focar no input */
+    border-color: #A563A8;
 }
 
 .container_button_register {
     display: flex;
-    justify-content: center; /* Centraliza os botões */
+    justify-content: center;
     margin-left: 23.5%;
 }
 
 .button_register_user_modal,
 .button_close_user_modal {
     margin: 5px;
-    padding: 10px 20px !important; /* Aumenta o padding horizontal */
+    padding: 10px 20px !important;
     border: none;
     border-radius: 8px;
-    background-color: #A380A5; /* Cor de fundo dos botões */
+    background-color: #A380A5; 
     color: white; 
     cursor: pointer;
     font-size: 12px; 
-    transition: background-color 0.3s; /* Transição suave para hover */
-    box-sizing: border-box; /* Inclui padding e border no tamanho total */
-    width: 100% !important; /* Ocupa todo o espaço disponível */
+    transition: background-color 0.3s; 
+    box-sizing: border-box;
+    width: 100% !important;
 }
 
 .button_register_user_modal:hover,
 .button_close_user_modal:hover {
-    background-color: #704772; /* Cor do botão ao passar o mouse */
+    background-color: #704772;
 }
 
 @media (max-width: 500px) {
     .modal_content_register {
-        width: 95%; /* Largura máxima para dispositivos menores */
+        width: 95%; 
     }
 }
