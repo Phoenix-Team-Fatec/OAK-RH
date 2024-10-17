@@ -69,8 +69,8 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
   if (!open) return null;
 
   return (
-    <div className="modal_overlay_edit">
-      <div className="modal_content_edit">
+    <div className="modal_overlay_edit" onClick={onClose}>
+      <div className="modal_content_edit" onClick={(e) => e.stopPropagation()}>
         <h2>Editar Funcionário</h2>
         <form onSubmit={handleSubmit}>
           <input

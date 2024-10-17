@@ -17,7 +17,7 @@ const App: React.FC = () => {
         <Route 
           path="/dashboard-admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <DashboardAdmin />
             </ProtectedRoute>
           }
@@ -26,7 +26,7 @@ const App: React.FC = () => {
         <Route
           path="/equipes-admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <EquipeAdmin />
             </ProtectedRoute>
           }
@@ -35,7 +35,7 @@ const App: React.FC = () => {
         <Route
           path="/funcionarios"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <MembersAdmin />
             </ProtectedRoute>
           }
@@ -44,7 +44,7 @@ const App: React.FC = () => {
         <Route
           path="/formularios-admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <FormsAdmin />
             </ProtectedRoute>
           }

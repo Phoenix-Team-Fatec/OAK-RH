@@ -53,8 +53,8 @@ const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFe
   if (!open) return null;
 
   return (
-    <div className="modal_overlay_register">
-      <div className="modal_content_register">
+    <div className="modal_overlay_register" onClick={onClose}>
+      <div className="modal_content_register" onClick={(e) => e.stopPropagation()}>
         <h2>Cadastrar Funcionário</h2>
         <form onSubmit={handleSubmit}>
           <input
