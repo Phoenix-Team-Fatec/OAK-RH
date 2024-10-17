@@ -10,6 +10,7 @@ import FormsAdmin from './components/FormsAdmin/formsAdmin';
 import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';
 import Formulario from './components/Formulario/Formulario';
 import SelecaoFormularioMembro from './components/SelecaoFormularioMembro/SelecaoFormularioMembro';
+import Responder from './components/ResponderFormulário/responder';
 
 
 const App: React.FC = () => {
@@ -67,7 +68,9 @@ const App: React.FC = () => {
         }/>
 
 
-
+      <Route path="/responder" element={
+          <Responder/>
+      } />
 
 
       </Routes>
