@@ -6,6 +6,7 @@ import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
 import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
+import SeleSelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 
 const App: React.FC = () => {
   return (
@@ -46,6 +47,13 @@ const App: React.FC = () => {
             <ProtectedRoute>
               <FormsAdmin />
             </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/lista-equipes"
+          element={
+              <SeleSelecaoFormularioMembro />
           }
         />
       </Routes>
