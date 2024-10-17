@@ -15,7 +15,7 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   // Substitua pelo ID do administrador desejado
-  const adminId = '2'; 
+  const adminId = localStorage.getItem('adminId'); 
 
   useEffect(() => {
     const fetchFormularios = async () => {
