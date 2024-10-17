@@ -17,11 +17,12 @@ const App: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<RegisterLogin />} />
+        
         <Route 
-          path="/dashboardAdmin" 
+          path="/dashboard-admin"
           element={
-            <ProtectedRoute adminOnly>
+            <ProtectedRoute>
               <DashboardAdmin />
             </ProtectedRoute>
           } 

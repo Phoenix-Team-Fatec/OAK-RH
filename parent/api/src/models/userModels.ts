@@ -5,8 +5,6 @@ import bcrypt from 'bcrypt';
 import Equipe_user from './equipe_userModel';
 
 
-
-
 class User extends Model {
  
   public id!: number;
@@ -15,8 +13,6 @@ class User extends Model {
   
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
-
-
 }
 
 User.init(

@@ -1,5 +1,8 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
+import Formulario_equipe from './formulario_equipeModels';
+
+
 class Formulario extends Model {
   public id!: number;
   public nome!: string;
@@ -43,4 +46,9 @@ Formulario.init(
     timestamps: false,
   }
 );
+
+
+Formulario_equipe.belongsTo(Formulario, { foreignKey: 'formulario_id', as: 'formularios', onDelete: 'CASCADE' });
+
+
 export default Formulario;

@@ -1,35 +1,27 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// models/categoriasModels.ts
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
-// npx sequelize-cli db:migrate:undo
+
 class Categoria extends Model {
   public id!: number;
   public nome!: string;
+  public id_admin!: number;
 }
+
 Categoria.init(
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+    id_admin: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'admin',
+        key: 'id',
+      },
     },
     nome: {
       type: DataTypes.STRING(30),
@@ -43,4 +35,5 @@ Categoria.init(
     timestamps: false,
   }
 );
+
 export default Categoria;

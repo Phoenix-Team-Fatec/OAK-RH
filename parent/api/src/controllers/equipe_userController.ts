@@ -16,9 +16,6 @@ export const setUsuarioEquipe = async (req: Request, res: Response) => {
 };
 
 
-
-
-
 export const listEquipeUser = async (req: Request, res: Response) => {
     try {
         const teamsWithUsers = await listarEquipe_User();

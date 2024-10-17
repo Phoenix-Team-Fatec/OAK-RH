@@ -7,15 +7,26 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       nome: {
-        type: Sequelize.STRING,
-        allowNull:false
-      }
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      id_admin: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'admins', // Nome da tabela relacionada
+          key: 'id',        // Chave estrangeira
+        },
+        onUpdate: 'CASCADE', // Propagação em caso de alteração do ID
+        onDelete: 'CASCADE', // Exclui categorias se o admin for removido
+      },
     });
   },
+
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('categorias');
-  }
+  },
 };

@@ -69,13 +69,16 @@ export const readAllUsers = async (req: Request, res: Response) => {
 
 //atualizar informações de um usuário
 export const updateUser = async (req: Request, res: Response) => {
-  const { id } = req.body;
-  const { nome, email, senha } = req.body;
+  const { id } = req.params;
+  const { nome, email } = req.body;
 
   try {
     const userId = parseInt(id, 10);
-    const updatedUser = await updateUserService(userId, nome, email, senha);
-    return res.status(200).json(updateUser);
+    if(isNaN(userId)) {
+      return res.status(400).json({ message: "ID must be a number" })
+    }
+    const updatedUser = await updateUserService(userId, nome, email);
+    return res.status(200).json(updatedUser);
   } catch (error) {
     console.log("Error in updatedUser function:", error);
     return res.status(500).json({ message: error.message });
@@ -122,5 +125,4 @@ export const getIdUser = async (req: Request, res: Response) => {
     console.log("Error in getIdUser function:", error);
     return res.status(500).json({ message: error.message });
   }
-
 }

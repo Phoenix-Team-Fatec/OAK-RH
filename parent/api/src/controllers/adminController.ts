@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { createAdminService, loginService } from "../services/adminServices";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "../config/firebase.cjs";
+import { createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { generateRandomPassword } from "../config/generateRandomPassword";
 
 
@@ -16,7 +16,7 @@ export const loginAdm = async (req: Request, res: Response) => {
       console.log("Error in login function:", error);
       return res.status(500).json({ messsage: error.message });
     }
-  };
+};
 
 //Função para criar admin
 export const createAdmin = async (req: Request, res: Response) => {
@@ -24,12 +24,11 @@ export const createAdmin = async (req: Request, res: Response) => {
 
   try {
     const randomPassword = generateRandomPassword();
-    
-
     const newAdmFirebase = await createUserWithEmailAndPassword(getAuth(), email, randomPassword);
 
     const newAdmin = await createAdminService(nome, email, empresa, cnpj);
 
+    const resetPassword = await sendPasswordResetEmail(getAuth(), email);
     res.status(201).json(newAdmin);
   }catch (error) {
     console.log("Error in createUser function:", error);

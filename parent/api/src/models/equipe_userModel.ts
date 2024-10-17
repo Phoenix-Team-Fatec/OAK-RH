@@ -1,39 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
 import User from './userModels';
