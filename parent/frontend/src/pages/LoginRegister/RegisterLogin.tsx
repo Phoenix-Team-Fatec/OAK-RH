@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './RegisterLogin.css';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
 
 const RegisterLogin: React.FC = () => {
     const [isSignUpMode, setIsSignUpMode] = useState(false);
@@ -18,14 +17,13 @@ const RegisterLogin: React.FC = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    const { setId } = useUser();
 
     useEffect(() => {
-        const storedAdminId = localStorage.getItem('adminId');
-        if (storedAdminId) {
-            setId(parseInt(storedAdminId)); // Define o ID armazenado ao carregar o componente
+        const IdToken = sessionStorage.getItem('IdToken');
+        if (IdToken) {
+            sessionStorage.removeItem('IdToken');
         }
-    }, [setId]);
+    }, []);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -38,6 +36,8 @@ const RegisterLogin: React.FC = () => {
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
+            setIsLoading(true)
+
             const response = await axios.post('http://localhost:3000/adm', {
                 nome,
                 email,
@@ -45,13 +45,21 @@ const RegisterLogin: React.FC = () => {
                 cnpj,
             });
             console.log("Successfully registered", response.data);
+
+            alert("Empresa cadastrada com sucesso")
+
             // Limpar os campos de entrada após o registro
             setNome('');
             setEmail('');
             setEmpresa('');
             setCnpj('');
+
+            toggleMode()
         } catch (error) {
+            alert("Erro ao cadastrar empresa")
             console.log("Error in register", error);
+        } finally {
+            setIsLoading(false)
         }
     };
 
@@ -67,14 +75,23 @@ const RegisterLogin: React.FC = () => {
                 }
             );
 
-            const { token, role, user } = response.data;
+            const user = response.data.user;
+            const { nome, email, empresa, cnpj, id_admin } = response.data.user;
             const id: number = user.id;
 
-            // Armazenar informações no localStorage
-            localStorage.setItem('token', token);
-            localStorage.setItem('role', role);
-            localStorage.setItem('adminId', String(id));
-            setId(id); 
+            const tokenToPayload = {
+                id,
+                nome,
+                email,
+                empresa,
+                cnpj,
+                id_admin
+            }
+
+            const tokenResponse = await axios.post("http://localhost:3000/generate-token", tokenToPayload);
+            const token = tokenResponse.data.token;
+
+            sessionStorage.setItem("IdToken", token);
 
             // Navegar para a página apropriada
             if (isAdmin) {
@@ -144,7 +161,7 @@ const RegisterLogin: React.FC = () => {
                                 required
                             />
                         </div>
-                        <button className="register_button" type="submit">Cadastrar</button>
+                        <button className="register_button" type="submit" disabled={isLoading}>{isLoading ? <span className="spinner"></span> : 'Cadastrar'}</button>
                     </form>
                     <img src='Security On-amico.png' alt="fundo" className={`fundo ${isSignUpMode ? 'fade-in' : 'fade-out'}`} />
                 </div>
@@ -152,7 +169,7 @@ const RegisterLogin: React.FC = () => {
                 <div className="overlay-container">
                     <div className="overlay">
                         <img className='logo_dois' src='logo.png' alt="Logo" />
-                        <button className="ghost_dois" onClick={toggleMode}>voltar</button>
+                        <button className="ghost_dois" onClick={toggleMode} disabled={isLoading}>voltar</button>
                         <div className="overlay-panel overlay-left"></div>
 
                         <div className="login_right">

@@ -1,8 +1,8 @@
 // ModalRegisterUser.tsx
 import React, { useState } from 'react';
 import './ModalRegisterUser.css';
-import { useUser } from '../../context/UserContext';
 import axios from 'axios';
+import useUserData from '../../hooks/useUserData';
 
 interface ModalProps {
   open: boolean;
@@ -14,7 +14,7 @@ interface ModalProps {
 const ModalRegisterUser: React.FC<ModalProps> = ({ open, onClose, onSubmit, onFetchUsers }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const { id } = useUser(); // Obtém o ID do admin
+  const { id } = useUserData(); // Obtém o ID do admin
   const [isAdding, setIsAdding] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {

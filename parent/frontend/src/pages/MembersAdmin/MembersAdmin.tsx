@@ -4,10 +4,10 @@ import Modal from "../../components/ModalRegisterUser/ModalRegisterUser";
 import './MemberAdmin.css';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import axios from 'axios';
-import { useUser } from '../../context/UserContext';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import ModalEditUser from '../../components/ModalEditUser/ModalEditUser';
 import { Checkbox } from '@mui/material';
+import useUserData from '../../hooks/useUserData';
 
 const MembersAdmin = () => {
     const [rows, setRows] = useState<any[]>([]);
@@ -15,7 +15,7 @@ const MembersAdmin = () => {
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState<{ id: number; nome: string; email: string } | null>(null);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
-    const { id } = useUser();
+    const { id } = useUserData();
 
     // Estados de carregamento
     const [isDeleting, setIsDeleting] = useState(false);
@@ -34,7 +34,12 @@ const MembersAdmin = () => {
     };
 
     useEffect(() => {
-        fetchUsers();
+        const loadUserData = async () => {
+            if (id != 0) {
+                await fetchUsers();
+            }
+        };
+        loadUserData();
     }, [id]);
 
     // Função para cadastrar um novo usuário
@@ -124,10 +129,10 @@ const MembersAdmin = () => {
                     checked={isAllSelected}
                     onChange={handleSelectAll}
                     inputProps={{ 'aria-label': 'select all rows' }}
-                    disabled={isDeleting} // Desabilita durante operações
+                    disabled={isDeleting}
                 />
             ),
-            width: 180,
+            width: 80,
             sortable: false,
             filterable: false,
             disableColumnMenu: true,
@@ -136,11 +141,11 @@ const MembersAdmin = () => {
                     checked={selectedIds.includes(params.row.id)}
                     onChange={() => handleSelect(params.row.id)}
                     inputProps={{ 'aria-label': `select row ${params.row.id}` }}
-                    disabled={isDeleting} // Desabilita durante operações
+                    disabled={isDeleting}
                 />
             )
         },
-        { field: 'id', headerName: 'ID', width: 120 },
+        { field: 'id', headerName: 'ID', width: 80 },
         { field: 'nome', headerName: 'Nome', width: 298 },
         { field: 'email', headerName: 'Email', width: 400 },
     ], [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]);
@@ -150,26 +155,26 @@ const MembersAdmin = () => {
             <SidebarAdmin />
             <div className='admin_members_container'>
                 <h2 className='h2_admin_members_register'>Gerenciamento de Funcionários</h2>
-                <div style={{ marginBottom: '20px', width: "1000px" }}>
+                <div style={{ marginBottom: '20px', width: "800px" }}>
                     <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-start', width: "100%" }}>
                         <button
                             className='button_register_user'
                             onClick={() => setModalOpen(true)}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             Cadastrar
                         </button>
                         <button
                             className='button_edit_member'
                             onClick={handleEdit}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             Editar
                         </button>
                         <button
                             className='button_delete_member'
                             onClick={handleDelete}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             {isDeleting ? <span className="spinner"></span> : 'Deletar'}
                         </button>
