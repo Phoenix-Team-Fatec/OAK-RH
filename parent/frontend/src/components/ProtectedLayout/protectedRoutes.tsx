@@ -1,17 +1,17 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import useUserData from '../../hooks/useUserData';
 
 // Componente para proteger rotas
 const ProtectedRoute: React.FC<{ children: JSX.Element, adminOnly?: boolean }> = ({ children, adminOnly = false }) => {
-  const token = localStorage.getItem('token');
-  const isAdmin = localStorage.getItem('is_admin') === 'true';
+  const userData = useUserData();
 
-  if (!token) {
+  if (!userData) {
     // Se não estiver autenticado, redireciona para a página de login
     return <Navigate to="/" replace />;
   }
 
-  if (adminOnly && !isAdmin) {
+  if (adminOnly && !userData.isAdmin) {
     // Se for uma rota de admin e o usuário não for admin, redireciona
     return <Navigate to="/" replace />;
   }

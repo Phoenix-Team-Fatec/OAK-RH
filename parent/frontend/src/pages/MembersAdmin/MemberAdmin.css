@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-left: 70px;
 }
   
 .h2_admin_members_register {
@@ -54,20 +55,4 @@
 .button_edit_member:hover,
 .button_delete_member:hover {
     background-color: #704772; /* Cor do fundo ao passar o mouse */
-}
-
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #ffffff;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
 }
