@@ -22,8 +22,8 @@ export const criarCategoriaControl = async (req: Request, res: Response) => {
 // Lista todas as categorias
 export const listarCategoriasControl = async (req: Request, res: Response) => {
     try {
-        const { id_admin } = req.body;
-        const categorias = await listarCategorias(id_admin);
+        const { id_admin } = req.params;
+        const categorias = await listarCategorias(Number(id_admin));
         return res.status(200).json(categorias);
     } catch (error) {
         return res.status(500).json({ message: error.message });

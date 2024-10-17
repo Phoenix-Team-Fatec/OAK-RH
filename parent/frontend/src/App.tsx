@@ -6,6 +6,7 @@ import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
 import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
+import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
 
 const App: React.FC = () => {
   return (
@@ -48,7 +49,23 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
+
+      <Route
+          path="/forms-admin-create"
+          element={
+            <ProtectedRoute>
+              <FormsAdminCreate/>
+            </ProtectedRoute>
+          }
+        />
+
+
+
+      
       </Routes>
+
+
+
     </Router>
   );
 };
