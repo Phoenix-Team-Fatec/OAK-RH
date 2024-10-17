@@ -58,7 +58,7 @@ router.delete('/formulario_equipe/:id', deletarFormularioEquipeController);
 
 // Rotas de Categoria
 router.post('/categorias', criarCategoriaControl);
-router.get('/categorias', listarCategoriasControl);
+router.get('/categorias/:id_admin', listarCategoriasControl);
 router.get('/categorias/:id', listarUmaCategoriaControl);
 router.put('/categorias/:id', atualizarCategoriaControl);
 router.delete('/categorias/:id', deletarCategoriaControl);

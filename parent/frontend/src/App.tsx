@@ -7,6 +7,7 @@ import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
 import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
+import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
 
 const App: React.FC = () => {
   return (
@@ -56,7 +57,23 @@ const App: React.FC = () => {
               <SelecaoFormularioMembro />
           }
         />
+
+      <Route
+          path="/forms-admin-create"
+          element={
+            <ProtectedRoute>
+              <FormsAdminCreate/>
+            </ProtectedRoute>
+          }
+        />
+
+
+
+      
       </Routes>
+
+
+
     </Router>
   );
 };

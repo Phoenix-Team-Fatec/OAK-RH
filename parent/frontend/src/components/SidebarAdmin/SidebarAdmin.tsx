@@ -46,7 +46,7 @@ const SidebarAdmin = () => {
                     </NavLink>
                 </li>
                 <li className="menu_span">
-                    <NavLink to="/forms" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/formularios-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faFileAlt} />
                         {isExpanded && " Formulários"}
                     </NavLink>
