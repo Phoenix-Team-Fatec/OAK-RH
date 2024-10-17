@@ -34,7 +34,6 @@
   li:hover {
     transform: scale(1.03);
     transition: 0.25s;
-    background-color: #588157;
     color: white;
   } 
   .member-actions button {

@@ -1,27 +1,13 @@
-<<<<<<< HEAD
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
-import EquipeAdmin from "./pages/EquipesAdmin/equipeAdmin";
+import EquipesAdmin from "./pages/EquipesAdmin/EquipesAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
-import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
-=======
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './components/Login/login';
-import DashboardAdmin from './components/DashboardAdmin/dashboardAdmin';
-import ProtectedRoute from './components/ProtectedLayout/protectedRoutes';
-import Logout from './components/Logout/logout';
-import UserPage from './components/UserScreen/user';
-import CadastroUser from './components/CadastroUser/CadastroUser';
-import FormsAdmin from './components/FormsAdmin/formsAdmin';
-import EquipeAdmin from './components/EquipesAdmin/equipeAdmin';
-import Formulario from './components/Formulario/Formulario';
-import SelecaoFormularioMembro from './components/SelecaoFormularioMembro/SelecaoFormularioMembro';
+import Formularios from "./pages/FormsAdmin/FormsAdmin";
 
->>>>>>> develop
 
 const App: React.FC = () => {
   return (
@@ -35,7 +21,6 @@ const App: React.FC = () => {
             <ProtectedRoute>
               <DashboardAdmin />
             </ProtectedRoute>
-<<<<<<< HEAD
           }
         />
         
@@ -43,7 +28,7 @@ const App: React.FC = () => {
           path="/equipes-admin"
           element={
             <ProtectedRoute>
-              <EquipeAdmin />
+              <EquipesAdmin />
             </ProtectedRoute>
           }
         />
@@ -56,64 +41,14 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
         <Route
           path="/formularios-admin"
           element={
             <ProtectedRoute>
-              <FormsAdmin />
+              <Formularios />
             </ProtectedRoute>
           }
         />
-=======
-          } 
-          />
-          <Route 
-            path="/formsAdmin"
-            element={
-              <ProtectedRoute adminOnly>
-                <FormsAdmin />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path='/equipesAdmin'
-            element={
-                <ProtectedRoute>
-                  <EquipeAdmin />
-                </ProtectedRoute>
-            }
-          />
-      
-        {/* Adicione a rota para logout */}
-        <Route path="/logout" element={<Logout />} />
-
-
-
-        <Route path="/user" element={<UserPage />} />
-
-
-
-        <Route path="/cadastro" element={
-           <ProtectedRoute adminOnly>
-           <CadastroUser />
-         </ProtectedRoute>
-          
-          } />
-
-       <Route path="/formulario" element={
-          <Formulario/>
-       }/>
-
-       <Route path="/selecaoFormularioMembro" element={       
-            <SelecaoFormularioMembro/>
-        }/>
-
-
-
-
-
->>>>>>> develop
       </Routes>
     </Router>
   );

@@ -6,12 +6,6 @@ const UserSelectionModal = ({ open, onClose, onSelect, isLider }) => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]); // Estado para armazenar os usuários vindos da API
   const [loading, setLoading] = useState(true); // Estado para controle de carregamento
-  
-
-  
-
- 
-
 
   // Buscar os usuários e os membros da equipe da API quando o modal abrir
    useEffect(() => {

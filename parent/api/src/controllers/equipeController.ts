@@ -4,7 +4,7 @@ import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
 export const createEquipe = async (req: Request, res: Response) => {
-    const { nome, id_admin , descricao} = req.body;  
+    const { nome, descricao, id_admin } = req.body;  
     try {
         const equipeExistente = await Equipe.findOne({ where: {nome} });
         if(equipeExistente) {

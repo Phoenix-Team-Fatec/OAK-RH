@@ -42,7 +42,6 @@ router.get('/equipe_user/:id', getEquipeUser);
 router.delete('/equipe_user/remover', removerUsuario);
 
 
-
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);
 router.get('/formulario/listar/:admin_id', listarFormularioControl);

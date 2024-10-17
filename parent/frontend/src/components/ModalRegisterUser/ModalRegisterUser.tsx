@@ -1,4 +1,3 @@
-// ModalRegisterUser.tsx
 import React, { useState } from 'react';
 import './ModalRegisterUser.css';
 import { useUser } from '../../context/UserContext';

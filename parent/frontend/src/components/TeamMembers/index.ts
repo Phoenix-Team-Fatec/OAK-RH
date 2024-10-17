@@ -19,11 +19,7 @@ export async function removeUserFromEquipe(userId: number, equipeId: number){
         console.log("Error in removeUserFromEquipe function:", error);
         return error;
     }
-
 }
-
-
-
 
 //função para mudar estado de lider 
 export async function changeLeader(userId: number, equipeId: number, isLider: boolean){

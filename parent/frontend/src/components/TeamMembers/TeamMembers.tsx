@@ -15,9 +15,6 @@ interface Member {
   role: 'Líder' | 'Liderado'; // Pode ser Líder ou Liderado
 }
 
-
-
-
 const equipes = async () => {
   try {
     const teamId = localStorage.getItem('teamId'); // Recupera o 'teamId' do localStorage
@@ -75,8 +72,6 @@ const TeamMembers: React.FC = () => {
     fetchMembers();
  
   }, []);
-
-
 
   // Função para adicionar um membro
   const handleAddMember = async (newMember: Member) => {

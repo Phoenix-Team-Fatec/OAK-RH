@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBars,faTimes,faTachometerAlt,faUsers,faUserFriends,faFileAlt,faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import "./SidebarAdmin.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SidebarAdmin = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const navigate = useNavigate();
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
     };
+
+    const handleLogout = () => {
+        localStorage.removeItem('id');
+        localStorage.removeItem('token');
+        navigate('/')
+    }
 
     return (
         <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
@@ -28,15 +35,15 @@ const SidebarAdmin = () => {
             </div>
             <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
                 <li className="menu_span">
-                    <NavLink to="/" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/dashboard-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faTachometerAlt} />
                         {isExpanded && " Dashboard"}
                     </NavLink>
                 </li>
                 <li className="menu_span">
-                    <NavLink to="/teams" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/equipes-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faUsers} />
-                        {isExpanded && " Equipes"}
+                        {isExpanded && " Equipes"}      
                     </NavLink>
                 </li>
                 <li className="menu_span">
@@ -46,7 +53,7 @@ const SidebarAdmin = () => {
                     </NavLink>
                 </li>
                 <li className="menu_span">
-                    <NavLink to="/forms" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/formularios-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faFileAlt} />
                         {isExpanded && " Formulários"}
                     </NavLink>
@@ -55,7 +62,7 @@ const SidebarAdmin = () => {
                     <span>Admin</span>
                     <img src="./images.jpg" alt="Perfil do Admin" />
                 </li>
-                <li className="logout">
+                <li className="logout" onClick={handleLogout}>
                     {isExpanded ? (
                         <span>Logout</span>
                     ) : (

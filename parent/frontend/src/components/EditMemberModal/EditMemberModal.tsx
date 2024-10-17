@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, Box, Button, Typography, RadioGroup, FormControlLabel, Radio, Switch } from '@mui/material';
+import { Modal, Box, Button, Typography, RadioGroup, FormControlLabel, Radio} from '@mui/material';
 import './EditMemberModal.css';
 import { changeLeader } from '../TeamMembers'; // Importa a função para alterar líder no backend
 

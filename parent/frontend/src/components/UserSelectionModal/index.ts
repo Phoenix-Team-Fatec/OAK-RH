@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 //função para listar todos os usuários
 export async function listUsers() {
     try {
@@ -17,8 +16,6 @@ export async function listUsers() {
     }
 }
 
-
-
 //função para pegar o id do usuário
 export async function getIdUser(email: string) {
 
@@ -30,8 +27,6 @@ export async function getIdUser(email: string) {
         return error;
     }
 }
-
-
 
 // Função para registrar usuário em equipe
 export async function registerEquipe_user(userId: number, equipeId: number, isLider: boolean) {

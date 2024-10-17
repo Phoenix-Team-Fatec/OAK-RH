@@ -1,11 +1,16 @@
 import React from 'react';
+import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 
 const Formularios: React.FC = () => {
   return (
-    <div>
-      <h1>Bem-vindo à página de Formulários!</h1>
-      <p>Aqui você pode criar e gerenciar os formulários.</p>
-    </div>
+    <> 
+      <div>
+        <SidebarAdmin />
+      </div>
+      <div>
+        
+      </div>
+    </>
   );
 };
 
