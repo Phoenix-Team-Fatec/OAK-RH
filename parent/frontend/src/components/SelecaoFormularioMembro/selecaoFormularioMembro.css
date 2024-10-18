@@ -6,6 +6,10 @@
     padding: 20px;
 }
 
+.container{
+    background-color: #c5c5c5;
+}
+
 .header {
     display: flex;
     gap: 100px;

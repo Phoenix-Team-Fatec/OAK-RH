@@ -5,9 +5,10 @@ import EquipeAdmin from "./pages/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
-import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
-import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
+import FormsAdmin from "./pages/FormsAdmin/FormsAdmin";   
+import SelecaoFormularioMembro from "./pages/FormsUser/FormsUser"; 
 import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
+import DashboardUser from "./pages/DashboardUser/DashboardUser"
 
 const App: React.FC = () => {
   return (
@@ -51,12 +52,7 @@ const App: React.FC = () => {
           }
         />
         
-        <Route
-          path="/lista-equipes"
-          element={
-              <SelecaoFormularioMembro />
-          }
-        />
+
 
       <Route
           path="/forms-admin-create"
@@ -67,9 +63,20 @@ const App: React.FC = () => {
           }
         />
 
+      <Route
+          path="/lista-formularios"
+          element={
+              <SelecaoFormularioMembro />
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+              <DashboardUser />
+          }
+        />
 
-
-      
+            
       </Routes>
 
 
