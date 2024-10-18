@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import axios from 'axios';
-import './ModalCreateCategory.css'; // Certifique-se de criar esse arquivo CSS
+import './ModalCreateCategory.css'; 
 
 interface ModalCreateCategoryProps {
   open: boolean;
@@ -19,7 +19,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
     }
 
     try {
-      // Simulação de envio ao backend
+      // Simula envio ao backend
       await axios.post('http://localhost:3000/formulario/criar', { nome: categoryName });
       alert('Categoria cadastrada com sucesso!');
       setCategoryName('');

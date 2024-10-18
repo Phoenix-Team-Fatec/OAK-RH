@@ -5,6 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import ModalCreateCategory from '../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
 import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
+import axios from 'axios'; // Importa o axios
 
 const Formularios: React.FC = () => {
   const [rows, setRows] = useState<any[]>([
@@ -49,21 +50,31 @@ const Formularios: React.FC = () => {
   const isAllSelected = rows.length > 0 && selectedIds.length === rows.length;
   const isSomeSelected = selectedIds.length > 0 && selectedIds.length < rows.length;
 
+// Deletando -  
   const handleDelete = async () => {
     if (selectedIds.length === 0) {
       alert("Selecione pelo menos um formulário para deletar.");
       return;
     }
-
+  
     if (!confirm('Tem certeza que deseja deletar os formulários selecionados?')) {
       return;
     }
-
+  
     setIsDeleting(true);
+  
     try {
+      // Faz a requisição de deletar para cada formulário selecionado
+      await Promise.all(
+        selectedIds.map(async (formularioId) => {
+          await axios.delete(`http://localhost:3000/formulario/${formularioId}`);
+        })
+      );
+  
+      // Remove os formulários deletados da lista exibida na tabela
       const updatedRows = rows.filter(row => !selectedIds.includes(row.id));
       setRows(updatedRows);
-      setSelectedIds([]);
+      setSelectedIds([]); // Limpa as seleções
       alert("Formulários deletados com sucesso.");
     } catch (error) {
       console.error("Erro ao deletar formulários", error);
