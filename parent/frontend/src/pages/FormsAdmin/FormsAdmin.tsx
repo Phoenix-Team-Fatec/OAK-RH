@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import ModalCreateCategory from '../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
 import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
-import { getFormularios, deleteFormulario } from './formsAdmin';
+import { getFormularios, deleteFormulario } from './formsAdminBackend';
 import { useNavigate } from 'react-router-dom';
 
 

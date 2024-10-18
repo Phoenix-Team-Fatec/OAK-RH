@@ -5,7 +5,7 @@ import EquipeAdmin from "./pages/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
-import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
+import FormsAdmin from "./pages/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
