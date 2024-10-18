@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Formulario.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { createForm, createQuestion, listCategories } from './formulario'; // Suas funções API
+import SalvarFormularioModal from '../SalvarFormularioModal/SalvarFormularioModal'; // Caminho do modal
+import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
 
 // Interfaces
 interface Category {
@@ -27,35 +29,26 @@ const Formulario: React.FC = () => {
     title: 'Título do Formulário',
     description: 'Descrição do Formulário',
     adminId: Number(localStorage.getItem("adminId"))
-
-    
   });
 
   const [categories, setCategories] = useState<Category[]>([]);
-
   const [questions, setQuestions] = useState<Question[]>([
     { type: 'longQuestion', value: '', options: [], category: '' }
   ]);
 
- 
-// Quando as categorias forem carregadas, defina a primeira como padrão para as perguntas
-useEffect(() => {
-  if (categories.length > 0) {
-    setQuestions((prevQuestions) => 
-      prevQuestions.map((q) => ({
-        ...q,
-        category: q.category || categories[0].nome, // Atribui a primeira categoria, se ainda estiver vazia
-      }))
-    );
-  }
-}, [categories]);
-  // Fetch de categorias do banco
+  // Modal states
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [isError, setIsError] = useState(false); // Estado para verificar se é um erro ou sucesso
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Fetch categories and update default question category
   useEffect(() => {
     const fetchCategorias = async () => {
       try {
         const categorias = await listCategories(form.adminId);
-        console.log('Categorias retornadas:', categorias);
         setCategories(categorias);
+        console.log('Categorias retornadas:', categorias);
       } catch (error) {
         console.log("Erro ao buscar categorias:", error);
       }
@@ -63,6 +56,18 @@ useEffect(() => {
     fetchCategorias();
   }, [form.adminId]);
 
+  useEffect(() => {
+    if (categories.length > 0) {
+      setQuestions((prevQuestions) =>
+        prevQuestions.map((q) => ({
+          ...q,
+          category: q.category || categories[0].nome, // Set default category if not selected
+        }))
+      );
+    }
+  }, [categories]);
+
+  // Add a new question
   const addQuestion = () => {
     setQuestions([
       ...questions,
@@ -70,24 +75,19 @@ useEffect(() => {
     ]);
   };
 
+  // Remove a question
   const deleteQuestion = (index: number) => {
     setQuestions(questions.filter((_, i) => i !== index));
   };
 
-  const deleteOption = (qIndex: number, optIndex: number) => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[qIndex].options = updatedQuestions[qIndex].options.filter(
-      (_, i) => i !== optIndex
-    );
-    setQuestions(updatedQuestions);
-  };
-
+  // Change question value
   const handleQuestionChange = (index: number, newValue: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].value = newValue;
     setQuestions(updatedQuestions);
   };
 
+  // Change question type
   const handleQuestionTypeChange = (index: number, newType: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].type = newType;
@@ -95,6 +95,14 @@ useEffect(() => {
     setQuestions(updatedQuestions);
   };
 
+  // Change question category
+  const handleQuestionCategoryChange = (index: number, newCategory: string) => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[index].category = newCategory;
+    setQuestions(updatedQuestions);
+  };
+
+  // Add an option to a multiple/unique choice question
   const handleAddOption = (index: number) => {
     const updatedQuestions = [...questions];
     if (updatedQuestions[index].options.length < 10) {
@@ -105,92 +113,130 @@ useEffect(() => {
     }
   };
 
+  // Change the value of an option
   const handleOptionChange = (qIndex: number, optIndex: number, newValue: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[qIndex].options[optIndex] = newValue;
     setQuestions(updatedQuestions);
   };
 
-  const handleQuestionCategoryChange = (index: number, newCategory: string) => {
+  // Delete an option
+  const deleteOption = (qIndex: number, optIndex: number) => {
     const updatedQuestions = [...questions];
-    updatedQuestions[index].category = newCategory;
+    updatedQuestions[qIndex].options = updatedQuestions[qIndex].options.filter(
+      (_, i) => i !== optIndex
+    );
     setQuestions(updatedQuestions);
   };
 
-  // Função para criar o formulário e associar as perguntas
+  // Função para fechar o modal de erro
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  // Submit the form and create the questions
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!form.title || !form.description) {
-      alert('O título e a descrição do formulário são obrigatórios');
+    const questionCount = questions.length;
+
+    // Validação: 0 ou mais de 20 perguntas, não permite envio
+    if (questionCount === 0 || questionCount > 20) {
+      setModalMessage('O formulário deve conter de 1 a 20 perguntas.');
+      setIsError(true); // Sinaliza que é um erro
+      setModalOpen(true);
       return;
     }
 
+    // Validação do título e descrição
+    if (!form.title || !form.description) {
+      setModalMessage('O título e a descrição do formulário são obrigatórios');
+      setIsError(true); // Sinaliza que é um erro
+      setModalOpen(true);
+      return;
+    }
+
+    // Verifica se todas as perguntas estão preenchidas
+    for (const question of questions) {
+      if (!question.value) {
+        setModalMessage('Preencha todas as perguntas antes de enviar.');
+        setIsError(true); // Sinaliza que é um erro
+        setModalOpen(true);
+        return;
+      }
+    }
+
     try {
-      // 1. Criar o formulário
+      // Cria o formulário
       const formResponse = await createForm(form.title, form.description, form.adminId);
-      const formulario_id = formResponse.id; // Obtém o ID do formulário criado
+      const formulario_id = formResponse.id;
 
-      // 2. Criar as perguntas associadas ao formulário
+      // Cria as perguntas associadas ao formulário
       for (const question of questions) {
-        if (!question.value) {
-          alert('Preencha todas as perguntas antes de enviar.');
-          return;
-        }
-
         const category = categories.find(c => c.nome === question.category);
-        console.log(question.category, category);
         if (!category) {
-          alert(`Categoria não encontrada para a pergunta: ${question.value}`);
+          setModalMessage(`Categoria não encontrada para a pergunta: ${question.value}`);
+          setIsError(true); // Sinaliza que é um erro
+          setModalOpen(true);
           return;
         }
 
-        const questionResponse = await createQuestion(
+        await createQuestion(
           formulario_id,
           question.value,
           question.type,
-          question.options, // Opções, se aplicável
-          category.id // Obter ID da categoria
+          question.options,
+          category.id
         );
-
-        const data = questionResponse.data;
-        console.log(data);
-
-        
       }
 
-      console.log('Formulário e perguntas criados com sucesso!');
+      setModalMessage('Formulário e perguntas criados com sucesso!');
+      setIsError(false); // Sinaliza que é sucesso
+      setModalOpen(true);
     } catch (error) {
-      console.log('Erro ao criar o formulário ou perguntas:', error);
+      setModalMessage('Erro ao criar o formulário ou perguntas.');
+      setIsError(true); // Sinaliza que é um erro
+      setModalOpen(true);
+    }
+  };
+
+  // Função para tratar o clique no OK do modal
+  const handleModalOkClick = () => {
+    setModalOpen(false);
+    if (!isError) {
+      navigate('/formularios-admin'); // Apenas redireciona se for sucesso
     }
   };
 
   return (
     <div className="form-container-forms-create">
+      <h2>Criar Formulário</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={form.title}
-          onChange={(e) => setForm({ ...form, title: e.target.value })}
-          placeholder="Edite o título do formulário"
-          className="form-title-input"
-        />
+        <div className="form-group">
+          <label>Título do Formulário</label>
+          <input
+            type="text"
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+            placeholder="Edite o título do formulário"
+          />
+        </div>
 
-        <input
-          type="text"
-          value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
-          placeholder="Edite a descrição do formulário"
-          className="form-description-input"
-        />
+        <div className="form-group">
+          <label>Descrição do Formulário</label>
+          <input
+            type="text"
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            placeholder="Edite a descrição do formulário"
+          />
+        </div>
 
         {questions.map((question, qIndex) => (
           <div className="question-container" key={qIndex}>
             <div className="question-content">
-              <DeleteIcon
-                className="delete-icon"
-                onClick={() => deleteQuestion(qIndex)}
-              />
+              <DeleteIcon className="delete-icon" onClick={() => deleteQuestion(qIndex)} />
+
               <div className="form-group">
                 <label>Categoria da Pergunta</label>
                 <select
@@ -203,7 +249,9 @@ useEffect(() => {
                     </option>
                   ))}
                 </select>
+              </div>
 
+              <div className="form-group">
                 <label>Tipo de Pergunta</label>
                 <select
                   value={question.type}
@@ -213,49 +261,53 @@ useEffect(() => {
                   <option value="multipleChoice">Múltipla Escolha</option>
                   <option value="uniqueChoice">Escolha Única</option>
                 </select>
+              </div>
 
+              <div className="form-group">
                 <label>Pergunta {qIndex + 1}</label>
                 <input
                   type="text"
-                  placeholder="Escreva sua pergunta"
                   value={question.value}
                   onChange={(e) => handleQuestionChange(qIndex, e.target.value)}
+                  placeholder="Escreva sua pergunta aqui"
                 />
-
-                {(question.type === 'multipleChoice' || question.type === 'uniqueChoice') && (
-                  <div className="options">
-                    {question.options.map((option, optIndex) => (
-                      <div key={optIndex} className="option-item">
-                        <input
-                          type="text"
-                          placeholder={`Opção ${optIndex + 1}`}
-                          value={option}
-                          onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
-                        />
-                        <DeleteIcon
-                          className="delete-icon"
-                          onClick={() => deleteOption(qIndex, optIndex)}
-                        />
-                      </div>
-                    ))}
-                    {question.options.length < 10 && (
-                      <button className="button-forms-create" type="button" onClick={() => handleAddOption(qIndex)}>
-                        Adicionar Opção
-                      </button>
-                    )}
-                  </div>
-                )}
               </div>
+
+              {question.type === 'multipleChoice' && (
+                <div className="options">
+                  <label>Opções</label>
+                  {question.options.map((option, optIndex) => (
+                    <div className="option" key={optIndex}>
+                      <input
+                        type="text"
+                        value={option}
+                        onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
+                      />
+                      <DeleteIcon className="delete-icon delete-option" onClick={() => deleteOption(qIndex, optIndex)} />
+                    </div>
+                  ))}
+                  <button type="button" className="button-forms-create" onClick={() => handleAddOption(qIndex)}>
+                    Adicionar Opção
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}
 
-        <button className="button-forms-create" type="button" onClick={addQuestion}>
+        <button type="button" className="button-forms-create" onClick={addQuestion}>
           Adicionar Pergunta
         </button>
-
-        <button className="button-forms-create" type="submit">Salvar Formulário</button>
+        <button type="submit" className="button-forms-create">Salvar Formulário</button>
       </form>
+
+      <SalvarFormularioModal
+        open={modalOpen}
+        onClose={handleCloseModal}
+        message={modalMessage}
+        isError={isError}
+        onOk={handleModalOkClick} // Correção aqui
+      />
     </div>
   );
 };
