@@ -36,6 +36,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
   };
 
   return (
+    
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Cadastrar Nova Categoria</DialogTitle>
       <DialogContent>
@@ -43,6 +44,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
           autoFocus
           margin="dense"
           label="Nome da Categoria"
+          className='inputCategory'
           fullWidth
           variant="outlined"
           value={categoryName}
@@ -50,14 +52,18 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="secondary">
+      <div className='modalCategory'>
+        <Button  onClick={onClose} color="secondary">
           Fechar
         </Button>
+        &nbsp;&nbsp;&nbsp;&nbsp;
         <Button onClick={handleSubmit} color="primary" variant="contained">
           Cadastrar
         </Button>
+        </div>
       </DialogActions>
     </Dialog>
+    
   );
 };
 

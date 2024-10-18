@@ -4,9 +4,9 @@ import { Radio, RadioGroup, Button, TextField, Box, Typography, FormControl, For
 
 const Responder: React.FC = () => {
   return (
-    <Container className="container">
-      <Paper className="form-container" elevation={0} sx={{ border: 'none' }}>
-        <header className="form-header">
+    <Container className="container-responder">
+      <Paper className="form-container-responder" elevation={0} sx={{ border: 'none' }}>
+        <header className="form-header-responder">
           <Typography variant="h5">Formulário de satisfação 10/2024</Typography>
           <Typography variant="subtitle1">Matheus Luiz | 1 de 3</Typography>
         </header>

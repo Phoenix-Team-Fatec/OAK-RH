@@ -1,0 +1,25 @@
+.modalCategory button{
+    background-color: #556644 !important;
+    gap: 10px;
+    color: white !important;
+
+
+}
+
+.modalCategory button:hover{
+    background-color: #588157 !important;
+    color: white !important;
+
+
+}
+
+.inputCategory{
+   /*change the border color*/
+    border-color: #556644 !important;
+}
+
+
+.inputCategory:focus-visible{
+    
+     border-color: #556644 !important;
+ }
