@@ -18,3 +18,62 @@ body {
     padding: 20px;
   }
   
+
+  .actions-forms-admin{
+    display: flex;
+   
+    margin-bottom: 20px;
+    
+    margin-left: 15%;
+
+  }
+
+
+  .actions-forms-admin button{
+   margin-right: 10%;
+   background-color:#6B7755;
+   
+  }
+
+  .actions-forms-admin .button-enviar{
+    margin-right: 10%;
+    background-color:#344E41;
+    
+   }
+
+   .actions-forms-admin .button-enviar:hover{
+    
+    background-color:#588157;
+    
+   }
+   
+
+
+  .actions-forms-admin button:hover{
+    
+    background-color:#556644;
+    
+   }
+
+   .tabela-formularios{
+    width: 100%;
+    margin: 0 auto; 
+   }
+
+
+
+
+
+
+.tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
+  color: #6B7755; /* Altere para a cor que você deseja */
+  
+}
+
+
+
+
+
+
+
+

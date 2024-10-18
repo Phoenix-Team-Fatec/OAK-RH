@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import axios from 'axios';
 import './ModalCreateCategory.css'; 
+import { createCategory } from './categoria';
+import useUserData from '../../hooks/useUserData';
+
 
 interface ModalCreateCategoryProps {
   open: boolean;
@@ -10,6 +13,7 @@ interface ModalCreateCategoryProps {
 
 const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose }) => {
   const [categoryName, setCategoryName] = useState('');
+  const { id } = useUserData();
 
   // Função para lidar com o envio do formulário
   const handleSubmit = async () => {
@@ -19,11 +23,12 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
     }
 
     try {
-      // Simula envio ao backend
-      await axios.post('http://localhost:3000/formulario/criar', { nome: categoryName });
+      if(id){
+      await createCategory(categoryName, id);
       alert('Categoria cadastrada com sucesso!');
       setCategoryName('');
       onClose(); // Fechar o modal após o envio
+      }
     } catch (error) {
       console.error('Erro ao cadastrar categoria', error);
       alert('Erro ao cadastrar a categoria. Tente novamente.');

@@ -1,32 +1,61 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import { Checkbox, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import ModalCreateCategory from '../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
 import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
-import axios from 'axios'; // Importa o axios
+import { getFormularios, deleteFormulario } from './formsAdmin';
+import { useNavigate } from 'react-router-dom';
 
-const Formularios: React.FC = () => {
-  const [rows, setRows] = useState<any[]>([
-    // Dados estáticos de exemplo
-    { id: 1, nome: 'Formulário 1', descricao: 'Descrição do Formulário 1', criado_em: '2023-01-01' },
-    { id: 2, nome: 'Formulário 2', descricao: 'Descrição do Formulário 2', criado_em: '2023-02-01' },
-    { id: 3, nome: 'Formulário 3', descricao: 'Descrição do Formulário 3', criado_em: '2023-03-01' },
-    { id: 4, nome: 'Formulário 4', descricao: 'Descrição do Formulário 4', criado_em: '2023-04-01' },
-    { id: 5, nome: 'Formulário 5', descricao: 'Descrição do Formulário 5', criado_em: '2023-05-01' },
-    { id: 6, nome: 'Formulário 6', descricao: 'Descrição do Formulário 6', criado_em: '2023-06-01' },
-    { id: 7, nome: 'Formulário 7', descricao: 'Descrição do Formulário 7', criado_em: '2023-07-01' },
-    { id: 8, nome: 'Formulário 8', descricao: 'Descrição do Formulário 8', criado_em: '2023-08-01' },
-    { id: 9, nome: 'Formulário 9', descricao: 'Descrição do Formulário 9', criado_em: '2023-09-01' },
-    { id: 10, nome: 'Formulário 10', descricao: 'Descrição do Formulário 10', criado_em: '2023-10-01' },
-    { id: 11, nome: 'Formulário 11', descricao: 'Descrição do Formulário 11', criado_em: '2023-11-01' }
-  ]);
-    // ... os outros formulários
+
+import useUserData from '../../hooks/useUserData';
+
+interface Forms{
+  id: number;
+  nome: string;
+  descricao: string;
+  criado_em: string;
+}
+
+const FormsAdmin: React.FC = () => {
+  const [rows, setRows] = useState<Forms[]>([]);
+
     
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const { id } = useUserData();
+
+  const navigate = useNavigate();
+
+  //Listando formulários
+   const fetchForms = async () =>{
+      if(id){
+          try{
+              const id_admin = id
+              const response = await getFormularios(id_admin)
+             
+              setRows(response);
+          }catch(error){
+              console.error("Erro ao buscar formulários", error);
+              alert("Erro ao buscar formulários");
+          }
+      }
+  }
+
+  useEffect(() => {
+    const loadUserData = async () => {
+        if (id != 0) {
+          try{
+            await fetchForms();
+          }catch(error){
+            console.log("Erro ao buscar formulários", error);
+          }
+        }
+    };
+    loadUserData();
+}, [id]);
 
   const handleSelect = (id: number) => {
     setSelectedIds(prevSelectedIds => {
@@ -47,8 +76,9 @@ const Formularios: React.FC = () => {
     }
   };
 
-  const isAllSelected = rows.length > 0 && selectedIds.length === rows.length;
-  const isSomeSelected = selectedIds.length > 0 && selectedIds.length < rows.length;
+  const isAllSelected = rows?.length > 0 && selectedIds.length === rows.length;
+  const isSomeSelected = selectedIds?.length > 0 && selectedIds.length < rows?.length;
+  
 
 // Deletando -  
   const handleDelete = async () => {
@@ -67,7 +97,7 @@ const Formularios: React.FC = () => {
       // Faz a requisição de deletar para cada formulário selecionado
       await Promise.all(
         selectedIds.map(async (formularioId) => {
-          await axios.delete(`http://localhost:3000/formulario/${formularioId}`);
+          await deleteFormulario(formularioId);
         })
       );
   
@@ -122,11 +152,11 @@ const Formularios: React.FC = () => {
       <div className="content">
         <h2>Gerenciamento de Formulários</h2>
 
-        <div className="actions">
+        <div className="actions-forms-admin">
           <Button
             variant="contained"
             color="primary"
-            onClick={() => alert("Redirecionar para página de cadastro")}
+            onClick={() => navigate('/forms-admin-create')}
             disabled={isDeleting}
           >
             Cadastrar
@@ -154,10 +184,25 @@ const Formularios: React.FC = () => {
           >
             Categoria +
           </Button>
+
+
+          <Button
+            variant="contained"
+            className='button-enviar'
+            color="secondary"
+            onClick={() => alert("Enviar para as equipes")}
+            disabled={selectedIds.length === 0 || isDeleting}
+          >
+            Enviar
+          </Button>
+
+
+          
         </div>
 
         <Paper style={{ height: 600, width: '100%' }}>
           <DataGrid
+          className='tabela-formularios'
             rows={rows}
             columns={columns}
             pageSizeOptions={[10, 25, 30]}
@@ -183,4 +228,4 @@ const Formularios: React.FC = () => {
   );
 };
 
-export default Formularios;
+export default FormsAdmin;
