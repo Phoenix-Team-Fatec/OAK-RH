@@ -1,61 +1,54 @@
 import React from 'react';
-import '/responder.css';
+import './responder.css';
+import { Radio, RadioGroup, Button, TextField, Box, Typography, FormControl, FormControlLabel, Container, Paper } from '@mui/material';
 
-interface Question {
-  type: string;
-  value: string;
-  options: string[];
-  response?: string | string[]; // Pode armazenar múltiplas ou únicas respostas
-}
-
-interface FormData {
-  formTitle: string;
-  category: string;
-  teams: string;
-  leader: string;
-  questions: Question[];
-}
-
-interface RespostasProps {
-  formData: FormData;
-}
-
-const Responder: React.FC<RespostasProps> = ({ formData }) => {
+const Responder: React.FC = () => {
   return (
-    <div className="respostas-container">
-      <h2>{formData.formTitle}</h2>
-      <p><strong>Categoria:</strong> {formData.category}</p>
-      <p><strong>Equipe:</strong> {formData.teams}</p>
-      <p><strong>Líder/Liderados:</strong> {formData.leader}</p>
+    <Container className="container">
+      <Paper className="form-container" elevation={0} sx={{ border: 'none' }}>
+        <header className="form-header">
+          <Typography variant="h5">Formulário de satisfação 10/2024</Typography>
+          <Typography variant="subtitle1">Matheus Luiz | 1 de 3</Typography>
+        </header>
 
-      <div className="questions-list">
-        {formData.questions.map((question, index) => (
-          <div className="question-response" key={index}>
-            <h3>Pergunta {index + 1}</h3>
-            <p>{question.value}</p>
+        <Box className="question">
+          <Typography variant="h6">1 - Qual sua maior dificuldade na empresa?</Typography>
+          <TextField
+            placeholder="Escreva sua resposta..."
+            multiline
+            rows={4}
+            variant="outlined"
+            fullWidth
+          />
+        </Box>
 
-            {question.type === 'longQuestion' && (
-              <p><strong>Resposta:</strong> {question.response}</p>
-            )}
+        <Box className="question">
+          <Typography variant="h6">2 - Como você avalia seu líder?</Typography>
+          <FormControl component="fieldset">
+            <RadioGroup name="lider" defaultValue="na-media">
+              <FormControlLabel value="muito-bom" control={<Radio />} label="Muito bom" />
+              <FormControlLabel value="na-media" control={<Radio />} label="Na média" />
+              <FormControlLabel value="muito-ruim" control={<Radio />} label="Muito ruim" />
+            </RadioGroup>
+          </FormControl>
+        </Box>
 
-            {question.type === 'multipleChoice' && (
-              <div>
-                <strong>Respostas:</strong>
-                <ul>
-                  {(question.response as string[]).map((resp, i) => (
-                    <li key={i}>{resp}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+        <Box className="question">
+          <Typography variant="h6">3 - Como você avalia seu dia de 0 a 10?</Typography>
+          <Box className="radio-group">
+            {[...Array(11)].map((_, i) => (
+              <label key={i}>
+                <Radio name="lider" value={String(i)} /> {i}
+              </label>
+            ))}
+          </Box>
+        </Box>
 
-            {question.type === 'uniqueChoice' && (
-              <p><strong>Resposta:</strong> {question.response}</p>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+        <Button variant="contained" className="next-button">
+          Próximo
+        </Button>
+      </Paper>
+    </Container>
   );
 };
 

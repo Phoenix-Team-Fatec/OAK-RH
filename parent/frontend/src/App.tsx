@@ -8,6 +8,7 @@ import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin";
 import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
+import Responder from "./components/ResponderFormulário/responder";
 
 const App: React.FC = () => {
   return (
@@ -67,6 +68,11 @@ const App: React.FC = () => {
           }
         />
 
+      <Route path="/responder"
+       element={
+       <Responder/>
+       } 
+       />
 
 
       
