@@ -61,7 +61,7 @@ const App: React.FC = () => {
       <Route
           path="/forms-admin-create"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <FormsAdminCreate/>
             </ProtectedRoute>
           }

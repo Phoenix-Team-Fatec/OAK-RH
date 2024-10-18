@@ -166,7 +166,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="form-container">
+    <div className="form-container-forms-create">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -239,7 +239,7 @@ useEffect(() => {
                       </div>
                     ))}
                     {question.options.length < 10 && (
-                      <button type="button" onClick={() => handleAddOption(qIndex)}>
+                      <button className="button-forms-create" type="button" onClick={() => handleAddOption(qIndex)}>
                         Adicionar Opção
                       </button>
                     )}
@@ -250,11 +250,11 @@ useEffect(() => {
           </div>
         ))}
 
-        <button type="button" onClick={addQuestion}>
+        <button className="button-forms-create" type="button" onClick={addQuestion}>
           Adicionar Pergunta
         </button>
 
-        <button type="submit">Salvar Formulário</button>
+        <button className="button-forms-create" type="submit">Salvar Formulário</button>
       </form>
     </div>
   );
