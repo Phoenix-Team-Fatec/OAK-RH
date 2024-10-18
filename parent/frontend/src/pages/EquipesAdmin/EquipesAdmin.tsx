@@ -6,13 +6,13 @@ import axios from 'axios';
 import './EquipeAdmin.css';
 import { useUser } from '../../context/UserContext';
 import ModalRegisterTeam from '../../components/ModalRegisterTeam/ModalRegisterTeam';
-import TeamMembers from '../../components/TeamMembers/TeamMembers';
+import ModalEditTeams from '../../components/ModalEditTeams/ModalEditTeams';
 
 const EquipesAdmin: React.FC = () => {
     const [rows, setRows] = useState<any[]>([]);
     const [modalRegisterTeam, setModalRegisterTeam] = useState(false);
     const [modalEditTeam, setModalEditTeam] = useState(false);
-    const [selectedTeamId, setSelectedTeamId] = useState<number | null>(null);
+    const [selectedTeam, setSelectedTeam] = useState<{ id: number; name: string; description: string } | null>(null);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const [isDeleting, setIsDeleting] = useState(false);
     const { id } = useUser();
@@ -47,11 +47,14 @@ const EquipesAdmin: React.FC = () => {
         fetchTeams();
     }
 
-    // Função para abrir o modal de edição 
+    // Funçãoo para editar uma equipe
     const handleEditTeam = (teamId: number) => {
-        setSelectedTeamId(teamId);
-        setModalEditTeam(true);
-    };
+        const team = rows.find((row) => row.id === teamId);
+        if (team) {
+            setSelectedTeam(team);
+            setModalEditTeam(true)
+        }
+    }
 
     // Função para deletar uma equipe
     const handleDelete = async () => {
@@ -139,7 +142,17 @@ const EquipesAdmin: React.FC = () => {
                         >
                             Cadastrar
                         </button>
-                        <button onClick={() => handleEditTeam(params.row.id)} className='button_edit_teams'>
+                        <button
+                            onClick={() => {
+                                if (selectedIds.length === 1) {
+                                    handleEditTeam(selectedIds[0]);
+                                } else {
+                                    alert("Selecione uma equipe para editar.");
+                                }
+                            }}
+                            className='button_edit_teams'
+                            disabled={isDeleting}
+                        >
                             Editar
                         </button>
                         <button 
@@ -176,6 +189,12 @@ const EquipesAdmin: React.FC = () => {
                     onClose={() => setModalRegisterTeam(false)}
                     onSubmit={handleAddTeam}
                     onFetchTeams={(fetchTeams)}
+                />
+                <ModalEditTeams
+                    open={modalEditTeam}
+                    onClose={() => setModalEditTeam(false)}
+                    onFetchTeams={fetchTeams}
+                    editingTeam={selectedTeam}
                 />
             </div>
         </>

@@ -18,7 +18,6 @@ export async function listUsers() {
 
 //função para pegar o id do usuário
 export async function getIdUser(email: string) {
-
     try{
     const response = axios.get(`http://localhost:3000/users/getId/${email}`);
     return response; //retorna o id do usuário

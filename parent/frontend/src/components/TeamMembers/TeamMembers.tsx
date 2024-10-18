@@ -188,14 +188,6 @@ const TeamMembers: React.FC = () => {
         onConfirm={handleConfirmDelete}
         member={selectedMember}
       />
-
-      {/* Modal de edição */}
-      <EditMemberModal
-        open={openEditModal}
-        onClose={() => {setOpenEditModal(false); fetchMembers()}}
-        onSave={handleSaveEdit}
-        member={selectedMember}
-      />
     </div>
   );
 };

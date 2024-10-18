@@ -26,7 +26,6 @@ router.get('/users/getId/:email', getIdUser);
 //router.get('/users/:id', getUserById);
 router.put('/users/:id', updateUser);
 
-
 // ROTAS DE EQUIPE
 router.post('/equipe/criar', createEquipe);
 router.get('/equipe/listar/:id_admin', getAllEquipes);
@@ -40,7 +39,6 @@ router.get('/equipe_user/listar', listEquipeUser);
 router.post('/equipe_user/mudarLider', mudarEstadoLider);
 router.get('/equipe_user/:id', getEquipeUser);
 router.delete('/equipe_user/remover', removerUsuario);
-
 
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);
