@@ -1,0 +1,20 @@
+/* Estilo para garantir que o conteúdo não ultrapasse a sidebar */
+body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar {
+    width: 250px; /* Defina a largura da sidebar */
+    position: fixed; /* Fixa a sidebar na lateral */
+    top: 0;
+    left: 0;
+    height: 100%;
+   
+  }
+  
+  .content {
+    margin-left: 250px; /* Espaçamento igual à largura da sidebar */
+    padding: 20px;
+  }
+  

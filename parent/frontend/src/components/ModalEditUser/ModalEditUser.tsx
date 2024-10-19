@@ -12,6 +12,7 @@ interface ModalProps {
 const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, editingUser }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   // Preenche os campos com os dados do usuário em edição, caso exista
   useEffect(() => {
@@ -37,6 +38,14 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
         return;
     }
 
+    if (confirm('Tem certeza que deseja atualizar o usuário ?')) {
+
+    } else {
+      return
+    }
+
+    setIsEditing(true)
+
     try {
         // Envia uma solicitação PUT para atualizar o usuário, passando o ID na URL
         await axios.put(`http://localhost:3000/users/${editingUser.id}`, {
@@ -51,6 +60,8 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
     } catch (error) {
         console.error('Erro ao atualizar usuário:', error);
         alert('Erro ao atualizar usuário, tente novamente.');
+    } finally {
+      setIsEditing(false)
     }
 };
 
@@ -58,8 +69,8 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
   if (!open) return null;
 
   return (
-    <div className="modal_overlay_edit">
-      <div className="modal_content_edit">
+    <div className="modal_overlay_edit" onClick={onClose}>
+      <div className="modal_content_edit" onClick={(e) => e.stopPropagation()}>
         <h2>Editar Funcionário</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -79,8 +90,8 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
             required
           />
           <div className='container_button_edit'>
-            <button type="submit" className='button_save_user_modal'>Salvar</button>
-            <button type="button" onClick={onClose} className='button_close_user_modal'>Fechar</button>
+            <button type="submit" className='button_save_user_modal'disabled={isEditing}>{isEditing ? <span className="spinner"></span> : 'Salvar'}</button>
+            <button type="button" onClick={onClose} className='button_close_user_modal'disabled={isEditing}>{isEditing ? <span className="spinner"></span> : 'Fechar'}</button>
           </div>
         </form>
       </div>

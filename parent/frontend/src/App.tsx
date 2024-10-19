@@ -1,13 +1,13 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
-import EquipesAdmin from "./pages/EquipesAdmin/EquipesAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
-import Formularios from "./pages/FormsAdmin/FormsAdmin";
-
+import FormsAdmin from "./pages/FormsAdmin/FormsAdmin"; 
+import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
+import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
+import Responder from "./components/ResponderFormulário/responder";
 
 const App: React.FC = () => {
   return (
@@ -18,38 +18,59 @@ const App: React.FC = () => {
         <Route 
           path="/dashboard-admin"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute adminOnly={true}>
               <DashboardAdmin />
             </ProtectedRoute>
           }
         />
         
+        
         <Route
-          path="/equipes-admin"
+          path="/funcionarios"
           element={
-            <ProtectedRoute>
-              <EquipesAdmin />
+            <ProtectedRoute adminOnly={true}>
+              <MembersAdmin />
             </ProtectedRoute>
           }
         />
         
         <Route
-          path="/funcionarios"
-          element={
-            <ProtectedRoute>
-              <MembersAdmin />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/formularios-admin"
           element={
-            <ProtectedRoute>
-              <Formularios />
+            <ProtectedRoute adminOnly={true}>
+              <FormsAdmin />
             </ProtectedRoute>
           }
         />
+        
+        <Route
+          path="/lista-equipes"
+          element={
+              <SelecaoFormularioMembro />
+          }
+        />
+
+      <Route
+          path="/forms-admin-create"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <FormsAdminCreate/>
+            </ProtectedRoute>
+          }
+        />
+
+      <Route path="/responder"
+       element={
+       <Responder/>
+       } 
+       />
+
+
+      
       </Routes>
+
+
+
     </Router>
   );
 };

@@ -4,8 +4,8 @@ import Modal from "../../components/ModalRegisterUser/ModalRegisterUser";
 import './MemberAdmin.css';
 import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
 import axios from 'axios';
-import { useUser } from '../../context/UserContext';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { useUser } from '../../context/UserContext';
 import ModalEditUser from '../../components/ModalEditUser/ModalEditUser';
 import { Checkbox } from '@mui/material';
 
@@ -16,8 +16,6 @@ const MembersAdmin = () => {
     const [editingUser, setEditingUser] = useState<{ id: number; nome: string; email: string } | null>(null);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const { id } = useUser();
-
-    // Estados de carregamento
     const [isDeleting, setIsDeleting] = useState(false);
 
     // Listagem de usuários do administrador
@@ -34,7 +32,12 @@ const MembersAdmin = () => {
     };
 
     useEffect(() => {
-        fetchUsers();
+        const loadUserData = async () => {
+            if (id !== 0) {
+                await fetchUsers();
+            }
+        };
+        loadUserData();
     }, [id]);
 
     // Função para cadastrar um novo usuário
@@ -50,9 +53,9 @@ const MembersAdmin = () => {
             return;
         }
 
-        if (confirm('Tem certeza que deseja deletar esses usuários ?')) return;
+        if (!confirm('Tem certeza que deseja deletar esses usuários ?')) return;
 
-        setIsDeleting(true)
+        setIsDeleting(true);
 
         try {
             await Promise.all(
@@ -70,15 +73,16 @@ const MembersAdmin = () => {
         } finally {
             setIsDeleting(false);
         }
-    }
+    };
 
     // Função para editar usuário
     const handleEdit = () => {
         if (selectedIds.length === 0) {
-            alert("Selecione um usuário para editar"); // Caso não tenha selecionado nenhum usuário
-            return
-        } else if (selectedIds.length > 1) { // Caso tenha selecionado mais de um usuário
-            alert("Selecione apenas um usuário para editar")
+            alert("Selecione um usuário para editar");
+            return;
+        } else if (selectedIds.length > 1) {
+            alert("Selecione apenas um usuário para editar");
+            return;
         }
 
         const userToEdit = rows.find(row => row.id === selectedIds[0]);
@@ -90,13 +94,11 @@ const MembersAdmin = () => {
 
     // Função para selecionar o usuário e ser direcionado para o id 
     const handleSelect = (id: number) => {
-        setSelectedIds(prevSelectedIds => {
-            if (prevSelectedIds.includes(id)) {
-                return prevSelectedIds.filter(selectedId => selectedId !== id);
-            } else {
-                return [...prevSelectedIds, id];
-            }
-        });
+        setSelectedIds(prevSelectedIds =>
+            prevSelectedIds.includes(id)
+                ? prevSelectedIds.filter(selectedId => selectedId !== id)
+                : [...prevSelectedIds, id]
+        );
     };
 
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -121,7 +123,7 @@ const MembersAdmin = () => {
                     checked={isAllSelected}
                     onChange={handleSelectAll}
                     inputProps={{ 'aria-label': 'select all rows' }}
-                    disabled={isDeleting} // Desabilita durante operações
+                    disabled={isDeleting}
                 />
             ),
             width: 180,
@@ -133,7 +135,7 @@ const MembersAdmin = () => {
                     checked={selectedIds.includes(params.row.id)}
                     onChange={() => handleSelect(params.row.id)}
                     inputProps={{ 'aria-label': `select row ${params.row.id}` }}
-                    disabled={isDeleting} // Desabilita durante operações
+                    disabled={isDeleting}
                 />
             )
         },
@@ -152,21 +154,21 @@ const MembersAdmin = () => {
                         <button
                             className='button_register_user'
                             onClick={() => setModalOpen(true)}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             Cadastrar
                         </button>
                         <button
                             className='button_edit_member'
                             onClick={handleEdit}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             Editar
                         </button>
                         <button
                             className='button_delete_member'
                             onClick={handleDelete}
-                            disabled={isDeleting} // Desabilita durante operações
+                            disabled={isDeleting}
                         >
                             {isDeleting ? <span className="spinner"></span> : 'Deletar'}
                         </button>

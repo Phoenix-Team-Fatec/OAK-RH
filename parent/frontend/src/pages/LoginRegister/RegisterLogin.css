@@ -13,6 +13,7 @@
   }
   
   .container {
+    all: unset;
     background-color: #201E23;
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -25,6 +26,7 @@
   }
   
   .form-container {
+    all: unset;
     position: absolute;
     top: 0;
     height: 100%;

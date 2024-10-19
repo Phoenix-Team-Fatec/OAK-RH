@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider,getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
+import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
 import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
@@ -29,9 +29,9 @@ router.put('/users/:id', updateUser);
 // ROTAS DE EQUIPE
 router.post('/equipe/criar', createEquipe);
 router.get('/equipe/listar/:id_admin', getAllEquipes);
-router.get('/equipe/:id', getEquipeById);       
-router.put('/equipe/:id', updateEquipe);         
-router.delete('/equipe/:id', deleteEquipe);   
+router.get('/equipe/:id', getEquipeById);
+router.put('/equipe/:id', updateEquipe);
+router.delete('/equipe/:id', deleteEquipe);
 
 // ROTAS EQUIPE_USER
 router.post('/equipe_user/associar', setUsuarioEquipe);
@@ -43,9 +43,9 @@ router.delete('/equipe_user/remover', removerUsuario);
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);
 router.get('/formulario/listar/:admin_id', listarFormularioControl);
-router.get('/formulario/:id', listarUmFormularioControl);       
-router.put('/formulario/:id', atuaizarFormularioControl);         
-router.delete('/formulario/:id', deletarFormularioControl);  
+router.get('/formulario/:id', listarUmFormularioControl);
+router.put('/formulario/:id', atuaizarFormularioControl);
+router.delete('/formulario/:id', deletarFormularioControl);
 
 
 // ROTAS DE FORMULÁRIO_EQUIPE
@@ -54,11 +54,11 @@ router.get('/formulario_equipe/listar/:equipe_id', listarFormulariosEquipeContro
 router.delete('/formulario_equipe/:id', deletarFormularioEquipeController);
 
 // Rotas de Categoria
-router.post('/categorias', criarCategoriaControl);                 
-router.get('/categorias', listarCategoriasControl);                
-router.get('/categorias/:id', listarUmaCategoriaControl);            
-router.put('/categorias/:id', atualizarCategoriaControl);            
-router.delete('/categorias/:id', deletarCategoriaControl); 
+router.post('/categorias', criarCategoriaControl);
+router.get('/categorias/:id_admin', listarCategoriasControl);
+router.get('/categorias/:id', listarUmaCategoriaControl);
+router.put('/categorias/:id', atualizarCategoriaControl);
+router.delete('/categorias/:id', deletarCategoriaControl);
 
 
 // Rotas de Perguntas
@@ -76,4 +76,3 @@ router.get('/respostas/user/:userId', findAnswerByUser)
 
 
 export default router;
- 
