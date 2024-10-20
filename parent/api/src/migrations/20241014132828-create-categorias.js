@@ -17,7 +17,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'admins', // Nome da tabela relacionada
+          model: 'admin', // Nome da tabela relacionada
           key: 'id',        // Chave estrangeira
         },
         onUpdate: 'CASCADE', // Propagação em caso de alteração do ID
