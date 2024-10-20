@@ -49,6 +49,7 @@
     cursor: pointer; /* Cursor de ponteiro ao passar o mouse */
     font-size: 12px; /* Tamanho da fonte dos botões */
     transition: background-color 0.3s; /* Efeito de transição na cor de fundo */
+    width: 100%;
 }
 
 .button_register_user:hover,

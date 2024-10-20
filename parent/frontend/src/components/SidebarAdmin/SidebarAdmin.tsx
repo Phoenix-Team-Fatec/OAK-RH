@@ -28,13 +28,13 @@ const SidebarAdmin = () => {
             </div>
             <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
                 <li className="menu_span">
-                    <NavLink to="/" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/dashboard-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faTachometerAlt} />
                         {isExpanded && " Dashboard"}
                     </NavLink>
                 </li>
                 <li className="menu_span">
-                    <NavLink to="/teams" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/equipes-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faUsers} />
                         {isExpanded && " Equipes"}
                     </NavLink>

@@ -2,14 +2,14 @@ import React, { useState, useMemo, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import { Checkbox, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import SidebarAdmin from '../../components/SidebarAdmin/SidebarAdmin';
-import ModalCreateCategory from '../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
+import SidebarAdmin from '../../../components/SidebarAdmin/SidebarAdmin';
+import ModalCreateCategory from '../../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
 import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
 import { getFormularios, deleteFormulario } from './formsAdminBackend';
 import { useNavigate } from 'react-router-dom';
 
 
-import useUserData from '../../hooks/useUserData';
+import useUserData from '../../../hooks/useUserData';
 
 interface Forms{
   id: number;
