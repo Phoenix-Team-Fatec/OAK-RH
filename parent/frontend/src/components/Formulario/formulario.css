@@ -133,7 +133,7 @@ input[type="text"], select {
 }
 
 .delete-icon {
-  color: #ffffff;
+  color: #f33838;
   cursor: pointer;
   margin-left: auto;
 }
