@@ -1,4 +1,7 @@
 'use strict';
+
+const { type } = require('os');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -8,6 +11,16 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      admin_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'admin',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE', // Propagação em caso de alteração do ID
+        onDelete: 'CASCADE', // Exclui categorias se o admin for removido
       },
       nome: {
         allowNull: false,
