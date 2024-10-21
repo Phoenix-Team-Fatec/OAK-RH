@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faBars,faTimes,faTachometerAlt,faUsers,faUserFriends,faFileAlt,faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
 import "./SidebarAdmin.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const SidebarAdmin = () => {
     const [isExpanded, setIsExpanded] = useState(false);
+    const navigate = useNavigate();
 
     const toggleSidebar = () => {
         setIsExpanded(!isExpanded);
     };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem('IdToken');
+        navigate('/')
+    }
 
     return (
         <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
@@ -55,7 +61,7 @@ const SidebarAdmin = () => {
                     <span>Admin</span>
                     <img src="./profile.png" alt="Perfil do Admin" />
                 </li>
-                <li className="logout">
+                <li className="logout" onClick={handleLogout}>
                     {isExpanded ? (
                         <span>Logout</span>
                     ) : (

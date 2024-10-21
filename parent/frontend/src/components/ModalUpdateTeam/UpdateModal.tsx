@@ -216,8 +216,6 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
       console.error('Erro ao mudar líder:', error);
       if (error.response && error.response.data.message === "A equipe deve ter pelo menos um líder.") {
         alert('Não é possível remover o último líder da equipe. Adicione outro líder antes de remover este.');
-      } else {
-        alert('Erro ao mudar líder. Tente novamente.');
       }
     }
   };
