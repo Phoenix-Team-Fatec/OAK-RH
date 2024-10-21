@@ -31,7 +31,7 @@
 | Nº Requisito   | Requisito do Parceiro |
 | :----: | :----: |
 | RF1  |   Desenvolver níveis de acesso diferentes: <br> <br> ● Admin: Acesso a todas as informações inseridas. Cadastro de novos usuários eclassificação dos mesmos como Líder, Liderado ou Líder e Liderado. Cadastro de pesquisas de Autoavaliação, Avaliação de Liderança e Avaliação de Liderado. <br> <br> ● Cadastro de categorias para as perguntas, que servirão para definir o grupo que a pergunta se enquadra (como Hard Skill,Soft Skill, Expectativas, Satisfação, entre outros...) e organizar os Dashboards; <br> <br> ● Líderes: Acesso às próprias informações e informações de liderados. Caso o líder tenha um superior, também poderá responder a pesquisa de Avaliação de Liderança, além de responder as pesquisas de Autoavaliação e Avaliação de Liderado; <br> <br> ● Liderados: Acesso às próprias informações. Acesso para responder a pesquisa de Autoavaliação. |
-| RF2  | Sobre as pesquisas: <br> <br>● O sistema deve permitir que o Admin cadastre perguntas nos formatos: Textolongo; Escolha Única (texto e número); Múltipla Escolha. <br> <br> ● O Admin pode escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado. <br> <br> ● O sistema terá um limite de inserção de 20 perguntas por Pesquisa, sendo 5 de cada formato, sendo possível inserir até 10 opções nos formatos de escolhamúltipla e única. <br> <br> ● O Admin pode escolher em qual categoria a pergunta se enquadra. |
+| RF2  | Sobre as pesquisas: <br> <br>● O sistema deve permitir que o Admin cadastre perguntas nos formatos: Texto longo; Escolha Única (texto e número); Múltipla Escolha. <br> <br> ● O Admin pode escolher se a pergunta deve aparecer na pesquisa de Autoavaliação, Avaliação de Liderança ou Avaliação de Liderado. <br> <br> ● O sistema terá um limite de inserção de 20 perguntas por Pesquisa, sendo 5 de cada formato, sendo possível inserir até 10 opções nos formatos de escolha múltipla e única. <br> <br> ● O Admin pode escolher em qual categoria a pergunta se enquadra. |
 | RF3  | Sobre os Dashboards: <br> <br> ● O Dashboard Pessoal deve se basear nas respostas dadas às perguntas de Autoavaliação, com as informações separadas de acordo com as categorias definidas pelo Admin.Todo usuário terá acesso ao próprio Dashboard Pessoal; <br> <br> ● O Dashboard dos Liderados, será apresentado para seus respectivos líderes e perfil Admin. Estes devem trazer as informações tanto de respostas fornecidas pelo liderado durante a Autoavaliação, quanto de respostas dadas pelo líder na Avaliação de Liderado, sobrepostas para comparação; <br> <br> ● O Dashboard Geral ficará disponível apenas para o perfil Admin, que terá acesso ao Dashboard com as informações que o usuário preencheu em sua Autoavaliação, Dashboard com as informações que o seu líder preencheu em Avaliação de Liderado e também o Dashboard com as informações que o liderado preencheu em Avaliação de Líder, sobrepostas para comparação; <br> <br> ● Todos os Dashboards devem apresentar filtros de data para que a pessoa possa escolher visualizar sua evolução ao longo do tempo ou apenas as informações preenchidas em um determinado período; <br> <br> ● É interessante que o usuário possa fazer o download de um arquivo PDF com as informações de seu Dashboard. |
 
 <br>
@@ -41,9 +41,9 @@
 
 | Nº Requisito   | Requisito do Parceiro |
 | :----: | :----: |
-| RFN1 | Documentação API – Application Programming Interface |
-| RFN2 | Modelagem de Banco de Dados ou Arquivo de dados |
-| RFN3 | Interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela. |
+| RNF1 | Documentação API – Application Programming Interface |
+| RNF2 | Modelagem de Banco de Dados ou Arquivo de dados |
+| RNF3 | Interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela. |
 
 <br>
 <br>
@@ -60,11 +60,12 @@
 
 <br>
   <img align="left" title="figma-logo" height="60px" src="https://user-images.githubusercontent.com/76211125/227502784-c94d5e2d-2e39-449b-ba85-053b9106b979.png"/>
-https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5&t=Jp8r0mNTQ2El6JWK-1
+https://www.figma.com/design/g9ZkBcQvA4WqrllBQUsATc/OAK-RH?node-id=0-1&t=3SuGwy7iTXibxYco-1
 <br>
 <br>
 <br>
 <br>
+
 
 
 ## ➯ Backlog das Sprints
@@ -88,7 +89,20 @@ https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5
 |Estudo do PostgreSQL|:white_check_mark: |
 
 
-### Sprint 2 - 
+### Sprint 2 - Criação e gestão de Formulários , Integração de  Colaboradores,  e Banco de Dados para formulários .
+
+| ITEM   | STATUS |
+| :----: | :----: |
+| Implementar funcionalidade de criação de formulários com limite de perguntas e formatos |:white_check_mark: |
+| Seleção de categorias e tipos de avaliações nas perguntas	 |:white_check_mark:  |
+| Interface para gerenciar formulários criados | :white_check_mark: |
+| Associação de perguntas aos tipos de avaliação	 | :white_check_mark: |
+| Edição e exclusão de perguntas e categorias	 |:white_check_mark:  |
+| Mudanças no Git	 | :white_check_mark: |
+| Criação de tela de colaboradores/usuários/funcionários	 | :white_check_mark: |
+| Alterações de design	 | :white_check_mark: |
+| Configuração e integração do PostgreSQL para formulários e Migration |:white_check_mark:  |
+
 
 
 ### Sprint 3 -
@@ -98,6 +112,7 @@ https://www.figma.com/proto/nqosnPwiCcfjUBpKQd0I42/API-3---SEMESTRE?node-id=24-5
 ## 🛠️ Tecnologias
 
 As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na construção do projeto:
+
 
 
  
@@ -143,6 +158,7 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
  </p>
 
 
+
 <span id="equipe">
 
 ## :busts_in_silhouette: Equipe
@@ -155,6 +171,9 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
 | Dev Team    | Matheus Andrade                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/matheus-andrade-b1a65b1ba/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/MatheusAndrade1999)      | 
 | Dev Team  | Hoton Oliveira                   |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/hoton-oliveira/)                                                   |         [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/hfoliveira90)     |
 | Dev Team | Vinicius Peretta                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/vinicius-peretta-5a2436227/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/Peretta)        |
+| Dev Team | Pedro Machado                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/pedro-henrique-machado-martins-968855305/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/PedrooMachado23)        |
+| Dev Team | Larissa Colucci                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/larissa-colucci-996393295/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/LarissaCGomes)        |
+| Dev Team | João Victor                 |[<img height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/LinkedIn.svg">](https://www.linkedin.com/in/jo%C3%A3o-victor-menezes-88a6b9264/)|      [<img align="center" height="30px" src="https://github.com/tandpfun/skill-icons/blob/main/icons/Github-Dark.svg"/>](https://github.com/jvictormo)        |
 
  
 
