@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useUser } from '../../context/UserContext';
+import useUserData from '../../hooks/useUserData';
 
 const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
   const [teamName, setTeamName] = useState('');
   const [teamDescription, setTeamDescription] = useState('');
-  const { id } = useUser();
+  const { id } = useUserData();
 
   if (!isOpen) return null;
 

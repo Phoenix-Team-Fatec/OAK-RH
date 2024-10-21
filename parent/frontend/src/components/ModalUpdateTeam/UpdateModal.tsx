@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UpdateModal.css';
-import { useUser } from '../../context/UserContext';
+import useUserData from '../../hooks/useUserData';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -32,7 +32,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
   const [teamDescription, setTeamDescription] = useState<string>(team.descricao || '');
   const [members, setMembers] = useState<Member[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const { id } = useUser();
+  const { id } = useUserData();
 
   useEffect(() => {
     const fetchUsers = async () => {

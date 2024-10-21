@@ -53,7 +53,7 @@ const SidebarAdmin = () => {
                 </li>
                 <li className="profile">
                     <span>Admin</span>
-                    <img src="./images.jpg" alt="Perfil do Admin" />
+                    <img src="./profile.png" alt="Perfil do Admin" />
                 </li>
                 <li className="logout">
                     {isExpanded ? (

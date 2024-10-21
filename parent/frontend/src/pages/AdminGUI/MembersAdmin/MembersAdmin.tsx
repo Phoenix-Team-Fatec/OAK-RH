@@ -147,7 +147,7 @@ const MembersAdmin = () => {
         },
         { field: 'id', headerName: 'ID', width: 80 },
         { field: 'nome', headerName: 'Nome', width: 298 },
-        { field: 'email', headerName: 'Email', width: 400 },
+        { field: 'email', headerName: 'Email', width: 340 },
     ], [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]);
 
     return (
@@ -180,7 +180,7 @@ const MembersAdmin = () => {
                         </button>
                     </div>
                     <div className='dataGridContainer'>
-                        <Paper style={{ height: 600, width: '100%', marginTop: '10px' }}>
+                        <Paper style={{ height: 500, width: '100%', marginTop: '10px' }}>
                             <DataGrid
                                 rows={rows}
                                 columns={columns}
