@@ -272,18 +272,17 @@ const Formulario: React.FC = () => {
                   placeholder="Escreva sua pergunta aqui"
                 />
               </div>
-
-              {question.type === 'multipleChoice' && (
+              {(question.type === 'multipleChoice' || question.type === 'uniqueChoice') && (
                 <div className="options">
                   <label>Opções</label>
                   {question.options.map((option, optIndex) => (
-                    <div className="option" key={optIndex}>
-                      <input
-                        type="text"
-                        value={option}
-                        onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
-                      />
-                      <DeleteIcon className="delete-icon delete-option" onClick={() => deleteOption(qIndex, optIndex)} />
+                   <div className="option" key={optIndex}>
+                    <input
+                      type="text"
+                      value={option}
+                      onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
+                    />
+                    <DeleteIcon className="delete-icon delete-option" onClick={() => deleteOption(qIndex, optIndex)} />
                     </div>
                   ))}
                   <button type="button" className="button-forms-create" onClick={() => handleAddOption(qIndex)}>
