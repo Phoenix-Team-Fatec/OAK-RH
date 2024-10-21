@@ -49,7 +49,4 @@ Equipe_user.init(
   }
 );
 
-
- 
-
 export default Equipe_user;

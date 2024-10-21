@@ -1,82 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EquipeAdmin.css";
 import SidebarAdmin from "../../../components/SidebarAdmin/SidebarAdmin";
 import Modal from "../../../components/ModalTeamMore/Modal"; 
 import UpdateModal from "../../../components/ModalUpdateTeam/UpdateModal";
 import AddTeamModal from "../../../components/AddTeamModal/AddTeamModal";
-
-// Sample static data for teams
-const initialTeams = [
-  { 
-    id: 1, 
-    name: "Team Alpha", 
-    description: "This is the Alpha team.", 
-    info: "Additional info about Team Alpha.",
-    members: [
-      { name: "John Doe", role: "Leader" },
-      { name: "Jane Smith", role: "Developer" },
-      { name: "Alice Johnson", role: "Designer" }
-    ]
-  },
-  { 
-    id: 2, 
-    name: "Team Beta", 
-    description: "Beta team is working on project X.", 
-    info: "Additional info about Team Beta.",
-    members: [
-      { name: "Bob Brown", role: "Leader" },
-      { name: "Charlie Davis", role: "Developer" }
-    ]
-  },
-  { 
-    id: 3, 
-    name: "Team Gamma", 
-    description: "Gamma team handles operations.", 
-    info: "Additional info about Team Gamma.",
-    members: [
-      { name: "Eve Adams", role: "Leader" },
-      { name: "Frank White", role: "Operations Manager" }
-    ]
-  },
-  { 
-    id: 4, 
-    name: "Team Delta", 
-    description: "Delta team focuses on research.", 
-    info: "Additional info about Team Delta.",
-    members: [
-      { name: "George Clark", role: "Leader" },
-      { name: "Helen Green", role: "Research Analyst" }
-    ]
-  },
-  { 
-    id: 5, 
-    name: "Team Omega", 
-    description: "Omega team is our support team.", 
-    info: "Additional info about Team Omega.",
-    members: [
-      { name: "Isaac Bell", role: "Leader" },
-      { name: "Jackie Lee", role: "Support Specialist" }
-    ]
-  },
-];
+import { useUser } from "../../../context/UserContext";
+import axios from "axios";
 
 function EquipeAdmin() {
-  const [teams, setTeams] = useState(initialTeams);
+  const [teams, setTeams] = useState([]);
+  const [users, setUsers] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
-  const [isAddTeamModalOpen, setIsAddTeamModalOpen] = useState(false)
+  const [isAddTeamModalOpen, setIsAddTeamModalOpen] = useState(false);
+  const { id } = useUser();
 
-  // Handlers for delete, update actions
-  const handleDelete = (id) => {
-    setTeams(teams.filter((team) => team.id !== id));
+  // Função para listar equipes do administrador
+  useEffect(() => {
+    const fetchTeams = async () => {
+      if (id !== null) {
+        try {
+          const response = await axios.get(`http://localhost:3000/equipe/listar/${id}`);
+          setTeams(response.data);
+        } catch (error) {
+          console.error("Erro ao carregar equipes", error);
+        }
+      }
+    };
+    fetchTeams();
+  }, [id]);
+  
+  // Função para deletar equipe
+  const handleDelete = async (teamId) => {
+    // Exibe um alerta de confirmação
+    const confirmDelete = window.confirm("Você realmente deseja deletar esta equipe?");
+    if (!confirmDelete) {
+      return; // Se o usuário cancelar, não faz nada
+    }
+
+    try {
+      await axios.delete(`http://localhost:3000/equipe/${teamId}`); 
+      setTeams(teams.filter((team) => team.id !== teamId)); 
+      alert("Equipe excluída com sucesso!");
+    } catch (error) {
+      console.error("Erro ao excluir equipe", error);
+      alert("Erro ao excluir equipe");
+    }
   };
 
   const handleUpdateTeam = (updatedTeam) => {
     setTeams(
       teams.map((team) => (team.id === updatedTeam.id ? updatedTeam : team))
     );
-    handleCloseUpdateModal(); // Close the modal after update
+    handleCloseUpdateModal(); // Fecha o modal após atualização
   };
 
   const handleOpenUpdateModal = (team) => {
@@ -102,7 +79,7 @@ function EquipeAdmin() {
   // Handler for adding a new team
   const handleAddTeam = (newTeam) => {
     setTeams([...teams, newTeam]);
-  }
+  };
 
   return (
     <div style={{ display: "flex", position: "relative" }}>
@@ -118,8 +95,8 @@ function EquipeAdmin() {
           <div className="equipe-container">
             {teams.map((team) => (
               <div key={team.id} className="equipe-item">
-                <div className="equipe-name">{team.name}</div>
-                <div className="equipe-description">{team.description}</div>
+                <div className="equipe-name">{team.nome}</div>
+                <div className="equipe-description">{team.descricao}</div>
 
                 {/* Buttons inside each team card */}
                 <div className="team-buttons">
@@ -137,7 +114,7 @@ function EquipeAdmin() {
                   </button>
                   <button
                     className="delete-btn"
-                    onClick={() => handleDelete(team.id)}
+                    onClick={() => handleDelete(team.id)} // Chama a função de deletar
                   >
                     Delete
                   </button>

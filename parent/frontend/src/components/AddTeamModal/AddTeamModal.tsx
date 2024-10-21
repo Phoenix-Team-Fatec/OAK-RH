@@ -1,27 +1,41 @@
 import React, { useState } from 'react';
-import './AddTeamModal.css'; // Add your CSS file for styling
+import axios from 'axios';
+import { useUser } from '../../context/UserContext';
 
 const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
   const [teamName, setTeamName] = useState('');
   const [teamDescription, setTeamDescription] = useState('');
-
-  const handleSubmit = () => {
-    if (teamName) {
-      const newTeam = {
-        id: Date.now(), // Use timestamp for a unique ID
-        name: teamName,
-        description: teamDescription,
-      };
-      onAdd(newTeam);
-      setTeamName('')
-      setTeamDescription('')
-      onClose(); // Close the modal after adding the team
-    } else {
-      alert('Please enter a team name.');
-    }
-  };
+  const { id } = useUser();
 
   if (!isOpen) return null;
+
+  // Função para cadastrar uma nova equipe
+  const handleSubmit = async (e: React.FormEvent) => {
+    if(!id) {
+      alert("Admin ID not found. Please Login");
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:3000/equipe/criar', {
+        nome: teamName,
+        descricao: teamDescription,
+        id_admin: id,
+      });
+
+      console.log("Team created", response.data);
+      alert("Equipe criada com sucesso!")
+      setTeamName('');
+      setTeamDescription('');
+
+      onAdd(response.data)
+
+      onClose();
+    }catch (error) {
+      console.log("Error creating team", error);
+      alert("Error ao criar equipe, tente novamente")
+    }
+  };
 
   return (
     <div className="modal-overlay">

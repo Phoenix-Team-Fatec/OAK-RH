@@ -1,20 +1,17 @@
 import { Request, Response } from "express";
 import { setUsarioEquipe, listarEquipe_User, getEquipe_user, mudarEstatosLider, deletarUsuarioEquipe } from "../services/equipe_userService";
 
-
-
 export const setUsuarioEquipe = async (req: Request, res: Response) => {
-  const { userId, equipeId, isLider } = req.body;
+  const { user_id, equipe_id, is_lider } = req.body;
 
   try {
-    const newAssociation = await setUsarioEquipe(userId, equipeId, isLider);
-    res.status(201).json(newAssociation);
+    const association = await setUsarioEquipe(user_id, equipe_id, is_lider);
+    return res.status(201).json(association);
   } catch (error) {
-    console.log("Error in setUsuarioEquipe function:", error);
-    res.status(500).json({ message: error.message });
+    console.error("Error in setUsuarioEquipe function:", error);
+    return res.status(500).json({ message: error.message });
   }
 };
-
 
 export const listEquipeUser = async (req: Request, res: Response) => {
     try {
@@ -26,27 +23,22 @@ export const listEquipeUser = async (req: Request, res: Response) => {
     }
 }
 
+export const mudarEstadoLider = async(req: Request, res: Response) => {
+  const { userId, equipeId, isLider } = req.body;
 
+  // Validação de entrada
+  if (userId === undefined || equipeId === undefined || isLider === undefined) {
+      return res.status(400).json({ message: "userId, equipeId e isLider são obrigatórios." });
+  }
 
-export const mudarEstadoLider = async(req: Request, res: Response) =>{
-
-    const {userId, equipeId, isLider} = req.body;
-
-    try{
+  try {
       const changeLider = await mudarEstatosLider(userId, equipeId, isLider);
       return res.status(200).json(changeLider);
-
-    }catch(error){
-        console.log("Error in mudarEstadoLider function:", error);
-        return res.status(500).json({message: error.message});
-    }
-
-
+  } catch (error) {
+      console.log("Error in mudarEstadoLider function:", error);
+      return res.status(500).json({ message: error.message });
+  }
 }
-
-
-
-
 
 export const getEquipeUser = async(req: Request, res: Response) =>{ 
     
@@ -58,10 +50,7 @@ export const getEquipeUser = async(req: Request, res: Response) =>{
           console.log("Error in getEquipeUser function:", error);
           return res.status(500).json({message: error.message});
         }
-
- 
 }
-
 
 export const removerUsuario = async(req: Request, res: Response) =>{
     const {userId, equipeId} = req.body;
@@ -73,7 +62,4 @@ export const removerUsuario = async(req: Request, res: Response) =>{
       console.log("Error in removerUsuario function:", error);
       return res.status(500).json({message: error.message});
     }
-
-
-
 }

@@ -1,7 +1,7 @@
 import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
-export const createEquipeService = async (nome: string, id_admin:number, descricao:string) => {
+export const createEquipeService = async (nome: string, id_admin: number, descricao: string) => {
     try {
         const equipeExistente = await Equipe.findOne({ where: {nome}});
         if(equipeExistente) {
@@ -49,6 +49,7 @@ export const updateEquipeService = async (id: number, nome: string, descricao:st
         }
 
         equipe.nome = nome;  // Atualiza o nome
+        equipe.descricao = descricao;
         await equipe.save(); // Salva as mudanças no banco de dados
 
         return equipe;
