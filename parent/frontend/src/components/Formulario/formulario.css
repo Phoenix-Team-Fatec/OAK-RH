@@ -52,13 +52,13 @@ label {
   font-weight: bold;
 }
 
-/* input[type="text"], select {
+.form-container-forms-create input[type="text"], select {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-} */
+} 
 
 .options {
   display: flex;
@@ -105,12 +105,8 @@ label {
   background-color: #662020;
 }
 
-.delete-option {
-  background-color: #882727;
-}
-.delete-option:hover {
-  background-color: #662020;
-}
+
+
 
 /* Retângulo em volta de cada pergunta */
 .question-container {

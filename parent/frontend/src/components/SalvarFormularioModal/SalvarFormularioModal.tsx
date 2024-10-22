@@ -1,6 +1,7 @@
 import React from 'react';
 import './SalvarFormularioModal.css'; // Seu CSS para estilização do modal
 import { Modal, Box, Typography, Button } from '@mui/material';
+import './SalvarFormularioModal.css'; 
 
 // Defina a interface com a nova propriedade isError
 interface SalvarFormularioModalProps {
@@ -19,7 +20,8 @@ const SalvarFormularioModal: React.FC<SalvarFormularioModalProps> = ({
   onOk
 }) => {
   return (
-    <Modal open={open} onClose={onClose}>
+    
+    <Modal open={open} onClose={onClose} className='modalConfirmFormulario'>
       <Box className="modal-box">
         <Typography variant="h6" component="h2">
           {message}

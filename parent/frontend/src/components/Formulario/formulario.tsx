@@ -117,7 +117,7 @@ const Formulario: React.FC = () => {
   const handleOptionChange = (qIndex: number, optIndex: number, newValue: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[qIndex].options[optIndex] = newValue;
-    setQuestions(updatedQuestions);
+    setQuestions(updatedQuestions); 
   };
 
   // Delete an option
@@ -273,7 +273,7 @@ const Formulario: React.FC = () => {
                 />
               </div>
 
-              {question.type === 'multipleChoice' && (
+              {(question.type === 'multipleChoice' || question.type ==='uniqueChoice') && (
                 <div className="options">
                   <label>Opções</label>
                   {question.options.map((option, optIndex) => (
@@ -291,9 +291,20 @@ const Formulario: React.FC = () => {
                   </button>
                 </div>
               )}
+
+
+            
             </div>
           </div>
         ))}
+
+
+
+        
+
+
+
+        
 
         <button type="button" className="button-forms-create" onClick={addQuestion}>
           Adicionar Pergunta

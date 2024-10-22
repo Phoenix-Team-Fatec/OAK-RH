@@ -12,6 +12,7 @@ interface User {
 
 interface Member {
   name: string;
+  id:number;
   role: string;
 }
 
@@ -35,11 +36,32 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
   const { id } = useUserData();
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchTeamMembers = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/equipe_user/${team.id}`);
+        const equipeData = response.data;
+  
+        const formattedMembers = equipeData.users.map((userEntry: any) => ({
+          id: userEntry.user.id,
+          name: userEntry.user.nome,
+          role: userEntry.is_lider ? 'Líder' : 'Liderado',
+        }));
+  
+        setMembers(formattedMembers);
+        
+        // Chama fetchUsers depois que os membros são definidos
+        await fetchUsers(formattedMembers);
+      } catch (error) {
+        console.error('Erro ao buscar membros da equipe:', error);
+        alert('Erro ao buscar membros da equipe. Tente novamente.');
+      }
+    };
+  
+    const fetchUsers = async (teamMembers: Member[]) => {
       try {
         const response = await axios.get(`http://localhost:3000/users/${id}`);
         const userWithOutTeam = response.data.filter((user: User) =>
-          !members.some((member) => member.name === user.nome)
+          !teamMembers.some((member) => member.id === user.id) // Usa teamMembers atualizado
         );
         setUsers(userWithOutTeam);
       } catch (error) {
@@ -47,31 +69,14 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
         alert('Erro ao buscar usuários. Tente novamente.');
       }
     };
-
-    const fetchTeamMembers = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/equipe_user/${team.id}`);
-        const equipeData = response.data;
-
-        const formattedMembers = equipeData.users.map((userEntry: any) => ({
-          name: userEntry.user.nome,
-          role: userEntry.is_lider ? 'Líder' : 'Liderado',
-        }));
-
-        setMembers(formattedMembers);
-      } catch (error) {
-        console.error('Erro ao buscar membros da equipe:', error);
-        alert('Erro ao buscar membros da equipe. Tente novamente.');
-      }
-    };
-
+  
     if (isOpen) {
-      fetchUsers();
-      fetchTeamMembers();
+      fetchTeamMembers();  // Carrega membros da equipe e depois usuários
       setTeamName(team.nome);
       setTeamDescription(team.descricao);
     }
   }, [isOpen, id, team]);
+  
 
   const handleMemberChange = async (index: number, field: keyof Member, value: string) => {
     setMembers((prevMembers) => {
