@@ -2,6 +2,7 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
 class Formulario_equipe extends Model {
   public id!: number;
+  public nivel!: string;
   public formulario_id!: number;
   public equipe_id!: number;
 }
@@ -29,6 +30,10 @@ Formulario_equipe.init(
         key: 'id',
       },
       onDelete: 'CASCADE',
+    },
+    nivel: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

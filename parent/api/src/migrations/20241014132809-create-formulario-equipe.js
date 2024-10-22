@@ -28,6 +28,11 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      nivel:{
+        type: Sequelize.STRING,
+        allowNull: false
+
       }
     });
   },

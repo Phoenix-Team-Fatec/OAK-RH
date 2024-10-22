@@ -49,4 +49,8 @@ Equipe_user.init(
   }
 );
 
+
+Equipe_user.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+
+
 export default Equipe_user;
