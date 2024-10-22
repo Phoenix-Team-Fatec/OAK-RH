@@ -143,7 +143,7 @@ const FormsAdmin: React.FC = () => {
     { field: 'id', headerName: 'ID', width: 100 },
     { field: 'nome', headerName: 'Título', width: 300 },
     { field: 'descricao', headerName: 'Descrição', width: 400 },
-    { field: 'criado_em', headerName: 'Criado em', width: 200 },
+    { field: 'criado_em', headerName: 'Criado em', width: 350 },
   ], [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]);
 
   return (

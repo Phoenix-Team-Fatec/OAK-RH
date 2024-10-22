@@ -12,7 +12,6 @@ interface User {
 
 interface Member {
   name: string;
-  id:number;
   role: string;
 }
 
@@ -42,7 +41,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
         const equipeData = response.data;
   
         const formattedMembers = equipeData.users.map((userEntry: any) => ({
-          id: userEntry.user.id,
+          id: userEntry.user.id, // Use ID para melhor precisão
           name: userEntry.user.nome,
           role: userEntry.is_lider ? 'Líder' : 'Liderado',
         }));
@@ -61,7 +60,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
       try {
         const response = await axios.get(`http://localhost:3000/users/${id}`);
         const userWithOutTeam = response.data.filter((user: User) =>
-          !teamMembers.some((member) => member.id === user.id) // Usa teamMembers atualizado
+          !teamMembers.some((member) => member.id === user.id) // Use teamMembers atualizado
         );
         setUsers(userWithOutTeam);
       } catch (error) {
@@ -77,52 +76,57 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
     }
   }, [isOpen, id, team]);
   
-
-  const handleMemberChange = async (index: number, field: keyof Member, value: string) => {
+  const handleMemberChange = (index: number, field: keyof Member, value: string) => {
     setMembers((prevMembers) => {
       const updatedMembers = [...prevMembers];
-      const currentRole = updatedMembers[index].role;
+      const currentMember = updatedMembers[index];
+      const previousRole = currentMember.role;
   
-      updatedMembers[index] = { ...updatedMembers[index], [field]: value };
+      // Atualizando o campo do membro (nome ou função)
+      updatedMembers[index] = { ...currentMember, [field]: value };
   
-      if (field === 'role' && value !== currentRole) {
+      // Se o campo alterado for a role (função) e ela mudou
+      if (field === 'role' && value !== previousRole) {
         const isNewLeader = value === 'Líder';
-        const userName = updatedMembers[index].name;
-        handleChangeLeader(userName, isNewLeader);
+        
+        // Verifica se está removendo o último líder
+        const remainingLeaders = updatedMembers.filter((m) => m.role === 'Líder').length;
+        
+        // Impede a remoção do último líder
+        if (remainingLeaders === 0 && previousRole === 'Líder' && !isNewLeader) {
+          alert('A equipe deve ter pelo menos um líder.');
+          return prevMembers; // Retorna sem modificar o estado
+        }
+  
+        // Chama função para mudar o líder no backend usando o ID
+        handleChangeLeader(currentMember.id, isNewLeader); // Passa o ID do membro
       }
-      
+  
       return updatedMembers;
     });
   };
-
+  
   const handleAddMember = () => {
     setMembers((prevMembers) => [...prevMembers, { name: '', role: '' }]);
   };
 
-  const handleRemoveMember = (index: number) => {
-    setMembers((prevMembers) => prevMembers.filter((_, i) => i !== index));
-  };
-
-  const handleDeleteMember = async (member: Member) => {
-    const confirmDelete = window.confirm(`Você realmente deseja excluir ${member.name} da equipe?`);
+  const handleDeleteMember = async (memberId) => {
+    const confirmDelete = window.confirm(`Você realmente deseja excluir este membro da equipe?`);
     
     if (confirmDelete) {
       try {
-        const user = users.find((u) => u.nome === member.name);
-        if (user) {
-          // Mantém a chamada para o backend
-          await axios.delete('http://localhost:3000/equipe_user/remover', {
-            data: {
-              userId: user.id,
-              equipeId: team.id
-            }
-          });
-          
-          // Atualiza o estado para remover o membro da lista
-          setMembers((prevMembers) => prevMembers.filter((m) => m.name !== member.name));
-          
-          console.log(`${member.name} foi removido da equipe`);
-        }
+        // Chamando a API para remover o membro pelo ID do usuário e da equipe
+        await axios.delete('http://localhost:3000/equipe_user/remover', {
+          data: {
+            userId: memberId, // Usando o ID do membro diretamente
+            equipeId: team.id
+          }
+        });
+        
+        // Atualiza o estado para remover o membro da lista de membros
+        setMembers((prevMembers) => prevMembers.filter((m) => m.id !== memberId)); // Certifique-se de que m.id é o ID correto
+        
+        console.log(`Membro com ID ${memberId} foi removido da equipe.`);
       } catch (error) {
         console.error('Erro ao deletar membro da equipe', error);
         alert('Erro ao deletar membro. Tente novamente.');
@@ -205,18 +209,15 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
     }
   };
 
-  const handleChangeLeader = async (memberName: string, isLeader: boolean) => {
+  const handleChangeLeader = async (memberId: number, isLeader: boolean) => {
     try {
-      const user = users.find(u => u.nome === memberName);
-      if (user) {
-        await axios.post('http://localhost:3000/equipe_user/mudarLider', {
-          userId: user.id,
-          equipeId: team.id,
-          isLider: isLeader,
-        });
-        
-        console.log(`Usuário ${memberName} agora é ${isLeader ? "líder" : "liderado"} da equipe.`);
-      }
+      await axios.post('http://localhost:3000/equipe_user/mudarLider', {
+        userId: memberId, // Utilize o ID do membro
+        equipeId: team.id,
+        isLider: isLeader,
+      });
+      
+      console.log(`Membro com ID ${memberId} agora é ${isLeader ? "líder" : "liderado"} da equipe.`);
     } catch (error) {
       console.error('Erro ao mudar líder:', error);
       if (error.response && error.response.data.message === "A equipe deve ter pelo menos um líder.") {
@@ -231,11 +232,11 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>Update {teamName}</h2>
+          <h2>Editar {teamName}</h2>
         </div>
 
         <div className="modal-body">
-          <label htmlFor="team-name">Team Name:</label>
+          <label htmlFor="team-name">Nome da Equipe</label>
           <input
             type="text"
             id="team-name"
@@ -243,14 +244,14 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
             onChange={(e) => setTeamName(e.target.value)}
           />
 
-          <label htmlFor="team-description">Team Description:</label>
+          <label htmlFor="team-description">Descrição da Equipe</label>
           <textarea
             id="team-description"
             value={teamDescription}
             onChange={(e) => setTeamDescription(e.target.value)}
           />
 
-          <h4>Team Members</h4>
+          <h4>Membros da Equipe</h4>
           {members.map((member, index) => (
             <div key={index} className="member-row">
               {member.name ? (
@@ -260,7 +261,7 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
                   value={member.name}
                   onChange={(e) => handleMemberChange(index, 'name', e.target.value)}
                 >
-                  <option value="" disabled>Select a member</option>
+                  <option value="" disabled>Selecione um membro</option>
                   {users.map((user) => (
                     <option key={user.id} value={user.nome}>{user.nome}</option>
                   ))}
@@ -270,27 +271,27 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
                 value={member.role}
                 onChange={(e) => handleMemberChange(index, 'role', e.target.value)}
               >
-                <option value="" disabled>Select role</option>
+                <option value="" disabled>Selecione uma função</option>
                 <option value="Líder">Líder</option>
                 <option value="Liderado">Liderado</option>
               </select>
-              <button onClick={() => handleDeleteMember(member)} className="remove-member-btn">
+              <button onClick={() => handleDeleteMember(member.id)} className="remove-member-btn">
                 <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
           ))}
 
           <button className="add-member-btn" onClick={handleAddMember}>
-            + Add Member
+            + Adicionar Membro
           </button>
         </div>
 
         <div className="modal-footer">
           <button className="save-btn" onClick={handleUpdate}>
-            Save
+            Salvar
           </button>
           <button className="cancel-btn" onClick={onClose}>
-            Cancel
+            Fechar
           </button>
         </div>
       </div>

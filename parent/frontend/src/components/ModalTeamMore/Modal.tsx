@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Modal.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons';
+
 
 function Modal({ isOpen, onClose, team }) {
   const [members, setMembers] = useState([]);
@@ -16,9 +19,20 @@ function Modal({ isOpen, onClose, team }) {
         const formattedMembers = equipeData.users.map((userEntry) => ({
           name: userEntry.user.nome,
           role: userEntry.is_lider ? 'Líder' : 'Liderado',
+          email: userEntry.user.email,
         }));
 
-        setMembers(formattedMembers);
+        // Orndeas os membros para que líderem apareçam primeiro
+        const sortedMembers = formattedMembers.sort((a, b) => {
+          if (a.role == 'Líder' && b. role === 'Liderado') {
+            return - 1;
+          }if (a.role === 'Liderado' && b.role === 'Líder'){
+            return 1;
+          }
+          return 0;
+        });
+
+        setMembers(sortedMembers);
       } catch (error) {
         console.error('Erro ao buscar membros da equipe:', error);
         alert('Erro ao buscar membros da equipe. Tente novamente.');
@@ -40,13 +54,19 @@ function Modal({ isOpen, onClose, team }) {
           <h2>{team.nome}</h2>
         </div>
         <div className="modal-body">
-          <p><strong>Team Description:</strong> {team.descricao}</p>
-          <h4>Team Members</h4>
+          <p><strong>Descrição da Equipe</strong> {team.descricao}</p>
+          <h4>Membros da Equipe</h4>
           <ul>
             {members.length > 0 ? (
               members.map((member, index) => (
                 <li key={index}>
-                  <strong>{member.name}</strong> - {member.role}
+                  <div className="member-details">
+                    <div>
+                      <strong>{member.name}</strong> - {member.role}
+                    </div>
+                    {member.role === 'Líder' && <FontAwesomeIcon icon={faUserTie} />}
+                  </div>
+                  <small className="member-email">{member.email}</small>
                 </li>
               ))
             ) : (
@@ -55,7 +75,7 @@ function Modal({ isOpen, onClose, team }) {
           </ul>
         </div>
         <div className="modal-footer">
-          <button onClick={onClose}>Close</button>
+          <button onClick={onClose}>Fechar</button>
         </div>
       </div>
     </div>

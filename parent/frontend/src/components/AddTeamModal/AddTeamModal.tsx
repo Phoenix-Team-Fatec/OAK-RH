@@ -41,16 +41,16 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>Add New Team</h2>
+          <h2>Adicionar nova equipe</h2>
         </div>
         <div className="modal-body">
-          <label>Team Name</label>
+          <label>Nome da Equipe</label>
           <input
             type="text"
             value={teamName}
             onChange={(e) => setTeamName(e.target.value)}
           />
-          <label>Team Description</label>
+          <label>Descrição da equipe</label>
           <textarea
             value={teamDescription}
             onChange={(e) => setTeamDescription(e.target.value)}
@@ -58,10 +58,10 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
         </div>
         <div className="modal-footer">
           <button className="save-btn" onClick={handleSubmit}>
-            Add Team
+            Adicionar Equipe
           </button>
           <button className="cancel-btn" onClick={onClose}>
-            Cancel
+            Fechar
           </button>
         </div>
       </div>

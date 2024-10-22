@@ -1,79 +1,66 @@
-/* Estilo para garantir que o conteúdo não ultrapasse a sidebar */
 body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  .sidebar {
-    width: 250px; /* Defina a largura da sidebar */
-    position: fixed; /* Fixa a sidebar na lateral */
-    top: 0;
-    left: 0;
-    height: 100%;
-   
-  }
-  
-  .content {
-    margin-left: 250px; /* Espaçamento igual à largura da sidebar */
-    padding: 20px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  background-color: #eae7eb !important;
+}
 
-  .actions-forms-admin{
-    display: flex;
-   
-    margin-bottom: 20px;
-    
-    margin-left: 15%;
+.sidebar {
+  width: 250px; /* Defina a largura da sidebar */
+  position: fixed; /* Fixa a sidebar na lateral */
+  top: 0;
+  left: 0;
+  height: 100%;
+}
 
-  }
+.content {
+  margin: 0 auto; /* Centraliza horizontalmente */
+  padding: 30px;
+  width: 72.5%; /* Define uma largura fixa */
+}
 
+.content h2 {
+  font-size: 24px;
+}
 
-  .actions-forms-admin button{
-   margin-right: 10%;
-   background-color:#6B7755;
-   
-  }
+.actions-forms-admin {
+  display: flex;
+  justify-content: space-between; /* Alinhamento dos botões */
+  margin-bottom: 20px;
+  width: 100%; /* Aumenta a largura para preencher a área */
+}
 
-  .actions-forms-admin .button-enviar{
-    margin-right: 10%;
-    background-color:#344E41;
-    
-   }
+.actions-forms-admin button {
+  flex: 1; /* Faz os botões ocuparem igual largura */
+  margin-right: 10px; /* Espaço entre os botões */
+  background-color: #2f8d54;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 12px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
 
-   .actions-forms-admin .button-enviar:hover{
-    
-    background-color:#588157;
-    
-   }
-   
+.actions-forms-admin button:last-child {
+  margin-right: 0; /* Remove a margem do último botão */
+}
 
+.actions-forms-admin .button-enviar {
+  background-color: #218838;
+}
 
-  .actions-forms-admin button:hover{
-    
-    background-color:#556644;
-    
-   }
+.actions-forms-admin .button-enviar:hover {
+  background-color: #218838;
+}
 
-   .tabela-formularios{
-    width: 100%;
-    margin: 0 auto; 
-   }
+.actions-forms-admin button:hover {
+  background-color: #218838;
+}
 
-
-
-
-
+.tabela-formularios {
+  width: 100%;
+  margin: 0 auto; 
+}
 
 .tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
   color: #6B7755; /* Altere para a cor que você deseja */
-  
 }
-
-
-
-
-
-
-
-

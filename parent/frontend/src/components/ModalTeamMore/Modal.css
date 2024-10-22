@@ -1,123 +1,108 @@
 /* Modal Overlay */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* A more subtle overlay */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
-  
-  /* Modal Content */
-  .modal-content {
-    background: #fff; /* Pure white background for contrast */
-    border-radius: 10px; /* Softer, rounded corners */
-    padding: 30px; /* More padding for a spacious feel */
-    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2); /* Strong shadow for a floating effect */
-    width: 600px; /* Slightly wider for more content */
-    max-height: 80vh; /* Ensures it doesn't exceed viewport height */
-    overflow-y: auto; /* Allows scrolling when the content is long */
-    transition: transform 0.3s ease-out; /* Smooth open/close effect */
-    transform: translateY(-20px); /* Initial transform to add animation */
-  }
-  
-  /* Modal Header */
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px; /* Extra margin for better spacing */
-  }
-  
-  /* Modal Title */
-  .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333; /* Darker gray for better readability */
-  }
-  
-  /* Close Button */
-  .close-btn {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #999; /* Softer gray for the close button */
-    transition: color 0.3s;
-  }
-  
-  .close-btn:hover {
-    color: #333; /* Darker color on hover for better UX */
-  }
-  
-  /* Modal Body */
-  .modal-body {
-    margin-bottom: 20px; /* Space between body and footer */
-  }
-  
-  .modal-body p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    line-height: 1.5; /* Better line spacing for readability */
-    color: #555; /* Medium gray for paragraph text */
-  }
-  
-  .modal-body h4 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-  }
-  
-  .modal-body ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .modal-body ul li {
-    background: #f9f9f9; /* Light background for each member */
-    border: 1px solid #e1e1e1; /* Soft border */
-    padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 5px; /* Subtle rounding on member list */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .modal-body ul li strong {
-    color: #333; /* Stronger contrast for names */
-    font-size: 1rem;
-  }
-  
-  .modal-body ul li span {
-    font-size: 0.9rem;
-    color: #777; /* Softer color for roles */
-  }
-  
-  /* Modal Footer */
-  .modal-footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .modal-footer button {
-    padding: 10px 20px;
-    background-color: #288c41; /* Primary blue color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .modal-footer button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); /* Um pouco mais escuro para dar foco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+  background: #ffffff; /* Branco para contraste */
+  border-radius: 12px; /* Cantos mais arredondados */
+  padding: 40px; /* Mais espaço */
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
+  width: 500px; /* Ajuste na largura */
+  max-height: 80vh; /* Altura máxima */
+  overflow-y: auto; /* Rolagem para conteúdo longo */
+  transition: transform 0.3s ease-out; /* Animação suave */
+  transform: translateY(-20px); /* Efeito de entrada */
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Modal Title */
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.75rem; /* Título um pouco maior */
+  font-weight: bold;
+  color: #444; /* Tom de cinza escuro */
+}
+
+/* Modal Body */
+.modal-body {
+  margin-bottom: 20px; /* Espaço entre corpo e rodapé */
+}
+
+.modal-body p {
+  font-size: 1.1rem; /* Texto um pouco maior */
+  margin-bottom: 15px;
+  line-height: 1.6; /* Melhor espaçamento */
+  color: #666; /* Tom de cinza para texto */
+}
+
+.modal-body h4 {
+  font-size: 1.3rem; /* Título de subtítulo um pouco maior */
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-body ul {
+  list-style: none; /* Remove marcadores */
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body ul li {
+  background: #f0f0f0; /* Um tom mais claro para cada membro */
+  border: 1px solid #dcdcdc; /* Limite suave */
+  padding: 12px; /* Mais espaço */
+  margin-bottom: 10px;
+  border-radius: 8px; /* Bordas arredondadas */
+}
+
+.member-details {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; /
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  background-color: #28a745; 
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-footer button:hover {
+  background-color: #218838; 
+}
+
+.member-email {
+  display: block; /* Certifica que o email está em uma nova linha */
+  font-size: 0.9rem; /* Um pouco menor que o texto normal */
+  color: #888; /* Um tom mais claro para diferenciar */
+  margin-top: 5px; /* Espaçamento entre o nome e o email */
+}

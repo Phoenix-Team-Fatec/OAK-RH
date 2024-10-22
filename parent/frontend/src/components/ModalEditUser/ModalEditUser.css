@@ -25,15 +25,14 @@
 .modal_content_edit h2 {
     margin-top: 0;
     font-size: 18px;
-    color: #A380A5;
     text-align: center;
     margin-bottom: 10px;
 }
 
 .modal_content_edit input {
-    all: unset;
-    width: 125%;
-    padding: 12px;
+    width: 125% !important;
+    padding: 12px !important;
+    border: 1px solid #ccc;
     border-radius: 8px;
     margin-bottom: 15px;
     font-size: 14px;
@@ -54,7 +53,7 @@
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    background-color: #A380A5;
+    background-color: #28a745;
     color: white;
     cursor: pointer;
     font-size: 12px;
@@ -65,5 +64,5 @@
 
 .button_save_user_modal:hover,
 .button_close_user_modal:hover {
-    background-color: #704772;
+    background-color: #218838;
 }

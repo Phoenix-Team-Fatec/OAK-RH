@@ -113,7 +113,7 @@ function EquipeAdmin() {
                       </button>
                       <button
                         className="delete-btn"
-                        onClick={() => handleDelete(team.id)} // Chama a função de deletar
+                        onClick={() => handleDelete(team.id)} 
                       >
                         Delete
                       </button>
@@ -123,8 +123,8 @@ function EquipeAdmin() {
 
                 {/* Empty card for adding a new team */}
                 <div className="equipe-item add-team" onClick={() => setIsAddTeamModalOpen(true)}>
-                  <div className="equipe-name">+ Add New Team</div>
-                  <div className="equipe-description">Click here to add a new team.</div>
+                  <div className="equipe-name">+ Adicionar novo time</div>
+                  <div className="equipe-description">Clique aqui para adicionar um novo time</div>
                 </div>
               </div>
             </div>

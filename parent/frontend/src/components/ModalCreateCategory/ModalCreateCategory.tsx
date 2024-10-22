@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import axios from 'axios';
 import './ModalCreateCategory.css'; 
 import { createCategory } from './categoria';
 import useUserData from '../../hooks/useUserData';
@@ -37,8 +36,8 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
 
   return (
     
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
-      <DialogTitle>Cadastrar Nova Categoria</DialogTitle>
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" className='modal_register_category'>
+      <DialogTitle className='title_new_category'>Cadastrar Nova Categoria</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -51,7 +50,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({ open, onClose
           onChange={(e) => setCategoryName(e.target.value)}
         />
       </DialogContent>
-      <DialogActions>
+      <DialogActions style={{ justifyContent: 'center'}}>
       <div className='modalCategory'>
         <Button  onClick={onClose} color="secondary">
           Fechar
