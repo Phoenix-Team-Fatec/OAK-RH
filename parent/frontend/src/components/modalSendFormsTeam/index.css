@@ -1,0 +1,95 @@
+/* Estilos do ModalSendForm */
+.modal-box-sendForms {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: var(--mui-background-paper, #fff);
+    box-shadow: 24px 24px 40px rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .modal-box-sendForms .modal-title {
+    margin-bottom: 16px;
+  }
+  
+  .modal-box-sendForms .form-control {
+    margin-bottom: 16px;
+  }
+  
+  .modal-box-sendForms .checkbox-label {
+    margin-bottom: 16px;
+    
+  }
+
+  
+
+
+  
+  .modal-box-sendForms .button-submit {
+    width: 100%;
+    margin-top: 16px;
+    background-color: #2f8d54;
+    color: #fff;
+  }
+  
+
+  .modal-box-sendForms .button-submit:hover {
+    width: 100%;
+    margin-top: 16px;
+    background-color: #218838;
+  }
+  
+
+
+  /* Estilo do checkbox com borda preta e fundo verde quando marcado */
+.modal-box-sendForms .MuiCheckbox-root {
+    color: black; /* Borda preta */
+  }
+  
+  .modal-box-sendForms .MuiCheckbox-root.Mui-checked {
+    color: #2f8d54; /* Fundo verde quando marcado */
+  }
+  
+  /* Estilo da borda verde no Select */
+  .modal-box-sendForms .MuiOutlinedInput-root {
+    border-color: #2f8d54; /* Borda verde */
+  }
+  
+  .modal-box-sendForms .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #2f8d54; /* Borda verde ao focar */
+    color: #2f8d54;
+  }
+
+
+  #select-teams-label{
+    color:#218838;
+  }
+
+
+
+ #select-nivel-label{
+    color:#218838;
+ }
+
+
+  /* Estilo do checkbox com borda preta e fundo verde quando marcado */
+  .menuItem-sendForms .MuiCheckbox-root {
+    color: black; /* Borda preta */
+  }
+  
+  .menuItem-sendForms .MuiCheckbox-root.Mui-checked {
+    color: #2f8d54; /* Fundo verde quando marcado */
+  }
+  
+  /* Estilo da borda verde no Select */
+  .menuItem-sendForms .MuiOutlinedInput-root {
+    border-color: #2f8d54; /* Borda verde */
+  }
+  
+  .menuItem-sendForms .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #2f8d54; /* Borda verde ao focar */
+    color: #2f8d54;
+  }

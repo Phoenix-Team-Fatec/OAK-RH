@@ -10,6 +10,7 @@ import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/seleca
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
 
+
 const App: React.FC = () => {
   return (
     <Router>
@@ -73,6 +74,9 @@ const App: React.FC = () => {
        <Responder/>
        } 
        />
+
+
+     
 
 
       

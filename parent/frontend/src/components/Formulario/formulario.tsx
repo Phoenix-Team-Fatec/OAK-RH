@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Formulario.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { createForm, createQuestion, listCategories } from './formulario'; // Suas funções API
-import SalvarFormularioModal from '../SalvarFormularioModal/SalvarFormularioModal'; // Caminho do modal
 import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
+import ModalSendForm from '../modalSendFormsTeam/ModalSendFormsTeam';
+
 
 // Interfaces
 interface Category {
@@ -35,6 +36,8 @@ const Formulario: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([
     { type: 'longQuestion', value: '', options: [], category: '' }
   ]);
+
+  const [formId, setFormId] = useState<number>(0);
 
   // Modal states
   const [modalOpen, setModalOpen] = useState(false);
@@ -132,6 +135,9 @@ const Formulario: React.FC = () => {
   // Função para fechar o modal de erro
   const handleCloseModal = () => {
     setModalOpen(false);
+    if (!isError) {
+      navigate('/formularios-admin'); // Redireciona para a página de formulários
+    }
   };
 
   // Submit the form and create the questions
@@ -170,6 +176,7 @@ const Formulario: React.FC = () => {
       // Cria o formulário
       const formResponse = await createForm(form.title, form.description, form.adminId);
       const formulario_id = formResponse.id;
+      setFormId(formulario_id)
 
       // Cria as perguntas associadas ao formulário
       for (const question of questions) {
@@ -200,13 +207,7 @@ const Formulario: React.FC = () => {
     }
   };
 
-  // Função para tratar o clique no OK do modal
-  const handleModalOkClick = () => {
-    setModalOpen(false);
-    if (!isError) {
-      navigate('/formularios-admin'); // Apenas redireciona se for sucesso
-    }
-  };
+  
 
   return (
     <div className="form-container-forms-create">
@@ -312,12 +313,12 @@ const Formulario: React.FC = () => {
         <button type="submit" className="button-forms-create">Salvar Formulário</button>
       </form>
 
-      <SalvarFormularioModal
+      <ModalSendForm
         open={modalOpen}
         onClose={handleCloseModal}
-        message={modalMessage}
-        isError={isError}
-        onOk={handleModalOkClick} // Correção aqui
+        formId={formId}
+      
+      
       />
     </div>
   );

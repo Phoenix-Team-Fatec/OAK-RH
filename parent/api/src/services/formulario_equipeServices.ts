@@ -4,34 +4,67 @@ import Formulario from "../models/formularioModels";
 import Pergunta from "../models/perguntasModels";
 import Equipe_user from "../models/equipe_userModel";
 import User from "../models/userModels";
+import { admin } from "../config/firebase.cjs";
 
 
 
-// Função para associar formulário a equipe
-export const associarFormularioEquipe = async (
+// Função para associar formulário a múltiplas equipes
+export const associarFormularioParaEquipes = async (
     formulario_id: number, 
-    equipe_id: number, 
+    equipe_ids: number[], // Um array de IDs de equipes
     nivel: string // 'lideres', 'liderados' ou 'ambos'
-  ) => {
+) => {
     try {
-      const formulario_equipe = await Formulario_equipe.create({
-        formulario_id,
-        equipe_id,
-        nivel, // Associar o nível definido
-      });
-      return formulario_equipe;
+        // Para cada equipe no array, associar o formulário
+        const associacoes = equipe_ids.map(async equipe_id => {
+            return await Formulario_equipe.create({
+                formulario_id,
+                equipe_id,
+                nivel, // Associar o nível definido
+            });
+        });
+
+        // Aguarda todas as associações serem realizadas
+        const resultado = await Promise.all(associacoes);
+
+        return resultado;
     } catch (error) {
-      console.log("Erro ao associar formulário à equipe:", error);
+        console.log("Erro ao associar formulário às equipes:", error);
     }
-  };
+};
+
+
+
+
+// Função para associar formulário a todas as equipes
+export const associarFormularioParaTodasEquipes = async (
   
+    formulario_id: number,
+    nivel: string, // 'lideres', 'liderados' ou 'ambos'
+    id_admin: number,
+) => {
+    try {
+        // Busca todos os IDs das equipes no banco de dados
+        const equipes = await Equipe.findAll({
+            where: { id_admin }});
+        const equipe_ids = equipes.map(equipe => equipe.id);
+        console.log(equipe_ids);
+
+        // Reutiliza a função anterior para associar o formulário a todas as equipes
+        return await associarFormularioParaEquipes(formulario_id, equipe_ids, nivel);
+    } catch (error) {
+        console.log("Erro ao associar formulário a todas as equipes:", error);
+    }
+};
+
 
 // Função para listar formulários de uma equipe
 export const listarFormulariosEquipe = async (equipe_id: number) => {
     try {
         const formularios = await Formulario_equipe.findAll({
             where: {
-                equipe_id
+                equipe_id,
+               
             },
             include: [
                 {
@@ -66,68 +99,5 @@ export const deletarFormularioEquipe = async (id: number) => {
         return { message: "Formulário de equipe deletado com sucesso" };
     } catch (error) {
         console.log("Erro ao deletar formulário de uma equipe", error);
-    }
-};
-
-// Função para distribuir formulários para uma equipe com base em liderança
-export const distribuirFormulariosParaEquipe = async (
-    formularioId: number,
-    equipeId: number,
-    distribuirPara: 'lideres' | 'liderados' | 'ambos'
-) => {
-    try {
-        // Verifica se o formulário existe
-        const formulario = await Formulario.findByPk(formularioId);
-        if (!formulario) {
-            return { message: "Formulário não encontrado" };
-        }
-
-        // Busca as perguntas associadas ao formulário
-        const perguntas = await Pergunta.findAll({
-            where: { formulario_id: formularioId }
-        });
-
-        if (perguntas.length === 0) {
-            return { message: "Nenhuma pergunta encontrada para este formulário" };
-        }
-
-        // Define a condição de filtro para os usuários com base no parâmetro distribuirPara
-        let filtroLideranca: any = {};
-        if (distribuirPara === 'lideres') {
-            filtroLideranca = { is_lider: true };
-        } else if (distribuirPara === 'liderados') {
-            filtroLideranca = { is_lider: false };
-        } // Se for 'ambos', não precisa de filtro específico
-
-        // Busca os usuários associados à equipe, filtrando por líderes ou liderados se necessário
-        const usuariosEquipe = await Equipe_user.findAll({
-            where: {
-                equipe_id: equipeId,
-                ...filtroLideranca, // Aplica o filtro de liderança se necessário
-            },
-            include: [
-                {
-                    model: User,
-                    as: 'user',
-                    attributes: ['id', 'nome', 'email'] // Inclua apenas os dados necessários dos usuários
-                }
-            ]
-        });
-
-        if (usuariosEquipe.length === 0) {
-            return { message: "Nenhum usuário encontrado nesta equipe com os critérios selecionados" };
-        }
-
-        // Distribui as perguntas para cada usuário da equipe
-        const distribuicao = usuariosEquipe.map(usuarioEquipe => ({  
-            usuario: usuarioEquipe.user_id, // Acessando o objeto associado `user`
-            perguntas
-        }));
-
-        return distribuicao;
-
-    } catch (error) {
-        console.log("Erro ao distribuir formulário para equipe:", error);
-        throw new Error("Erro ao distribuir formulário para equipe");
     }
 };

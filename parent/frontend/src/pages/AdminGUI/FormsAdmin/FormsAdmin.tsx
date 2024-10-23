@@ -7,6 +7,7 @@ import ModalCreateCategory from '../../../components/ModalCreateCategory/ModalCr
 import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
 import { getFormularios, deleteFormulario } from './formsAdminBackend';
 import { useNavigate } from 'react-router-dom';
+import ModalSendForm from '../../../components/modalSendFormsTeam/ModalSendFormsTeam';
 
 
 import useUserData from '../../../hooks/useUserData';
@@ -25,6 +26,7 @@ const FormsAdmin: React.FC = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
   const { id } = useUserData();
 
   const navigate = useNavigate();
@@ -114,6 +116,9 @@ const FormsAdmin: React.FC = () => {
     }
   };
 
+
+  
+
   const columns: GridColDef[] = useMemo(() => [
     {
       field: 'select',
@@ -190,7 +195,11 @@ const FormsAdmin: React.FC = () => {
             variant="contained"
             className='button-enviar'
             color="secondary"
-            onClick={() => alert("Enviar para as equipes")}
+            onClick={() => {if(selectedIds.length > 1 ){
+              alert("Selecione apenas um formulário para enviar.")
+            }else{
+              setIsModalOpenSend(true)}
+            }}
             disabled={selectedIds.length === 0 || isDeleting}
           >
             Enviar
@@ -223,6 +232,15 @@ const FormsAdmin: React.FC = () => {
           open={isModalOpen}
           onClose={() => setIsModalOpen(false)} // Fecha o modal ao clicar
         />
+
+
+      <ModalSendForm
+        open={isModalOpenSend}
+        onClose={() => setIsModalOpenSend(false)}
+        formId={selectedIds[0]}
+      
+      
+      />
       </div>
     </>
   );
