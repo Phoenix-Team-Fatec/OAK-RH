@@ -9,7 +9,6 @@ import FormsAdmin from "./pages/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./pages/FormsUser/FormsUser";
 import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
 import DashboardUser from "./pages/DashboardUser/DashboardUser"
-import LoginUser from "./pages/User/LoginUser/LoginUser";
 
 const App: React.FC = () => {
   return (
@@ -78,7 +77,7 @@ const App: React.FC = () => {
         />
 
         <Route path="/dashboard-user"
-          element={<LoginUser />} />
+          element={<DashboardUser />} />
       </Routes>
 
     </Router>

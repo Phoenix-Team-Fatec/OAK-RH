@@ -22,8 +22,17 @@ const RegisterLogin: React.FC = () => {
 
     useEffect(() => {
         const IdToken = sessionStorage.getItem('IdToken');
+        const LastEntry = localStorage.getItem('isAdmin')
         if (IdToken) {
             sessionStorage.removeItem('IdToken');
+        }
+        if (LastEntry !== null) {
+            if (LastEntry == "true") {
+                setIsAdmin(LastEntry === 'true')
+            } else {
+                setIsAdmin(false)
+                setIsUserScreen(true)
+            }
         }
     }, []);
 
@@ -93,6 +102,7 @@ const RegisterLogin: React.FC = () => {
                     const token = tokenResponse.data.token;
 
                     sessionStorage.setItem("IdToken", token);
+                    localStorage.setItem("isAdmin", "true")
 
                     navigate('/funcionarios');
 
@@ -139,6 +149,7 @@ const RegisterLogin: React.FC = () => {
                     const token = tokenResponse.data.token;
 
                     sessionStorage.setItem("IdToken", token);
+                    localStorage.setItem("isAdmin", "false")
 
                     navigate('/dashboard-user');
 
