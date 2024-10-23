@@ -4,19 +4,20 @@ import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
 import EquipeAdmin from "./pages/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/MembersAdmin/MembersAdmin";
-import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin"; 
-import FormsAdmin from "./pages/FormsAdmin/FormsAdmin";   
-import SelecaoFormularioMembro from "./pages/FormsUser/FormsUser"; 
+import DashboardAdmin from "./pages/DashboardAdmin/DashboardAdmin";
+import FormsAdmin from "./pages/FormsAdmin/FormsAdmin";
+import SelecaoFormularioMembro from "./pages/FormsUser/FormsUser";
 import FormsAdminCreate from "./pages/FormsAdminCreate/FormsAdminCreate";
 import DashboardUser from "./pages/DashboardUser/DashboardUser"
+import LoginUser from "./pages/User/LoginUser/LoginUser";
 
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RegisterLogin />} />
-        
-        <Route 
+
+        <Route
           path="/dashboard-admin"
           element={
             <ProtectedRoute adminOnly={true}>
@@ -24,7 +25,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/equipes-admin"
           element={
@@ -33,7 +34,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/funcionarios"
           element={
@@ -42,7 +43,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/formularios-admin"
           element={
@@ -51,35 +52,34 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
 
 
-      <Route
+
+        <Route
           path="/forms-admin-create"
           element={
             <ProtectedRoute adminOnly={true}>
-              <FormsAdminCreate/>
+              <FormsAdminCreate />
             </ProtectedRoute>
           }
         />
 
-      <Route
+        <Route
           path="/lista-formularios"
           element={
-              <SelecaoFormularioMembro />
+            <SelecaoFormularioMembro />
           }
         />
         <Route
           path="/dashboard"
           element={
-              <DashboardUser />
+            <DashboardUser />
           }
         />
 
-            
+        <Route path="/dashboard-user"
+          element={<LoginUser />} />
       </Routes>
-
-
 
     </Router>
   );
