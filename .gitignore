@@ -1,0 +1,21 @@
+/oak/node_modules/
+node_modules/
+node_modules/
+
+firebaseService.json
+firebase-adm-config.json
+
+parent/api/src/config/config.json
+
+# Build output
+/.dist/
+
+# Log files
+*.log
+
+# OS generated files
+.DS_Store
+# TypeScript
+*.tsbuildinfo
+
+

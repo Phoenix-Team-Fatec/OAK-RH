@@ -1,0 +1,59 @@
+.admin_members_container {
+    background-color: #eae7eb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    margin-left: 70px;
+}
+  
+.h2_admin_members_register {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+  
+.dataGridContainer {
+  width: 100%;
+  margin: 0 auto;
+}
+  
+.dataGridPaper {
+  padding: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+  
+.MuiDataGrid-root {
+  border: none; 
+}
+  
+.MuiDataGrid-columnHeader {
+  background-color: #f5f5f5;
+}
+  
+.MuiDataGrid-cell {
+  border-bottom: 1px solid #e0e0e0; 
+}
+
+/* Botões */
+.button_register_user,
+.button_edit_member,
+.button_delete_member {
+    margin: 5px; 
+    padding: 10px 15px; 
+    border: none; 
+    border-radius: 5px; 
+    background-color: #2f8d54;
+    color: white; 
+    cursor: pointer; 
+    font-size: 12px;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.button_register_user:hover,
+.button_edit_member:hover,
+.button_delete_member:hover {
+    background-color: #704772;
+}

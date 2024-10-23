@@ -1,0 +1,57 @@
+/* Container for the entire dashboard */
+.dashboard-admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    min-height: 100vh;
+  }
+  
+  /* Dashboard Title */
+  .dashboard-admin-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Dashboard Description */
+  .dashboard-admin-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+  
+  /* Grid layout for the cards */
+  .dashboard-admin-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Individual card styling */
+  .dashboard-admin-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .dashboard-admin-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Card title styling */
+  .dashboard-admin-card-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Card value styling */
+  .dashboard-admin-card-value {
+    font-size: 24px;
+    color: #2d80d8;
+    font-weight: bold;
+  }
+  
