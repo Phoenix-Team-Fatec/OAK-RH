@@ -41,9 +41,9 @@
 
 | Nº Requisito   | Requisito do Parceiro |
 | :----: | :----: |
-| RFN1 | Documentação API – Application Programming Interface |
-| RFN2 | Modelagem de Banco de Dados ou Arquivo de dados |
-| RFN3 | Interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela. |
+| RNF1 | Documentação API – Application Programming Interface |
+| RNF2 | Modelagem de Banco de Dados ou Arquivo de dados |
+| RNF3 | Interface responsiva e amigável para facilitar o acesso e a utilização do dashboard em diferentes dispositivos e tamanhos de tela. |
 
 <br>
 <br>
