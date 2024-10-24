@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
-import EquipeAdmin from "./pages/AdminGUI/EquipesAdmin/EquipeAdmin";
+import EquipeAdmin from "./pages/AdminGUI/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/AdminGUI/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin"; 
@@ -9,6 +9,7 @@ import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
+import DashboardUser from "./pages/User/DashboardUser/DashboardUser";
 
 
 const App: React.FC = () => {
@@ -16,8 +17,8 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<RegisterLogin />} />
-        
-        <Route 
+
+        <Route
           path="/dashboard-admin"
           element={
             <ProtectedRoute adminOnly={true}>
@@ -25,7 +26,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/equipes-admin"
           element={
@@ -34,7 +35,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/funcionarios"
           element={
@@ -43,7 +44,7 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
+
         <Route
           path="/formularios-admin"
           element={
@@ -52,19 +53,14 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        
-        <Route
-          path="/lista-equipes"
-          element={
-              <SelecaoFormularioMembro />
-          }
-        />
 
-      <Route
+
+
+        <Route
           path="/forms-admin-create"
           element={
             <ProtectedRoute adminOnly={true}>
-              <FormsAdminCreate/>
+              <FormsAdminCreate />
             </ProtectedRoute>
           }
         />
@@ -80,9 +76,9 @@ const App: React.FC = () => {
 
 
       
+        <Route path="/dashboard-user"
+          element={<DashboardUser />} />
       </Routes>
-
-
 
     </Router>
   );
