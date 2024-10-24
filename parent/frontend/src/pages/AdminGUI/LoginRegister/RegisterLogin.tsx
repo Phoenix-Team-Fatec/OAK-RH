@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './RegisterLogin.css';
 import { useNavigate } from 'react-router-dom';
-import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
-import AdmAuth from '../../components/AuthInterfaces/AdmAuth';
-import UserAuth from '../../components/AuthInterfaces/UserAuth';
+import ToggleSwitch from '../../../components/ToggleSwitch/ToggleSwitch';
+import AdmAuth from '../../../components/AuthInterfaces/AdmAuth';
+import UserAuth from '../../../components/AuthInterfaces/UserAuth';
 
 const RegisterLogin: React.FC = () => {
     const [isUserScreen, setIsUserScreen] = useState(false)
