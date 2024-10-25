@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
+import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario, listarUserEquipe } from "./controllers/equipe_userController";
 import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
@@ -40,6 +40,7 @@ router.get('/equipe_user/listar', listEquipeUser);
 router.post('/equipe_user/mudarLider', mudarEstadoLider);
 router.get('/equipe_user/:id', getEquipeUser);
 router.delete('/equipe_user/remover', removerUsuario);
+router.get('/equipe_user/listar/:id', listarUserEquipe);
 
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);

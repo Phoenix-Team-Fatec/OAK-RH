@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './selecaoFormularioMembro.css';
 import useUserData from '../../hooks/useUserData';
 import './index'
-import { readUserService } from './index';
+
 
 interface Formulario {
   id: number;

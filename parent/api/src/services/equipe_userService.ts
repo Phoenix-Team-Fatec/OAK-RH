@@ -53,12 +53,12 @@ export const listarUser_Equipe = async (id:number) => {
       include: [
         {
           model: Equipe_user,
-          as: 'equipes',
+          as: 'user',
           attributes: ['is_lider'],
           include: [
             {
               model: Equipe,
-              as: 'equipe',
+              as: 'equipes',
               attributes: ['id', 'nome'],
             },
           ],

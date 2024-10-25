@@ -45,6 +45,7 @@ Equipe.init(
 
 // Associações
 Equipe.hasMany(Equipe_user, { foreignKey: 'equipe_id', as: 'users', onDelete: 'CASCADE' });
+Equipe_user.belongsTo(Equipe, { foreignKey: 'equipe_id', as: 'equipes', onDelete: 'CASCADE' });
 Formulario_equipe.belongsTo(Equipe, { foreignKey: 'equipe_id', as: 'equipes', onDelete: 'CASCADE' });
 
 
