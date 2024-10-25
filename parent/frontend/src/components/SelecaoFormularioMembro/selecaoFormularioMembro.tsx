@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './selecaoFormularioMembro.css';
+import useUserData from '../../hooks/useUserData';
+import './index'
+import { readUserService } from './index';
 
 interface Formulario {
   id: number;
@@ -13,9 +16,13 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [formularios, setFormularios] = useState<Formulario[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+ const {id} = useUserData();
 
-  // Substitua pelo ID do administrador desejado
-  const adminId = localStorage.getItem('adminId'); 
+
+
+
+  // Por equanto pegando o id do user, não do admin
+  const adminId = 6;
 
   useEffect(() => {
     const fetchFormularios = async () => {
@@ -25,8 +32,9 @@ const SelecaoFormularioMembro: React.FC = () => {
       try {
         const response = await fetch(
           `http://localhost:3000/formulario/listar/${adminId}`
+          
         );
-
+        console.log(adminId)
         if (!response.ok) {
           throw new Error('Erro ao buscar os formulários.');
         }

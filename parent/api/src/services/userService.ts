@@ -37,7 +37,7 @@ export const createUserService = async (nome: string, email: string, id_admin: n
 export const readUserService = async (id: number) => {
     try {
         const user = await User.findByPk(id, {
-            attributes: ['nome', 'email']
+            attributes: ['nome', 'email','id_admin', ]
         });
 
         if(!user) {

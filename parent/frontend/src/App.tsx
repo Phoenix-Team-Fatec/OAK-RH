@@ -6,7 +6,7 @@ import RegisterLogin from "./pages/AdminGUI/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin"; 
 import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
-
+import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro";
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
 import DashboardUser from "./pages/User/DashboardUser/DashboardUser";
@@ -64,6 +64,14 @@ const App: React.FC = () => {
             </ProtectedRoute>
           }
         />
+
+        
+      <Route path="/forms-user"
+       element={
+       <SelecaoFormularioMembro/>
+       } 
+       />
+
 
       <Route path="/responder"
        element={

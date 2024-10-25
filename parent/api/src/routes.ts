@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
-import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser } from "./controllers/userController";
+import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl } from "./controllers/formularioController";
@@ -23,7 +23,7 @@ router.get('/users/:id_admin', readAllUsers);
 router.post('/users/login', loginUser);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
-//router.get('/users/:id', getUserById);
+router.get('/users/listar_um/:id', readUser);
 router.put('/users/:id', updateUser);
 
 

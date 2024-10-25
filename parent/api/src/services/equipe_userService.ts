@@ -45,6 +45,34 @@ export const setUsarioEquipe = async (
   }
 };
 
+export const listarUser_Equipe = async (id:number) => {
+  try {
+    const usersWithTeams = await User.findAll({
+      where:{id},
+      
+      include: [
+        {
+          model: Equipe_user,
+          as: 'equipes',
+          attributes: ['is_lider'],
+          include: [
+            {
+              model: Equipe,
+              as: 'equipe',
+              attributes: ['id', 'nome'],
+            },
+          ],
+        },
+      ],
+    });
+
+    return usersWithTeams;
+  } catch (error) {
+    console.log("Error in listUser_Equipe function:", error);
+    throw new Error("Erro ao listar usuários com equipes");
+  }
+}
+
 // Função para listar equipes com seus respectivos usuários
 export const listarEquipe_User = async () => {
   try {
