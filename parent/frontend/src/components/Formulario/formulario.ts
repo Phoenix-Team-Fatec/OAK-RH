@@ -55,6 +55,7 @@ export async function listTeams(admin_id:number){
 export async function listCategories(admin_id:number){
     try{
         const response = await axios.get(`http://localhost:3000/categorias/${admin_id}`);
+        console.log(admin_id);
         return response.data;
     }catch(error){
         console.log("Error in listCategories function:", error);
