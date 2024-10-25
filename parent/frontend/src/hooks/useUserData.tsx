@@ -22,7 +22,7 @@ function useUserData(): UserData {
                 }
                 const decoded = Base64.decode(parts[1]);
                 const payload = JSON.parse(decoded);
-                console.log("Payload:", payload);
+            
 
                 return {
                     id: payload.id || 0,

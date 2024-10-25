@@ -34,7 +34,7 @@ const SidebarUser = () => {
                     </NavLink>
                 </li>
                 <li className="menu_span">
-                    <NavLink to="/lista-formularios" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/forms-user" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faFileAlt} />
                         {isExpanded && " Formulários"}
                     </NavLink>
