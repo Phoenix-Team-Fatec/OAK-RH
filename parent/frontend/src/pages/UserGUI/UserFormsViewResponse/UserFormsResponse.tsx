@@ -35,6 +35,7 @@ export default function UserFormsResponseView() {
     });
     const [formsData, setFormsData] = useState<Question[]>([])
     const [formsName, setFormsName] = useState("")
+    const [formsDescription, setFormsDescription] = useState("")
     const [answerData, setAnswerData] = useState<Resposta[]>([])
     const [isLoading, setIsLoading] = useState(true)
 
@@ -52,6 +53,7 @@ export default function UserFormsResponseView() {
 
             const answer = await axios.get(`http://localhost:3000/resposta/usuario/${formulario_id}/${userData.id}`)
             setAnswerData(answer.data)
+            setFormsDescription(forms.data.descricao)
 
             setIsLoading(false)
         }
@@ -66,6 +68,7 @@ export default function UserFormsResponseView() {
             ) : (
                 <>
                     <h2>{formsName}</h2>
+                    <span>{formsDescription}</span>
                     <UserRenderForms formsData={formsData} answerData={answerData} />
                 </>
             )}

@@ -34,6 +34,7 @@ export default function UserFormsResponse() {
     });
     const [data, setData] = useState<Question[]>([])
     const [formsName, setFormsName] = useState("")
+    const [formsDescription, setFormsDescription] = useState("")
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -45,6 +46,7 @@ export default function UserFormsResponse() {
 
             const forms = await axios.get(`http://localhost:3000/formulario/${formsId}`)
             setFormsName(forms.data.nome)
+            setFormsDescription(forms.data.descricao)
 
             setIsLoading(false)
         }
@@ -69,6 +71,7 @@ export default function UserFormsResponse() {
             ) : (
                 <>
                     <h2>{formsName}</h2>
+                    <span>{formsDescription}</span>
                     <UserRenderForms data={data} onSubmit={handleSubmit} formsId={Number(formulario_id)} />
                 </>
             )}
