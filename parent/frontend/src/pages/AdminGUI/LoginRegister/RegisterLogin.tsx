@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './RegisterLogin.css';
 import { useNavigate } from 'react-router-dom';
-import ToggleSwitch from '../../components/ToggleSwitch/ToggleSwitch';
-import AdmAuth from '../../components/AuthInterfaces/AdmAuth';
-import UserAuth from '../../components/AuthInterfaces/UserAuth';
+import ToggleSwitch from '../../../components/ToggleSwitch/ToggleSwitch';
+import AdmAuth from '../../../components/AuthInterfaces/AdmAuth';
+import UserAuth from '../../../components/AuthInterfaces/UserAuth';
 
 const RegisterLogin: React.FC = () => {
     const [isUserScreen, setIsUserScreen] = useState(false)
@@ -133,7 +133,9 @@ const RegisterLogin: React.FC = () => {
                     });
 
                     const user = response.data.user;
+                    const equipe = response.data.team;
                     const { nome, email, empresa, cnpj, id_admin } = user;
+                    const { equipe_id } = equipe;
                     const id: number = user.id;
 
                     const tokenToPayload = {
@@ -142,7 +144,8 @@ const RegisterLogin: React.FC = () => {
                         email,
                         empresa,
                         cnpj,
-                        id_admin
+                        id_admin,
+                        equipe_id
                     };
 
                     const tokenResponse = await axios.post("http://localhost:3000/generate-token", tokenToPayload);

@@ -15,14 +15,14 @@ app.use(express.json());
 
 //Rota para criação de token
 app.post('/generate-token', async (req, res) => {
-    const { id, nome, email, empresa, cnpj, id_admin } = req.body;
+    const { id, nome, email, empresa, cnpj, id_admin, equipe_id } = req.body;
     const isAdmin = !!cnpj;
 
     if (!process.env.JWT_SECRET) {
         return res.status(500).json({ error: 'JWT_SECRET não está definido' });
     }
 
-    const token = jwt.sign({ id, nome, email, empresa, cnpj, id_admin, isAdmin  }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id, nome, email, empresa, cnpj, id_admin, isAdmin, equipe_id  }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
     res.json({ token });
 });
