@@ -45,6 +45,18 @@ export const setUsarioEquipe = async (
   }
 };
 
+export const getUserEquipeService = async (user_id: number) => {
+  try {
+    console.log("User ID", user_id)
+    const userTeam = await Equipe_user.findOne({ where: { user_id } })
+
+    return userTeam
+  } catch (error) {
+    console.log("Error in getUserEquipe function", error);
+    throw new Error("Error in getUserEquipe function");
+  }
+}
+
 // Função para listar equipes com seus respectivos usuários
 export const listarEquipe_User = async () => {
   try {
@@ -109,51 +121,51 @@ export const getEquipe_user = async (equipeId: number) => {
 export const mudarEstatosLider = async (userId: number, equipeId: number, isLider: boolean) => {
   // Verificar se os parâmetros não são undefined
   if (userId === undefined || equipeId === undefined || isLider === undefined) {
-      throw new Error("userId, equipeId e isLider não podem ser undefined");
+    throw new Error("userId, equipeId e isLider não podem ser undefined");
   }
 
   console.log("Dados antes de salvar:", { userId, equipeId, isLider });
 
   try {
-      // Buscar a associação atual do usuário na equipe
-      let equipeUser = await Equipe_user.findOne({
-          where: {
-              user_id: userId,
-              equipe_id: equipeId,
-          },
+    // Buscar a associação atual do usuário na equipe
+    let equipeUser = await Equipe_user.findOne({
+      where: {
+        user_id: userId,
+        equipe_id: equipeId,
+      },
+    });
+
+    // Se a associação não for encontrada, lançar um erro
+    if (!equipeUser) {
+      throw new Error("Associação entre usuário e equipe não encontrada");
+    }
+
+    // Se o usuário está sendo rebaixado de líder para liderado, verificar se há outros líderes
+    if (!isLider && equipeUser.is_lider) {
+      const totalLideres = await Equipe_user.count({
+        where: {
+          equipe_id: equipeId,
+          is_lider: true,
+        },
       });
 
-      // Se a associação não for encontrada, lançar um erro
-      if (!equipeUser) {
-          throw new Error("Associação entre usuário e equipe não encontrada");
+      // Se há apenas um líder na equipe, impedir a remoção
+      if (totalLideres <= 1) {
+        throw new Error("A equipe deve ter pelo menos um líder.");
       }
+    }
 
-      // Se o usuário está sendo rebaixado de líder para liderado, verificar se há outros líderes
-      if (!isLider && equipeUser.is_lider) {
-          const totalLideres = await Equipe_user.count({
-              where: {
-                  equipe_id: equipeId,
-                  is_lider: true,
-              },
-          });
+    // Atualizar o status de liderança do usuário atual
+    equipeUser.is_lider = isLider;
+    await equipeUser.save();
 
-          // Se há apenas um líder na equipe, impedir a remoção
-          if (totalLideres <= 1) {
-              throw new Error("A equipe deve ter pelo menos um líder.");
-          }
-      }
+    console.log("Associação atualizada:", equipeUser);
 
-      // Atualizar o status de liderança do usuário atual
-      equipeUser.is_lider = isLider;
-      await equipeUser.save();
-
-      console.log("Associação atualizada:", equipeUser);
-
-      // Retornar a associação atualizada
-      return equipeUser;
+    // Retornar a associação atualizada
+    return equipeUser;
   } catch (error) {
-      console.log("Erro na função mudarEstatosLider:", error);
-      throw new Error("Erro ao mudar estado de líder de uma equipe");
+    console.log("Erro na função mudarEstatosLider:", error);
+    throw new Error("Erro ao mudar estado de líder de uma equipe");
   }
 };
 

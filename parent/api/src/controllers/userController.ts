@@ -3,6 +3,7 @@ import { loginService, createUserService, listUserService, readUserService, upda
 import { generateRandomPassword } from "../config/generateRandomPassword";
 import { admin, createUserWithEmailAndPassword, deleteUserByEmail, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
+import { getUserEquipeService } from "../services/equipe_userService";
 
 
 export const loginUser = async (req: Request, res: Response) => {
@@ -10,7 +11,15 @@ export const loginUser = async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const userFind = await loginService(email);
     const userVerify = await signInWithEmailAndPassword(getAuth(), email, password);
-    return res.status(200).json(userFind);
+
+    const findTeam = await getUserEquipeService(userFind.id)
+
+    const response = {
+      user: userFind,
+      team: findTeam,
+    };
+
+    return res.status(200).json(response);
   } catch (error) {
     console.log("Error in login function:", error);
     return res.status(500).json({ messsage: error.message });
@@ -74,7 +83,7 @@ export const updateUser = async (req: Request, res: Response) => {
 
   try {
     const userId = parseInt(id, 10);
-    if(isNaN(userId)) {
+    if (isNaN(userId)) {
       return res.status(400).json({ message: "ID must be a number" })
     }
     const updatedUser = await updateUserService(userId, nome, email);
@@ -104,7 +113,7 @@ export const deleteUser = async (req: Request, res: Response) => {
 
     const userId = parseInt(id);
     const result = await deleteUserService(userId);
-    
+
     return res.status(200).json(result);
   } catch (error) {
     console.error("Error in deleteUser function:", error);

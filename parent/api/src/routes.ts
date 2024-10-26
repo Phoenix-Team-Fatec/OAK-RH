@@ -7,7 +7,7 @@ import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioCon
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
-import { createAnswer, findAnswerById, findAnswerByQuestionsId, findAnswerByUser } from "./controllers/respostaControllers";
+import { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser } from "./controllers/respostaControllers";
 
 
 
@@ -74,6 +74,7 @@ router.delete('/perguntas/:id', deletarPergunta);
 router.post('/respostas', createAnswer);
 router.get('/respostas/:answerId', findAnswerById);
 router.get('/respostas/listar/:answerId', findAnswerByQuestionsId);
+router.get('/resposta/usuario/:questionId/:userId', findAnswerByQuestionsAndUserId)
 router.get('/respostas/user/:userId', findAnswerByUser)
 
 

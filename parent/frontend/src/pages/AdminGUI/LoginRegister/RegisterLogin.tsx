@@ -133,7 +133,9 @@ const RegisterLogin: React.FC = () => {
                     });
 
                     const user = response.data.user;
+                    const equipe = response.data.team;
                     const { nome, email, empresa, cnpj, id_admin } = user;
+                    const { equipe_id } = equipe;
                     const id: number = user.id;
 
                     const tokenToPayload = {
@@ -142,7 +144,8 @@ const RegisterLogin: React.FC = () => {
                         email,
                         empresa,
                         cnpj,
-                        id_admin
+                        id_admin,
+                        equipe_id
                     };
 
                     const tokenResponse = await axios.post("http://localhost:3000/generate-token", tokenToPayload);

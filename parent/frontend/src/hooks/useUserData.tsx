@@ -9,6 +9,7 @@ interface UserData {
     cnpj: string;
     id_admin: number;
     isAdmin: boolean;
+    equipe_id: number;
 }
 
 function useUserData(): UserData {
@@ -31,6 +32,7 @@ function useUserData(): UserData {
                     cnpj: payload.cnpj || "",
                     id_admin: payload.id_admin || 0,
                     isAdmin: payload.isAdmin || false,
+                    equipe_id: payload.equipe_id || 0,
                 };
             } catch (error) {
                 console.error("Erro ao decodificar o token:", error);
@@ -42,6 +44,7 @@ function useUserData(): UserData {
                     cnpj: "",
                     id_admin: 0,
                     isAdmin: false,
+                    equipe_id: 0,
                 };
             }
         } else {
@@ -53,6 +56,7 @@ function useUserData(): UserData {
                 cnpj: "",
                 id_admin: 0,
                 isAdmin: false,
+                equipe_id: 0,
             };
         }
     };

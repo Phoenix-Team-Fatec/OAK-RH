@@ -4,8 +4,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { createForm, createQuestion, listCategories } from './formulario'; // Suas funções API
 import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
 import ModalSendForm from '../modalSendFormsTeam/ModalSendFormsTeam';
-import useUserData from '../../hooks/useUserData';
 
+import useUserData from '../../hooks/useUserData';
 
 // Interfaces
 interface Category {
@@ -26,13 +26,15 @@ interface Form {
   adminId: number;
 }
 
+const userData = useUserData()
+
 const Formulario: React.FC = () => {
   const {id} = useUserData();
 
   const [form, setForm] = useState<Form>({
     title: 'Título do Formulário',
     description: 'Descrição do Formulário',
-    adminId: id
+    adminId: userData.id
   });
 
   const [categories, setCategories] = useState<Category[]>([]);

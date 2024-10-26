@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Box, Button, Typography, RadioGroup, FormControlLabel, Radio, Switch } from '@mui/material';
 import './EditMemberModal.css';
 import { changeLeader } from '../TeamMembers'; // Importa a função para alterar líder no backend
+import useUserData from '../../hooks/useUserData';
 
 interface Member {
   id: number;
@@ -16,6 +17,8 @@ interface EditMemberModalProps {
   onSave: (updatedMember: Member) => void;
   member: Member | null;
 }
+
+const userData = useUserData()
 
 const EditMemberModal: React.FC<EditMemberModalProps> = ({ open, onClose, onSave, member }) => {
   const [newRole, setNewRole] = useState<'Líder' | 'Liderado' | undefined>(member?.role);

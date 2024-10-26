@@ -2,10 +2,11 @@ import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
 class Resposta extends Model {
   public id!: number;
+  public formulario_id!: number;
   public pergunta_id!: number;
   public respondido_por!: number;
   public equipe_id!: number;
-  public resposta!: string;
+  public resposta!: string | string[];
   public tipo_resposta!: string;
   public respondido_em!: Date;
 }
@@ -16,7 +17,7 @@ Resposta.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    pergunta_id: {
+    formulario_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
@@ -24,6 +25,10 @@ Resposta.init(
         key: 'id',
       },
       onDelete: 'CASCADE',
+    },
+    pergunta_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     respondido_por: {
       type: DataTypes.INTEGER,
@@ -44,7 +49,7 @@ Resposta.init(
       onDelete: 'CASCADE',
     },
     resposta: {
-      type: DataTypes.TEXT,
+      type: DataTypes.JSONB,
       allowNull: true,
     },
     tipo_resposta: {

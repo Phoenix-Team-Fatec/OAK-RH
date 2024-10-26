@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      pergunta_id: {
+      formulario_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -18,6 +18,10 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      pergunta_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       respondido_por: {
         type: Sequelize.INTEGER,
@@ -40,7 +44,7 @@ module.exports = {
         onDelete: 'CASCADE'
       },
       resposta: {
-        type: Sequelize.TEXT,
+        type: Sequelize.JSONB,
         allowNull: true
       },
       tipo_resposta: {
