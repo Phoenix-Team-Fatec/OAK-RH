@@ -5,39 +5,35 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Estilo da sidebar */
 .sidebar {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 60px; /* Define uma largura inicial para a sidebar colapsada */
-    position: fixed; /* Fixa a sidebar na tela */
+    width: 60px; 
+    position: fixed;
     background-color: #2A2033;
     padding: 20px;
     color: #ffffff;
-    overflow: hidden; /* Esconde o conteúdo que não cabe ao colapsar */
+    overflow: hidden;
     top: 0;
     left: 0;
     z-index: 1000;
 }
 
-/* Sidebar expandida */
 .sidebar.expanded {
     width: 190px;
 }
 
-/* Sidebar colapsada */
 .sidebar.collapsed {
     width: 70px;
-    align-items: flex-start; /* Alinha os itens à esquerda */
+    align-items: flex-start;
 }
 
 .hamburguer_sidebard.sidebar.collapsed {
     margin-left: 0;
 }
 
-/* Logo da sidebar */
 .logo_sidebar {
     font-size: 24px;
     font-weight: 500;
@@ -48,18 +44,15 @@
     align-items: center;
 }
 
-/* Estiliza a palavra 'OAK' da logo */
 .logo_sidebar .oak {
     color: #A380A5;
 }
 
-/* Esconde o texto 'OAK RH' quando a sidebar está colapsada */
 .sidebar.collapsed .oak,
 .sidebar.collapsed span {
     display: none;
 }
 
-/* Ícone para alternar entre expandir e colapsar */
 .toggle-icon {
     cursor: pointer;
     font-size: 25px;
@@ -67,7 +60,6 @@
     font-weight: 600;
 }
 
-/* Menu da sidebar */
 .menu {
     list-style: none;
     padding: 0;
@@ -78,10 +70,9 @@
     justify-content: space-between;
     margin-top: 160px;
     width: 100%;
-    font-size: 14px; /* Mantém a posição dos itens */
+    font-size: 14px;
 }
 
-/* Itens do menu */
 .menu li {
     all: unset;
     margin-bottom: 10px;
@@ -90,28 +81,24 @@
     display: flex;
 }
 
-/* Estilo dos links */
 .menu li a {
-    color: #ffffff; /* Cor dos links como branco */
-    text-decoration: none; /* Remove a linha de baixo dos links */
+    color: #ffffff; 
+    text-decoration: none; 
     display: block;
     width: 100%;
     padding: 10px;
 }
 
-/* Estilo dos links ativos (na página atual) */
 .menu li a.active_link {
-    color: #A380A5; /* Cor roxa para o link ativo */
-    background-color: #3A2B4A; /* Ajuste a cor do fundo, se necessário, para destaque */
+    color: #A380A5;
+    background-color: #3A2B4A; 
     border-radius: 6px;
 }
 
-/* Estilo de hover nos links */
 .menu li a:hover {
-    color: #A380A5; /* Muda para roxo ao passar o mouse */
+    color: #A380A5;
 }
 
-/* Perfil no final do menu */
 .menu li.profile {
     margin-top: auto;
     display: flex;
@@ -119,7 +106,6 @@
     align-items: center;
 }
 
-/* Botão de logout */
 .menu li.logout {
     margin-top: 10px;
     display: flex;
@@ -130,7 +116,6 @@
     cursor: pointer;
 }
 
-/* Imagem do perfil */
 .menu li img {
     width: 140px;
     height: 135px;
@@ -138,7 +123,6 @@
     margin-top: 5px;
 }
 
-/* Ajusta o tamanho da imagem do perfil quando a sidebar está colapsada */
 .sidebar.collapsed .menu li img {
     width: 30px;
     height: 30px;

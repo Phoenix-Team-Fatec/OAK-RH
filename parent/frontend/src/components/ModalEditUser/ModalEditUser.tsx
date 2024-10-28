@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './ModalEditUser.css';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import "./ModalEditUser.css";
+import axios from "axios";
+import SuccessNotification from "../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification";
 
 interface ModalProps {
   open: boolean;
@@ -9,10 +10,16 @@ interface ModalProps {
   editingUser: { id: number; nome: string; email: string } | null;
 }
 
-const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, editingUser }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+const ModalEditUser: React.FC<ModalProps> = ({
+  open,
+  onClose,
+  onFetchUsers,
+  editingUser,
+}) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Preenche os campos com os dados do usuário em edição, caso exista
   useEffect(() => {
@@ -25,8 +32,8 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
   }, [editingUser]);
 
   const resetFields = () => {
-    setName('');
-    setEmail('');
+    setName("");
+    setEmail("");
   };
 
   // Função que lida com o envio do formulário para edição
@@ -34,36 +41,41 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
     e.preventDefault();
 
     if (!editingUser) {
-        alert('Nenhum usuário selecionado para edição.');
-        return;
+      alert("Nenhum usuário selecionado para edição.");
+      return;
     }
 
-    if (confirm('Tem certeza que deseja atualizar o usuário ?')) {
-
-    } else {
-      return
+    if (!confirm("Tem certeza que deseja atualizar o usuário?")) {
+      return;
     }
 
-    setIsEditing(true)
+    setIsEditing(true);
+    setShowSuccess(false); // Garante que a notificação não apareça até que a atualização seja bem-sucedida
 
     try {
-        // Envia uma solicitação PUT para atualizar o usuário, passando o ID na URL
-        await axios.put(`http://localhost:3000/users/${editingUser.id}`, {
-            nome: name,
-            email: email,
-        });
-        alert('Usuário atualizado com sucesso!');
+      // Envia uma solicitação PUT para atualizar o usuário, passando o ID na URL
+      await axios.put(`http://localhost:3000/users/${editingUser.id}`, {
+        nome: name,
+        email: email,
+      });
 
-        // Atualiza a lista de usuários
-        onFetchUsers();
-        onClose();
+      // Exibe notificação de sucesso após a atualização
+      setShowSuccess(true);
+
+      // Atualiza a lista de usuários
+      onFetchUsers();
+
+      setTimeout(() => {
+        setShowSuccess(false); // Oculta a notificação após 2 segundos
+        onClose(); // Fecha o modal
+      }, 2000);
     } catch (error) {
-        console.error('Erro ao atualizar usuário:', error);
-        alert('Erro ao atualizar usuário, tente novamente.');
+      console.error("Erro ao atualizar usuário:", error);
+      alert("Erro ao atualizar usuário, tente novamente.");
     } finally {
-      setIsEditing(false)
+      setIsEditing(false);
     }
-};
+  };
 
   // Retorna null se o modal estiver fechado
   if (!open) return null;
@@ -89,11 +101,30 @@ const ModalEditUser: React.FC<ModalProps> = ({ open, onClose, onFetchUsers, edit
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <div className='container_button_edit'>
-            <button type="submit" className='button_save_user_modal'disabled={isEditing}>{isEditing ? <span className="spinner"></span> : 'Salvar'}</button>
-            <button type="button" onClick={onClose} className='button_close_user_modal'disabled={isEditing}>{isEditing ? <span className="spinner"></span> : 'Fechar'}</button>
+          <div className="container_button_edit">
+            <button
+              type="submit"
+              className="button_save_user_modal"
+              disabled={isEditing}
+            >
+              {isEditing ? <span className="spinner"></span> : "Salvar"}
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="button_close_user_modal"
+              disabled={isEditing}
+            >
+              Fechar
+            </button>
           </div>
         </form>
+        {showSuccess && (
+          <SuccessNotification
+            message="Usuário atualizado com sucesso!"
+            onClose={() => setShowSuccess(false)}
+          />
+        )}
       </div>
     </div>
   );

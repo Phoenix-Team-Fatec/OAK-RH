@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import Paper from '@mui/material/Paper';
 import Modal from "../../../components/ModalRegisterUser/ModalRegisterUser";
+import AlertNotification from '../../../components/ComponentsAdmin/Modal/ModalAlertNotification/AlertNotification';
 import './MemberAdmin.css';
 import SidebarAdmin from '../../../components/SidebarAdmin/SidebarAdmin';
 import axios from 'axios';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import ModalEditUser from '../../../components/ModalEditUser/ModalEditUser';
+import ModalConfirmDeleteUser from '../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteUser/ModalConfirmDeleteUser';
 import { Checkbox } from '@mui/material';
 import useUserData from '../../../hooks/useUserData';
 
@@ -16,11 +18,11 @@ const MembersAdmin = () => {
     const [editingUser, setEditingUser] = useState<{ id: number; nome: string; email: string } | null>(null);
     const [selectedIds, setSelectedIds] = useState<number[]>([]);
     const { id } = useUserData();
-
-    // Estados de carregamento
     const [isDeleting, setIsDeleting] = useState(false);
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+    const [alertModalOpen, setAlertModalOpen] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
-    // Listagem de usuários do administrador
     const fetchUsers = async () => {
         if (id) {
             try {
@@ -35,34 +37,31 @@ const MembersAdmin = () => {
 
     useEffect(() => {
         const loadUserData = async () => {
-            if (id != 0) {
+            if (id !== 0) {
                 await fetchUsers();
             }
         };
         loadUserData();
     }, [id]);
 
-    // Função para cadastrar um novo usuário
     const handleAddMember = (data: { name: string; email: string; }) => {
         const newId = rows.length > 0 ? Math.max(...rows.map(row => row.id)) + 1 : 1;
         setRows([...rows, { id: newId, nome: data.name, email: data.email }]);
+        setSelectedIds([]);
     };
 
-    // Função para deletar usuário
-    const handleDelete = async () => {
-        if (selectedIds.length === 0) {
-            alert("Selecione pelo menos um usuário para deletar.");
-            return;
-        }
+    const handleAddMemberOpen = () => {
+        setModalOpen(true);
+        setSelectedIds([]);
+    };
 
-        if (confirm('Tem certeza que deseja deletar esses usuários ?')) {
+    const closeAddMemberModal = () => {
+        setModalOpen(false);
+        setSelectedIds([]);
+    };
 
-        } else {
-
-        }
-
-        setIsDeleting(true)
-
+    const handleDeleteConfirm = async () => {
+        setIsDeleting(true);
         try {
             await Promise.all(
                 selectedIds.map(async (userId) => {
@@ -78,25 +77,49 @@ const MembersAdmin = () => {
             alert("Erro ao deletar usuário. Tente novamente.");
         } finally {
             setIsDeleting(false);
+            setConfirmDeleteOpen(false);
         }
-    }
+    };
+
+    const handleDelete = () => {
+        if (selectedIds.length === 0) {
+            setAlertMessage("Selecione pelo menos um usuário para deletar.");
+            setAlertModalOpen(true);
+        } else {
+            setConfirmDeleteOpen(true);
+        }
+    };
 
     const handleEdit = () => {
         if (selectedIds.length === 0) {
-            alert("Selecione um usuário para editar"); // Caso não tenha selecionado nenhum usuário
-            return
-        } else if (selectedIds.length > 1) { // Caso tenha selecionado mais de um usuário
-            alert("Selecione apenas um usuário para editar")
+            setAlertMessage("Selecione pelo menos um usuário para editar");
+            setAlertModalOpen(true);
+            return;
+        } else if (selectedIds.length > 1) {
+            setAlertMessage("Selecione apenas um usuário para editar");
+            setAlertModalOpen(true);
+            return;
         }
 
         const userToEdit = rows.find(row => row.id === selectedIds[0]);
         if (userToEdit) {
             setEditingUser(userToEdit);
+            closeAlertModal(); // Fecha o modal de alerta antes de abrir o modal de edição
             setEditModalOpen(true);
+            setSelectedIds([userToEdit.id]);
         }
     };
 
-    // Função para selecionar o usuário e ser direcionado para o id 
+    const closeEditModal = () => {
+        setEditModalOpen(false);
+        setSelectedIds([]);
+    };
+
+    const closeAlertModal = () => {
+        setAlertModalOpen(false);
+        setSelectedIds([]);
+    };
+
     const handleSelect = (id: number) => {
         setSelectedIds(prevSelectedIds => {
             if (prevSelectedIds.includes(id)) {
@@ -159,7 +182,7 @@ const MembersAdmin = () => {
                     <div style={{ display: 'flex', gap: '10px', justifyContent: 'flex-start', width: "100%" }}>
                         <button
                             className='button_register_user'
-                            onClick={() => setModalOpen(true)}
+                            onClick={handleAddMemberOpen}
                             disabled={isDeleting}
                         >
                             Cadastrar
@@ -202,15 +225,29 @@ const MembersAdmin = () => {
                 </div>
                 <Modal
                     open={modalOpen}
-                    onClose={() => setModalOpen(false)}
+                    onClose={closeAddMemberModal}
                     onSubmit={handleAddMember}
                     onFetchUsers={fetchUsers}
                 />
                 <ModalEditUser
                     open={editModalOpen}
-                    onClose={() => setEditModalOpen(false)}
+                    onClose={closeEditModal}
                     onFetchUsers={fetchUsers}
                     editingUser={editingUser}
+                />
+                <ModalConfirmDeleteUser
+                    open={confirmDeleteOpen}
+                    onClose={() => {
+                        setConfirmDeleteOpen(false);
+                        setSelectedIds([]); 
+                    }}
+                    onConfirm={handleDeleteConfirm}
+                    selectedUserNames={selectedIds.map(id => rows.find(row => row.id === id)?.nome || '')}
+                />
+                <AlertNotification 
+                    open={alertModalOpen}
+                    message={alertMessage}
+                    onClose={closeAlertModal}
                 />
             </div>
         </>

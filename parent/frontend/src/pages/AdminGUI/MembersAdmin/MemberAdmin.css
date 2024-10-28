@@ -35,7 +35,6 @@
   border-bottom: 1px solid #e0e0e0; 
 }
 
-/* Botões */
 .button_register_user,
 .button_edit_member,
 .button_delete_member {
@@ -43,7 +42,7 @@
     padding: 10px 15px; 
     border: none; 
     border-radius: 5px; 
-    background-color: #2f8d54;
+    background-color: #A380A5;
     color: white; 
     cursor: pointer; 
     font-size: 12px;

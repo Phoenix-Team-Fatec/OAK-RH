@@ -29,7 +29,6 @@
     margin-bottom: 10px;
 }
 
-/* Estilização dos inputs */
 .modal_content_register input {
     width: 125% !important;
     padding: 12px !important;
@@ -55,25 +54,22 @@
 .button_register_user_modal,
 .button_close_user_modal {
     margin: 5px;
-    padding: 10px 20px !important;
+    padding: 8px 12px !important;
     border: none;
-    border-radius: 8px;
-    background-color: #28a745; 
+    border-radius: 4px;
+    background-color: #A380A5; 
     color: white; 
     cursor: pointer;
-    font-size: 12px; 
     transition: background-color 0.3s; 
     box-sizing: border-box;
     width: 100% !important;
 }
 
-.button_register_user_modal:hover,
-.button_close_user_modal:hover {
-    background-color: #218838;
+.button_register_user_modal:hover {
+    background-color: #704772;
 }
 
-@media (max-width: 500px) {
-    .modal_content_register {
-        width: 95%; 
-    }
+.button_close_user_modal:hover {
+    background-color: #ebd9ec;
+    color: #8d5790;
 }
