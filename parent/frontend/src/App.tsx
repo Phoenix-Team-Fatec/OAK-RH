@@ -5,6 +5,7 @@ import EquipeAdmin from "./pages/AdminGUI/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/AdminGUI/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin";
+import Dashboard from "./components/DashAdmin/DashAdmin";
 import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
@@ -76,6 +77,8 @@ const App: React.FC = () => {
 
         <Route path="/forms-user/ver" element={<UserFormsResponseView />} />
 
+
+        <Route path="/dashadmin" element={<Dashboard />} />
 
         <Route path="/dashboard-user"
           element={<DashboardUser />} />
