@@ -207,3 +207,4 @@ export const deletarUsuarioEquipe = async (userId: number, equipeId: number) => 
     throw new Error("Erro ao deletar usuário de uma equipe");
   }
 };
+

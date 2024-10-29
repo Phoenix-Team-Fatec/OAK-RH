@@ -7,7 +7,9 @@
     "start": "ts-node out/index.js",
     "cli": "ts-node scripts/cli.ts",
     "dev": "tsnd .",
-    "build": "tsc"
+    "build": "tsc",
+    "create" : "npx sequelize-cli db:migrate",
+    "destroy": "cd parent/api/src, npx sequelize-cli db:migrate:undo"
   },
   "author": "",
   "license": "ISC",

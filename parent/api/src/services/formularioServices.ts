@@ -103,7 +103,7 @@ export const listarFormulariosPendentes = async(user_id: number) => {
 }
 
 //Função de listar apenas um formulário
-export const listarUmFormulario = async ( id:number) => {
+export const listarUmFormulario = async ( id: number) => {
 
     try{
         const formulario = await Formulario.findByPk(id);
