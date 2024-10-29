@@ -1,4 +1,4 @@
-import { createFormularioService, listarFormularios, listarUmFormulario, deletarFormulario, atualizarFormulario } from "../services/formularioServices";
+import { createFormularioService, listarFormularios, listarUmFormulario, deletarFormulario, atualizarFormulario, listarFormulariosRespondidos, listarFormulariosPendentes } from "../services/formularioServices";
 import { Request, Response } from "express";
 
 //criar formulário
@@ -44,7 +44,29 @@ export const listarUmFormularioControl = async (req: Request, res: Response) =>{
     }catch(error){
         return res.status(500).json({ messsage: error.message });
     }
-} 
+}
+
+export const listarRespondidosControl = async (req: Request, res: Response) => {
+    try {
+        const {id} = req.params
+        const listar = await listarFormulariosRespondidos(Number(id))
+
+        return res.status(201).json(listar)
+    } catch (error) {
+        return res.status(500).json({ message: error.message})
+    }
+}
+
+export const listarPendentesControl = async (req: Request, res: Response) => {
+    try {
+        const {id} = req.params
+        const listar = await listarFormulariosPendentes(Number(id))
+
+        return res.status(201).json(listar)
+    } catch (error){
+        return res.status(500).json({message: error.message})
+    }
+}
 
 //deletar formulário
 export const deletarFormularioControl = async (req: Request, res: Response) =>{
