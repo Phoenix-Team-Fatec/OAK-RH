@@ -18,8 +18,10 @@ body {
   width: 72.5%; /* Define uma largura fixa */
 }
 
-.content h2 {
+.h2-content-forms-admin {
   font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .actions-forms-admin {
@@ -32,7 +34,7 @@ body {
 .actions-forms-admin button {
   flex: 1; /* Faz os botões ocuparem igual largura */
   margin-right: 10px; /* Espaço entre os botões */
-  background-color: #2f8d54;
+  background-color: #A380A5;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 12px;
@@ -53,7 +55,7 @@ body {
 }
 
 .actions-forms-admin button:hover {
-  background-color: #218838;
+  background-color: #704772;
 }
 
 .tabela-formularios {

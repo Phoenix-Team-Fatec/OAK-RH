@@ -8,7 +8,7 @@ interface SuccessNotificationProps {
 
 const SuccessNotification: React.FC<SuccessNotificationProps> = ({ message, onClose }) => {
   useEffect(() => {
-    const timer = setTimeout(onClose, 4000);
+    const timer = setTimeout(onClose, 3000);
     return () => clearTimeout(timer);
   }, [onClose]);
 

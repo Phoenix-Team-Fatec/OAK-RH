@@ -1,18 +1,17 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import Paper from '@mui/material/Paper';
-import { Checkbox, Button } from '@mui/material';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import SidebarAdmin from '../../../components/SidebarAdmin/SidebarAdmin';
-import ModalCreateCategory from '../../../components/ModalCreateCategory/ModalCreateCategory'; // Importa o Modal
-import './adminFormulario.css'; // Certifique-se de que o caminho do CSS está correto
-import { getFormularios, deleteFormulario } from './formsAdminBackend';
-import { useNavigate } from 'react-router-dom';
-import ModalSendForm from '../../../components/modalSendFormsTeam/ModalSendFormsTeam';
+import React, { useState, useMemo, useEffect } from "react";
+import Paper from "@mui/material/Paper";
+import { Checkbox, Button } from "@mui/material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
+import ModalCreateCategory from "../../../components/ModalCreateCategory/ModalCreateCategory"; // Importa o Modal
+import "./adminFormulario.css"; // Certifique-se de que o caminho do CSS está correto
+import { getFormularios, deleteFormulario } from "./formsAdminBackend";
+import { useNavigate } from "react-router-dom";
+import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
 
+import useUserData from "../../../hooks/useUserData";
 
-import useUserData from '../../../hooks/useUserData';
-
-interface Forms{
+interface Forms {
   id: number;
   nome: string;
   descricao: string;
@@ -22,7 +21,6 @@ interface Forms{
 const FormsAdmin: React.FC = () => {
   const [rows, setRows] = useState<Forms[]>([]);
 
-    
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
@@ -32,37 +30,37 @@ const FormsAdmin: React.FC = () => {
   const navigate = useNavigate();
 
   //Listando formulários
-   const fetchForms = async () =>{
-      if(id){
-          try{
-              const id_admin = id
-              const response = await getFormularios(id_admin)
-             
-              setRows(response);
-          }catch(error){
-              console.error("Erro ao buscar formulários", error);
-              alert("Erro ao buscar formulários");
-          }
+  const fetchForms = async () => {
+    if (id) {
+      try {
+        const id_admin = id;
+        const response = await getFormularios(id_admin);
+
+        setRows(response);
+      } catch (error) {
+        console.error("Erro ao buscar formulários", error);
+        alert("Erro ao buscar formulários");
       }
-  }
+    }
+  };
 
   useEffect(() => {
     const loadUserData = async () => {
-        if (id != 0) {
-          try{
-            await fetchForms();
-          }catch(error){
-            console.log("Erro ao buscar formulários", error);
-          }
+      if (id != 0) {
+        try {
+          await fetchForms();
+        } catch (error) {
+          console.log("Erro ao buscar formulários", error);
         }
+      }
     };
     loadUserData();
-}, [id]);
+  }, [id]);
 
   const handleSelect = (id: number) => {
-    setSelectedIds(prevSelectedIds => {
+    setSelectedIds((prevSelectedIds) => {
       if (prevSelectedIds.includes(id)) {
-        return prevSelectedIds.filter(selectedId => selectedId !== id);
+        return prevSelectedIds.filter((selectedId) => selectedId !== id);
       } else {
         return [...prevSelectedIds, id];
       }
@@ -71,7 +69,7 @@ const FormsAdmin: React.FC = () => {
 
   const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const allIds = rows.map(row => row.id);
+      const allIds = rows.map((row) => row.id);
       setSelectedIds(allIds);
     } else {
       setSelectedIds([]);
@@ -79,22 +77,24 @@ const FormsAdmin: React.FC = () => {
   };
 
   const isAllSelected = rows?.length > 0 && selectedIds.length === rows.length;
-  const isSomeSelected = selectedIds?.length > 0 && selectedIds.length < rows?.length;
-  
+  const isSomeSelected =
+    selectedIds?.length > 0 && selectedIds.length < rows?.length;
 
-// Deletando -  
+  // Deletando -
   const handleDelete = async () => {
     if (selectedIds.length === 0) {
       alert("Selecione pelo menos um formulário para deletar.");
       return;
     }
-  
-    if (!confirm('Tem certeza que deseja deletar os formulários selecionados?')) {
+
+    if (
+      !confirm("Tem certeza que deseja deletar os formulários selecionados?")
+    ) {
       return;
     }
-  
+
     setIsDeleting(true);
-  
+
     try {
       // Faz a requisição de deletar para cada formulário selecionado
       await Promise.all(
@@ -102,9 +102,9 @@ const FormsAdmin: React.FC = () => {
           await deleteFormulario(formularioId);
         })
       );
-  
+
       // Remove os formulários deletados da lista exibida na tabela
-      const updatedRows = rows.filter(row => !selectedIds.includes(row.id));
+      const updatedRows = rows.filter((row) => !selectedIds.includes(row.id));
       setRows(updatedRows);
       setSelectedIds([]); // Limpa as seleções
       alert("Formulários deletados com sucesso.");
@@ -116,52 +116,52 @@ const FormsAdmin: React.FC = () => {
     }
   };
 
-
-  
-
-  const columns: GridColDef[] = useMemo(() => [
-    {
-      field: 'select',
-      headerName: 'Selecionar',
-      renderHeader: () => (
-        <Checkbox
-          indeterminate={isSomeSelected}
-          checked={isAllSelected}
-          onChange={handleSelectAll}
-          inputProps={{ 'aria-label': 'select all rows' }}
-          disabled={isDeleting}
-        />
-      ),
-      width: 180,
-      sortable: false,
-      filterable: false,
-      disableColumnMenu: true,
-      renderCell: (params: any) => (
-        <Checkbox
-          checked={selectedIds.includes(params.row.id)}
-          onChange={() => handleSelect(params.row.id)}
-          inputProps={{ 'aria-label': `select row ${params.row.id}` }}
-          disabled={isDeleting}
-        />
-      )
-    },
-    { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'nome', headerName: 'Título', width: 300 },
-    { field: 'descricao', headerName: 'Descrição', width: 400 },
-    { field: 'criado_em', headerName: 'Criado em', width: 350 },
-  ], [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]);
+  const columns: GridColDef[] = useMemo(
+    () => [
+      {
+        field: "select",
+        headerName: "Selecionar",
+        renderHeader: () => (
+          <Checkbox
+            indeterminate={isSomeSelected}
+            checked={isAllSelected}
+            onChange={handleSelectAll}
+            inputProps={{ "aria-label": "select all rows" }}
+            disabled={isDeleting}
+          />
+        ),
+        width: 180,
+        sortable: false,
+        filterable: false,
+        disableColumnMenu: true,
+        renderCell: (params: any) => (
+          <Checkbox
+            checked={selectedIds.includes(params.row.id)}
+            onChange={() => handleSelect(params.row.id)}
+            inputProps={{ "aria-label": `select row ${params.row.id}` }}
+            disabled={isDeleting}
+          />
+        ),
+      },
+      { field: "id", headerName: "ID", width: 100 },
+      { field: "nome", headerName: "Título", width: 300 },
+      { field: "descricao", headerName: "Descrição", width: 400 },
+      { field: "criado_em", headerName: "Criado em", width: 350 },
+    ],
+    [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
+  );
 
   return (
     <>
       <SidebarAdmin />
       <div className="content">
-        <h2>Gerenciamento de Formulários</h2>
+        <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
 
         <div className="actions-forms-admin">
           <Button
             variant="contained"
             color="primary"
-            onClick={() => navigate('/forms-admin-create')}
+            onClick={() => navigate("/forms-admin-create")}
             disabled={isDeleting}
           >
             Cadastrar
@@ -180,7 +180,7 @@ const FormsAdmin: React.FC = () => {
             onClick={handleDelete}
             disabled={isDeleting}
           >
-            {isDeleting ? 'Deletando...' : 'Deletar'}
+            {isDeleting ? "Deletando..." : "Deletar"}
           </Button>
           <Button
             variant="contained"
@@ -190,28 +190,26 @@ const FormsAdmin: React.FC = () => {
             Categoria +
           </Button>
 
-
           <Button
             variant="contained"
-            className='button-enviar'
+            className="button-enviar"
             color="secondary"
-            onClick={() => {if(selectedIds.length > 1 ){
-              alert("Selecione apenas um formulário para enviar.")
-            }else{
-              setIsModalOpenSend(true)}
+            onClick={() => {
+              if (selectedIds.length > 1) {
+                alert("Selecione apenas um formulário para enviar.");
+              } else {
+                setIsModalOpenSend(true);
+              }
             }}
             disabled={selectedIds.length === 0 || isDeleting}
           >
             Enviar
           </Button>
-
-
-          
         </div>
 
-        <Paper style={{ height: 600, width: '100%' }}>
+        <Paper style={{ height: 600, width: "100%" }}>
           <DataGrid
-          className='tabela-formularios'
+            className="tabela-formularios"
             rows={rows}
             columns={columns}
             pageSizeOptions={[10, 25, 30]}
@@ -219,7 +217,7 @@ const FormsAdmin: React.FC = () => {
             initialState={{
               pagination: { paginationModel: { pageSize: 10 } },
               sorting: {
-                sortModel: [{ field: 'id', sort: 'asc' }]
+                sortModel: [{ field: "id", sort: "asc" }],
               },
             }}
             pagination
@@ -233,14 +231,11 @@ const FormsAdmin: React.FC = () => {
           onClose={() => setIsModalOpen(false)} // Fecha o modal ao clicar
         />
 
-
-      <ModalSendForm
-        open={isModalOpenSend}
-        onClose={() => setIsModalOpenSend(false)}
-        formId={selectedIds[0]}
-      
-      
-      />
+        <ModalSendForm
+          open={isModalOpenSend}
+          onClose={() => setIsModalOpenSend(false)}
+          formId={selectedIds[0]}
+        />
       </div>
     </>
   );

@@ -63,6 +63,7 @@
     transition: background-color 0.3s; 
     box-sizing: border-box;
     width: 100% !important;
+    height: 40px; 
 }
 
 .button_register_user_modal:hover {

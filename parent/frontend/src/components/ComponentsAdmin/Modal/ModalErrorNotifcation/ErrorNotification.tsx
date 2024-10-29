@@ -8,13 +8,15 @@ interface ErrorNotificationProps {
 
 const ErrorNotification: React.FC<ErrorNotificationProps> = ({ message, onClose }) => {
   useEffect(() => {
-    const timer = setTimeout(onClose, 4000);
+    const timer = setTimeout(onClose, 3000);
     return () => clearTimeout(timer);
   }, [onClose]);
 
   return (
     <div className="error-notification">
-      <div className="error-icon">❌</div>
+      <div className="error-icon">
+        <span className="error-exclamation">!</span>
+      </div>
       <span>{message}</span>
     </div>
   );

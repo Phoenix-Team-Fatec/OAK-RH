@@ -1,139 +1,110 @@
-.form-container-forms-create {
-  display: flex; /* Adiciona flexbox */
-  flex-direction: column; /* Organiza os elementos em coluna */
-  align-items: center; /* Centraliza os elementos horizontalmente */
-  justify-content: center; /* Centraliza os elementos verticalmente */
-  width: 100%;
-  max-width: 100%; /* Define uma largura máxima para o formulário */
-  margin: 0 auto; /* Centraliza a div principal na página */
-  padding: 20px;
-  background-color: #f7f7f7;
-  position: relative; 
+.formulario-wrapper {
+  max-width: 800px;
+  margin: 20px auto; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; 
 }
 
-h2 {
-  text-align: center; /* Centraliza o título */
-  margin-bottom: 20px;
-  color: #444;
-}
-
-.dropdown-container {
+.forms-content-admin {
   display: flex;
-  justify-content: space-around; /* Distribui os dropdowns de forma centralizada */
-  background-color: #e0e0e0;
-  padding: 20px;
-  margin-top: 20px;
-  border-radius: 8px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  margin: 5px;
-}
-
-select {
+  flex-direction: column; 
   width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
 }
 
-select:focus {
-  border-color: #005c0c;
-  outline: none;
+.formulario-title {
+  font-size: 24px; 
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.formulario-field {
+  margin-bottom: 15px;
 }
 
 label {
   display: block;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: bold; 
 }
 
-.form-container-forms-create input[type="text"], select {
+.formulario-field input[type="text"],
+select {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-} 
-
-.options {
-  display: flex;
-  flex-direction: column; /* Empilha as opções na vertical */
-  gap: 10px; /* Adiciona um espaço entre as opções */
+  font-size: 13px;
+  box-sizing: border-box; 
 }
 
-.options div {
-  display: flex;
-  align-items: center;
-}
-
-.options label {
-  margin-left: 5px;
-}
-
-.options input {
-  width: 100%; /* Garante que os inputs tenham 100% da largura */
-  padding: 8px;
-  border: 1px solid #ccc;
+.question-wrapper {
+  border: 1px solid #e0e0e0;
   border-radius: 4px;
-}
-
-.button-forms-create {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  background-color: #2f8d54;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.button-forms-create:hover {
-  background-color: #218838;
-}
-
-.delete-button {
-  background-color: #218838;
-}
-.delete-button:hover {
-  background-color: #662020;
-}
-
-
-
-
-/* Retângulo em volta de cada pergunta */
-.question-container {
-  background-color: #e0e0e0;
-  padding: 20px;
+  padding: 15px;
   margin-bottom: 20px;
-  border-radius: 8px;
-  width: 100%; /* Garante que o container da pergunta tenha 100% de largura */
-  max-width: 600px; /* Define uma largura máxima para as perguntas */
-  display: flex; /* Adiciona flexbox */
-  flex-direction: column; /* Organiza os elementos em coluna */
-  align-items: center; /* Centraliza os elementos */
-}
-
-.question-content{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  background-color: #f9f9f9; 
 }
 
 .delete-icon {
-  color: #882727;
   cursor: pointer;
-  margin-left: auto;
+  color: black;
+  float: right; 
+  margin-bottom: 10px;
 }
 
-.form-group {
-  width: 100%;
+.add-question-button,
+.submit-button {
+  background-color: #A380A5;
+  color: white;
+  padding: 8px 12px;
+  border: none; 
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-top: 10px; 
+  transition: background-color 0.3s;
+}
+.add-option-button {
+  border: 2px solid #a380a5;
+  color: #a380a5;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.add-option-button:hover {
+  background-color: #ebd9ec;
+  color: #8d5790;
+}
+
+.add-question-button:hover,
+.submit-button:hover {
+  background-color: #704772;
+}
+
+.options-wrapper {
+  margin-top: 10px;
+}
+
+.option-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.option-input {
+  width: 100%; 
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+.delete-option {
+  margin-left: 10px;
 }

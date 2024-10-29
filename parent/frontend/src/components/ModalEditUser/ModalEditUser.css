@@ -58,6 +58,7 @@
     transition: background-color 0.3s; 
     box-sizing: border-box;
     width: 100% !important;
+    height: 40px; 
 }
 
 .button_close_user_modal {
@@ -67,6 +68,7 @@
     border-radius: 4px;
     cursor: pointer;
     background-color: white;
+    height: 40px; 
 }
 
 .button_save_user_modal:hover {

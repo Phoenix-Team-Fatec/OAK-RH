@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ModalEditUser.css";
 import axios from "axios";
 import SuccessNotification from "../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification";
+import ErrorNotification from "../ComponentsAdmin/Modal/ModalErrorNotifcation/ErrorNotification";
 
 interface ModalProps {
   open: boolean;
@@ -20,6 +21,7 @@ const ModalEditUser: React.FC<ModalProps> = ({
   const [email, setEmail] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   // Preenche os campos com os dados do usuário em edição, caso exista
   useEffect(() => {
@@ -50,7 +52,8 @@ const ModalEditUser: React.FC<ModalProps> = ({
     }
 
     setIsEditing(true);
-    setShowSuccess(false); // Garante que a notificação não apareça até que a atualização seja bem-sucedida
+    setShowSuccess(false);
+    setShowError(false);
 
     try {
       // Envia uma solicitação PUT para atualizar o usuário, passando o ID na URL
@@ -66,12 +69,12 @@ const ModalEditUser: React.FC<ModalProps> = ({
       onFetchUsers();
 
       setTimeout(() => {
-        setShowSuccess(false); // Oculta a notificação após 2 segundos
-        onClose(); // Fecha o modal
+        setShowSuccess(false); 
+        onClose(); 
       }, 2000);
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
-      alert("Erro ao atualizar usuário, tente novamente.");
+      setShowError(true);
     } finally {
       setIsEditing(false);
     }
@@ -123,6 +126,12 @@ const ModalEditUser: React.FC<ModalProps> = ({
           <SuccessNotification
             message="Usuário atualizado com sucesso!"
             onClose={() => setShowSuccess(false)}
+          />
+        )}
+        {showError && (
+          <ErrorNotification
+            message="Erro ao ataulizar usuário. Tente novamente."
+            onClose={() => setShowError(false)}
           />
         )}
       </div>
