@@ -29,8 +29,8 @@ const Formulario: React.FC = () => {
   const { id } = useUserData();
 
   const [form, setForm] = useState<Form>({
-    title: "Título do Formulário",
-    description: "Descrição do Formulário",
+    title: "",
+    description: "",
     adminId: id,
   });
 
@@ -209,24 +209,22 @@ const Formulario: React.FC = () => {
         <h2 className="formulario-title">Criar Formulário</h2>
         <form onSubmit={handleSubmit} className="forms-content-admin">
           <div className="formulario-field">
-            <label>Título do Formulário</label>
             <input
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              placeholder="Edite o título do formulário"
+              placeholder="Título do Formulário" 
             />
           </div>
 
           <div className="formulario-field">
-            <label>Descrição do Formulário</label>
             <input
               type="text"
               value={form.description}
               onChange={(e) =>
                 setForm({ ...form, description: e.target.value })
               }
-              placeholder="Edite a descrição do formulário"
+              placeholder="Descrição do Formulário"
             />
           </div>
 

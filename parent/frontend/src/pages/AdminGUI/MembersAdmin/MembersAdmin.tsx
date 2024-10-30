@@ -67,7 +67,7 @@ const MembersAdmin = () => {
 
   const handleDelete = () => {
     if (selectedIds.length === 0) {
-      setAlertMessage("Selecione pelo menos um usuário para deletar.");
+      setAlertMessage("Selecione pelo menos um usuário para deletar");
       setAlertModalOpen(true);
     } else {
       setConfirmDeleteOpen(true);

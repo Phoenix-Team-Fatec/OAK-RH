@@ -88,7 +88,7 @@
 
 .modal-footer button {
   padding: 10px 20px;
-  background-color: #28a745; 
+  background-color: #A380A5; 
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -97,12 +97,12 @@
 }
 
 .modal-footer button:hover {
-  background-color: #218838; 
+  background-color: #704772; 
 }
 
 .member-email {
-  display: block; /* Certifica que o email está em uma nova linha */
-  font-size: 0.9rem; /* Um pouco menor que o texto normal */
-  color: #888; /* Um tom mais claro para diferenciar */
-  margin-top: 5px; /* Espaçamento entre o nome e o email */
+  display: block;
+  font-size: 0.9rem;
+  color: #888; 
+  margin-top: 5px; 
 }

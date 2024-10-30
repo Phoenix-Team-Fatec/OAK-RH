@@ -118,13 +118,19 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
         // Chamando a API para remover o membro pelo ID do usuário e da equipe
         await axios.delete('http://localhost:3000/equipe_user/remover', {
           data: {
-            userId: memberId, // Usando o ID do membro diretamente
+            userId: memberId, 
             equipeId: team.id
           }
         });
         
         // Atualiza o estado para remover o membro da lista de membros
-        setMembers((prevMembers) => prevMembers.filter((m) => m.id !== memberId)); // Certifique-se de que m.id é o ID correto
+        setMembers((prevMembers) => prevMembers.filter((m) => m.id !== memberId)); 
+
+        // Encontrar o usuário removido e adiciona-lo de volta em 
+        const removerUser = members.find((m) => m.id === memberId);
+        if(removerUser) {
+          setUsers((prevUsers) => [ ...prevUsers, { id: memberId, nome: removerUser.name}])
+        }
         
         console.log(`Membro com ID ${memberId} foi removido da equipe.`);
       } catch (error) {
@@ -226,10 +232,16 @@ const UpdateModal: React.FC<UpdateModalProps> = ({ isOpen, onClose, team, onUpda
     }
   };
 
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.currentTarget === e.target) {
+      onClose(); 
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content">
         <div className="modal-header">
           <h2>Editar {teamName}</h2>

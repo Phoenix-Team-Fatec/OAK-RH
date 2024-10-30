@@ -47,11 +47,11 @@ body {
 }
 
 .actions-forms-admin .button-enviar {
-  background-color: #218838;
+  background-color: #A380A5;
 }
 
 .actions-forms-admin .button-enviar:hover {
-  background-color: #218838;
+  background-color: #704772;
 }
 
 .actions-forms-admin button:hover {
@@ -64,5 +64,5 @@ body {
 }
 
 .tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
-  color: #218838; /* Altere para a cor que você deseja */
+  color: #813585; /* Altere para a cor que você deseja */
 }

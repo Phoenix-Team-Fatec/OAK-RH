@@ -1,129 +1,132 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    width: 60px; 
-    position: fixed;
-    background-color: #2A2033;
-    padding: 20px;
-    color: #ffffff;
-    overflow: hidden;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+.sidebar-admin {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  height: 100vh;
+  width: 230px;
+  position: fixed;
+  background-color: #2a2033;
+  padding: 20px;
+  color: #ffffff;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
-.sidebar.expanded {
-    width: 190px;
+.logo-sidebar-admin {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center; 
+  width: 100%;
 }
 
-.sidebar.collapsed {
-    width: 70px;
-    align-items: flex-start;
+.logo-sidebar-admin .oak {
+  color: #a380a5;
 }
 
-.hamburguer_sidebard.sidebar.collapsed {
-    margin-left: 0;
+.profile_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-.logo_sidebar {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+.profile_image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
-.logo_sidebar .oak {
-    color: #A380A5;
+.profile_name {
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  color: #ffffff;
 }
 
-.sidebar.collapsed .oak,
-.sidebar.collapsed span {
-    display: none;
+.profile_email {
+  font-size: 12px;
+  text-align: center;
+  color: #ffffff;
+  font-weight: 100;
 }
 
-.toggle-icon {
-    cursor: pointer;
-    font-size: 25px;
-    margin: auto;
-    font-weight: 600;
+.menu-sidebar-admin {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 160px;
-    width: 100%;
-    font-size: 14px;
+.menu-sidebar-admin li {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.menu li {
-    all: unset;
-    margin-bottom: 10px;
-    text-align: center;
-    font-weight: 300;
-    display: flex;
+.menu_span {
+  width: 100%;
 }
 
-.menu li a {
-    color: #ffffff; 
-    text-decoration: none; 
-    display: block;
-    width: 100%;
-    padding: 10px;
+.menu_span a {
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
 }
 
-.menu li a.active_link {
-    color: #A380A5;
-    background-color: #3A2B4A; 
-    border-radius: 6px;
+.menu_span a.active_link {
+  color: #a380a5;
+  background-color: #3a2b4a;
+  border-radius: 6px;
 }
 
-.menu li a:hover {
-    color: #A380A5;
+.menu_span a:hover {
+  color: #a380a5;
 }
 
-.menu li.profile {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.icon-sidebar-admin {
+  margin-right: 8px; 
 }
 
-.menu li.logout {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    border: 1px solid #DEE0DB;
-    border-radius: 10px;
-    padding: 5px;
-    cursor: pointer;
+.logout {
+  list-style: none;
+  margin-top: auto;
+  width: 100%;
 }
 
-.menu li img {
-    width: 140px;
-    height: 135px;
-    border-radius: 20px;
-    margin-top: 5px;
+.logout_link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 12px;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 2px solid #ffffff;
+  border-radius: 8px;
 }
 
-.sidebar.collapsed .menu li img {
-    width: 30px;
-    height: 30px;
+.logout_link:hover {
+  color: #a380a5;
 }

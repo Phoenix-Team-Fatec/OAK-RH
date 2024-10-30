@@ -56,3 +56,7 @@
 .button_delete_member:hover {
     background-color: #704772;
 }
+
+.dataGridContainer .MuiCheckbox-root .MuiSvgIcon-root {
+  color: #813585;
+}

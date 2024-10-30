@@ -19,6 +19,10 @@ const ModalEditUser: React.FC<ModalProps> = ({
 }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [originalUserData, setOriginalUserData] = useState<{
+    nome: string; 
+    email: string;
+  } | null>(null)
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -28,15 +32,14 @@ const ModalEditUser: React.FC<ModalProps> = ({
     if (editingUser) {
       setName(editingUser.nome);
       setEmail(editingUser.email);
+      setOriginalUserData({ nome: editingUser.nome, email: editingUser.email })
     } else {
-      resetFields();
+      // Se não houver um usuário em edição, limpe os campos
+      setName("");
+      setEmail("");
+      setOriginalUserData(null)
     }
   }, [editingUser]);
-
-  const resetFields = () => {
-    setName("");
-    setEmail("");
-  };
 
   // Função que lida com o envio do formulário para edição
   const handleSubmit = async (e: React.FormEvent) => {
@@ -68,6 +71,7 @@ const ModalEditUser: React.FC<ModalProps> = ({
       // Atualiza a lista de usuários
       onFetchUsers();
 
+      // Limpa os campos após a edição
       setTimeout(() => {
         setShowSuccess(false); 
         onClose(); 
@@ -80,11 +84,19 @@ const ModalEditUser: React.FC<ModalProps> = ({
     }
   };
 
+  const handleClose = () => {
+    if (originalUserData) {
+      setName(originalUserData.nome)
+      setEmail(originalUserData.email);
+    }
+    onClose();
+  }
+
   // Retorna null se o modal estiver fechado
   if (!open) return null;
 
   return (
-    <div className="modal_overlay_edit" onClick={onClose}>
+    <div className="modal_overlay_edit" onClick={handleClose}>
       <div className="modal_content_edit" onClick={(e) => e.stopPropagation()}>
         <h2>Editar Funcionário</h2>
         <form onSubmit={handleSubmit}>
@@ -114,7 +126,7 @@ const ModalEditUser: React.FC<ModalProps> = ({
             </button>
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="button_close_user_modal"
               disabled={isEditing}
             >
@@ -130,7 +142,7 @@ const ModalEditUser: React.FC<ModalProps> = ({
         )}
         {showError && (
           <ErrorNotification
-            message="Erro ao ataulizar usuário. Tente novamente."
+            message="Erro ao atualizar usuário. Tente novamente."
             onClose={() => setShowError(false)}
           />
         )}

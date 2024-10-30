@@ -47,8 +47,14 @@ function Modal({ isOpen, onClose, team }) {
 
   if (!isOpen) return null;
 
+  const handleOverlayClick = (e: React.MouseEvent) => {
+    if (e.currentTarget === e.target) {
+      onClose(); 
+    }
+  };
+
   return (
-    <div className="modal-overlay">
+    <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content">
         <div className="modal-header">
           <h2>{team.nome}</h2>
@@ -70,7 +76,7 @@ function Modal({ isOpen, onClose, team }) {
                 </li>
               ))
             ) : (
-              <li>No members available.</li>
+              <li>Não existe membros nessa equipe.</li>
             )}
           </ul>
         </div>

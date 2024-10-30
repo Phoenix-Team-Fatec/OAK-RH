@@ -1,76 +1,78 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBars,faTimes,faTachometerAlt,faUsers,faUserFriends,faFileAlt,faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTachometerAlt,
+  faUsers,
+  faUserFriends,
+  faFileAlt,
+  faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import "./SidebarAdmin.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SidebarAdmin = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
-    const navigate = useNavigate();
-
-    const toggleSidebar = () => {
-        setIsExpanded(!isExpanded);
-    };
-
-    const handleLogout = () => {
-        sessionStorage.removeItem('IdToken');
-        navigate('/')
-    }
-
-    return (
-        <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
-            <div className="logo_sidebar">
-                <div>
-                    <span className="oak">OAK</span>
-                    <span>RH</span>
-                </div>
-                <div className="hamburguer_sidebar">
-                    <FontAwesomeIcon
-                        icon={isExpanded ? faTimes : faBars}
-                        className="toggle-icon"
-                        onClick={toggleSidebar}
-                    />
-                </div>
-            </div>
-            <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
-                <li className="menu_span">
-                    <NavLink to="/dashboard-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faTachometerAlt} />
-                        {isExpanded && " Dashboard"}
-                    </NavLink>
-                </li>
-                <li className="menu_span">
-                    <NavLink to="/equipes-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faUsers} />
-                        {isExpanded && " Equipes"}
-                    </NavLink>
-                </li>
-                <li className="menu_span">
-                    <NavLink to="/funcionarios" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faUserFriends} />
-                        {isExpanded && " Funcionários"}
-                    </NavLink>
-                </li>
-                <li className="menu_span">
-                    <NavLink to="/formularios-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faFileAlt} />
-                        {isExpanded && " Formulários"}
-                    </NavLink>
-                </li>
-                <li className="profile">
-                    <span>Admin</span>
-                    <img src="./profile.png" alt="Perfil do Admin" />
-                </li>
-                <li className="logout" onClick={handleLogout}>
-                    {isExpanded ? (
-                        <span>Logout</span>
-                    ) : (
-                        <FontAwesomeIcon icon={faSignOutAlt} /> 
-                    )}
-                </li>
-            </ul>
+  return (
+    <div className="sidebar-admin">
+      <div className="logo-sidebar-admin">
+      <div className="logo-text">
+          <span className="oak">OAK</span>
+          <span>RH</span>
         </div>
-    );
+      </div>
+
+      <div className="profile_container">
+        <img src="./profile.png" alt="Perfil do Admin" className="profile_image" />
+        <span className="profile_name">Admin Name</span>
+        <span className="profile_email">admin@example.com</span>
+      </div>
+
+      <ul className="menu-sidebar-admin">
+        <li className="menu_span">
+          <NavLink
+            to="/dashboard-admin"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faTachometerAlt} className="icon-sidebar-admin"/>
+            Dashboard
+          </NavLink>
+        </li>
+        <li className="menu_span">
+          <NavLink
+            to="/funcionarios"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faUserFriends} className="icon-sidebar-admin"/>
+            Funcionários
+          </NavLink>
+        </li>
+        <li className="menu_span">
+          <NavLink
+            to="/equipes-admin"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faUsers} className="icon-sidebar-admin"/>
+            Equipes
+          </NavLink>
+        </li>
+        <li className="menu_span">
+          <NavLink
+            to="/formularios-admin"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-admin"/>
+            Formulários
+          </NavLink>
+        </li>
+      </ul>
+
+      <li className="logout">
+        <NavLink to="/" className="logout_link">
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          Logout
+        </NavLink>
+      </li>
+    </div>
+  );
 };
 
 export default SidebarAdmin;

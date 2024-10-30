@@ -17,7 +17,7 @@ const AlertNotification: React.FC<AlertNotificationProps> = ({
   return (
     <div className="alert-notification">
       <span className="alert-icon">¡</span>
-      <p>{message}</p>
+      <p>{message}.</p>
       <button className="close-button-alert-notification" onClick={onClose}>
         ✖
       </button>

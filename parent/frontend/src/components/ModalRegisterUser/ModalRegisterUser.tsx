@@ -64,8 +64,14 @@ const ModalRegisterUser: React.FC<ModalProps> = ({
 
   if (!open) return null;
 
+  const handleClose = () => {
+    setName('');
+    setEmail('');
+    onClose();
+  }
+
   return (
-    <div className="modal_overlay_register" onClick={onClose}>
+    <div className="modal_overlay_register" onClick={handleClose}>
       <div
         className="modal_content_register"
         onClick={(e) => e.stopPropagation()}
@@ -98,7 +104,7 @@ const ModalRegisterUser: React.FC<ModalProps> = ({
             </button>
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleClose}
               className="button_close_user_modal"
               disabled={isAdding}
             >
