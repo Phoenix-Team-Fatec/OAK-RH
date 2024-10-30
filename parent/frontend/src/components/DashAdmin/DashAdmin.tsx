@@ -1,6 +1,8 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import SimpleTable from '../DashAdmin/DashAdminTable';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
+import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import './DashAdmin.css';
 
 const Dashboard: React.FC = () => {
@@ -24,22 +26,25 @@ const Dashboard: React.FC = () => {
     { name: 'Segmento 3', value: 100 },
   ];
   
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const COLORS = ['#54334c', '#c46a7c', '#844164', '#e07b7b'];
 
   return (
+    <>
+    <SidebarAdmin />
     <Box className="dashboard-container">
       <Box className="top-cards">
         <Box className="small-card">
-          <Typography variant="h6">Card 1</Typography>
-          <Typography variant="body2">Informações do Card 1</Typography>
+          <Typography variant="h6">Colaboradores</Typography>
+          <Typography variant="body2">150</Typography>
+          
         </Box>
         <Box className="small-card">
-          <Typography variant="h6">Card 2</Typography>
-          <Typography variant="body2">Informações do Card 2</Typography>
+          <Typography variant="h6">Equipes</Typography>
+          <Typography variant="body2">27</Typography>
         </Box>
         <Box className="small-card">
-          <Typography variant="h6">Card 3</Typography>
-          <Typography variant="body2">Informações do Card 3</Typography>
+          <Typography variant="h6">Formulários Criados</Typography>
+          <Typography variant="body2">20</Typography>
         </Box>
       </Box>
 
@@ -111,17 +116,19 @@ const Dashboard: React.FC = () => {
         </Box>
       </Box>
 
+                
       <Box className="bottom-cards">
         <Box className="bottom-card">
-          <Typography variant="h6">Card Grande</Typography>
-          <Typography variant="body2">Informações do Card Grande</Typography>
+          <Typography variant="h5">Controle de Respostas</Typography>
+          <SimpleTable />
         </Box>
         <Box className="thin-card">
-          <Typography variant="h6">Card Fino</Typography>
+          <Typography variant="h6">Card Não Largo</Typography>
           <Typography variant="body2">Informações do Card Fino</Typography>
         </Box>
       </Box>
     </Box>
+    </>
   );
 };
 
