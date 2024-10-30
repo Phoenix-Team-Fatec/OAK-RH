@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { setUsarioEquipe, getUserEquipeService, listarEquipe_User, getEquipe_user, mudarEstatosLider, deletarUsuarioEquipe } from "../services/equipe_userService";
+import { setUsarioEquipe, listarEquipe_User, getEquipe_user, mudarEstatosLider, deletarUsuarioEquipe, listarUser_Equipe } from "../services/equipe_userService";
 
 export const setUsuarioEquipe = async (req: Request, res: Response) => {
   const { user_id, equipe_id, is_lider } = req.body;
@@ -13,14 +13,16 @@ export const setUsuarioEquipe = async (req: Request, res: Response) => {
   }
 };
 
-export const getUserEquipe = async(req: Request, res: Response) => {
-  const user_id = parseInt(req.params.user_id);
-  try{
-    const userTeam = await getUserEquipeService(user_id)
-    return res.status(200).json(userTeam)
-  } catch(error){
-    console.log("Error finding user team")
-    return res.status(500).json({ message: error.message })
+
+export const listarUserEquipe = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const usersWithTeams = await listarUser_Equipe(id);
+    return res.status(200).json(usersWithTeams);
+  } catch (error) {
+    console.log("Error in listarUserEquipe function:", error);
+    return res.status(500).json({ message: error.message });
   }
 }
 

@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario } from "./controllers/equipe_userController";
-import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser } from "./controllers/userController";
+import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario, listarUserEquipe } from "./controllers/equipe_userController";
+import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
-import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl } from "./controllers/formularioController";
+import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
@@ -23,7 +23,7 @@ router.get('/users/:id_admin', readAllUsers);
 router.post('/users/login', loginUser);
 router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
-//router.get('/users/:id', getUserById);
+router.get('/users/listar_um/:id', readUser);
 router.put('/users/:id', updateUser);
 
 
@@ -40,10 +40,13 @@ router.get('/equipe_user/listar', listEquipeUser);
 router.post('/equipe_user/mudarLider', mudarEstadoLider);
 router.get('/equipe_user/:id', getEquipeUser);
 router.delete('/equipe_user/remover', removerUsuario);
+router.get('/equipe_user/listar/:id', listarUserEquipe);
 
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);
 router.get('/formulario/listar/:admin_id', listarFormularioControl);
+router.get('/formulariosPendentes/:id', listarPendentesControl);
+router.get('/formulariosRespondidos/:id', listarRespondidosControl);
 router.get('/formulario/:id', listarUmFormularioControl);
 router.put('/formulario/:id', atuaizarFormularioControl);
 router.delete('/formulario/:id', deletarFormularioControl);

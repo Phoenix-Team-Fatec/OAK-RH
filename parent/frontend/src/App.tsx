@@ -7,7 +7,7 @@ import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
 import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin";
 import Dashboard from "./components/DashAdmin/DashAdmin";
 import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
-import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
+import SelecaoFormularioMembro from "./pages/FormsUser/selecaoFormularioMembro";
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
 import DashboardUser from "./pages/User/DashboardUser/DashboardUser";

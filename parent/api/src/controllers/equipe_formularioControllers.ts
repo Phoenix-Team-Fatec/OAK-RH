@@ -16,6 +16,9 @@ export const associarFormularioEquipeController = async (req: Request, res: Resp
 
 }
 
+
+
+
 //Função para associar formulário a todas as equipes
 export const associarFormularioTodasEquipesController = async (req: Request, res: Response) => {
     try{
