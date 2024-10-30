@@ -34,7 +34,7 @@ const SidebarAdmin = () => {
             </div>
             <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
                 <li className="menu_span">
-                    <NavLink to="/dashboard-admin" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/dashadmin" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faTachometerAlt} />
                         {isExpanded && " Dashboard"}
                     </NavLink>
