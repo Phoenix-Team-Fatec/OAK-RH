@@ -1,52 +1,173 @@
-.modal_register_category {
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(1px);
-    padding: 20px !important;
+/* Estilos gerais do modal */
+.modal-categories-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-.modalCategory {
-    display: flex;
-    justify-content: center;
+.modal-categories-content-container {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  width: 600px; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.modalCategory button {
-    background-color: #28a745;
-    gap: 10px;
-    color: white;
-    padding: 10px 20px;
-    font-size: 12px;
-    cursor: pointer;
-    box-sizing: border-box;
-    font-weight: bold;
-    border-radius: 8px;
-    width: 100%; 
-    transition: background-color 0.3s; 
-    margin-bottom: 10px;
+/* Botão de fechar */
+.modal-categories-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  background: none; /* Remove o fundo */
+  border: none; /* Remove a borda */
 }
 
-.title_new_category {
-    margin-top: 0;
-    font-size: 18px;
-    margin-bottom: 10px;
-    font-weight: bold !important;
-    text-align: center; 
+/* Título do modal */
+.modal-categories-title {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.modalCategory button:hover {
-    background-color: #218838 !important; 
+/* Estilos para a alternância de visualizações */
+.modal-categories-view-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-right: 8px;
 }
 
-.inputCategory {
-    border: 1px solid #ccc;
-    border-radius: 8px; 
-    padding: 12px; 
-    width: calc(100% + 16px);
-    box-sizing: border-box; 
-    outline: none;
-    transition: border-color 0.3s; 
+.modal-categories-view-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  background: none; /* Remove o fundo */
+  font-size: 12px; 
+  color: #A380A5; /* Cor padrão para "Ver Categorias" */
 }
 
-.inputCategory:focus-visible {
-    border-color: #556644 !important;
+.modal-categories-view-button:hover {
+  background-color: transparent;
 }
+
+/* Estilo para o botão ativo (Cadastrar) */
+.modal-categories-view-button.active {
+  color: #6f2c91; 
+}
+
+.modal-categories-view-button.active::after {
+  content: '';
+  display: block;
+  height: 2px; /* Altura da linha */
+  background-color: #6f2c91; 
+  width: 100%; 
+  position: absolute; 
+  bottom: -1px; 
+  left: 0; 
+}
+
+.modal-categories-view-button:not(.active) {
+  color: #d3d3d3; /* Cor mais clara para "Ver Categorias" */
+}
+
+/* Campo de entrada para categorias */
+.modal-categories-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Botões de ação do modal */
+.modal-categories-action-buttons {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  gap: 10px;
+}
+
+.modal-categories-button-secondary,
+.modal-categories-button-primary {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-categories-button-secondary {
+  background-color: #A380A5;
+}
+
+.modal-categories-button-primary {
+  background-color: #A380A5; 
+  color: white;
+}
+
+.modal-categories-button-secondary:hover {
+  background-color: #704772; 
+}
+
+.modal-categories-button-primary:hover {
+  background-color: #704772;
+}
+
+/* Estilos para a lista de categorias */
+.modal-categories-list {
+  max-height: 200px; 
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+/* Item da lista de categorias */
+.modal-categories-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc; 
+}
+
+/* Container para os botões de editar e excluir */
+.modal-categories-edit-delete-container {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 10px; 
+}
+
+/* Botão de editar */
+.modal-categories-edit-delete-container .modal-categories-edit-button {
+  border: none; 
+  cursor: pointer; 
+  color: black;
+  background-color: transparent;
+}
+
+/* Botão de excluir categoria */
+.modal-categories-edit-delete-container .modal-categories-delete-button {
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./ModalRegisterUser.css";
 import axios from "axios";
-import useUserData from "../../hooks/useUserData";
-import SuccessNotification from "../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification";
-import ErrorNotification from "../ComponentsAdmin/Modal/ModalErrorNotifcation/ErrorNotification";
+import useUserData from "../../../../hooks/useUserData";
+import SuccessNotification from "../ModalSuccessNotification/SuccessNotification";
+import ErrorNotification from "../ModalErrorNotifcation/ErrorNotification";
 
 interface ModalProps {
   open: boolean;
@@ -23,7 +23,7 @@ const ModalRegisterUser: React.FC<ModalProps> = ({
   const { id } = useUserData();
   const [isAdding, setIsAdding] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [showError, setShowError] = useState(false); 
+  const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -55,8 +55,8 @@ const ModalRegisterUser: React.FC<ModalProps> = ({
     } catch (error) {
       console.log("Error creating user:", error);
       setErrorMessage("Erro ao cadastrar usuário, tente novamente.");
-      setShowError(true); 
-      setEmail('')
+      setShowError(true);
+      setEmail("");
     } finally {
       setIsAdding(false);
     }
@@ -65,10 +65,10 @@ const ModalRegisterUser: React.FC<ModalProps> = ({
   if (!open) return null;
 
   const handleClose = () => {
-    setName('');
-    setEmail('');
+    setName("");
+    setEmail("");
     onClose();
-  }
+  };
 
   return (
     <div className="modal_overlay_register" onClick={handleClose}>

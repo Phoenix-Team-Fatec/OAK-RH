@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./ModalEditUser.css";
 import axios from "axios";
-import SuccessNotification from "../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification";
-import ErrorNotification from "../ComponentsAdmin/Modal/ModalErrorNotifcation/ErrorNotification";
+import SuccessNotification from "../ModalSuccessNotification/SuccessNotification";
+import ErrorNotification from "../ModalErrorNotifcation/ErrorNotification";
 
 interface ModalProps {
   open: boolean;
@@ -20,9 +20,9 @@ const ModalEditUser: React.FC<ModalProps> = ({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [originalUserData, setOriginalUserData] = useState<{
-    nome: string; 
+    nome: string;
     email: string;
-  } | null>(null)
+  } | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -32,12 +32,12 @@ const ModalEditUser: React.FC<ModalProps> = ({
     if (editingUser) {
       setName(editingUser.nome);
       setEmail(editingUser.email);
-      setOriginalUserData({ nome: editingUser.nome, email: editingUser.email })
+      setOriginalUserData({ nome: editingUser.nome, email: editingUser.email });
     } else {
       // Se não houver um usuário em edição, limpe os campos
       setName("");
       setEmail("");
-      setOriginalUserData(null)
+      setOriginalUserData(null);
     }
   }, [editingUser]);
 
@@ -73,8 +73,8 @@ const ModalEditUser: React.FC<ModalProps> = ({
 
       // Limpa os campos após a edição
       setTimeout(() => {
-        setShowSuccess(false); 
-        onClose(); 
+        setShowSuccess(false);
+        onClose();
       }, 2000);
     } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
@@ -86,11 +86,11 @@ const ModalEditUser: React.FC<ModalProps> = ({
 
   const handleClose = () => {
     if (originalUserData) {
-      setName(originalUserData.nome)
+      setName(originalUserData.nome);
       setEmail(originalUserData.email);
     }
     onClose();
-  }
+  };
 
   // Retorna null se o modal estiver fechado
   if (!open) return null;

@@ -54,9 +54,9 @@ function Modal({ isOpen, onClose, team }) {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-content">
-        <div className="modal-header">
+    <div className="modal-overlay-more-info" onClick={handleOverlayClick}>
+      <div className="modal-content-more-info">
+        <div className="modal-header-more-info">
           <h2>{team.nome}</h2>
         </div>
         <div className="modal-body">

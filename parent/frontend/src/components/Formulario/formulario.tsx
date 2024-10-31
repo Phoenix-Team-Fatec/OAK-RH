@@ -141,45 +141,47 @@ const Formulario: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (questions.length === 0 || questions.length > 20) {
-      setModalMessage("O formulário deve conter de 1 a 20 perguntas.");
-      setIsError(true);
+
+    const questionCount = questions.length;
+
+    // Validação: 0 ou mais de 20 perguntas, não permite envio
+    if (questionCount === 0 || questionCount > 20) {
+      setModalMessage('O formulário deve conter de 1 a 20 perguntas.');
+      setIsError(true); // Sinaliza que é um erro
       setModalOpen(true);
       return;
     }
 
+    // Validação do título e descrição
     if (!form.title || !form.description) {
-      setModalMessage("O título e a descrição do formulário são obrigatórios");
-      setIsError(true);
+      setModalMessage('O título e a descrição do formulário são obrigatórios');
+      setIsError(true); // Sinaliza que é um erro
       setModalOpen(true);
       return;
     }
 
+    // Verifica se todas as perguntas estão preenchidas
     for (const question of questions) {
       if (!question.value) {
-        setModalMessage("Preencha todas as perguntas antes de enviar.");
-        setIsError(true);
+        setModalMessage('Preencha todas as perguntas antes de enviar.');
+        setIsError(true); // Sinaliza que é um erro
         setModalOpen(true);
         return;
       }
     }
 
     try {
-      const formResponse = await createForm(
-        form.title,
-        form.description,
-        form.adminId
-      );
+      // Cria o formulário
+      const formResponse = await createForm(form.title, form.description, form.adminId);
       const formulario_id = formResponse.id;
-      setFormId(formulario_id);
+      setFormId(formulario_id)
 
+      // Cria as perguntas associadas ao formulário
       for (const question of questions) {
-        const category = categories.find((c) => c.nome === question.category);
+        const category = categories.find(c => c.nome === question.category);
         if (!category) {
-          setModalMessage(
-            `Categoria não encontrada para a pergunta: ${question.value}`
-          );
-          setIsError(true);
+          setModalMessage(`Categoria não encontrada para a pergunta: ${question.value}`);
+          setIsError(true); // Sinaliza que é um erro
           setModalOpen(true);
           return;
         }
@@ -193,12 +195,12 @@ const Formulario: React.FC = () => {
         );
       }
 
-      setModalMessage("Formulário e perguntas criados com sucesso!");
-      setIsError(false);
+      setModalMessage('Formulário e perguntas criados com sucesso!');
+      setIsError(false); // Sinaliza que é sucesso
       setModalOpen(true);
     } catch (error) {
-      setModalMessage("Erro ao criar o formulário ou perguntas.");
-      setIsError(true);
+      setModalMessage('Erro ao criar o formulário ou perguntas.');
+      setIsError(true); // Sinaliza que é um erro
       setModalOpen(true);
     }
   };
@@ -313,19 +315,15 @@ const Formulario: React.FC = () => {
           >
             Adicionar Pergunta
           </button>
-          <button type="submit" className="submit-button">
-            Criar Formulário
-          </button>
+          <button type="submit" className="button-forms-create">Enviar Formulário</button>
         </form>
       </div>
 
-      {modalOpen && (
-        <ModalSendForm
-          message={modalMessage}
-          isError={isError}
-          onClose={handleCloseModal}
-        />
-      )}
+      <ModalSendForm
+        open={modalOpen}
+        onClose={handleCloseModal}
+        formId={formId}
+      />
     </div>
   );
 };

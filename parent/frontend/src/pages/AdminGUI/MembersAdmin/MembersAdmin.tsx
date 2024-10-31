@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useMemo } from "react";
 import Paper from "@mui/material/Paper";
-import Modal from "../../../components/ModalRegisterUser/ModalRegisterUser";
+import Modal from "../../../components/ComponentsAdmin/Modal/ModalRegisterUser/ModalRegisterUser";
 import AlertNotification from "../../../components/ComponentsAdmin/Modal/ModalAlertNotification/AlertNotification";
 import "./MemberAdmin.css";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
 import axios from "axios";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import ModalEditUser from "../../../components/ModalEditUser/ModalEditUser";
+import ModalEditUser from "../../../components/ComponentsAdmin/Modal/ModalEditUser/ModalEditUser";
 import ModalConfirmDeleteUser from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteUser/ModalConfirmDeleteUser";
 import { Checkbox } from "@mui/material";
 import useUserData from "../../../hooks/useUserData";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./EquipeAdmin.css";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
-import Modal from "../../../components/ModalTeamMore/Modal";
-import UpdateModal from "../../../components/ModalUpdateTeam/UpdateModal";
+import Modal from "../../../components/ComponentsAdmin/Modal/ModalMoreInfoTeam/Modal";
+import UpdateModal from "../../../components/ComponentsAdmin/Modal/ModalUpdateTeam/UpdateModal";
 import AddTeamModal from "../../../components/AddTeamModal/AddTeamModal";
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";

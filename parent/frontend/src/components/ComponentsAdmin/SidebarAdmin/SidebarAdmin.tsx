@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -6,25 +6,48 @@ import {
   faUserFriends,
   faFileAlt,
   faSignOutAlt,
+  faBars,
+  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import "./SidebarAdmin.css";
 import { NavLink } from "react-router-dom";
+import useUserData from "../../../hooks/useUserData";
 
 const SidebarAdmin = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+  const { nome, email } = useUserData();
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
-    <div className="sidebar-admin">
-      <div className="logo-sidebar-admin">
-      <div className="logo-text">
-          <span className="oak">OAK</span>
-          <span>RH</span>
+    <div className={`sidebar-admin ${isExpanded ? "expanded" : "collapsed"}`}>
+      <div className="toggle-container">
+        {isExpanded && (
+          <div className="logo-sidebar-admin">
+            <div className="logo-text">
+              <span className="oak">OAK</span>
+              <span>RH</span>
+            </div>
+          </div>
+        )}
+        <div className="toggle-button" onClick={toggleSidebar}>
+          <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
         </div>
       </div>
 
-      <div className="profile_container">
-        <img src="./profile.png" alt="Perfil do Admin" className="profile_image" />
-        <span className="profile_name">Admin Name</span>
-        <span className="profile_email">admin@example.com</span>
-      </div>
+      {isExpanded && (
+        <div className="profile_container">
+          <img
+            src="./profile.png"
+            alt="Perfil do Admin"
+            className="profile_image"
+          />
+          <span className="profile_name">{nome || "Nome não disponível"}</span>
+          <span className="profile_email">{email || "Email não disponível"}</span>
+        </div>
+      )}
 
       <ul className="menu-sidebar-admin">
         <li className="menu_span">
@@ -32,8 +55,8 @@ const SidebarAdmin = () => {
             to="/dashboard-admin"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
-            <FontAwesomeIcon icon={faTachometerAlt} className="icon-sidebar-admin"/>
-            Dashboard
+            <FontAwesomeIcon icon={faTachometerAlt} className="icon-sidebar-admin" />
+            {isExpanded && "Dashboard"}
           </NavLink>
         </li>
         <li className="menu_span">
@@ -41,8 +64,8 @@ const SidebarAdmin = () => {
             to="/funcionarios"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
-            <FontAwesomeIcon icon={faUserFriends} className="icon-sidebar-admin"/>
-            Funcionários
+            <FontAwesomeIcon icon={faUserFriends} className="icon-sidebar-admin" />
+            {isExpanded && "Funcionários"}
           </NavLink>
         </li>
         <li className="menu_span">
@@ -50,8 +73,8 @@ const SidebarAdmin = () => {
             to="/equipes-admin"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
-            <FontAwesomeIcon icon={faUsers} className="icon-sidebar-admin"/>
-            Equipes
+            <FontAwesomeIcon icon={faUsers} className="icon-sidebar-admin" />
+            {isExpanded && "Equipes"}
           </NavLink>
         </li>
         <li className="menu_span">
@@ -59,8 +82,8 @@ const SidebarAdmin = () => {
             to="/formularios-admin"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
-            <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-admin"/>
-            Formulários
+            <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-admin" />
+            {isExpanded && "Formulários"}
           </NavLink>
         </li>
       </ul>
@@ -68,7 +91,7 @@ const SidebarAdmin = () => {
       <li className="logout">
         <NavLink to="/" className="logout_link">
           <FontAwesomeIcon icon={faSignOutAlt} />
-          Logout
+          {isExpanded && "Logout"}
         </NavLink>
       </li>
     </div>
