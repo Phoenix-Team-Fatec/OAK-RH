@@ -1,0 +1,12 @@
+/* TabelaFormularioDashAdmin.css */
+.tabela-formulario {
+    padding: 16px;
+    background-color: #fff; /* Cor de fundo do card */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra do card */
+  }
+  
+  .tabela-formulario .MuiTableCell-root {
+    border-bottom: 1px solid #ddd; /* Borda inferior das células */
+  }
+  

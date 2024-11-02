@@ -33,11 +33,11 @@ const rows = [
   ];
   
 
-const paginationModel = { page: 0, pageSize: 10 }; // linhas por página
+const paginationModel = { page: 0, pageSize: 11 }; // linhas por página
 
 const TabelaDashAdmin: React.FC = () => {
   return (
-    <Paper sx={{ height: 650, width: '100%' }}>
+    <Paper sx={{ height: 700, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
