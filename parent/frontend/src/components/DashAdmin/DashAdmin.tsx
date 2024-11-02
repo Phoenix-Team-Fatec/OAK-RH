@@ -3,7 +3,9 @@ import { Box, Typography } from '@mui/material';
 import SimpleTable from '../DashAdmin/DashAdminTable';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
+import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
+
 
 const Dashboard: React.FC = () => {
   // Dados para os gráficos
@@ -30,7 +32,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-    <SidebarAdmin />
+    <AdminNavbar/>
+    <SidebarAdmin/>
     <Box className="dashboard-container">
       <Box className="top-cards">
         <Box className="small-card">

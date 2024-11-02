@@ -54,4 +54,8 @@
   .small-card:hover, .medium-card:hover, .bottom-card:hover, .thin-card:hover {
     transform: scale(1.01);
   }
+  .dashboard-container {
+    margin-top: 60px; /* Ajuste o valor conforme necessário */
+    padding: 30px;
+  }
   
