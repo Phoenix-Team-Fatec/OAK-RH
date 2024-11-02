@@ -4,16 +4,18 @@ import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/Sideb
 import Modal from "../../../components/ComponentsAdmin/Modal/ModalMoreInfoTeam/Modal";
 import UpdateModal from "../../../components/ComponentsAdmin/Modal/ModalUpdateTeam/UpdateModal";
 import AddTeamModal from "../../../components/AddTeamModal/AddTeamModal";
+import ModalConfirmDeleteTeam from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteTeam/ModalConfirmDeleteTeam"; // Importando o novo modal
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";
 
 function EquipeAdmin() {
   const [teams, setTeams] = useState([]);
-  const [users, setUsers] = useState([]);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const [isAddTeamModalOpen, setIsAddTeamModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedTeamIds, setSelectedTeamIds] = useState([]);
   const { id } = useUserData();
 
   const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
@@ -35,24 +37,14 @@ function EquipeAdmin() {
     fetchTeams();
   }, [id]);
 
-  // Função para deletar equipe
-  const handleDelete = async (teamId) => {
-    // Exibe um alerta de confirmação
-    const confirmDelete = window.confirm(
-      "Você realmente deseja deletar esta equipe?"
-    );
-    if (!confirmDelete) {
-      return; // Se o usuário cancelar, não faz nada
-    }
+  const handleDelete = async (teamIds) => {
+    setTeams(teams.filter((team) => !teamIds.includes(team.id)));
+    setIsDeleteModalOpen(false);
+  };
 
-    try {
-      await axios.delete(`http://localhost:3000/equipe/${teamId}`);
-      setTeams(teams.filter((team) => team.id !== teamId));
-      alert("Equipe excluída com sucesso!");
-    } catch (error) {
-      console.error("Erro ao excluir equipe", error);
-      alert("Erro ao excluir equipe");
-    }
+  const handleOpenDeleteModal = (team) => {
+    setSelectedTeamIds([team.id]); // Altera para permitir múltiplas seleções no futuro
+    setIsDeleteModalOpen(true);
   };
 
   const handleUpdateTeam = (updatedTeam) => {
@@ -82,7 +74,6 @@ function EquipeAdmin() {
     setSelectedTeam(null);
   };
 
-  // Handler for adding a new team
   const handleAddTeam = (newTeam) => {
     setTeams([...teams, newTeam]);
   };
@@ -98,9 +89,7 @@ function EquipeAdmin() {
 
       <div className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="main-content">
-          <h2
-            style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}
-          >
+          <h2 style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}>
             Gerenciamento de Equipes
           </h2>
 
@@ -127,7 +116,7 @@ function EquipeAdmin() {
                   </button>
                   <button
                     className="delete-btn"
-                    onClick={() => handleDelete(team.id)}
+                    onClick={() => handleOpenDeleteModal(team)}
                   >
                     Delete
                   </button>
@@ -140,9 +129,9 @@ function EquipeAdmin() {
               className="equipe-item add-team"
               onClick={() => setIsAddTeamModalOpen(true)}
             >
-              <div className="equipe-name">+ Adicionar novo time</div>
+              <div className="equipe-name">+ Adicionar nova equipe</div>
               <div className="equipe-description">
-                Clique aqui para adicionar um novo time
+                Clique aqui para adicionar uma nova equipe
               </div>
             </div>
           </div>
@@ -154,7 +143,7 @@ function EquipeAdmin() {
         <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          team={selectedTeam} // Pass the selected team data to the Modal component
+          team={selectedTeam} 
         />
       )}
 
@@ -174,6 +163,17 @@ function EquipeAdmin() {
         onClose={() => setIsAddTeamModalOpen(false)}
         onAdd={handleAddTeam}
       />
+
+      {/* Delete Team Modal */}
+      {isDeleteModalOpen && (
+        <ModalConfirmDeleteTeam
+          open={isDeleteModalOpen}
+          onClose={() => setIsDeleteModalOpen(false)}
+          onConfirm={handleDelete}
+          selectedTeamNames={selectedTeamIds.map(id => teams.find(team => team.id === id)?.nome)}
+          selectedIds={selectedTeamIds}
+        />
+      )}
     </div>
   );
 }

@@ -81,7 +81,7 @@ function Modal({ isOpen, onClose, team }) {
           </ul>
         </div>
         <div className="modal-footer">
-          <button onClick={onClose}>Fechar</button>
+          <button onClick={onClose} className="cancel-btn-team-more-info">Fechar</button>
         </div>
       </div>
     </div>

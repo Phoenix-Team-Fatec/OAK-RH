@@ -105,12 +105,13 @@
 
 /* Add Member Button */
 .add-member-btn {
-  border: 2px solid #a380a5;
+  border: none;
   color: #a380a5;
   padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
   background-color: white;
+  background-color: #ebd9ec;
 }
 
 .add-member-btn:hover {
@@ -131,28 +132,36 @@
   cursor: pointer;
 }
 
-.modal-footer .save-btn {
-  background-color: #A380A5;
+.modal-footer .save-btn-update-team {
+  background-color: #a380a5;
   color: white;
-  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  padding: 8px 40px;
+  border-radius: 4px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
 }
 
 .modal-footer .save-btn:hover {
   background-color: #704772;
 }
 
-.modal-footer .cancel-btn {
-  background-color: #A380A5;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+.modal-footer .cancel-btn-update-team {
+  border: 2px solid #a380a5;
+  color: #a380a5;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
+  background-color: white;
+  height: 40px; 
+  width: 120px;
 }
 
-.modal-footer .cancel-btn:hover {
-  background-color: #704772;
+.modal-footer .cancel-btn-update-team:hover {
+  background-color: #ebd9ec;
+  color: #8d5790;
 }
