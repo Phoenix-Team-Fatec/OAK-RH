@@ -117,16 +117,16 @@ const ModalSendForm: React.FC<ModalProps> = ({ open, onClose, formId}) => {
   
       {/* Dropdown para seleção do nível */}
       <FormControl fullWidth className="form-control">
-        <InputLabel id="select-nivel-label">Nível</InputLabel>
+        <InputLabel id="select-nivel-label">Tipo</InputLabel>
         <Select
           labelId="select-nivel-label"
           value={nivel}
           onChange={(e) => setNivel(e.target.value)}
           input={<OutlinedInput label="Nível" />}
         >
-          <MenuItem value="lideres">Líderes</MenuItem>
-          <MenuItem value="liderados">Liderados</MenuItem>
-          <MenuItem value="ambos">Ambos</MenuItem>
+           <MenuItem value="lideres">Avaliação Liderados</MenuItem>
+          <MenuItem value="liderados">Avaliação Líderes</MenuItem>
+          <MenuItem value="ambos">Autoavaliação</MenuItem>
         </Select>
       </FormControl>
   
