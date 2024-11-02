@@ -5,6 +5,7 @@ import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
 import TabelaDashAdmin from './TabelaDashAdmin';
+import TabelaFormularioDashAdmin from './tabelaFormularioDashAdmin';
 
 
 const Dashboard: React.FC = () => {
@@ -122,13 +123,11 @@ const Dashboard: React.FC = () => {
                 
       <Box className="bottom-cards">
       <Box className="bottom-card">
-        <Typography variant="h5">Controle de Respostas</Typography>
         <TabelaDashAdmin />
       </Box>
 
         <Box className="thin-card">
-          <Typography variant="h6">Card Não Largo</Typography>
-          <Typography variant="body2">Informações do Card Fino</Typography>
+          <TabelaFormularioDashAdmin />
         </Box>
       </Box>
     </Box>
