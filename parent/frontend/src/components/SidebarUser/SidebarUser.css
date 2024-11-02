@@ -13,7 +13,7 @@
     height: 100vh;
     width: 60px; /* Define uma largura inicial para a sidebar colapsada */
     position: fixed; /* Fixa a sidebar na tela */
-    background-color: #2A2033;
+    background-color: #177035;
     padding: 20px;
     color: #ffffff;
     overflow: hidden; /* Esconde o conteúdo que não cabe ao colapsar */
@@ -50,7 +50,7 @@
 
 /* Estiliza a palavra 'OAK' da logo */
 .logo_sidebar .oak {
-    color: #A380A5;
+    color: #6FE396;
 }
 
 /* Esconde o texto 'OAK RH' quando a sidebar está colapsada */
@@ -92,7 +92,7 @@
 
 /* Estilo dos links */
 .menu li a {
-    color: #ffffff; /* Cor dos links como branco */
+    color: #9ae59f; /* Cor dos links como branco */
     text-decoration: none; /* Remove a linha de baixo dos links */
     display: block;
     width: 100%;
@@ -101,14 +101,14 @@
 
 /* Estilo dos links ativos (na página atual) */
 .menu li a.active_link {
-    color: #A380A5; /* Cor roxa para o link ativo */
-    background-color: #3A2B4A; /* Ajuste a cor do fundo, se necessário, para destaque */
+    color: #ffffff; /* Cor roxa para o link ativo */
+    background-color: #1352288a; /* Ajuste a cor do fundo, se necessário, para destaque */
     border-radius: 6px;
 }
 
 /* Estilo de hover nos links */
 .menu li a:hover {
-    color: #A380A5; /* Muda para roxo ao passar o mouse */
+    color: #6FE396; /* Muda para roxo ao passar o mouse */
 }
 
 /* Perfil no final do menu */

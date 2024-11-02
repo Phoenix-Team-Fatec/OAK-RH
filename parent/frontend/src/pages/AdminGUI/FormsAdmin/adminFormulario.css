@@ -15,7 +15,13 @@ body {
 .content {
   margin: 0 auto; /* Centraliza horizontalmente */
   padding: 30px;
-  width: 72.5%; /* Define uma largura fixa */
+  width: 72%; /* Define uma largura fixa */
+  transition: margin-left 0.3s ease; /* Smooth transition */
+  margin-left: 350px; /* Adjust this value to the width of your expanded sidebar */
+}
+
+.content.collapsed {
+  margin-left: 250px;
 }
 
 .h2-content-forms-admin {
@@ -66,3 +72,5 @@ body {
 .tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
   color: #813585; /* Altere para a cor que você deseja */
 }
+
+

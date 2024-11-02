@@ -26,6 +26,8 @@ const FormsAdmin: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
   const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
   const { id } = useUserData();
+  
+  const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
 
   const navigate = useNavigate();
 
@@ -130,7 +132,7 @@ const FormsAdmin: React.FC = () => {
             disabled={isDeleting}
           />
         ),
-        width: 180,
+        width: 80,
         sortable: false,
         filterable: false,
         disableColumnMenu: true,
@@ -145,16 +147,20 @@ const FormsAdmin: React.FC = () => {
       },
       { field: "id", headerName: "ID", width: 100 },
       { field: "nome", headerName: "Título", width: 300 },
-      { field: "descricao", headerName: "Descrição", width: 400 },
-      { field: "criado_em", headerName: "Criado em", width: 350 },
+      { field: "descricao", headerName: "Descrição", width: 300 },
+      { field: "criado_em", headerName: "Criado em", width: 264 },
     ],
     [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
   );
 
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
     <>
-      <SidebarAdmin />
-      <div className="content">
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      <div className={`content ${isExpanded ? "expanded" : "collapsed"}`}>
         <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
 
         <div className="actions-forms-admin">
@@ -207,7 +213,7 @@ const FormsAdmin: React.FC = () => {
           </Button>
         </div>
 
-        <Paper style={{ height: 600, width: "100%" }}>
+        <Paper style={{ height: 500, width: "100%" }}>
           <DataGrid
             className="tabela-formularios"
             rows={rows}
@@ -222,6 +228,7 @@ const FormsAdmin: React.FC = () => {
             }}
             pagination
             getRowId={(row) => row.id}
+
           />
         </Paper>
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -13,13 +13,8 @@ import "./SidebarAdmin.css";
 import { NavLink } from "react-router-dom";
 import useUserData from "../../../hooks/useUserData";
 
-const SidebarAdmin = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+const SidebarAdmin = ({ isExpanded, toggleSidebar }) => {
   const { nome, email } = useUserData();
-
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
-  };
 
   return (
     <div className={`sidebar-admin ${isExpanded ? "expanded" : "collapsed"}`}>
@@ -32,7 +27,10 @@ const SidebarAdmin = () => {
             </div>
           </div>
         )}
-        <div className="toggle-button" onClick={toggleSidebar}>
+        <div
+          className={`toggle-button ${isExpanded ? "expanded" : ""}`}
+          onClick={toggleSidebar}
+        >
           <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
         </div>
       </div>

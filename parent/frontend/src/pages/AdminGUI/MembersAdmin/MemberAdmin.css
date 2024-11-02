@@ -1,36 +1,61 @@
+.sidebar-admin {
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar-admin.expanded {
+  width: 250px; /* Expanded width */
+}
+
+.sidebar-admin.collapsed {
+  width: 60px; /* Collapsed width */
+}
+
 .admin_members_container {
-    background-color: #eae7eb;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-    margin-left: 70px;
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+  background-color: #eae7eb;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  margin-left: 70px; /* Default margin for expanded sidebar */
 }
-  
+
+/* Adjust margin based on sidebar state */
+.sidebar-admin.expanded ~ .admin_members_container {
+  margin-left: 250px; /* Adjusted for expanded sidebar */
+}
+
+.sidebar-admin.collapsed ~ .admin_members_container {
+  margin-left: 60px; /* Adjusted for collapsed sidebar */
+}
+
 .h2_admin_members_register {
-    margin-bottom: 20px;
-    font-size: 24px;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
-  
+
 .dataGridContainer {
   width: 100%;
   margin: 0 auto;
 }
-  
+
 .dataGridPaper {
   padding: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-  
+
 .MuiDataGrid-root {
   border: none; 
 }
-  
+
 .MuiDataGrid-columnHeader {
   background-color: #f5f5f5;
 }
-  
+
 .MuiDataGrid-cell {
   border-bottom: 1px solid #e0e0e0; 
 }
@@ -38,25 +63,42 @@
 .button_register_user,
 .button_edit_member,
 .button_delete_member {
-    margin: 5px; 
-    padding: 10px 15px; 
-    border: none; 
-    border-radius: 5px; 
-    background-color: #A380A5;
-    color: white; 
-    cursor: pointer; 
-    font-size: 12px;
-    transition: background-color 0.3s;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+  margin: 5px; 
+  padding: 10px 15px; 
+  border: none; 
+  border-radius: 5px; 
+  background-color: #A380A5;
+  color: white; 
+  cursor: pointer; 
+  font-size: 12px;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Full width for buttons */
 }
 
 .button_register_user:hover,
 .button_edit_member:hover,
 .button_delete_member:hover {
-    background-color: #704772;
+  background-color: #704772;
 }
 
 .dataGridContainer .MuiCheckbox-root .MuiSvgIcon-root {
   color: #813585;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+  .admin_members_container {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+  
+  .h2_admin_members_register {
+    font-size: 20px; /* Smaller font size for headings */
+  }
+
+  .button_register_user,
+  .button_edit_member,
+  .button_delete_member {
+    font-size: 10px; /* Smaller font size for buttons */
+  }
 }

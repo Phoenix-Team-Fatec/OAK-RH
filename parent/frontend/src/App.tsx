@@ -9,7 +9,7 @@ import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./components/SelecaoFormularioMembro/selecaoFormularioMembro"; 
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
-import DashboardUser from "./pages/User/DashboardUser/DashboardUser";
+import DashboardUser from "./pages/UserGUI/DashboardUser/DashboardUser";
 import UserFormsResponse from "./pages/UserGUI/UserFormsResponse/UserFormsResponse";
 import UserFormsResponseView from "./pages/UserGUI/UserFormsViewResponse/UserFormsResponse";
 

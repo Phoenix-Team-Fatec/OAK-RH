@@ -1,13 +1,21 @@
-/* EquipeAdmin.css */
 
-/* Flex container to hold sidebar and main content */
 .content-wrapper {
+    flex-grow: 1;
+    transition: margin-left 0.3s ease; 
     display: flex;
     background-color: #eae7eb;
     min-height: 100vh; 
     flex-grow: 1;
     padding: 20px;
     justify-content: center;
+  }
+  
+  .content-wrapper.collapsed {
+    margin-left: 0px; /* Adjust this value based on your sidebar width */
+  }
+  
+  .content-wrapper.expanded {
+    margin-left: 180px; /* Adjust this value based on your sidebar width */
   }
   
   /* Adjust the main content area to be a flexbox as well */

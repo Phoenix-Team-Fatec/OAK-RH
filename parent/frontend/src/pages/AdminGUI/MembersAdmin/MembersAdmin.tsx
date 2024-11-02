@@ -27,6 +27,8 @@ const MembersAdmin = () => {
   const [alertModalOpen, setAlertModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
 
+  const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
+
   const fetchUsers = async () => {
     if (id) {
       try {
@@ -161,10 +163,16 @@ const MembersAdmin = () => {
     [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
   );
 
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
+
   return (
     <>
-      <SidebarAdmin />
-      <div className="admin_members_container">
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+
+      <div className={`admin_members_container ${isExpanded ? "expanded" : "collapsed"}`}>
+        
         <h2 className="h2_admin_members_register">
           Gerenciamento de Funcionários
         </h2>

@@ -5,6 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+.dashboard-admin-wrapper {
+  display: flex;
+}
+
 .sidebar-admin {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,14 @@
   top: 0;
   left: 0;
   z-index: 1000;
+  transition: width 0.5s ease; 
+}
+
+.sidebar-admin.expanded .profile_container,
+.sidebar-admin.expanded .menu-sidebar-admin,
+.sidebar-admin.expanded .logout {
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 .logo-sidebar-admin {
@@ -48,8 +60,13 @@
   margin: 0; 
   display: flex;
   justify-content: center; 
-  align-items: center; 
   width: 100%; 
+}
+
+.toggle-button.expanded {
+  font-size: 1.8vw;
+  margin-top: -19px;
+  margin-left: 78px;
 }
 
 .logo-sidebar-admin .oak {

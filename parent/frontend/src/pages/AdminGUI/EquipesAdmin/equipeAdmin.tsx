@@ -16,6 +16,8 @@ function EquipeAdmin() {
   const [isAddTeamModalOpen, setIsAddTeamModalOpen] = useState(false);
   const { id } = useUserData();
 
+  const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
+
   // Função para listar equipes do administrador
   useEffect(() => {
     const fetchTeams = async () => {
@@ -85,12 +87,16 @@ function EquipeAdmin() {
     setTeams([...teams, newTeam]);
   };
 
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
     <div style={{ display: "flex", position: "relative" }}>
-      {/* Sidebar */}
-      <SidebarAdmin />
+     
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
 
-      <div className="content-wrapper">
+      <div className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="main-content">
           <h2
             style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}

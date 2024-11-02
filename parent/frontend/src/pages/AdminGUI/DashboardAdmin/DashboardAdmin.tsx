@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DashboardAdmin.css";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
 
 const DashboardAdmin: React.FC = () => {
+  const [isExpanded, setIsExpanded] = useState(true);
+
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
-    <>
-      <SidebarAdmin />
-      <div className="dashboard-admin-container">
+    <div className="dashboard-admin-wrapper">
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      <div className={`dashboard-admin-container ${isExpanded ? "expanded" : "collapsed"}`}>
         <h1 className="dashboard-admin-title">Bem-vindo ao Dashboard!</h1>
         <p className="dashboard-admin-description">
           Aqui você pode visualizar informações gerais da sua conta.
@@ -32,7 +38,7 @@ const DashboardAdmin: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
