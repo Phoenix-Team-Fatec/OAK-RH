@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import SimpleTable from '../DashAdmin/DashAdminTable';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
+import TabelaDashAdmin from './TabelaDashAdmin';
 
 
 const Dashboard: React.FC = () => {
@@ -121,10 +121,11 @@ const Dashboard: React.FC = () => {
 
                 
       <Box className="bottom-cards">
-        <Box className="bottom-card">
-          <Typography variant="h5">Controle de Respostas</Typography>
-          <SimpleTable />
-        </Box>
+      <Box className="bottom-card">
+        <Typography variant="h5">Controle de Respostas</Typography>
+        <TabelaDashAdmin />
+      </Box>
+
         <Box className="thin-card">
           <Typography variant="h6">Card Não Largo</Typography>
           <Typography variant="body2">Informações do Card Fino</Typography>
