@@ -29,8 +29,8 @@
   font-size: 20px;
   cursor: pointer;
   color: #888;
-  background: none; /* Remove o fundo */
-  border: none; /* Remove a borda */
+  background: none; 
+  border: none; 
 }
 
 /* Título do modal */
@@ -55,9 +55,9 @@
   border-radius: 5px;
   cursor: pointer;
   position: relative;
-  background: none; /* Remove o fundo */
+  background: none; 
   font-size: 12px; 
-  color: #A380A5; /* Cor padrão para "Ver Categorias" */
+  color: #A380A5; 
 }
 
 .modal-categories-view-button:hover {
@@ -72,7 +72,7 @@
 .modal-categories-view-button.active::after {
   content: '';
   display: block;
-  height: 2px; /* Altura da linha */
+  height: 2px; 
   background-color: #6f2c91; 
   width: 100%; 
   position: absolute; 
@@ -81,7 +81,7 @@
 }
 
 .modal-categories-view-button:not(.active) {
-  color: #d3d3d3; /* Cor mais clara para "Ver Categorias" */
+  color: #d3d3d3; 
 }
 
 /* Campo de entrada para categorias */
@@ -100,33 +100,40 @@
   justify-content: end;
   gap: 10px;
 }
-
-.modal-categories-button-secondary,
 .modal-categories-button-primary {
-  padding: 10px 15px;
-  font-size: 14px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.modal-categories-button-secondary {
-  background-color: #A380A5;
-}
-
-.modal-categories-button-primary {
-  background-color: #A380A5; 
+  background-color: #a380a5;
   color: white;
-}
-
-.modal-categories-button-secondary:hover {
-  background-color: #704772; 
+  border: none;
+  padding: 8px 40px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 40px;
 }
 
 .modal-categories-button-primary:hover {
   background-color: #704772;
 }
+
+.modal-categories-action-buttons .modal-categories-button-secondary {
+  border: 2px solid #a380a5;
+  color: #a380a5;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+  height: 40px; 
+  width: 120px;
+}
+
+.modal-categories-action-buttons .modal-categories-button-secondary:hover {
+  background-color: #ebd9ec;
+  color: #8d5790;
+}
+
 
 /* Estilos para a lista de categorias */
 .modal-categories-list {
@@ -157,6 +164,7 @@
   cursor: pointer; 
   color: black;
   background-color: transparent;
+  font-size: 14px;
 }
 
 /* Botão de excluir categoria */
@@ -168,6 +176,5 @@
   padding: 5px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px;
 }
-
-

@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import useUserData from '../../hooks/useUserData';
+import SuccessNotification from '../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification';
+import './AddTeamModal.css'; // Importa o CSS
 
 const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
   const [teamName, setTeamName] = useState('');
   const [teamDescription, setTeamDescription] = useState('');
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Estado para o carregamento
   const { id } = useUserData();
 
   if (!isOpen) return null;
 
   // Função para cadastrar uma nova equipe
-  const handleSubmit = async (e: React.FormEvent) => {
-    if(!id) {
+  const handleSubmit = async (e) => {
+    e.preventDefault(); 
+
+    if (!id) {
       alert("Admin ID not found. Please Login");
       return;
     }
+
+    setIsLoading(true); // Inicia o carregamento
 
     try {
       const response = await axios.post('http://localhost:3000/equipe/criar', {
@@ -24,48 +32,72 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
       });
 
       console.log("Team created", response.data);
-      alert("Equipe criada com sucesso!")
       setTeamName('');
       setTeamDescription('');
+      onAdd(response.data);
 
-      onAdd(response.data)
-
-      onClose();
-    }catch (error) {
+      setShowSuccessNotification(true);
+      setTimeout(() => {
+        setShowSuccessNotification(false);
+        onClose();
+      }, 2000);
+    } catch (error) {
       console.log("Error creating team", error);
-      alert("Error ao criar equipe, tente novamente")
+      alert("Erro ao criar equipe, tente novamente");
+    } finally {
+      setIsLoading(false); // Finaliza o carregamento
     }
   };
 
+  const handleClose = () => {
+    setTeamName('');
+    setTeamDescription('');
+    onClose();
+  };
+
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h2>Adicionar nova equipe</h2>
+    <>
+      <div className="modal-overlay" onClick={handleClose}>
+        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-header-add-team">
+            <h2 className='h2-modal-add-team'>Adicionar nova equipe</h2>
+          </div>
+          <div className="modal-body">
+            <input
+              type="text"
+              value={teamName}
+              onChange={(e) => setTeamName(e.target.value)}
+              placeholder="Nome da Equipe" // Substitui o rótulo por um placeholder
+              required
+            />
+            <textarea
+              value={teamDescription}
+              onChange={(e) => setTeamDescription(e.target.value)}
+              placeholder="Descrição da equipe" // Substitui o rótulo por um placeholder
+              required
+            />
+          </div>
+          <div className="modal-footer-add-team">
+            <button className="save-btn-add-team" onClick={handleSubmit} disabled={isLoading}>
+              {isLoading ? (
+                <span className="spinner"></span>
+              ) : (
+                'Adicionar'
+              )}
+            </button>
+            <button className="cancel-btn-add-team" onClick={handleClose} disabled={isLoading}>
+              Fechar
+            </button>
+          </div>
         </div>
-        <div className="modal-body">
-          <label>Nome da Equipe</label>
-          <input
-            type="text"
-            value={teamName}
-            onChange={(e) => setTeamName(e.target.value)}
+        {showSuccessNotification && (
+          <SuccessNotification
+            message="Equipe criada com sucesso!"
+            onClose={() => setShowSuccessNotification(false)}
           />
-          <label>Descrição da equipe</label>
-          <textarea
-            value={teamDescription}
-            onChange={(e) => setTeamDescription(e.target.value)}
-          />
-        </div>
-        <div className="modal-footer">
-          <button className="save-btn" onClick={handleSubmit}>
-            Adicionar Equipe
-          </button>
-          <button className="cancel-btn" onClick={onClose}>
-            Fechar
-          </button>
-        </div>
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -86,18 +86,20 @@
   justify-content: flex-end;
 }
 
-.modal-footer button {
-  padding: 10px 20px;
-  background-color: #A380A5; 
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.modal-footer .cancel-btn-team-more-info {
+  border: 2px solid #a380a5;
+  color: #a380a5;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  background-color: white;
+  height: 40px; 
+  width: 120px;
 }
 
-.modal-footer button:hover {
-  background-color: #704772; 
+.cancel-btn-team-more-info {
+  background-color: #ebd9ec;
+  color: #8d5790;
 }
 
 .member-email {

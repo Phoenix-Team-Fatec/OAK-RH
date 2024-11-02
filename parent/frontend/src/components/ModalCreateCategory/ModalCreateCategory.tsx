@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ModalCreateCategory.css";
 import {
   createCategory,
@@ -27,6 +27,24 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
   const { id } = useUserData();
   const [editingCategory, setEditingCategory] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (open) {
+      fetchAllCategories();
+    }
+  }, [open]);
+
+  // Função para buscar categorias
+  const fetchAllCategories = async () => {
+    if (id) {
+      try {
+        const fetchedCategories = await fetchCategories(id);
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error("Erro ao buscar categorias", error);
+      }
+    }
+  };
+
   // Função para lidar com o envio do formulário
   const handleSubmit = async () => {
     if (!categoryName.trim()) {
@@ -47,20 +65,10 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
     }
   };
 
-  // Função para buscar categorias
-  const fetchAllCategories = async () => {
-    try {
-      const fetchedCategories = await fetchCategories(id);
-      setCategories(fetchedCategories);
-    } catch (error) {
-      console.error("Erro ao buscar categorias", error);
-    }
-  };
-
   // Função para excluir categoria
-  const handleDelete = async (categoryToDelete: string) => {
+  const handleDelete = async (categoryId: string) => {
     try {
-      await deleteCategorie(categoryToDelete);
+      await deleteCategorie(Number(categoryId), id);
       alert("Categoria excluída com sucesso!");
       fetchAllCategories();
     } catch (error) {
@@ -78,7 +86,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
 
     try {
       if (id) {
-        await editCategorie(editingCategory, categoryName, id);
+        await editCategorie(Number(editingCategory), categoryName, Number(id));
         alert("Categoria editada com sucesso!");
         setCategoryName("");
         setEditingCategory(null);
@@ -92,10 +100,11 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
 
   // Função para alternar entre as visualizações
   const toggleView = () => {
-    if (currentView === "create") {
-      fetchAllCategories();
-    }
     setCurrentView(currentView === "create" ? "list" : "create");
+    if (currentView === "create") {
+      setCategoryName(""); // Limpa o campo ao alternar para a lista
+      setEditingCategory(null); // Reseta a edição ao alternar para criar
+    }
   };
 
   return (
@@ -141,19 +150,20 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
                   onChange={(e) => setCategoryName(e.target.value)}
                 />
                 <div className="modal-categories-action-buttons">
-                  <button
-                    onClick={onClose}
-                    className="modal-categories-button-secondary"
-                  >
-                    Fechar
-                  </button>
-                  <button
-                    onClick={editingCategory ? handleEdit : handleSubmit}
-                    className="modal-categories-button-primary"
-                  >
-                    {editingCategory ? "Salvar Alterações" : "Cadastrar"}
-                  </button>
-                </div>
+
+                    <button
+                      onClick={editingCategory ? handleEdit : handleSubmit}
+                      className="modal-categories-button-primary"
+                    >
+                      {editingCategory ? "Salvar Alterações" : "Cadastrar"}
+                    </button>
+                    <button
+                      onClick={onClose}
+                      className="modal-categories-button-secondary"
+                    >
+                      Fechar
+                    </button>
+                  </div>
               </>
             ) : (
               <div className="modal-categories-list">
@@ -166,6 +176,7 @@ const ModalCreateCategory: React.FC<ModalCreateCategoryProps> = ({
                           onClick={() => {
                             setCategoryName(category.nome);
                             setEditingCategory(category.id);
+                            setCurrentView("create");
                           }}
                           className="modal-categories-edit-button"
                         >

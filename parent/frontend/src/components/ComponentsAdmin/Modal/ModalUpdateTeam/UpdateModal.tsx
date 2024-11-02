@@ -369,10 +369,10 @@ const UpdateModal: React.FC<UpdateModalProps> = ({
         </div>
 
         <div className="modal-footer">
-          <button className="save-btn" onClick={handleUpdate}>
+          <button className="save-btn-update-team" onClick={handleUpdate}>
             Salvar
           </button>
-          <button className="cancel-btn" onClick={onClose}>
+          <button className="cancel-btn-update-team" onClick={onClose}>
             Fechar
           </button>
         </div>

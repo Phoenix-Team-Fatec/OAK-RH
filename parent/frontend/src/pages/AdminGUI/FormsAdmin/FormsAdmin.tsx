@@ -4,6 +4,7 @@ import { Checkbox, Button } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
 import ModalCreateCategory from "../../../components/ModalCreateCategory/ModalCreateCategory"; // Importa o Modal
+import AlertNotification from "../../../components/ComponentsAdmin/Modal/ModalAlertNotification/AlertNotification";
 import "./adminFormulario.css"; // Certifique-se de que o caminho do CSS está correto
 import { getFormularios, deleteFormulario } from "./formsAdminBackend";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +26,7 @@ const FormsAdmin: React.FC = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
   const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
+  const [showAlert, setShowAlert] = useState(false)
   const { id } = useUserData();
 
   const navigate = useNavigate();
@@ -83,8 +85,8 @@ const FormsAdmin: React.FC = () => {
   // Deletando -
   const handleDelete = async () => {
     if (selectedIds.length === 0) {
-      alert("Selecione pelo menos um formulário para deletar.");
-      return;
+      setShowAlert(true)
+      return
     }
 
     if (
@@ -235,6 +237,12 @@ const FormsAdmin: React.FC = () => {
           open={isModalOpenSend}
           onClose={() => setIsModalOpenSend(false)}
           formId={selectedIds[0]}
+        />
+
+        <AlertNotification
+          message="Selecione pelo menos um formulário para deletar"
+          open={showAlert}
+          onClose={() => setShowAlert(false)}
         />
       </div>
     </>

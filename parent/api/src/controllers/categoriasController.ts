@@ -58,8 +58,8 @@ export const deletarCategoriaControl = async (req: Request, res: Response) => {
 export const atualizarCategoriaControl = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { nome } = req.body;
-        const resultado = await atualizarCategoria(Number(id), nome);
+        const { nome, id_admin } = req.body;
+        const resultado = await atualizarCategoria(Number(id),Number(id_admin), nome);
         return res.status(200).json(resultado);
     } catch (error) {
         return res.status(500).json({ message: error.message });
