@@ -4,26 +4,30 @@ import SimpleTable from '../DashAdmin/DashAdminTable';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
 import './DashAdmin.css';
+import SmallCardChart from './SmallCardCHart'; 
 
 const Dashboard: React.FC = () => {
   // Dados para os gráficos
   const data1 = [
-    { name: 'Grupo A', value: 400 },
-    { name: 'Grupo B', value: 300 },
-    { name: 'Grupo C', value: 300 },
-    { name: 'Grupo D', value: 200 },
+    { name: 'Grupo A', value: 100 },
+    { name: 'Grupo B', value: 80 },
+    { name: 'Grupo C', value: 30 },
+    { name: 'Grupo D', value: 20 },
   ];
   
   const data2 = [
-    { name: 'Categoria X', value: 500 },
-    { name: 'Categoria Y', value: 100 },
-    { name: 'Categoria Z', value: 200 },
+    { name: 'Categoria X', value: 50 },
+    { name: 'Categoria Y', value: 30 },
+    { name: 'Categoria Z', value: 80 },
+    { name: 'Categoria Z', value: 80 },
+    { name: 'Categoria Z', value: 100 },
+    { name: 'Categoria Z', value: 50 },
   ];
   
   const data3 = [
-    { name: 'Segmento 1', value: 350 },
-    { name: 'Segmento 2', value: 150 },
-    { name: 'Segmento 3', value: 100 },
+    { name: 'Segmento 1', value: 35 },
+    { name: 'Segmento 2', value: 15 },
+    { name: 'Segmento 3', value: 50 },
   ];
   
   const COLORS = ['#54334c', '#c46a7c', '#844164', '#e07b7b'];
@@ -34,17 +38,17 @@ const Dashboard: React.FC = () => {
     <Box className="dashboard-container">
       <Box className="top-cards">
         <Box className="small-card">
-          <Typography variant="h6">Colaboradores</Typography>
-          <Typography variant="body2">150</Typography>
+         
+          <SmallCardChart  title = "Colaboradores" data={data1} />
           
         </Box>
         <Box className="small-card">
-          <Typography variant="h6">Equipes</Typography>
-          <Typography variant="body2">27</Typography>
+          
+          <SmallCardChart  title = "Equipes" data={data2} />
         </Box>
         <Box className="small-card">
-          <Typography variant="h6">Formulários Criados</Typography>
-          <Typography variant="body2">20</Typography>
+
+          <SmallCardChart  title = "Formulários Criados" data={data3} />
         </Box>
       </Box>
 
@@ -133,3 +137,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
