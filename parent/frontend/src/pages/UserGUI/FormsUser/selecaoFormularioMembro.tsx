@@ -28,7 +28,6 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { id } = useUserData();
   const [isLider, setIsLider] = useState<boolean>(false);
-  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     const fetchUserTeams = async () => {
@@ -93,35 +92,40 @@ const SelecaoFormularioMembro: React.FC = () => {
     setActiveButton(button);
   };
 
-  const toggleSidebar = () => {
-    setIsExpanded((prevState) => !prevState);
-};
-
   return (
-    <div className="main-container">
-      <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-      <div className="header">
-        <button
-          className={activeButton === 'Pendentes' ? 'active' : ''}
-          onClick={() => handleButtonClick('Pendentes')}
-        >
-          Pendentes
-        </button>
-        <button
-          className={activeButton === 'Respondidos' ? 'active' : ''}
-          onClick={() => handleButtonClick('Respondidos')}
-        >
-          Respondidos
-        </button>
-        <select value={selectedEquipe || ''} onChange={handleEquipeChange}>
-          <option value="" disabled>Selecione uma equipe</option>
-          {equipes.map((equipe) => (
-            <option key={equipe.id} value={equipe.id}>
-              {equipe.nome}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="selecao-formulario-container">
+      <SidebarUser />
+      <div className="selecao-formulario-content">
+        <div className="selecao-formulario-header">
+          <div className="selecao-formulario-buttons">
+            <button
+              className={`selecao-formulario-button ${activeButton === 'Pendentes' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('Pendentes')}
+            >
+              Pendentes
+            </button>
+            <button
+              className={`selecao-formulario-button ${activeButton === 'Respondidos' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('Respondidos')}
+            >
+              Respondidos
+            </button>
+          </div>
+          <select
+            value={selectedEquipe || ''}
+            onChange={handleEquipeChange}
+            className="selecao-formulario-select"
+          >
+            <option value="" disabled>Selecione uma equipe</option>
+            {equipes.map((equipe) => (
+              <option key={equipe.id} value={equipe.id}>
+                {equipe.nome}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <h3 className="selecao-formulario-team-info">{nomeEquipe} - {nivel}</h3>
 
         {loading ? (
           <p className="selecao-formulario-loading">Carregando formulários...</p>
@@ -141,6 +145,7 @@ const SelecaoFormularioMembro: React.FC = () => {
           <div className="selecao-formulario-no-data">Não há formulários respondidos ainda.</div>
         )}
       </div>
+    </div>
   );
 };
 
