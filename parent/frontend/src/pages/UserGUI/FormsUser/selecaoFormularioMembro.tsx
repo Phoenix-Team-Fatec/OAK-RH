@@ -141,7 +141,6 @@ const SelecaoFormularioMembro: React.FC = () => {
           <div className="selecao-formulario-no-data">Não há formulários respondidos ainda.</div>
         )}
       </div>
-    </div>
   );
 };
 

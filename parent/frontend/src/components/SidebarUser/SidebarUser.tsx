@@ -65,7 +65,7 @@ const SidebarUser: React.FC<SidebarUserProps> = ({ isExpanded, toggleSidebar }) 
         </li>
         <li className="menu_span_user">
           <NavLink
-            to="/forms-user"
+            to="/formularios-user"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
             <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-user" />
