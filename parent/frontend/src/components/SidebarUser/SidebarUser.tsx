@@ -1,58 +1,81 @@
-import React, { useState } from "react";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faBars,faTimes,faTachometerAlt, faFileAlt,faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTachometerAlt,
+  faUsers,
+  faUserFriends,
+  faFileAlt,
+  faSignOutAlt,
+  faBars,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 import "./SidebarUser.css";
 import { NavLink } from "react-router-dom";
+import useUserData from "../../hooks/useUserData";
 
-const SidebarUser = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
+const SidebarUser = ({ isExpanded, toggleSidebar }) => {
+  const { nome, email } = useUserData();
 
-    const toggleSidebar = () => {
-        setIsExpanded(!isExpanded);
-    };
-
-    return (
-        <div className={`sidebar ${isExpanded ? "expanded" : "collapsed"}`}>
-            <div className="logo_sidebar">
-                <div>
-                    <span className="oak">OAK</span>
-                    <span>RH</span>
-                </div>
-                <div className="hamburguer_sidebar">
-                    <FontAwesomeIcon
-                        icon={isExpanded ? faTimes : faBars}
-                        className="toggle-icon"
-                        onClick={toggleSidebar}
-                    />
-                </div>
+  return (
+    <div className={`sidebar-user ${isExpanded ? "expanded" : "collapsed"}`}>
+      <div className="toggle-container">
+        {isExpanded && (
+          <div className="logo-sidebar-user">
+            <div className="logo-text">
+              <span className="oak">OAK</span>
+              <span>RH</span>
             </div>
-            <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
-                <li className="menu_span">
-                    <NavLink to="/dashboard-user" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faTachometerAlt} />
-                        {isExpanded && " Dashboard"}
-                    </NavLink>
-                </li>
-                <li className="menu_span">
-                    <NavLink to="/lista-formularios" className={({ isActive }) => (isActive ? "active_link" : "")}>
-                        <FontAwesomeIcon icon={faFileAlt} />
-                        {isExpanded && " Formulários"}
-                    </NavLink>
-                </li>
-                <li className="profile">
-                    <span>Admin</span>
-                    <img src="./images.jpg" alt="Perfil do Admin" />
-                </li>
-                <li className="logout">
-                    {isExpanded ? (
-                        <span>Logout</span>
-                    ) : (
-                        <FontAwesomeIcon icon={faSignOutAlt} /> 
-                    )}
-                </li>
-            </ul>
+          </div>
+        )}
+        <div
+          className={`toggle-button ${isExpanded ? "expanded" : ""}`}
+          onClick={toggleSidebar}
+        >
+          <FontAwesomeIcon icon={isExpanded ? faTimes : faBars} />
         </div>
-    );
+      </div>
+
+      {isExpanded && (
+        <div className="profile_container">
+          <img
+            src="./profile-w.png"
+            alt="Perfil do User"
+            className="profile_image"
+          />
+          <span className="profile_name">{nome || "Nome não disponível"}</span>
+          <span className="profile_email">{email || "Email não disponível"}</span>
+        </div>
+      )}
+
+      <ul className="menu-sidebar-user">
+        <li className="menu_span">
+          <NavLink
+            to="/dashboard-user"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faTachometerAlt} className="icon-sidebar-user" />
+            {isExpanded && "Dashboard"}
+          </NavLink>
+        </li>
+        <li className="menu_span">
+          <NavLink
+            to="/formularios-user"
+            className={({ isActive }) => (isActive ? "active_link" : "")}
+          >
+            <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-user" />
+            {isExpanded && "Formulários"}
+          </NavLink>
+        </li>
+      </ul>
+
+      <li className="logout">
+        <NavLink to="/" className="logout_link">
+          <FontAwesomeIcon icon={faSignOutAlt} />
+          {isExpanded && "Logout"}
+        </NavLink>
+      </li>
+    </div>
+  );
 };
 
 export default SidebarUser;

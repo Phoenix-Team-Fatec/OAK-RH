@@ -2,144 +2,221 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Estilo da sidebar */
-.sidebar {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .dashboard-user-wrapper {
+    display: flex;
+  }
+  
+  .sidebar-user {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
-    width: 60px; /* Define uma largura inicial para a sidebar colapsada */
-    position: fixed; /* Fixa a sidebar na tela */
+    width: 230px;
+    position: fixed;
     background-color: #177035;
     padding: 20px;
     color: #ffffff;
-    overflow: hidden; /* Esconde o conteúdo que não cabe ao colapsar */
+    overflow: hidden; 
     top: 0;
     left: 0;
     z-index: 1000;
-}
-
-/* Sidebar expandida */
-.sidebar.expanded {
-    width: 190px;
-}
-
-/* Sidebar colapsada */
-.sidebar.collapsed {
-    width: 70px;
-    align-items: flex-start; /* Alinha os itens à esquerda */
-}
-
-.hamburguer_sidebard.sidebar.collapsed {
-    margin-left: 0;
-}
-
-/* Logo da sidebar */
-.logo_sidebar {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 20px;
+    transition: width 0.5s ease; 
+  }
+  
+  .sidebar-user.expanded .profile_container,
+  .sidebar-user.expanded .menu-sidebar-user,
+  .sidebar-user.expanded .logout {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+  .logo-sidebar-user {
     display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
-    align-items: center;
-}
-
-/* Estiliza a palavra 'OAK' da logo */
-.logo_sidebar .oak {
-    color: #6FE396;
-}
-
-/* Esconde o texto 'OAK RH' quando a sidebar está colapsada */
-.sidebar.collapsed .oak,
-.sidebar.collapsed span {
-    display: none;
-}
-
-/* Ícone para alternar entre expandir e colapsar */
-.toggle-icon {
+    margin-bottom: 20px; 
+  }
+  
+  .toggle-button {
+    font-size: 24px;
+    color: #ffffff;
+    background: none;
+    border: none;
     cursor: pointer;
-    font-size: 25px;
-    margin: auto;
-    font-weight: 600;
-}
-
-/* Menu da sidebar */
-.menu {
+    margin: 0; 
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+  }
+  
+  .toggle-button.expanded {
+    font-size: 1.8vw;
+    margin-top: -19px;
+    margin-left: 78px;
+  }
+  
+  .logo-sidebar-user .oak {
+    color: #4fc576;
+  }
+  
+  .profile_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .profile_image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile_name {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .profile_email {
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 100;
+  }
+  
+  .menu-sidebar-user {
     list-style: none;
     padding: 0;
     margin: 0;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-top: 160px;
     width: 100%;
-    font-size: 14px; /* Mantém a posição dos itens */
-}
-
-/* Itens do menu */
-.menu li {
-    all: unset;
+  }
+  
+  .menu-sidebar-user li {
+    width: 100%;
     margin-bottom: 10px;
-    text-align: center;
-    font-weight: 300;
-    display: flex;
-}
-
-/* Estilo dos links */
-.menu li a {
-    color: #9ae59f; /* Cor dos links como branco */
-    text-decoration: none; /* Remove a linha de baixo dos links */
-    display: block;
+    font-size: 14px;
+  }
+  
+  .menu_span {
     width: 100%;
-    padding: 10px;
-}
-
-/* Estilo dos links ativos (na página atual) */
-.menu li a.active_link {
-    color: #ffffff; /* Cor roxa para o link ativo */
-    background-color: #1352288a; /* Ajuste a cor do fundo, se necessário, para destaque */
-    border-radius: 6px;
-}
-
-/* Estilo de hover nos links */
-.menu li a:hover {
-    color: #6FE396; /* Muda para roxo ao passar o mouse */
-}
-
-/* Perfil no final do menu */
-.menu li.profile {
-    margin-top: auto;
+  }
+  
+  .menu_span a {
+    color: #ffffff;
+    text-decoration: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-
-/* Botão de logout */
-.menu li.logout {
-    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .menu_span a.active_link {
+    color: #ffffff;
+    background-color: #0e632a;
+    border-radius: 6px;
+  }
+  
+  .menu_span a:hover {
+    color: #5dc680;
+  }
+  
+  .icon-sidebar-user {
+    margin-right: 8px;
+  }
+  
+  .logout {
+    list-style: none;
+    margin-top: auto;
+    width: 100%;
+  }
+  
+  .logout_link {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 12px;
+    padding: 8px 10px;
     display: flex;
     justify-content: center;
-    border: 1px solid #DEE0DB;
-    border-radius: 10px;
-    padding: 5px;
-    cursor: pointer;
-}
-
-/* Imagem do perfil */
-.menu li img {
-    width: 140px;
-    height: 135px;
-    border-radius: 20px;
-    margin-top: 5px;
-}
-
-/* Ajusta o tamanho da imagem do perfil quando a sidebar está colapsada */
-.sidebar.collapsed .menu li img {
-    width: 30px;
-    height: 30px;
-}
+    align-items: center;
+    width: 100%;
+    border: 2px solid #ffffff;
+    border-radius: 8px;
+  }
+  
+  .logout_link:hover {
+    color: #a380a5;
+  }
+  
+  .sidebar-user.collapsed {
+    width: 80px;
+    padding: 20px 10px;
+    align-items: center;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+  }
+  
+  .sidebar-user.collapsed .logo-sidebar-user {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .sidebar-user.collapsed .icon-sidebar-user {
+    margin-right: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .sidebar-user.collapsed .profile_image {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-user.collapsed .profile_name,
+  .sidebar-user.collapsed .profile_email {
+    display: none;
+  }
+  
+  .menu-sidebar-user li {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .menu_span a {
+    justify-content: center;
+  }
+  
+  .icon-sidebar-user {
+    display: flex;
+    justify-content: center;
+  }
+  
