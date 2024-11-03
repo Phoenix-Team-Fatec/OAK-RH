@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './selecaoFormularioMembro.css';
+import './SelecaoFormularioMembro.css';
 import useUserData from '../../../hooks/useUserData';
 import SidebarUser from '../../../components/SidebarUser/SidebarUser';
 import { listFormularios, listUser_Teams } from './index';
@@ -33,7 +33,6 @@ const SelecaoFormularioMembro: React.FC = () => {
     const fetchUserTeams = async () => {
       try {
         const response = await listUser_Teams(id);
-
         const equipesData = response.flatMap((userItem: any) =>
           userItem.user.map((userTeam: any) => ({
             id: userTeam.equipes.id,
@@ -41,14 +40,12 @@ const SelecaoFormularioMembro: React.FC = () => {
             isLider: userTeam.is_lider,
           }))
         );
-
         setEquipes(equipesData);
       } catch (error) {
         console.log(error);
         setError("Erro ao carregar equipes.");
       }
     };
-
     fetchUserTeams();
   }, [id]);
 
@@ -57,11 +54,8 @@ const SelecaoFormularioMembro: React.FC = () => {
       if (selectedEquipe === null) return;
       setLoading(true);
       setError(null);
-
       try {
         const response = await listFormularios(selectedEquipe);
-
-        // Filtra os formulários conforme o nível de acesso (Líderes, Liderados, Ambos)
         const formulariosData = response
           .filter((item: any) => {
             if (item.nivel === "ambos") return true;
@@ -75,7 +69,6 @@ const SelecaoFormularioMembro: React.FC = () => {
             equipe: item.equipes.nome,
             nivel: item.nivel,
           }));
-
         setFormularios(formulariosData);
       } catch (error: any) {
         setError("Erro ao buscar os formulários.");
@@ -83,14 +76,12 @@ const SelecaoFormularioMembro: React.FC = () => {
         setLoading(false);
       }
     };
-
     fetchFormularios();
   }, [selectedEquipe, activeButton, isLider]);
 
   const handleEquipeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const equipeId = Number(event.target.value);
     setSelectedEquipe(equipeId);
-
     const equipeSelecionada = equipes.find((equipe) => equipe.id === equipeId);
     setNomeEquipe(equipeSelecionada ? equipeSelecionada.nome : '');
     setIsLider(equipeSelecionada ? equipeSelecionada.isLider : false);
@@ -102,49 +93,56 @@ const SelecaoFormularioMembro: React.FC = () => {
   };
 
   return (
-    <div className="main-container">
+    <div className="selecao-formulario-container">
       <SidebarUser />
-      <div className="header">
-        <button
-          className={activeButton === 'Pendentes' ? 'active' : ''}
-          onClick={() => handleButtonClick('Pendentes')}
-        >
-          Pendentes
-        </button>
-        <button
-          className={activeButton === 'Respondidos' ? 'active' : ''}
-          onClick={() => handleButtonClick('Respondidos')}
-        >
-          Respondidos
-        </button>
-        <select value={selectedEquipe || ''} onChange={handleEquipeChange}>
-          <option value="" disabled>Selecione uma equipe</option>
-          {equipes.map((equipe) => (
-            <option key={equipe.id} value={equipe.id}>
-              {equipe.nome}
-            </option>
-          ))}
-        </select>
-      </div>
+      <div className="selecao-formulario-content">
+        <div className="selecao-formulario-header">
+          <div className="selecao-formulario-buttons">
+            <button
+              className={`selecao-formulario-button ${activeButton === 'Pendentes' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('Pendentes')}
+            >
+              Pendentes
+            </button>
+            <button
+              className={`selecao-formulario-button ${activeButton === 'Respondidos' ? 'active' : ''}`}
+              onClick={() => handleButtonClick('Respondidos')}
+            >
+              Respondidos
+            </button>
+          </div>
+          <select
+            value={selectedEquipe || ''}
+            onChange={handleEquipeChange}
+            className="selecao-formulario-select"
+          >
+            <option value="" disabled>Selecione uma equipe</option>
+            {equipes.map((equipe) => (
+              <option key={equipe.id} value={equipe.id}>
+                {equipe.nome}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="container-forms-user">
-        <h3>{nomeEquipe} - {nivel}</h3>
+        <h3 className="selecao-formulario-team-info">{nomeEquipe} - {nivel}</h3>
+
         {loading ? (
-          <p>Carregando formulários...</p>
+          <p className="selecao-formulario-loading">Carregando formulários...</p>
         ) : error ? (
-          <p className="error">Erro: {error}</p>
+          <p className="selecao-formulario-error">Erro: {error}</p>
         ) : activeButton === 'Pendentes' ? (
           formularios.length > 0 ? (
             formularios.map((formulario) => (
-              <div key={formulario.id} className="card-userForms">
-                <div className="card-header">{formulario.nome}</div>
+              <div key={formulario.id} className="selecao-formulario-card">
+                <div className="selecao-formulario-card-header">{formulario.nome}</div>
               </div>
             ))
           ) : (
-            <p>Nenhum formulário pendente encontrado.</p>
+            <p className="selecao-formulario-no-data">Nenhum formulário pendente encontrado.</p>
           )
         ) : (
-          <div>Não há formulários respondidos ainda.</div>
+          <div className="selecao-formulario-no-data">Não há formulários respondidos ainda.</div>
         )}
       </div>
     </div>
