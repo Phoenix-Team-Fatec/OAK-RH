@@ -1,4 +1,3 @@
-
 import { getEquipe_user } from "../components/UserSelectionModal/index";
 
 import { useState, useEffect } from 'react';

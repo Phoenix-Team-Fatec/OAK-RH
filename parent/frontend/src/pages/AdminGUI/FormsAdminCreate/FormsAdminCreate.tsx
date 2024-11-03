@@ -1,5 +1,5 @@
-import Formulario from "../../../components/Formulario/formulario.tsx"
-import SidebarAdmin from "../../../components/SidebarAdmin/SidebarAdmin.tsx";
+import Formulario from "../../../components/Formulario/formulario.tsx";
+import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin.tsx";
 
 const FormsAdminCreate: React.FC = () => {
   return (
@@ -9,6 +9,5 @@ const FormsAdminCreate: React.FC = () => {
     </div>
   );
 };
-
 
 export default FormsAdminCreate;

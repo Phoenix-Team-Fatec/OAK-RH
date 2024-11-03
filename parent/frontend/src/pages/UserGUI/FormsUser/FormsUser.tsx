@@ -1,10 +1,12 @@
 import SidebarUser from "../../components/SidebarUser/SidebarUser";
+import SelecaoFormularioMembro from "../../components/SelecaoFormularioMembro/selecaoFormularioMembro";
+
 
 function App() {
     return (
       <div>
-        <h1>Meus Dashboards</h1>
         <SidebarUser />
+        <SelecaoFormularioMembro/>
       </div>
     );
   }

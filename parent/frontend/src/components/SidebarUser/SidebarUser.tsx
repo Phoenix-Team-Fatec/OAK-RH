@@ -28,7 +28,7 @@ const SidebarUser = () => {
             </div>
             <ul className={`menu ${isExpanded ? "" : "collapsed"}`}>
                 <li className="menu_span">
-                    <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active_link" : "")}>
+                    <NavLink to="/dashboard-user" className={({ isActive }) => (isActive ? "active_link" : "")}>
                         <FontAwesomeIcon icon={faTachometerAlt} />
                         {isExpanded && " Dashboard"}
                     </NavLink>

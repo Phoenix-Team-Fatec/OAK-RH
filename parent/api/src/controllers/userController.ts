@@ -107,10 +107,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     const user_id = userRecord.uid;
     await admin.auth().deleteUser(user_id);
 
-
-
-
-
     const userId = parseInt(id);
     const result = await deleteUserService(userId);
 
@@ -120,7 +116,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     return res.status(500).json({ message: error.message })
   }
 };
-
 
 
 //função para pegar o id do usuário pelo email

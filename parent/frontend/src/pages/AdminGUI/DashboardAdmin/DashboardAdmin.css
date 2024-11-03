@@ -1,11 +1,45 @@
 /* Container for the entire dashboard */
+
+.dashboard-admin-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar styles */
+.sidebar-admin {
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+.sidebar-admin.expanded {
+  width: 250px; /* Expanded width */
+}
+
+.sidebar-admin.collapsed {
+  width: 60px; /* Collapsed width */
+}
+
+/* ________________________________________________ */
+
 .dashboard-admin-container {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
     min-height: 100vh;
   }
+
+
+.dashboard-admin-container.collapsed {
+  margin-left: 200px;
+}
+
+.dashboard-admin-container.expanded {
+  margin-left: 290px;
+}
   
   /* Dashboard Title */
   .dashboard-admin-title {
@@ -24,7 +58,7 @@
   /* Grid layout for the cards */
   .dashboard-admin-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
     gap: 20px;
   }
   

@@ -1,0 +1,20 @@
+.success-notification {
+  position: fixed;
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  background-color: #177035;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  font-size: 14px;
+}
+
+.success-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}

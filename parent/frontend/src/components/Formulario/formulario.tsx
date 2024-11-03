@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './Formulario.css';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { createForm, createQuestion, listCategories } from './formulario'; // Suas funções API
-import { useNavigate } from 'react-router-dom'; // Importa o hook useNavigate
-import ModalSendForm from '../modalSendFormsTeam/ModalSendFormsTeam';
-
-import useUserData from '../../hooks/useUserData';
+import React, { useState, useEffect } from "react";
+import "./Formulario.css";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { createForm, createQuestion, listCategories } from "./formulario"; // Suas funções API
+import { useNavigate } from "react-router-dom"; // Importa o hook useNavigate
+import ModalSendForm from "../modalSendFormsTeam/ModalSendFormsTeam";
+import useUserData from "../../hooks/useUserData";
 
 // Interfaces
 interface Category {
@@ -26,31 +25,25 @@ interface Form {
   adminId: number;
 }
 
-const userData = useUserData()
-
 const Formulario: React.FC = () => {
-  const {id} = useUserData();
+  const { id } = useUserData();
 
   const [form, setForm] = useState<Form>({
-    title: 'Título do Formulário',
-    description: 'Descrição do Formulário',
-    adminId: userData.id
+    title: "",
+    description: "",
+    adminId: id,
   });
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [questions, setQuestions] = useState<Question[]>([
-    { type: 'longQuestion', value: '', options: [], category: '' }
+    { type: "longQuestion", value: "", options: [], category: "" },
   ]);
 
-
-
   const [formId, setFormId] = useState<number>(0);
-
-  // Modal states
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
-  const [isError, setIsError] = useState(false); // Estado para verificar se é um erro ou sucesso
-  const navigate = useNavigate(); // Hook for navigation
+  const [modalMessage, setModalMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const navigate = useNavigate();
 
   // Fetch categories and update default question category
   useEffect(() => {
@@ -58,7 +51,6 @@ const Formulario: React.FC = () => {
       try {
         const categorias = await listCategories(form.adminId);
         setCategories(categorias);
-        console.log('Categorias retornadas:', categorias);
       } catch (error) {
         console.log("Erro ao buscar categorias:", error);
       }
@@ -71,66 +63,67 @@ const Formulario: React.FC = () => {
       setQuestions((prevQuestions) =>
         prevQuestions.map((q) => ({
           ...q,
-          category: q.category || categories[0].nome, // Set default category if not selected
+          category: q.category || categories[0].nome,
         }))
       );
     }
   }, [categories]);
 
-  // Add a new question
   const addQuestion = () => {
     setQuestions([
       ...questions,
-      { type: 'longQuestion', value: '', options: [], category: categories[0].nome }
+      {
+        type: "longQuestion",
+        value: "",
+        options: [],
+        category: categories[0].nome,
+      },
     ]);
   };
 
-  // Remove a question
   const deleteQuestion = (index: number) => {
     setQuestions(questions.filter((_, i) => i !== index));
   };
 
-  // Change question value
   const handleQuestionChange = (index: number, newValue: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].value = newValue;
     setQuestions(updatedQuestions);
   };
 
-  // Change question type
   const handleQuestionTypeChange = (index: number, newType: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].type = newType;
-    updatedQuestions[index].options = newType === 'multipleChoice' ? [''] : [];
+    updatedQuestions[index].options = newType === "multipleChoice" ? [""] : [];
     setQuestions(updatedQuestions);
   };
 
-  // Change question category
   const handleQuestionCategoryChange = (index: number, newCategory: string) => {
     const updatedQuestions = [...questions];
     updatedQuestions[index].category = newCategory;
     setQuestions(updatedQuestions);
   };
 
-  // Add an option to a multiple/unique choice question
   const handleAddOption = (index: number) => {
     const updatedQuestions = [...questions];
     if (updatedQuestions[index].options.length < 10) {
-      updatedQuestions[index].options.push('');
+      updatedQuestions[index].options.push("");
       setQuestions(updatedQuestions);
     } else {
-      alert('Limite de 10 opções atingido');
+      alert("Limite de 10 opções atingido");
     }
   };
 
-  // Change the value of an option
-  const handleOptionChange = (qIndex: number, optIndex: number, newValue: string) => {
+  const handleOptionChange = (
+    qIndex: number,
+    optIndex: number,
+    newValue: string
+  ) => {
     const updatedQuestions = [...questions];
     updatedQuestions[qIndex].options[optIndex] = newValue;
-    setQuestions(updatedQuestions); 
+    setQuestions(updatedQuestions);
   };
 
-  // Delete an option
   const deleteOption = (qIndex: number, optIndex: number) => {
     const updatedQuestions = [...questions];
     updatedQuestions[qIndex].options = updatedQuestions[qIndex].options.filter(
@@ -139,15 +132,13 @@ const Formulario: React.FC = () => {
     setQuestions(updatedQuestions);
   };
 
-  // Função para fechar o modal de erro
   const handleCloseModal = () => {
     setModalOpen(false);
     if (!isError) {
-      navigate('/formularios-admin'); // Redireciona para a página de formulários
+      navigate("/formularios-admin");
     }
   };
 
-  // Submit the form and create the questions
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -214,42 +205,44 @@ const Formulario: React.FC = () => {
     }
   };
 
-  
-
   return (
-    <div className="form-container-forms-create">
-      <h2>Criar Formulário</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Título do Formulário</label>
-          <input
-            type="text"
-            value={form.title}
-            onChange={(e) => setForm({ ...form, title: e.target.value })}
-            placeholder="Edite o título do formulário"
-          />
-        </div>
+    <div className="formulario-wrapper">
+      <div className="formulario-content">
+        <h2 className="formulario-title">Criar Formulário</h2>
+        <form onSubmit={handleSubmit} className="forms-content-admin">
+          <div className="formulario-field">
+            <input
+              type="text"
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              placeholder="Título do Formulário" 
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Descrição do Formulário</label>
-          <input
-            type="text"
-            value={form.description}
-            onChange={(e) => setForm({ ...form, description: e.target.value })}
-            placeholder="Edite a descrição do formulário"
-          />
-        </div>
+          <div className="formulario-field">
+            <input
+              type="text"
+              value={form.description}
+              onChange={(e) =>
+                setForm({ ...form, description: e.target.value })
+              }
+              placeholder="Descrição do Formulário"
+            />
+          </div>
 
-        {questions.map((question, qIndex) => (
-          <div className="question-container" key={qIndex}>
-            <div className="question-content">
-              <DeleteIcon className="delete-icon" onClick={() => deleteQuestion(qIndex)} />
-
-              <div className="form-group">
+          {questions.map((question, qIndex) => (
+            <div className="question-wrapper" key={qIndex}>
+              <DeleteIcon
+                className="delete-icon"
+                onClick={() => deleteQuestion(qIndex)}
+              />
+              <div className="formulario-field">
                 <label>Categoria da Pergunta</label>
                 <select
                   value={question.category}
-                  onChange={(e) => handleQuestionCategoryChange(qIndex, e.target.value)}
+                  onChange={(e) =>
+                    handleQuestionCategoryChange(qIndex, e.target.value)
+                  }
                 >
                   {categories.map((category) => (
                     <option key={category.id} value={category.nome}>
@@ -259,11 +252,13 @@ const Formulario: React.FC = () => {
                 </select>
               </div>
 
-              <div className="form-group">
+              <div className="formulario-field">
                 <label>Tipo de Pergunta</label>
                 <select
                   value={question.type}
-                  onChange={(e) => handleQuestionTypeChange(qIndex, e.target.value)}
+                  onChange={(e) =>
+                    handleQuestionTypeChange(qIndex, e.target.value)
+                  }
                 >
                   <option value="longQuestion">Pergunta Longa</option>
                   <option value="multipleChoice">Múltipla Escolha</option>
@@ -271,7 +266,7 @@ const Formulario: React.FC = () => {
                 </select>
               </div>
 
-              <div className="form-group">
+              <div className="formulario-field">
                 <label>Pergunta {qIndex + 1}</label>
                 <input
                   type="text"
@@ -281,51 +276,53 @@ const Formulario: React.FC = () => {
                 />
               </div>
 
-              {(question.type === 'multipleChoice' || question.type ==='uniqueChoice') && (
-                <div className="options">
+              {(question.type === "multipleChoice" ||
+                question.type === "uniqueChoice") && (
+                <div className="options-wrapper">
                   <label>Opções</label>
                   {question.options.map((option, optIndex) => (
-                    <div className="option" key={optIndex}>
+                    <div className="option-wrapper" key={optIndex}>
                       <input
                         type="text"
                         value={option}
-                        onChange={(e) => handleOptionChange(qIndex, optIndex, e.target.value)}
+                        className="option-input"
+                        onChange={(e) =>
+                          handleOptionChange(qIndex, optIndex, e.target.value)
+                        }
                       />
-                      <DeleteIcon className="delete-icon delete-option" onClick={() => deleteOption(qIndex, optIndex)} />
+                      <DeleteIcon
+                        className="delete-icon delete-option"
+                        onClick={() => deleteOption(qIndex, optIndex)}
+                      />
                     </div>
                   ))}
-                  <button type="button" className="button-forms-create" onClick={() => handleAddOption(qIndex)}>
-                    Adicionar Opção
+                  <button
+                    type="button"
+                    className="add-option-button"
+                    onClick={() => handleAddOption(qIndex)}
+                  >
+                    + Adicionar Opção
                   </button>
                 </div>
               )}
-
-
-            
             </div>
-          </div>
-        ))}
+          ))}
 
-
-
-        
-
-
-
-        
-
-        <button type="button" className="button-forms-create" onClick={addQuestion}>
-          Adicionar Pergunta
-        </button>
-        <button type="submit" className="button-forms-create">Salvar Formulário</button>
-      </form>
+          <button
+            type="button"
+            className="add-question-button"
+            onClick={addQuestion}
+          >
+            Adicionar Pergunta
+          </button>
+          <button type="submit" className="button-forms-create">Enviar Formulário</button>
+        </form>
+      </div>
 
       <ModalSendForm
         open={modalOpen}
         onClose={handleCloseModal}
         formId={formId}
-      
-      
       />
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './selecaoFormularioMembro.css';
-import useUserData from '../../hooks/useUserData';
-import SidebarUser from '../../components/SidebarUser/SidebarUser';
+import useUserData from '../../../hooks/useUserData';
+import SidebarUser from '../../../components/SidebarUser/SidebarUser';
 import { listFormularios, listUser_Teams } from './index';
 
 interface Formulario {

@@ -15,11 +15,19 @@ body {
 .content {
   margin: 0 auto; /* Centraliza horizontalmente */
   padding: 30px;
-  width: 72.5%; /* Define uma largura fixa */
+  width: 72%; /* Define uma largura fixa */
+  transition: margin-left 0.3s ease; /* Smooth transition */
+  margin-left: 350px; /* Adjust this value to the width of your expanded sidebar */
 }
 
-.content h2 {
+.content.collapsed {
+  margin-left: 250px;
+}
+
+.h2-content-forms-admin {
   font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .actions-forms-admin {
@@ -32,7 +40,7 @@ body {
 .actions-forms-admin button {
   flex: 1; /* Faz os botões ocuparem igual largura */
   margin-right: 10px; /* Espaço entre os botões */
-  background-color: #2f8d54;
+  background-color: #A380A5;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 12px;
@@ -45,15 +53,15 @@ body {
 }
 
 .actions-forms-admin .button-enviar {
-  background-color: #218838;
+  background-color: #A380A5;
 }
 
 .actions-forms-admin .button-enviar:hover {
-  background-color: #218838;
+  background-color: #704772;
 }
 
 .actions-forms-admin button:hover {
-  background-color: #218838;
+  background-color: #704772;
 }
 
 .tabela-formularios {
@@ -62,5 +70,7 @@ body {
 }
 
 .tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
-  color: #218838; /* Altere para a cor que você deseja */
+  color: #813585; /* Altere para a cor que você deseja */
 }
+
+

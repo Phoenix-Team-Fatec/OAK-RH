@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 //Função para criar um formulário
 export async function createForm(nome:string, descricao:string, admin_id:number){
     try{
@@ -18,8 +16,6 @@ export async function createForm(nome:string, descricao:string, admin_id:number)
         return error;
     }
 }
-
-
 
 //Função para criar pergunta
 export async function createQuestion(formulario_id:number, texto:string, tipo:string, descricao:string[], categoria_id:number){
@@ -49,8 +45,6 @@ export async function listTeams(admin_id:number){
     }
 }
 
-
-
 //Função para listar categorias
 export async function listCategories(admin_id:number){
     try{
@@ -62,4 +56,5 @@ export async function listCategories(admin_id:number){
         return error;
     }
 }
+
 
