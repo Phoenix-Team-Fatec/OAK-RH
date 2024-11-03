@@ -1,6 +1,5 @@
-import SidebarUser from "../../components/SidebarUser/SidebarUser";
-import SelecaoFormularioMembro from "../../components/SelecaoFormularioMembro/selecaoFormularioMembro";
-
+import SidebarUser from "../../../components/SidebarUser/SidebarUser";
+import SelecaoFormularioMembro from "./selecaoFormularioMembro";
 
 function App() {
     return (

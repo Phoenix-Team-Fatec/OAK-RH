@@ -1,86 +1,157 @@
-/* Estiliza o container principal */
-.main-container {
+
+/* Main container for the form selection page */
+.selecao-formulario-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-top: 60px;
 }
 
-.header {
+/* Form selection content area */
+.selecao-formulario-content {
     display: flex;
-    gap: 100px;
-    margin-bottom: 20px;
+    flex-direction: column;
     align-items: center;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    min-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header button {
+/* Header with buttons and select dropdown */
+.selecao-formulario-header {
+    display: flex;
+    justify-content: space-between; /* Distribute space between buttons and select */
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Button group in the center */
+.selecao-formulario-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Individual buttons */
+.selecao-formulario-button {
     background-color: white;
     color: black;
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: solid 1px #c5c5c5;
     border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
-.header button.active {
-    background-color: #556644;
+.selecao-formulario-button:hover {
+    background-color: transparent;
+}
+
+.selecao-formulario-button.active {
+    background-color: #177035;
     color: white;
 }
 
-/* Container dos cards */
-.container-forms-user {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    justify-content: center;
-    background-color: white;
-    position: relative; /* Necessário para posicionar o h3 */
-    padding-top: 40px; /* Espaço para o h3 não cobrir os cards */
+/* Dropdown for selecting teams, aligned to the right */
+.selecao-formulario-select {
+    width: 30%;
+    border-radius: 5px;
+    padding: 8px;
 }
 
-/* Estilo do h3 para posicioná-lo no canto superior esquerdo */
-.container-forms-user h3 {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    margin: 0;
+/* Team and role information styling */
+.selecao-formulario-team-info {
     font-size: 18px;
     color: #333;
+    margin-top: 10px;
+    text-align: left; 
+    width: 100%;
 }
 
-/* Estilo dos cards */
-.card-userForms {
-    width: 130px;
-    height: 130px;
+.selecao-formulario-nivel {
+    font-size: 16px;
+    color: #555; /* Adjust color for better visibility */
+}
+
+/* Loading message styling */
+.selecao-formulario-loading {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Error message styling */
+.selecao-formulario-error {
+    font-size: 16px;
+    color: #ff5a5a;
+}
+
+/* Message for no data */
+.selecao-formulario-no-data {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Cards displaying forms */
+.selecao-formulario-card {
+    width: 150px;
+    height: 150px;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
 }
 
-.card-header {
-    background-color: #218838;
-    color: white;
-    text-align: center;
+.selecao-formulario-card:hover {
+    transform: scale(1.05);
+}
+
+.selecao-formulario-card-header {
     padding: 10px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    text-align: center;
 }
 
-.card-footer {
-    background-color: #2F3B6B;
-    color: white;
-    height: 30%;
+/* Wrapper to align sidebar and form side-by-side */
+.forms-user-wraper {
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    width: 100%;
+  }
+  
+  /* Sidebar styles (same as Dashboard) */
+  .sidebar-user {
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .sidebar-user.expanded {
+    width: 250px; /* Expanded width */
+  }
+  
+  .sidebar-user.collapsed {
+    width: 60px; /* Collapsed width */
+  }
+  
+  /* Formulario content area */
+  .formulario-user-container {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .formulario-user-container.collapsed {
+    margin-left: 60px;
+  }
+  
+  .formulario-user-container.expanded {
+    margin-left: 250px;
+  }
 
-/* Zoom suave no hover */
-.card-userForms:hover {
-    transform: scale(1.1);
-}

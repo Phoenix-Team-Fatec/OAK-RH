@@ -13,7 +13,13 @@ import "./SidebarUser.css";
 import { NavLink } from "react-router-dom";
 import useUserData from "../../hooks/useUserData";
 
-const SidebarUser = ({ isExpanded, toggleSidebar }) => {
+// Define a interface para as props
+interface SidebarUserProps {
+  isExpanded: boolean;
+  toggleSidebar: () => void;
+}
+
+const SidebarUser: React.FC<SidebarUserProps> = ({ isExpanded, toggleSidebar }) => {
   const { nome, email } = useUserData();
 
   return (
@@ -59,7 +65,7 @@ const SidebarUser = ({ isExpanded, toggleSidebar }) => {
         </li>
         <li className="menu_span">
           <NavLink
-            to="/formularios-user"
+            to="/forms-user"
             className={({ isActive }) => (isActive ? "active_link" : "")}
           >
             <FontAwesomeIcon icon={faFileAlt} className="icon-sidebar-user" />
@@ -79,3 +85,4 @@ const SidebarUser = ({ isExpanded, toggleSidebar }) => {
 };
 
 export default SidebarUser;
+  
