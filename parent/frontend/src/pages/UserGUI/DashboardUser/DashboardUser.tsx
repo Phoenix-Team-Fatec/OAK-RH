@@ -1,13 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DashboardUser.css";
 import SidebarUser from "../../../components/SidebarUser/SidebarUser";
+import { listUser_Teams } from "../FormsUser/index";
+import useUserData from "../../../hooks/useUserData";
+
+interface Equipe {
+    id: number;
+    nome: string;
+    isLider: boolean;
+}
 
 const DashboardUser: React.FC = () => {
     const [isExpanded, setIsExpanded] = useState(true);
+    const [equipes, setEquipes] = useState<Equipe[]>([]);
+    const [setError] = useState<string | null>(null);
+    const { id } = useUserData();
 
     const toggleSidebar = () => {
         setIsExpanded((prevState) => !prevState);
     };
+
+    useEffect(() => {
+        const fetchUserTeams = async () => {
+            try {
+                const response = await listUser_Teams(id);
+                const equipesData = response.flatMap((userItem: any) =>
+                    userItem.user.map((userTeam: any) => ({
+                        id: userTeam.equipes.id,
+                        nome: userTeam.equipes.nome,
+                        isLider: userTeam.is_lider,
+                    }))
+                );
+                setEquipes(equipesData);
+            } catch (error) {
+                console.log(error);
+                setError("Erro ao carregar equipes.");
+            }
+        };
+        fetchUserTeams();
+    }, [id]);
 
     return (
         <div className="dashboard-user-wrapper">
@@ -25,7 +56,6 @@ const DashboardUser: React.FC = () => {
 
 
             <div className={`dashboard-user-container ${isExpanded ? "expanded" : "collapsed"}`}>
-
                 {/* Dashboard Cards */}
                 <div className="dashboard-user-cards">
                     <div className="upper-dashboard-user-card">
@@ -44,11 +74,9 @@ const DashboardUser: React.FC = () => {
                                 <rect className="bar" width="30" height="0" x="90" fill="#65A281" />
                                 <rect className="bar" width="30" height="0" x="130" fill="#91E2B6" />
                                 <rect className="bar" width="30" height="0" x="170" fill="#65A281" />
-                                <rect className="bar" width="30" height="0" x="210" fill="#91E2B6" /> {/* New bar */}
+                                <rect className="bar" width="30" height="0" x="210" fill="#91E2B6" />
                             </svg>
-
                         </div>
-
                     </div>
                     <div className="upper-dashboard-user-card">
                         <div className="dashboard-card-header">
@@ -102,7 +130,6 @@ const DashboardUser: React.FC = () => {
                         <p className="dashboard-user-card-value">15</p>
                     </div>
                 </div>
-
             </div>
         </div>
     );
