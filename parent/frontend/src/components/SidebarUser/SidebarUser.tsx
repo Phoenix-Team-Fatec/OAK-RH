@@ -48,7 +48,7 @@ const SidebarUser = ({ isExpanded, toggleSidebar }) => {
       )}
 
       <ul className="menu-sidebar-user">
-        <li className="menu_span">
+        <li className="menu_span_user">
           <NavLink
             to="/dashboard-user"
             className={({ isActive }) => (isActive ? "active_link" : "")}
@@ -57,7 +57,7 @@ const SidebarUser = ({ isExpanded, toggleSidebar }) => {
             {isExpanded && "Dashboard"}
           </NavLink>
         </li>
-        <li className="menu_span">
+        <li className="menu_span_user">
           <NavLink
             to="/formularios-user"
             className={({ isActive }) => (isActive ? "active_link" : "")}

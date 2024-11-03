@@ -28,6 +28,7 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { id } = useUserData();
   const [isLider, setIsLider] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     const fetchUserTeams = async () => {
@@ -101,9 +102,13 @@ const SelecaoFormularioMembro: React.FC = () => {
     setActiveButton(button);
   };
 
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+};
+
   return (
     <div className="main-container">
-      <SidebarUser />
+      <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
       <div className="header">
         <button
           className={activeButton === 'Pendentes' ? 'active' : ''}

@@ -12,17 +12,17 @@ const DashboardUser: React.FC = () => {
     return (
         <div className="dashboard-user-wrapper">
             <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-
             {/* Fake Navbar */}
-            <div className={`navbar ${isExpanded ? "expanded" : "collapsed"}`}>
-                <span className="navbar-title">
+            <div className={`navbar-user-dashboard ${isExpanded ? "expanded" : "collapsed"}`}>
+                <span className="navbar-title-user-dashboard">
                     {isExpanded ? "Dashboard" : "Dashboard"}
                 </span>
-                <select className={`navbar-select ${isExpanded ? "expanded" : "collapsed"}`}>
+                <select className={`navbar-select-user-dashboard ${isExpanded ? "expanded" : "collapsed"}`}>
                     <option value="option1">Option 1</option>
                     <option value="option2">Option 2</option>
                 </select>
             </div>
+
 
             <div className={`dashboard-user-container ${isExpanded ? "expanded" : "collapsed"}`}>
 
@@ -56,7 +56,36 @@ const DashboardUser: React.FC = () => {
                             <button className="dashboard-card-btn">Ver Todos</button>
                         </div>
                         <hr className="divider-line" />
-                        <p className="dashboard-user-card-value">24</p>
+                        <div className="dashboard-card-value-container">
+                            <p className="dashboard-user-card-value">Visualize o total de <br>
+                            </br> formulários respondidos <br>
+                            </br> e acompanhe seu progresso!</p>
+
+                            <svg className="doughnut-chart" width="100" height="100" viewBox="0 0 36 36">
+                                {/* Full circle background */}
+                                <circle
+                                    className="doughnut-segment"
+                                    cx="18"
+                                    cy="18"
+                                    r="15.915"
+                                    fill="transparent"
+                                    stroke="#91E2B6"
+                                    strokeWidth="4"
+                                />
+                                {/* Segment for the first part */}
+                                <circle
+                                    className="doughnut-segment"
+                                    cx="18"
+                                    cy="18"
+                                    r="15.915"
+                                    fill="transparent"
+                                    stroke="#65A281"
+                                    strokeWidth="4"
+                                    strokeDasharray="60 40"
+                                    strokeDashoffset="25"   
+                                />
+                            </svg>
+                        </div>
                     </div>
                     <div className="dashboard-user-card">
                         <div className="dashboard-card-header">

@@ -76,7 +76,7 @@ const App: React.FC = () => {
 
         <Route path="/forms-user/ver" element={<UserFormsResponseView />} />
 
-        <Route path="/forms-user" element={<SelecaoFormularioMembro />} />
+        <Route path="/formularios-user" element={<SelecaoFormularioMembro />} />
         <Route path="/dashadmin" element={<Dashboard />} />
 
         <Route path="/dashboard-user"

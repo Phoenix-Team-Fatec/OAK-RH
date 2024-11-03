@@ -2,9 +2,8 @@
     display: flex;
     width: 100%;
 }
-
 /* Navbar styles */
-.navbar {
+.navbar-user-dashboard {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,30 +11,28 @@
     width: 100%;
     background-color: #f0f0f0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    ;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    z-index: 1;
-    /* Behind sidebar */
+    z-index: 1; /* Behind sidebar */
     transition: margin-left 0.5s ease;
 }
 
-.navbar.expanded {
+.navbar-user-dashboard.expanded {
     margin-left: 250px;
 }
 
-.navbar.collapsed {
-    margin-left: 80px;
+.navbar-user-dashboard.collapsed {
+    margin-left: 60px;
 }
 
-.navbar-title {
+.navbar-title-user-dashboard {
     font-size: 24px;
     font-weight: bold;
 }
 
-.navbar-select {
+.navbar-select-user-dashboard {
     padding: 5px;
     font-size: 16px;
     width: 10%;
@@ -43,42 +40,33 @@
     transition: margin-right 0.5s ease;
 }
 
-.navbar-select.expanded {
-    margin-right: 240px;
+.navbar-select-user-dashboard.expanded {
+    margin-right: 250px;
 }
 
-.navbar-select.collapsed {
-    margin-right: 80px;
+.navbar-select-user-dashboard.collapsed {
+    margin-right: 60px;
 }
 
 .dashboard-user-container {
     flex: 1;
     padding: 80px 20px 20px;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.5s ease;
 }
 
-.dashboard-user-container.expanded {
-    margin-left: 240px;
-}
-
-.dashboard-user-container.collapsed {
-    margin-left: 80px;
-}
 
 /* Sidebar styles */
 .sidebar-user {
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
     overflow: hidden;
 }
 
 .sidebar-user.expanded {
     width: 250px;
-    /* Expanded width */
 }
 
 .sidebar-user.collapsed {
     width: 60px;
-    /* Collapsed width */
 }
 
 /* ________________________________________________ */
@@ -86,7 +74,7 @@
 .dashboard-user-container {
     flex-grow: 1;
     padding: 20px;
-    transition: margin-left 0.3s ease;
+    transition: margin-left 0.5s ease;
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -111,9 +99,6 @@
     grid-template-columns: repeat(auto-fill, minmax(400px, 2fr));
     gap: 20px;
 }
-
-/* Individual card styling */
-
 
 .upper-dashboard-user-card {
     background-color: #fff;
@@ -172,9 +157,8 @@
 .divider-line {
     border: none;
     border-top: 1px solid #e0e0e0;
-    margin: 10px 0;
+    
 }
-
 
 /* Card value styling */
 .dashboard-user-card-value {
@@ -215,3 +199,7 @@
 .bar:nth-child(4) { animation-delay: 0.6s; }
 .bar:nth-child(5) { animation-delay: 0.8s; }
 .bar:nth-child(6) { animation-delay: 1s; } /* New bar delay */
+
+.pie-chart {
+    margin-right: 15%;
+}

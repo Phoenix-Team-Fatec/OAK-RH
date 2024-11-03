@@ -4,7 +4,24 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    transition: all 0.3s ease;
 }
+  
+  .main-container.sidebar-expanded .content {
+    width: calc(100% - 250px); /* Adjust based on sidebar's expanded width */
+    margin-left: 250px;
+  }
+  
+  .main-container.sidebar-collapsed .content {
+    width: calc(100% - 80px); /* Adjust based on sidebar's collapsed width */
+    margin-left: 80px;
+  }
+  
+  .content {
+    transition: width 0.3s ease, margin-left 0.3s ease;
+    padding: 20px;
+  }
+  
 
 .header {
     display: flex;
