@@ -3,7 +3,7 @@ import { loginService, createUserService, listUserService, readUserService, upda
 import { generateRandomPassword } from "../config/generateRandomPassword";
 import { admin, createUserWithEmailAndPassword, deleteUserByEmail, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
-import { getUserEquipeService } from "../services/equipe_userService";
+
 
 
 export const loginUser = async (req: Request, res: Response) => {
@@ -12,11 +12,11 @@ export const loginUser = async (req: Request, res: Response) => {
     const userFind = await loginService(email);
     const userVerify = await signInWithEmailAndPassword(getAuth(), email, password);
 
-    const findTeam = await getUserEquipeService(userFind.id)
+    
 
     const response = {
       user: userFind,
-      team: findTeam,
+      
     };
 
     return res.status(200).json(response);

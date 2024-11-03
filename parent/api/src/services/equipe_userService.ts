@@ -45,15 +45,31 @@ export const setUsarioEquipe = async (
   }
 };
 
-export const getUserEquipeService = async (user_id: number) => {
+export const listarUser_Equipe = async (id:number) => {
   try {
-    console.log("User ID", user_id)
-    const userTeam = await Equipe_user.findOne({ where: { user_id } })
+    const usersWithTeams = await User.findAll({
+      where:{id},
+      
+      include: [
+        {
+          model: Equipe_user,
+          as: 'user',
+          attributes: ['is_lider'],
+          include: [
+            {
+              model: Equipe,
+              as: 'equipes',
+              attributes: ['id', 'nome'],
+            },
+          ],
+        },
+      ],
+    });
 
-    return userTeam
+    return usersWithTeams;
   } catch (error) {
-    console.log("Error in getUserEquipe function", error);
-    throw new Error("Error in getUserEquipe function");
+    console.log("Error in listUser_Equipe function:", error);
+    throw new Error("Erro ao listar usuários com equipes");
   }
 }
 
@@ -191,3 +207,4 @@ export const deletarUsuarioEquipe = async (userId: number, equipeId: number) => 
     throw new Error("Erro ao deletar usuário de uma equipe");
   }
 };
+

@@ -135,7 +135,9 @@ const RegisterLogin: React.FC = () => {
                     const user = response.data.user;
                     const equipe = response.data.team;
                     const { nome, email, empresa, cnpj, id_admin } = user;
+
                     let equipe_id = 0
+
                     if (equipe != null) { equipe_id = equipe.equipe_id;; }
                     const id: number = user.id;
 

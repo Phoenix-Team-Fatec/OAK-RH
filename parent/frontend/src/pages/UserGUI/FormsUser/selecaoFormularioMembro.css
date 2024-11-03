@@ -1,13 +1,9 @@
-
+/* Estiliza o container principal */
 .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-}
-
-.container{
-    background-color: #c5c5c5;
 }
 
 .header {
@@ -31,16 +27,30 @@
     background-color: #556644;
     color: white;
 }
+
 /* Container dos cards */
-.container {
+.container-forms-user {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: white;
+    position: relative; /* Necessário para posicionar o h3 */
+    padding-top: 40px; /* Espaço para o h3 não cobrir os cards */
+}
+
+/* Estilo do h3 para posicioná-lo no canto superior esquerdo */
+.container-forms-user h3 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin: 0;
+    font-size: 18px;
+    color: #333;
 }
 
 /* Estilo dos cards */
-.card {
+.card-userForms {
     width: 130px;
     height: 130px;
     border-radius: 8px;
@@ -50,38 +60,27 @@
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Conteúdo interno do card */
-.card-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    padding: 0;
-}
-
-/* Parte superior do card */
 .card-header {
-    background-color: #E1DED5;
-    color: black;
+    background-color: #218838;
+    color: white;
     text-align: center;
     padding: 10px;
-    flex: 1; /* Ocupa o espaço restante */
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Parte inferior do card */
 .card-footer {
     background-color: #2F3B6B;
     color: white;
-    height: 30%; /* 30% da altura total */
+    height: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 /* Zoom suave no hover */
-.card:hover {
+.card-userForms:hover {
     transform: scale(1.1);
 }

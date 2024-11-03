@@ -1,0 +1,61 @@
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #F2EEF7;
+  }
+  
+  .top-cards, .middle-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .small-card, .medium-card, .bottom-card, .thin-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .small-card {
+    width: 32%;
+    height: 250px;
+  }
+  
+  .medium-card {
+    width: 32%;
+    height: 400px;
+  }
+  
+  .bottom-cards {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .bottom-card {
+    width: 75%; /* Card grande ocupa 75% da largura */
+    height: 700px;
+  }
+  
+  .thin-card {
+    width: 23%; /* Card fino ocupa 23% da largura */
+    height: 700px; /* Mantém a mesma altura do card grande */
+  }
+  
+  .small-card:hover, .medium-card:hover, .bottom-card:hover, .thin-card:hover {
+    transform: scale(1.01);
+  }
+  .dashboard-container {
+    margin-top: 60px; /* Ajuste o valor conforme necessário */
+    padding: 30px;
+  }
+  
