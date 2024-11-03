@@ -127,7 +127,7 @@ const SelecaoFormularioMembro: React.FC = () => {
         </select>
       </div>
 
-      <div className="container">
+      <div className="container-forms-user">
         <h3>{nomeEquipe} - {nivel}</h3>
         {loading ? (
           <p>Carregando formulários...</p>

@@ -4,10 +4,9 @@ import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
 import EquipeAdmin from "./pages/AdminGUI/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/AdminGUI/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
-import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin";
 import Dashboard from "./components/DashAdmin/DashAdmin";
 import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
-import SelecaoFormularioMembro from "./pages/FormsUser/selecaoFormularioMembro";
+import SelecaoFormularioMembro from "./pages/UserGUI/FormsUser/selecaoFormularioMembro";
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
 import Responder from "./components/ResponderFormulário/responder";
 import DashboardUser from "./pages/UserGUI/DashboardUser/DashboardUser";
@@ -24,7 +23,7 @@ const App: React.FC = () => {
           path="/dashboard-admin"
           element={
             <ProtectedRoute adminOnly={true}>
-              <DashboardAdmin />
+              <Dashboard />
             </ProtectedRoute>
           }
         />

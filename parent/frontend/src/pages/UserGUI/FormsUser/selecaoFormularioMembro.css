@@ -29,7 +29,7 @@
 }
 
 /* Container dos cards */
-.container {
+.container-forms-user {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
@@ -40,7 +40,7 @@
 }
 
 /* Estilo do h3 para posicioná-lo no canto superior esquerdo */
-.container h3 {
+.container-forms-user h3 {
     position: absolute;
     top: 10px;
     left: 10px;

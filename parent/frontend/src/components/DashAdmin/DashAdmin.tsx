@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import SidebarAdmin from '../SidebarAdmin/SidebarAdmin';
+import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
 import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
 import TabelaDashAdmin from './TabelaDashAdmin';
