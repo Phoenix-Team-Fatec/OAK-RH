@@ -19,6 +19,62 @@
   min-height: 80vh;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: margin-left 0.5s ease;
+}
+
+.selecao-formulario-content.collapsed {
+  margin-left: 60px;
+}
+
+.selecao-formulario-content.expanded {
+  margin-left: 250px;
+}
+
+
+/* Navbar styles */
+.navbar-user-dashboard {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100%;
+  background-color: #f0f0f0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1; /* Behind sidebar */
+  transition: margin-left 0.5s ease;
+}
+
+.navbar-user-dashboard.expanded {
+  margin-left: 250px;
+}
+
+.navbar-user-dashboard.collapsed {
+  margin-left: 60px;
+}
+
+.navbar-title-user-dashboard {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-select-user-dashboard {
+  padding: 5px;
+  font-size: 16px;
+  width: 15%;
+  margin-right: 100px;
+  transition: margin-right 0.5s ease;
+}
+
+.navbar-select-user-dashboard.expanded {
+  margin-right: 250px;
+}
+
+.navbar-select-user-dashboard.collapsed {
+  margin-right: 60px;
 }
 
 /* Header with buttons and select dropdown */

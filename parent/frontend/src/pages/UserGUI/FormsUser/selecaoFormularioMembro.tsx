@@ -28,6 +28,7 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { id } = useUserData();
   const [isLider, setIsLider] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   useEffect(() => {
     const fetchUserTeams = async () => {
@@ -92,10 +93,28 @@ const SelecaoFormularioMembro: React.FC = () => {
     setActiveButton(button);
   };
 
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
     <div className="selecao-formulario-container">
-      <SidebarUser />
-      <div className="selecao-formulario-content">
+      <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+
+{/* Fake Navbar */}
+<div
+        className={`navbar-user-dashboard ${
+          isExpanded ? "expanded" : "collapsed"
+        }`}
+      >
+        <span className="navbar-title-user-dashboard">
+          {isExpanded ? "Formulários" : "Formulários"}
+        </span>
+      </div>
+
+
+      <div
+        className={`selecao-formulario-content ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="selecao-formulario-header">
           <div className="selecao-formulario-buttons">
             <button
