@@ -105,6 +105,13 @@ export default function UserRenderForms({ data, formsId, onSubmit }: UserRenderF
     };
 
     const handleSubmit = () => {
+        const allAnswered = data.every(question => respostas.some(r => r.pergunta_id === question.id && r.resposta != ""));
+
+        if (!allAnswered) {
+            alert('Por favor, responda a todas as perguntas antes de enviar.');
+            return;
+          }
+
         const novasRespostas: Resposta[] = respostas.map(r => ({
             ...r,
             tipo_resposta: data.find(q => q.id === r.pergunta_id)?.tipo as QuestionType || "unknown"

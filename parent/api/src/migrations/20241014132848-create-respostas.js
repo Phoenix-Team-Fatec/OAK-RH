@@ -45,7 +45,7 @@ module.exports = {
       },
       resposta: {
         type: Sequelize.JSONB,
-        allowNull: true
+        allowNull: false
       },
       tipo_resposta: {
         type: Sequelize.STRING,
