@@ -3,7 +3,7 @@ import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, remo
 import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
-import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl } from "./controllers/formularioController";
+import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
@@ -45,10 +45,11 @@ router.get('/equipe_user/listar/:id', listarUserEquipe);
 // ROTAS FORMULÁRIO
 router.post('/formulario/criar', criarFormularioControl);
 router.get('/formulario/listar/:admin_id', listarFormularioControl);
-router.get('/formulariosPendentes/:id', listarPendentesControl);
-router.get('/formulariosRespondidos/:id', listarRespondidosControl);
+router.get('/formulariosPendentes/:id/:equipe_id', listarPendentesControl);
+router.get('/formulariosRespondidos/:id/:equipe_id', listarRespondidosControl);
 router.get('/formulario/:id', listarUmFormularioControl);
 router.put('/formulario/:id', atuaizarFormularioControl);
+router.put('/formulario/atualizar/:user_id/:formulario_id',mudarStatusControl)
 router.delete('/formulario/:id', deletarFormularioControl);
 
 

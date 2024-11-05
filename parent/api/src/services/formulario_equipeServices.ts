@@ -1,10 +1,12 @@
 import Equipe from "../models/equipeModels";
 import Formulario_equipe from "../models/formulario_equipeModels";
 import Formulario from "../models/formularioModels";
+import Formulario_user from "../models/formulario_user";
 import Pergunta from "../models/perguntasModels";
 import Equipe_user from "../models/equipe_userModel";
 import User from "../models/userModels";
 import { admin } from "../config/firebase.cjs";
+import { where } from "sequelize";
 
 
 
@@ -22,11 +24,38 @@ export const associarFormularioParaEquipes = async (
                 equipe_id,
                 nivel, // Associar o nível definido
             });
+            
         });
 
-        // Aguarda todas as associações serem realizadas
-        const resultado = await Promise.all(associacoes);
+        // Guardar os usuários de cada equipe
+        equipe_ids.map(async equipe_id => {
+            let where_clause;
+            if (nivel === 'lideres') {
+             where_clause = { equipe_id, is_lider: true };
+            } else if (nivel === 'liderados') {
+             where_clause = { equipe_id, is_lider: false };
+            } else {
+             where_clause = { equipe_id };
+            }
+            const users = await Equipe_user.findAll({
+            
+             where: where_clause
+            
+        });
+        users.map(async user => {
+            return await Formulario_user.create({
+                formulario_id,
+                user_id: user.user_id,
+                status: 'pendente'
+        })})
+    });
 
+
+
+
+       // Aguarda todas as associações serem realizadas
+        const resultado = await Promise.all(associacoes);
+        
         return resultado;
     } catch (error) {
         console.log("Erro ao associar formulário às equipes:", error);
