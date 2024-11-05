@@ -3,34 +3,51 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 
 const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', width: 150, align: 'center', headerAlign: 'center' },
   { field: 'Nome', headerName: 'Nome', width: 200, align: 'center', headerAlign: 'center' },
   { field: 'Equipe', headerName: 'Equipe', width: 200, align: 'center', headerAlign: 'center' },
-  { field: 'Respondido', headerName: 'Respondido', width: 200, align: 'center', headerAlign: 'center' },
-  { field: 'Data', headerName: 'Data', type: 'number', width: 200, align: 'center', headerAlign: 'center' },
+  { field: 'Respondido', headerName: 'Respondido', width: 150, align: 'center', headerAlign: 'center' },
+  { 
+    field: 'formulario', 
+    headerName: 'Formulário', 
+    width: 385, 
+    align: 'center', 
+    headerAlign: 'center',
+    renderCell: (params) => (
+      <a 
+        href={`https://exemplo.com/formularios/${params.row.id}`}  //Link para o formulário
+        target="_blank" 
+        rel="noopener noreferrer"
+        style={{ color: 'inherit', textDecoration: 'none' }} // Remove o azul e o sublinhado
+      >
+        {params.value}
+      </a>
+    ),
+  },
 ];
 
 const rows = [
-    { id: 1, Nome: 'Lucas Silva', Equipe: 'Administração', Respondido: 'Sim', Data: '2024-11-01' },
-    { id: 2, Nome: 'Ana Souza', Equipe: 'Financeiro', Respondido: 'Não', Data: '2024-10-30' },
-    { id: 3, Nome: 'Marcos Oliveira', Equipe: 'Desenvolvimento', Respondido: 'Sim', Data: '2024-11-01' },
-    { id: 4, Nome: 'Fernanda Costa', Equipe: 'Administração', Respondido: 'Não', Data: '2024-10-29' },
-    { id: 5, Nome: 'Carlos Almeida', Equipe: 'Financeiro', Respondido: 'Sim', Data: '2024-10-28' },
-    { id: 6, Nome: 'Patrícia Lima', Equipe: 'Desenvolvimento', Respondido: 'Sim', Data: '2024-10-27' },
-    { id: 7, Nome: 'João Pereira', Equipe: 'Administração', Respondido: 'Não', Data: '2024-10-26' },
-    { id: 8, Nome: 'Juliana Martins', Equipe: 'Financeiro', Respondido: 'Sim', Data: '2024-10-25' },
-    { id: 9, Nome: 'Felipe Rocha', Equipe: 'Desenvolvimento', Respondido: 'Não', Data: '2024-10-24' },
-    { id: 10, Nome: 'Mariana Dias', Equipe: 'Administração', Respondido: 'Sim', Data: '2024-10-23' },
-    { id: 11, Nome: 'Gustavo Santos', Equipe: 'Financeiro', Respondido: 'Não', Data: '2024-10-22' },
-    { id: 12, Nome: 'Aline Ferreira', Equipe: 'Desenvolvimento', Respondido: 'Sim', Data: '2024-10-21' },
-    { id: 13, Nome: 'Roberto Mendes', Equipe: 'Administração', Respondido: 'Não', Data: '2024-10-20' },
-    { id: 14, Nome: 'Sofia Ribeiro', Equipe: 'Financeiro', Respondido: 'Sim', Data: '2024-10-19' },
-    { id: 15, Nome: 'Eduardo Martins', Equipe: 'Desenvolvimento', Respondido: 'Não', Data: '2024-10-18' },
-    { id: 16, Nome: 'Tatiane Lima', Equipe: 'Administração', Respondido: 'Sim', Data: '2024-10-17' },
-    { id: 17, Nome: 'Diego Alves', Equipe: 'Financeiro', Respondido: 'Não', Data: '2024-10-16' },
-    { id: 18, Nome: 'Vanessa Gomes', Equipe: 'Desenvolvimento', Respondido: 'Sim', Data: '2024-10-15' },
-    { id: 19, Nome: 'Roberta Nascimento', Equipe: 'Administração', Respondido: 'Não', Data: '2024-10-14' },
-    { id: 20, Nome: 'Rafael Santos', Equipe: 'Financeiro', Respondido: 'Sim', Data: '2024-10-13' },
-  ];
+  { id: 1001, Nome: 'Lucas Silva', Equipe: 'Administração', Respondido: 'Sim', formulario: 'Formulário de Avaliação de Desempenho' },
+  { id: 1002, Nome: 'Ana Souza', Equipe: 'Financeiro', Respondido: 'Não', formulario: 'Formulário de Solicitação de Reembolso' },
+  { id: 1003, Nome: 'Marcos Oliveira', Equipe: 'Desenvolvimento', Respondido: 'Sim', formulario: 'Formulário de Feedback de Projeto' },
+  { id: 1004, Nome: 'Fernanda Costa', Equipe: 'Administração', Respondido: 'Não', formulario: 'Formulário de Solicitação de Férias' },
+  { id: 1005, Nome: 'Carlos Almeida', Equipe: 'Financeiro', Respondido: 'Sim', formulario: 'Formulário de Aprovação de Orçamento' },
+  { id: 1006, Nome: 'Patrícia Lima', Equipe: 'Desenvolvimento', Respondido: 'Sim', formulario: 'Formulário de Relatório de Bug' },
+  { id: 1007, Nome: 'João Pereira', Equipe: 'Administração', Respondido: 'Não', formulario: 'Formulário de Atualização de Dados Pessoais' },
+  { id: 1008, Nome: 'Juliana Martins', Equipe: 'Financeiro', Respondido: 'Sim', formulario: 'Formulário de Solicitação de Pagamento' },
+  { id: 1009, Nome: 'Felipe Rocha', Equipe: 'Desenvolvimento', Respondido: 'Não', formulario: 'Formulário de Planejamento de Sprint' },
+  { id: 1010, Nome: 'Mariana Dias', Equipe: 'Administração', Respondido: 'Sim', formulario: 'Formulário de Avaliação de Treinamento' },
+  { id: 1011, Nome: 'Gustavo Santos', Equipe: 'Financeiro', Respondido: 'Não', formulario: 'Formulário de Relatório Financeiro' },
+  { id: 1012, Nome: 'Aline Ferreira', Equipe: 'Desenvolvimento', Respondido: 'Sim', formulario: 'Formulário de Solicitação de Equipamento' },
+  { id: 1013, Nome: 'Roberto Mendes', Equipe: 'Administração', Respondido: 'Não', formulario: 'Formulário de Pesquisa de Satisfação' },
+  { id: 1014, Nome: 'Sofia Ribeiro', Equipe: 'Financeiro', Respondido: 'Sim', formulario: 'Formulário de Controle de Despesas' },
+  { id: 1015, Nome: 'Eduardo Martins', Equipe: 'Desenvolvimento', Respondido: 'Não', formulario: 'Formulário de Revisão de Código' },
+  { id: 1016, Nome: 'Tatiane Lima', Equipe: 'Administração', Respondido: 'Sim', formulario: 'Formulário de Solicitação de Transferência' },
+  { id: 1017, Nome: 'Diego Alves', Equipe: 'Financeiro', Respondido: 'Não', formulario: 'Formulário de Análise de Investimentos' },
+  { id: 1018, Nome: 'Vanessa Gomes', Equipe: 'Desenvolvimento', Respondido: 'Sim', formulario: 'Formulário de Documentação Técnica' },
+  { id: 1019, Nome: 'Roberta Nascimento', Equipe: 'Administração', Respondido: 'Não', formulario: 'Formulário de Solicitação de Aumento' },
+  { id: 1020, Nome: 'Rafael Santos', Equipe: 'Financeiro', Respondido: 'Sim', formulario: 'Formulário de Planejamento Orçamentário' },
+];
   
 
 const paginationModel = { page: 0, pageSize: 11 }; // linhas por página
