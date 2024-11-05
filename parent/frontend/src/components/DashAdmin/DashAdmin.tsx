@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   
   const data2 = [
     { name: 'Categoria X', value: 500 },
-    { name: 'Categoria Y', value: 100 },
+    { name: 'Categoria Y', value: 100 }, 
     { name: 'Categoria Z', value: 200 },
   ];
   
@@ -126,9 +126,6 @@ const Dashboard: React.FC = () => {
         <TabelaDashAdmin />
       </Box>
 
-        <Box className="thin-card">
-          <TabelaFormularioDashAdmin />
-        </Box>
       </Box>
     </Box>
     </>
