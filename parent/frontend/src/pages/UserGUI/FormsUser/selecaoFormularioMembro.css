@@ -1,4 +1,4 @@
-/* Main container for the form selection page */
+/* Container principal */
 .selecao-formulario-container {
   display: flex;
   flex-direction: column;
@@ -7,19 +7,20 @@
   margin-top: 60px;
 }
 
-/* Form selection content area */
+/* Conteúdo principal */
 .selecao-formulario-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 20px;
+  align-items: flex-start;
   background-color: white;
+  gap: 10px; /* Menor espaçamento entre os elementos */
   padding: 20px;
   width: 80%;
   min-height: 80vh;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: margin-left 0.5s ease;
+  margin-bottom: 10px; /* Ajuste na margem inferior */
 }
 
 .selecao-formulario-content.collapsed {
@@ -30,8 +31,7 @@
   margin-left: 250px;
 }
 
-
-/* Navbar styles */
+/* Navbar */
 .navbar-user-dashboard {
   position: fixed;
   top: 0;
@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
-  z-index: 1; /* Behind sidebar */
+  z-index: 1;
   transition: margin-left 0.5s ease;
 }
 
@@ -61,38 +61,23 @@
   font-weight: bold;
 }
 
-.navbar-select-user-dashboard {
-  padding: 5px;
-  font-size: 16px;
-  width: 15%;
-  margin-right: 100px;
-  transition: margin-right 0.5s ease;
-}
-
-.navbar-select-user-dashboard.expanded {
-  margin-right: 250px;
-}
-
-.navbar-select-user-dashboard.collapsed {
-  margin-right: 60px;
-}
-
-/* Header with buttons and select dropdown */
+/* Cabeçalho */
 .selecao-formulario-header {
   display: flex;
-  justify-content: space-between; /* Distribute space between buttons and select */
+  justify-content: space-between;
   width: 100%;
-  padding: 10px 0;
+  padding-bottom: 5px; /* Reduzido para ajustar o espaço */
 }
 
-/* Button group in the center */
+/* Botões */
 .selecao-formulario-buttons {
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-bottom: 10px; /* Adicionada margem inferior reduzida */
 }
 
-/* Individual buttons */
+/* Botão individual */
 .selecao-formulario-button {
   background-color: white;
   color: black;
@@ -113,46 +98,24 @@
   color: white;
 }
 
-/* Dropdown for selecting teams, aligned to the right */
+/* Select */
 .selecao-formulario-select {
   width: 30%;
   border-radius: 5px;
   padding: 8px;
+  margin-bottom: 10px; /* Ajuste da margem inferior */
 }
 
-/* Team and role information styling */
+/* Informações da equipe */
 .selecao-formulario-team-info {
   font-size: 18px;
   color: #333;
-  margin-top: 10px;
-  text-align: left; 
+  text-align: left;
   width: 100%;
+  margin-bottom: 0;
 }
 
-.selecao-formulario-nivel {
-  font-size: 16px;
-  color: #555; /* Adjust color for better visibility */
-}
-
-/* Loading message styling */
-.selecao-formulario-loading {
-  font-size: 16px;
-  color: #777;
-}
-
-/* Error message styling */
-.selecao-formulario-error {
-  font-size: 16px;
-  color: #ff5a5a;
-}
-
-/* Message for no data */
-.selecao-formulario-no-data {
-  font-size: 16px;
-  color: #777;
-}
-
-/* Cards displaying forms */
+/* Cards */
 .selecao-formulario-card {
   width: 150px;
   height: 150px;
@@ -160,7 +123,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  justify-content: space-between;
+  margin: 0; /* Removido para evitar espaçamento vertical */
   cursor: pointer;
 }
 
@@ -169,8 +133,29 @@
 }
 
 .selecao-formulario-card-header {
+  all: unset;
   padding: 10px;
   background-color: #f0f0f0;
   font-weight: bold;
   text-align: center;
+  height: 100px;
+  border-radius: 8px;
+}
+
+/* Adicionando contêiner para os cards */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  width: 100%; 
+  justify-content: flex-start; 
+  margin-top: 0;
+  padding: 0;
+}
+
+.content-forms-user {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 0;
 }

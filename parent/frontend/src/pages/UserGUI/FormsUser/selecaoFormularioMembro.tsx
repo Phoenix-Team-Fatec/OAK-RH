@@ -143,7 +143,7 @@ const SelecaoFormularioMembro: React.FC = () => {
             ))}
           </select>
         </div>
-
+        <div className='content-forms-user'>
         <h3 className="selecao-formulario-team-info">{nomeEquipe} - {nivel}</h3>
 
         {loading ? (
@@ -163,6 +163,7 @@ const SelecaoFormularioMembro: React.FC = () => {
         ) : (
           <div className="selecao-formulario-no-data">Não há formulários respondidos ainda.</div>
         )}
+      </div>
       </div>
     </div>
   );
