@@ -9,6 +9,7 @@ interface Formulario {
   nome: string;
   equipe: string;
   nivel: string;
+  descricao: string;
 }
 
 interface Equipe {
@@ -67,6 +68,7 @@ const SelecaoFormularioMembro: React.FC = () => {
           .map((item: any) => ({
             id: item.id,
             nome: item.formularios.nome,
+            descricao: item.formularios.descricao,
             equipe: item.equipes.nome,
             nivel: item.nivel,
           }));
@@ -74,7 +76,9 @@ const SelecaoFormularioMembro: React.FC = () => {
       } catch (error: any) {
         setError("Erro ao buscar os formulários.");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     };
     fetchFormularios();
@@ -154,7 +158,10 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header">{formulario.nome}</div>
+                <div className="selecao-formulario-card-header">
+                  <h2>{formulario.nome}</h2>
+                  <p className='description-forms-user'>{formulario.descricao}</p>
+                </div>
               </div>
             ))
           ) : (

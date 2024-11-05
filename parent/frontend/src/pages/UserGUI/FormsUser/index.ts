@@ -9,7 +9,6 @@ export const listFormularios = async (id: number) => {
     }catch(error){
         console.log(error)
         return {message:error}
-        
     }
 }
 
