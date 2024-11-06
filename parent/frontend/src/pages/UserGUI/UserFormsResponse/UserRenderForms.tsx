@@ -37,7 +37,7 @@ enum QuestionType {
 const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void }> = ({ question, index, onAnswer }) => (
     <div className="unique-choice-question">
         <label className="unique-choice-question-text">
-            {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+            {`${index + 1} ) ${question.texto}`}  
         </label>
         {question.descricao.map((answer, index) => (
             <label key={`${question.id}-${index}`} className="unique-choice-answer">
@@ -69,7 +69,7 @@ const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: num
     return (
         <div className="multiple-choice-question">
             <label className="multiple-choice-question-text">
-                {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+                {`${index + 1} ) ${question.texto}`}  
             </label>
             {question.descricao.map((answer, index) => (
                 <label key={`${question.id}-${index}`} className="multiple-choice-answer">
@@ -94,7 +94,7 @@ const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: numbe
     return (
         <div className="long-question">
             <label className="long-question-text">
-                {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+                {`${index + 1} ) ${question.texto}`} 
             </label>
             <input
                 type="text"
