@@ -30,7 +30,6 @@
 }
 
 .modal_content_register input {
-    width: 125% !important;
     padding: 12px !important;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -48,7 +47,7 @@
 .container_button_register {
     display: flex;
     justify-content: center;
-    margin-left: 23.5%;
+    align-items: center;
 }
 
 .button_register_user_modal,
@@ -62,8 +61,8 @@
     cursor: pointer;
     transition: background-color 0.3s; 
     box-sizing: border-box;
-    width: 100% !important;
     height: 40px; 
+    width: 120px;
 }
 
 .button_register_user_modal:hover {

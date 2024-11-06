@@ -28,7 +28,6 @@ export const listarPendentes = async (id: number, equipe_id: number) => {
     }catch(error){
         console.log(error)
         return {message:error}
-        
     }
 }
 

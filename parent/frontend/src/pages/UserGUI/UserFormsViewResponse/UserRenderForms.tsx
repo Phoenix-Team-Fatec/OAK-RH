@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-interface UserRenderFormsProps {
+interface UserViewFormsProps {
     formsData: Question[];
     answerData: Resposta[];
 }
@@ -29,65 +29,70 @@ enum QuestionType {
     LongQuestion = "longQuestion",
 }
 
-const UniqueChoice: FC<{ question: Question; answer: string }> = ({ question, answer }) => (
-    <div>
-        <label>{question.texto}</label>
-        {question.descricao.map((option, index) => (
-            <div key={`${question.id}-${index}`}>
+const UniqueChoiceView: FC<{ question: Question; answer: string; index: number }> = ({ question, answer, index }) => (
+    <div className="unique-choice-question-view">
+        <label className="unique-choice-question-text">{`${index + 1}) ${question.texto}`}</label>
+        {question.descricao.map((option, i) => (
+            <div key={`${question.id}-${i}`} className="unique-choice-answer-view">
                 <input
                     type="radio"
                     name={question.id.toString()}
                     value={option}
                     checked={answer === option}
                     readOnly
+                    className="unique-choice-input-view"
                 />
                 <span>{option}</span>
             </div>
         ))}
+        <hr className="question-separator" />
     </div>
 );
 
-const MultipleChoice: FC<{ question: Question; answer: string[] }> = ({ question, answer }) => (
-    <div>
-        <label>{question.texto}</label>
-        {question.descricao.map((option, index) => (
-            <div key={`${question.id}-${index}`}>
+const MultipleChoiceView: FC<{ question: Question; answer: string[]; index: number }> = ({ question, answer, index }) => (
+    <div className="multiple-choice-question-view">
+        <label className="multiple-choice-question-text">{`${index + 1}) ${question.texto}`}</label>
+        {question.descricao.map((option, i) => (
+            <div key={`${question.id}-${i}`} className="multiple-choice-answer-view">
                 <input
                     type="checkbox"
                     value={option}
                     checked={answer.includes(option)}
                     readOnly
+                    className="multiple-choice-input-view"
                 />
                 <span>{option}</span>
             </div>
         ))}
-    </div>
-)
-
-const LongQuestion: FC<{ question: Question; answer: string }> = ({ question, answer }) => (
-    <div>
-        <label>{question.texto}</label>
-        <p id={`long-${question.id}`}>{answer}</p>
+        <hr className="question-separator" />
     </div>
 );
 
-export default function UserRenderForms({ formsData, answerData }: UserRenderFormsProps) {
+const LongQuestionView: FC<{ question: Question; answer: string; index: number }> = ({ question, answer, index }) => (
+    <div className="long-question-view">
+        <label className="long-question-text">{`${index + 1}) ${question.texto}`}</label>
+        <p className="long-answer-view">{answer}</p>
+        <hr className="question-separator" />
+    </div>
+);
+
+export default function UserViewForms({ formsData, answerData }: UserViewFormsProps) {
     return (
-        <form>
-            {formsData.map((question) => {
+        <div className="container-forms-view-user">
+            {formsData.map((question, index) => {
                 const answer = answerData.find(a => a.pergunta_id === question.id)?.resposta;
 
                 switch (question.tipo) {
                     case "uniqueChoice":
-                        return <UniqueChoice key={question.id} question={question} answer={answer as string} />;
+                        return <UniqueChoiceView key={question.id} question={question} answer={answer as string} index={index} />;
                     case "multipleChoice":
-                        return <MultipleChoice key={question.id} question={question} answer={answer as string[]} />;
+                        return <MultipleChoiceView key={question.id} question={question} answer={answer as string[]} index={index} />;
                     case "longQuestion":
-                        return <LongQuestion key={question.id} question={question} answer={answer as string} />;
+                        return <LongQuestionView key={question.id} question={question} answer={answer as string} index={index} />;
                     default:
                         return <div key={question.id}><h3>Type of question undefined</h3></div>;
                 }
             })}
-        </form>
+        </div>
     );
 }

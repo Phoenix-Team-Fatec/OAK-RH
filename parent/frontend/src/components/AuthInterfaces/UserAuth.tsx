@@ -33,7 +33,7 @@ const UserAuth: React.FC<UserAuthProps> = ({
                     <div className="login_right">
                         <img className="logo" src="/logo.png" alt="logo" />
                         <h2>Login User</h2>
-                        <form onSubmit={handleSignIn}>
+                        <form onSubmit={handleSignIn} className='form-input-group-user'>
                             <div className="input_group">
                                 <FontAwesomeIcon icon={faUser} />
                                 <input

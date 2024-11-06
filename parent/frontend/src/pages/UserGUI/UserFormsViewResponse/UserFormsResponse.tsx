@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserRenderForms from "./UserRenderForms";
 import useUserData from "../../../hooks/useUserData";
+import './UserViewResponse.css';
 
 interface Question {
     categoria_id: number;
@@ -67,9 +68,11 @@ export default function UserFormsResponseView() {
                 <div>Carregando...</div>
             ) : (
                 <>
+                <div className="container-forms-ver-respostas-user">
                     <h2>{formsName}</h2>
                     <span>{formsDescription}</span>
                     <UserRenderForms formsData={formsData} answerData={answerData} />
+                </div>
                 </>
             )}
         </div>

@@ -10,6 +10,7 @@ interface Formulario {
   nome: string;
   equipe: string;
   nivel: string;
+  descricao: string;
 }
 
 interface Equipe {
@@ -29,6 +30,7 @@ const SelecaoFormularioMembro: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const { id } = useUserData();
   const [isLider, setIsLider] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -62,12 +64,15 @@ const SelecaoFormularioMembro: React.FC = () => {
           .map((item: any) => ({
             id: item.id,
             nome: item.nome,
+            descricao: item.descricao,
         }));
         setFormularios(formulariosData);
       } catch (error: any) {
         setError("Erro ao buscar os formulários.");
       } finally {
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       }
     };
     fetchFormularios();
@@ -105,10 +110,28 @@ const SelecaoFormularioMembro: React.FC = () => {
     setActiveButton(button);
   };
 
+  const toggleSidebar = () => {
+    setIsExpanded((prevState) => !prevState);
+  };
+
   return (
     <div className="selecao-formulario-container">
-      <SidebarUser />
-      <div className="selecao-formulario-content">
+      <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+
+{/* Fake Navbar */}
+<div
+        className={`navbar-user-dashboard ${
+          isExpanded ? "expanded" : "collapsed"
+        }`}
+      >
+        <span className="navbar-title-user-dashboard">
+          {isExpanded ? "Formulários" : "Formulários"}
+        </span>
+      </div>
+
+
+      <div
+        className={`selecao-formulario-content ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="selecao-formulario-header">
           <div className="selecao-formulario-buttons">
             <button
@@ -137,7 +160,7 @@ const SelecaoFormularioMembro: React.FC = () => {
             ))}
           </select>
         </div>
-
+        <div className='content-forms-user'>
         <h3 className="selecao-formulario-team-info">{nomeEquipe} - {nivel}</h3>
 
         {loading ? (
@@ -148,7 +171,9 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}
+                  <p className='description-forms-card-user'>Descrição: {formulario.descricao}</p>
+                </div>
               </div>
             ))
           ) : (
@@ -158,7 +183,9 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}
+                <p className='description-forms-card-user'>Descrição: {formulario.descricao}</p>
+                </div>
               </div>
             ))
           
@@ -166,6 +193,7 @@ const SelecaoFormularioMembro: React.FC = () => {
           <p className="selecao-formulario-no-data">Nenhum formulário respondido encontrado.</p>
         )
       ): null}
+      </div>
       </div>
     </div>
   );
