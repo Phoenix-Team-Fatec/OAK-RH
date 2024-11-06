@@ -64,6 +64,7 @@ const SelecaoFormularioMembro: React.FC = () => {
           .map((item: any) => ({
             id: item.id,
             nome: item.nome,
+            descricao: item.descricao,
         }));
         setFormularios(formulariosData);
       } catch (error: any) {
@@ -170,7 +171,9 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}
+                  <p className='description-forms-card-user'>Descrição: {formulario.descricao}</p>
+                </div>
               </div>
             ))
           ) : (
@@ -180,7 +183,9 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}
+                <p className='description-forms-card-user'>Descrição: {formulario.descricao}</p>
+                </div>
               </div>
             ))
           

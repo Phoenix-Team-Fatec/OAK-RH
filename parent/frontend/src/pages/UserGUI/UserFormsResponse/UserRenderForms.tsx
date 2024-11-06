@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 interface UserRenderFormsProps {
     data: Question[];
-    formsId: number,
+    formsId: number;
     equipe_id: number;
     onSubmit: (respostas: Resposta[]) => void;
 }
@@ -34,22 +34,28 @@ enum QuestionType {
     LongQuestion = "longQuestion",
 }
 
-const UniqueChoice: FC<{ question: Question; onAnswer: (id: number, resposta: string) => void }> = ({ question, onAnswer }) => (
-    <div>
-        <label>{question.texto}</label>
+const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void }> = ({ question, index, onAnswer }) => (
+    <div className="unique-choice-question">
+        <label className="unique-choice-question-text">
+            {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+        </label>
         {question.descricao.map((answer, index) => (
-            <label key={`${question.id}-${index}`}>
-                <input type="radio"
+            <label key={`${question.id}-${index}`} className="unique-choice-answer">
+                <input
+                    type="radio"
                     name={question.id.toString()}
                     value={answer}
-                    onChange={() => onAnswer(question.id, answer)} />
+                    onChange={() => onAnswer(question.id, answer)}
+                    className="unique-choice-input"
+                />
                 {answer}
             </label>
         ))}
+        <hr className="question-separator" />
     </div>
 );
 
-const MultipleChoice: FC<{ question: Question; onAnswer: (id: number, resposta: string[]) => void }> = ({ question, onAnswer }) => {
+const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string[]) => void }> = ({ question, index, onAnswer }) => {
     const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
 
     const handleCheckboxChange = (answer: string): string[] => {
@@ -61,10 +67,12 @@ const MultipleChoice: FC<{ question: Question; onAnswer: (id: number, resposta: 
     };
 
     return (
-        <div>
-            <label>{question.texto}</label>
+        <div className="multiple-choice-question">
+            <label className="multiple-choice-question-text">
+                {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+            </label>
             {question.descricao.map((answer, index) => (
-                <label key={`${question.id}-${index}`}>
+                <label key={`${question.id}-${index}`} className="multiple-choice-answer">
                     <input
                         type="checkbox"
                         value={answer}
@@ -72,43 +80,47 @@ const MultipleChoice: FC<{ question: Question; onAnswer: (id: number, resposta: 
                             const updatedAnswers = handleCheckboxChange(answer);
                             onAnswer(question.id, updatedAnswers);
                         }}
+                        className="multiple-choice-input"
                     />
                     {answer}
                 </label>
             ))}
+            <hr className="question-separator" />
         </div>
     );
 };
 
-const LongQuestion: FC<{ question: Question; onAnswer: (id: number, resposta: string) => void }> = ({ question, onAnswer }) => {
+const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void }> = ({ question, index, onAnswer }) => {
     return (
-        <div>
-            <label>{question.texto}</label>
+        <div className="long-question">
+            <label className="long-question-text">
+                {`${index + 1} ) ${question.texto}`}  {/* Usando o índice para numeração */}
+            </label>
             <input
                 type="text"
                 onChange={(e) => onAnswer(question.id, e.target.value)}
+                className="long-question-input"
             />
+            <hr className="question-separator" />
         </div>
     );
 };
 
-export default function UserRenderForms({ data, equipe_id ,formsId, onSubmit }: UserRenderFormsProps) {
+export default function UserRenderForms({ data, equipe_id, formsId, onSubmit }: UserRenderFormsProps) {
     const [respostas, setRespostas] = useState<{ formulario_id: number, pergunta_id: number; respondido_por: number; equipe_id: number; resposta: string | string[]; tipo_resposta: string; }[]>([]);
 
-    const userData = useUserData()
-   const {id} = useUserData()
-   const navigate = useNavigate()
-
+    const userData = useUserData();
+    const { id } = useUserData();
+    const navigate = useNavigate();
 
     const handleChangeFormStatus = async () => {
-        try{
-            await axios.put(`http://localhost:3000/formulario/atualizar/${id}/${formsId}`)
-
-        }catch(error){
-            alert("Erro ao mudar status do formulário")
-            console.log(error)
+        try {
+            await axios.put(`http://localhost:3000/formulario/atualizar/${id}/${formsId}`);
+        } catch (error) {
+            alert("Erro ao mudar status do formulário");
+            console.log(error);
         }
-    }
+    };
 
     const handleAnswer = (id: number, resposta: string | string[]) => {
         setRespostas(prev => {
@@ -121,12 +133,12 @@ export default function UserRenderForms({ data, equipe_id ,formsId, onSubmit }: 
     };
 
     const handleSubmit = () => {
-        const allAnswered = data.every(question => respostas.some(r => r.pergunta_id === question.id && r.resposta != ""));
+        const allAnswered = data.every(question => respostas.some(r => r.pergunta_id === question.id && r.resposta !== ""));
 
         if (!allAnswered) {
             alert('Por favor, responda a todas as perguntas antes de enviar.');
             return;
-          }
+        }
 
         const novasRespostas: Resposta[] = respostas.map(r => ({
             ...r,
@@ -135,27 +147,27 @@ export default function UserRenderForms({ data, equipe_id ,formsId, onSubmit }: 
 
         onSubmit(novasRespostas);
         handleChangeFormStatus();
-        navigate('/forms-user')
+        navigate('/forms-user');
     };
 
     return (
         <>
-            <form>
-                {data.map((question) => {
+            <form className="user-render-forms">
+                {data.map((question, index) => {
                     const { tipo } = question;
 
                     switch (tipo) {
                         case "uniqueChoice":
-                            return <UniqueChoice key={question.id} question={question} onAnswer={handleAnswer} />;
+                            return <UniqueChoice key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
                         case "multipleChoice":
-                            return <MultipleChoice key={question.id} question={question} onAnswer={handleAnswer} />;
+                            return <MultipleChoice key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
                         case "longQuestion":
-                            return <LongQuestion key={question.id} question={question} onAnswer={handleAnswer} />;
+                            return <LongQuestion key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
                         default:
                             return <div key={question.id}><h3>Type of question undefined</h3></div>;
                     }
                 })}
-                <button type="button" onClick={handleSubmit}>Enviar Respostas</button>
+                <button type="button" onClick={handleSubmit} className="submit-button">Enviar Respostas</button>
             </form>
         </>
     );

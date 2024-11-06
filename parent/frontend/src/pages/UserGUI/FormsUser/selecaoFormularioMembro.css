@@ -160,8 +160,9 @@
   margin-top: 0;
 }
 
-.description-forms-user {
+.description-forms-card-user {
   font-weight: 100;
   text-align: left;
   font-size: 14px;
+  margin-top: 8px;
 }

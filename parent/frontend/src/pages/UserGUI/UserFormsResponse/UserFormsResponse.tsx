@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import UserRenderForms from "./UserRenderForms";
+import './UserFormResponse.css';
 
 interface Question {
     categoria_id: number;
@@ -84,9 +85,11 @@ export default function UserFormsResponse() {
                 <div>Carregando...</div>
             ) : (
                 <>
-                    <h2>{formsName}</h2>
-                    <span>{formsDescription}</span>
-                    <UserRenderForms data={data} equipe_id={Number(equipe_id)} onSubmit={handleSubmit} formsId={Number(formulario_id)} />
+                <div className="container-forms-responder-user">
+                    <h2>Título do Formulário - {formsName}</h2>
+                    <span className="description-forms-user">Descrição do Formulário: {formsDescription}</span>
+                    <UserRenderForms data={data} equipe_id={Number(equipe_id)} onSubmit={handleSubmit} formsId={Number(formulario_id)}/>
+                </div>
                 </>
             )}
         </div>

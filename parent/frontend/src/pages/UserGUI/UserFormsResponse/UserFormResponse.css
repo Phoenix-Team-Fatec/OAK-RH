@@ -1,0 +1,128 @@
+.container-forms-responder-user {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.submit-button {
+  background-color: #177035;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  align-self: center;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+/* Estilos para as perguntas de escolha única */
+.unique-choice-question {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unique-choice-question-text {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.unique-choice-answer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 100;
+}
+
+.unique-choice-input {
+  margin-right: 8px;
+}
+
+/* Estilos para as perguntas de escolha múltipla */
+.multiple-choice-question {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.multiple-choice-question-text {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.multiple-choice-answer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 100;
+}
+
+.multiple-choice-input {
+  margin-right: 8px;
+}
+
+/* Estilos para as perguntas longas */
+.long-question {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.long-question-text {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.long-question .long-question-input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  font-weight: 100;
+}
+
+/* Estilo para as labels */
+label {
+  font-size: 14px;
+}
+
+/* Estilo geral para inputs */
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.5);
+}
+
+.user-render-forms {
+  width: 100%;
+}
+
+
+/* Estilo para descrição do formulário */
+.description-forms-user {
+  margin-top: -20px;
+}
+
+/* Estilo para linha que separa as perguntas */
+.question-separator {
+  border: none;
+  border-top: 1px solid #000000;
+  margin: 16px 0;
+  width: 100%;
+}
