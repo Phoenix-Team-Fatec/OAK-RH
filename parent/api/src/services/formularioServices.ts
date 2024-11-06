@@ -1,5 +1,6 @@
 import Formulario_user from "../models/formulario_user";
 import Formulario from "../models/formularioModels";
+import Formulario_equipe from "../models/formulario_equipeModels";
 import Pergunta from "../models/perguntasModels";
 import Resposta from "../models/respostasModels";
 
@@ -29,78 +30,78 @@ export const listarFormularios =  async (admin_id:number) =>{
     }
 }
 
-export const listarFormulariosRespondidos = async(user_id: number) => {
+export const listarFormulariosRespondidos = async(user_id: number, equipe_id: number) => {
     try {
-        const formulariosDesejados: Formulario[] = []
+    
         const formularios = await Formulario.findAll({
-            include: {
+            include: [{
                 model: Formulario_user,
                 as: 'form',
-                where: { user_id: user_id }, // Filtrando pela tabela de ligação
+                where: { user_id: user_id, status:'respondido'}, // Filtrando pela tabela de ligação
             },
+            {
+                model: Formulario_equipe,
+                as: 'formularios',
+                where: { equipe_id: equipe_id }
+            }
+        ]
         });
 
-        for (const formulario of formularios) {
-            let form_id = formulario.id;
-            let semResposta = false
-            const perguntas = await Pergunta.findAll({where:{formulario_id: form_id}})
-
-            for (const pergunta of perguntas) {
-                let per_id = pergunta.id
-                const resposta = await Resposta.findOne({ where: { pergunta_id: per_id, respondido_por: user_id} });
-
-                if (!resposta) {
-                    console.log('porra ',form_id)
-                    semResposta = true
-                }
-            }
-
-            if (!semResposta){
-                formulariosDesejados.push(formulario)
-            }
-        }
-        return formulariosDesejados
+        
+        return formularios
 
     } catch (error) {
         console.log('Erro ao listar formulários pendentes', error)
     }
 }
 
-export const listarFormulariosPendentes = async(user_id: number) => {
+
+
+export const listarFormulariosPendentes = async(user_id: number, equipe_id: number) => {
     try {
-        const formulariosDesejados: Formulario[] = []
+    
         const formularios = await Formulario.findAll({
-            include: {
+           
+            include: [ {
                 model: Formulario_user,
                 as: 'form',
-                where: { user_id: user_id }, // Filtrando pela tabela de ligação
+                where: { user_id: user_id, status:'pendente' }, // Filtrando pela tabela de ligação
             },
+            {
+                model: Formulario_equipe,
+                as: 'formularios',
+                where: { equipe_id: equipe_id }
+            }
+
+        ]
         });
 
-        for (const formulario of formularios) {
-            let form_id = formulario.id;
-            let semResposta = false
-            const perguntas = await Pergunta.findAll({where:{formulario_id: form_id}})
-
-            for (const pergunta of perguntas) {
-                let per_id = pergunta.id
-                const resposta = await Resposta.findOne({ where: { pergunta_id: per_id, respondido_por: user_id} });
-
-                if (!resposta) {
-                    semResposta = true
-                }
-            }
-
-            if (semResposta){
-                formulariosDesejados.push(formulario)
-            }
-        }
-        return formulariosDesejados
+         
+        return formularios
 
     } catch (error) {
         console.log('Erro ao listar formulários pendentes', error)
     }
 }
+
+
+//Função para mudar status de pendente para respondido
+export const mudarStatus = async (user_id: number, formulario_id: number) => {
+    try{
+        const form = await Formulario_user.findOne({where:{user_id, formulario_id}})
+        if(!form){
+            return {message:"Formulário não encontrado"}
+        }
+        form.status = "respondido"
+        form.save()
+        return {message:"Status alterado com sucesso"}
+
+    }catch(error){
+        console.log("Erro ao mudar status", error)
+    }
+}
+
+
 
 //Função de listar apenas um formulário
 export const listarUmFormulario = async ( id: number) => {

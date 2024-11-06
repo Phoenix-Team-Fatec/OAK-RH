@@ -3,6 +3,7 @@ import './SelecaoFormularioMembro.css';
 import useUserData from '../../../hooks/useUserData';
 import SidebarUser from '../../../components/SidebarUser/SidebarUser';
 import { listFormularios, listUser_Teams } from './index';
+import { useNavigate } from 'react-router-dom';
 
 interface Formulario {
   id: number;
@@ -30,6 +31,7 @@ const SelecaoFormularioMembro: React.FC = () => {
   const { id } = useUserData();
   const [isLider, setIsLider] = useState<boolean>(false);
   const [isExpanded, setIsExpanded] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserTeams = async () => {
@@ -57,21 +59,12 @@ const SelecaoFormularioMembro: React.FC = () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await listFormularios(selectedEquipe);
+        const response = await listFormularios(id,selectedEquipe,activeButton);
         const formulariosData = response
-          .filter((item: any) => {
-            if (item.nivel === "ambos") return true;
-            if (item.nivel === "lideres" && isLider) return true;
-            if (item.nivel === "liderados" && !isLider) return true;
-            return false;
-          })
           .map((item: any) => ({
             id: item.id,
-            nome: item.formularios.nome,
-            descricao: item.formularios.descricao,
-            equipe: item.equipes.nome,
-            nivel: item.nivel,
-          }));
+            nome: item.nome,
+        }));
         setFormularios(formulariosData);
       } catch (error: any) {
         setError("Erro ao buscar os formulários.");
@@ -92,6 +85,25 @@ const SelecaoFormularioMembro: React.FC = () => {
     setIsLider(equipeSelecionada ? equipeSelecionada.isLider : false);
     setNivel(equipeSelecionada ? (equipeSelecionada.isLider ? 'Líder' : 'Liderado') : '');
   };
+
+  const handleFormularioClick = (formularioId: number) => {
+    let url = '';
+    if(activeButton === 'Pendentes'){
+             url = `/forms-user/responder?id=${formularioId}&equipe_id=${selectedEquipe}`
+    }else{
+      url = `/forms-user/ver?id=${formularioId}`
+    }
+    try{
+      navigate(url);
+
+
+    }catch(error){
+      console.log(error);
+    }
+
+ 
+   
+  }
 
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
@@ -158,18 +170,24 @@ const SelecaoFormularioMembro: React.FC = () => {
           formularios.length > 0 ? (
             formularios.map((formulario) => (
               <div key={formulario.id} className="selecao-formulario-card">
-                <div className="selecao-formulario-card-header">
-                  <h2>{formulario.nome}</h2>
-                  <p className='description-forms-user'>{formulario.descricao}</p>
-                </div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
               </div>
             ))
           ) : (
             <p className="selecao-formulario-no-data">Nenhum formulário pendente encontrado.</p>
           )
-        ) : (
-          <div className="selecao-formulario-no-data">Não há formulários respondidos ainda.</div>
-        )}
+        ) : activeButton === 'Respondidos' ? (
+          formularios.length > 0 ? (
+            formularios.map((formulario) => (
+              <div key={formulario.id} className="selecao-formulario-card">
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>{formulario.nome}</div>
+              </div>
+            ))
+          
+        ): (
+          <p className="selecao-formulario-no-data">Nenhum formulário respondido encontrado.</p>
+        )
+      ): null}
       </div>
       </div>
     </div>

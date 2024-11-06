@@ -8,6 +8,8 @@ class Formulario_user extends Model {
     public id!: number
     public formulario_id!: number
     public user_id!: number
+    public status!: string;
+    public respondido_em!: Date;
 }
 
 Formulario_user.init(
@@ -36,6 +38,15 @@ Formulario_user.init(
             },
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
+        },
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: 'pendente'
+        },
+        respondido_em: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
         }
     },
     {

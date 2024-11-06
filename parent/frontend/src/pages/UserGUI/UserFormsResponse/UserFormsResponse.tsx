@@ -1,5 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import UserRenderForms from "./UserRenderForms";
 
 interface Question {
@@ -30,12 +30,23 @@ export default function UserFormsResponse() {
     const [formulario_id] = useState(() => {
         const params = new URLSearchParams(document.location.search);
         const id = params.get("id");
+        
         return id !== null ? id : 0;
     });
+
+    const [equipe_id] = useState(() => {
+        const params = new URLSearchParams(document.location.search);
+        const id = params.get("equipe_id");
+        
+        return id !== null ? id : 0;
+    });
+    
+
     const [data, setData] = useState<Question[]>([])
     const [formsName, setFormsName] = useState("")
     const [formsDescription, setFormsDescription] = useState("")
     const [isLoading, setIsLoading] = useState(true)
+    
 
     useEffect(() => {
         async function fetchData() {
@@ -64,6 +75,9 @@ export default function UserFormsResponse() {
         }
     }
 
+
+  
+
     return (
         <div>
             {isLoading ? (
@@ -72,7 +86,7 @@ export default function UserFormsResponse() {
                 <>
                     <h2>{formsName}</h2>
                     <span>{formsDescription}</span>
-                    <UserRenderForms data={data} onSubmit={handleSubmit} formsId={Number(formulario_id)} />
+                    <UserRenderForms data={data} equipe_id={Number(equipe_id)} onSubmit={handleSubmit} formsId={Number(formulario_id)} />
                 </>
             )}
         </div>

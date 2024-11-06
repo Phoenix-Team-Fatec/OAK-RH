@@ -1,4 +1,4 @@
-import { createFormularioService, listarFormularios, listarUmFormulario, deletarFormulario, atualizarFormulario, listarFormulariosRespondidos, listarFormulariosPendentes } from "../services/formularioServices";
+import { createFormularioService, listarFormularios, listarUmFormulario, deletarFormulario, atualizarFormulario, listarFormulariosRespondidos, listarFormulariosPendentes,mudarStatus } from "../services/formularioServices";
 import { Request, Response } from "express";
 
 //criar formulário
@@ -48,8 +48,8 @@ export const listarUmFormularioControl = async (req: Request, res: Response) =>{
 
 export const listarRespondidosControl = async (req: Request, res: Response) => {
     try {
-        const {id} = req.params
-        const listar = await listarFormulariosRespondidos(Number(id))
+        const {id, equipe_id} = req.params
+        const listar = await listarFormulariosRespondidos(Number(id), Number(equipe_id))
 
         return res.status(201).json(listar)
     } catch (error) {
@@ -59,8 +59,8 @@ export const listarRespondidosControl = async (req: Request, res: Response) => {
 
 export const listarPendentesControl = async (req: Request, res: Response) => {
     try {
-        const {id} = req.params
-        const listar = await listarFormulariosPendentes(Number(id))
+        const {id, equipe_id} = req.params
+        const listar = await listarFormulariosPendentes(Number(id), Number(equipe_id))
 
         return res.status(201).json(listar)
     } catch (error){
@@ -97,4 +97,17 @@ export const atuaizarFormularioControl = async (req: Request, res: Response ) =>
         return res.status(500).json({ messsage: error.message });
     }
 
+}
+
+
+//mudar status
+export const mudarStatusControl = async (req: Request, res: Response) => {
+    try {
+        const {user_id, formulario_id} = req.params
+        const mudar = await mudarStatus(Number(user_id), Number(formulario_id))
+
+        return res.status(201).json(mudar)
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 }

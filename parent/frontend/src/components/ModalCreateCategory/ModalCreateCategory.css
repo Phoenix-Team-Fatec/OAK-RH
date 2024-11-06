@@ -160,6 +160,7 @@
 
 /* Botão de editar */
 .modal-categories-edit-delete-container .modal-categories-edit-button {
+  padding: 0;
   border: none; 
   cursor: pointer; 
   color: black;

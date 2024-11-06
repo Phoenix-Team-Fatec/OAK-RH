@@ -49,6 +49,7 @@ Formulario.init(
 
 
 Formulario_equipe.belongsTo(Formulario, { foreignKey: 'formulario_id', as: 'formularios', onDelete: 'CASCADE' });
+Formulario.hasMany(Formulario_equipe, { foreignKey: 'formulario_id', as: 'formularios' });
 
 
 export default Formulario;

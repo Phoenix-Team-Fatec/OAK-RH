@@ -1,9 +1,12 @@
 import { FC, useState } from "react";
 import useUserData from "../../../hooks/useUserData";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface UserRenderFormsProps {
     data: Question[];
     formsId: number,
+    equipe_id: number;
     onSubmit: (respostas: Resposta[]) => void;
 }
 
@@ -89,10 +92,23 @@ const LongQuestion: FC<{ question: Question; onAnswer: (id: number, resposta: st
     );
 };
 
-export default function UserRenderForms({ data, formsId, onSubmit }: UserRenderFormsProps) {
+export default function UserRenderForms({ data, equipe_id ,formsId, onSubmit }: UserRenderFormsProps) {
     const [respostas, setRespostas] = useState<{ formulario_id: number, pergunta_id: number; respondido_por: number; equipe_id: number; resposta: string | string[]; tipo_resposta: string; }[]>([]);
 
     const userData = useUserData()
+   const {id} = useUserData()
+   const navigate = useNavigate()
+
+
+    const handleChangeFormStatus = async () => {
+        try{
+            await axios.put(`http://localhost:3000/formulario/atualizar/${id}/${formsId}`)
+
+        }catch(error){
+            alert("Erro ao mudar status do formulário")
+            console.log(error)
+        }
+    }
 
     const handleAnswer = (id: number, resposta: string | string[]) => {
         setRespostas(prev => {
@@ -100,17 +116,26 @@ export default function UserRenderForms({ data, formsId, onSubmit }: UserRenderF
             if (existing) {
                 return prev.map(r => r.pergunta_id === id ? { ...r, resposta } : r);
             }
-            return [...prev, { formulario_id: formsId, pergunta_id: id, respondido_por: userData.id, equipe_id: userData.equipe_id, resposta, tipo_resposta: "" }];
+            return [...prev, { formulario_id: formsId, pergunta_id: id, respondido_por: userData.id, equipe_id: equipe_id, resposta, tipo_resposta: "" }];
         });
     };
 
     const handleSubmit = () => {
+        const allAnswered = data.every(question => respostas.some(r => r.pergunta_id === question.id && r.resposta != ""));
+
+        if (!allAnswered) {
+            alert('Por favor, responda a todas as perguntas antes de enviar.');
+            return;
+          }
+
         const novasRespostas: Resposta[] = respostas.map(r => ({
             ...r,
             tipo_resposta: data.find(q => q.id === r.pergunta_id)?.tipo as QuestionType || "unknown"
         }));
 
         onSubmit(novasRespostas);
+        handleChangeFormStatus();
+        navigate('/forms-user')
     };
 
     return (
