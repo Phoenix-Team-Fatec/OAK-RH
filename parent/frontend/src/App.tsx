@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedLayout/protectedRoutes";
 import EquipeAdmin from "./pages/AdminGUI/EquipesAdmin/equipeAdmin";
 import RegisterLogin from "./pages/AdminGUI/LoginRegister/RegisterLogin";
 import MembersAdmin from "./pages/AdminGUI/MembersAdmin/MembersAdmin";
-import Dashboard from "./components/DashAdmin/DashAdmin";
+import DashboardAdmin from "./pages/AdminGUI/DashboardAdmin/DashboardAdmin";
 import FormsAdmin from "./pages/AdminGUI/FormsAdmin/FormsAdmin";
 import SelecaoFormularioMembro from "./pages/UserGUI/FormsUser/selecaoFormularioMembro";
 import FormsAdminCreate from "./pages/AdminGUI/FormsAdminCreate/FormsAdminCreate";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
           path="/dashboard-admin"
           element={
             <ProtectedRoute adminOnly={true}>
-              <Dashboard />
+              <DashboardAdmin />
             </ProtectedRoute>
           }
         />
@@ -77,7 +77,7 @@ const App: React.FC = () => {
         <Route path="/forms-user/ver" element={<UserFormsResponseView />} />
 
         <Route path="/forms-user" element={<SelecaoFormularioMembro />} />
-        <Route path="/dashadmin" element={<Dashboard />} />
+       
 
         <Route path="/dashboard-user"
           element={<DashboardUser />} />
