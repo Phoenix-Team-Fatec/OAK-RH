@@ -5,7 +5,7 @@ import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
 import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
 import TabelaDashAdmin from './TabelaDashAdmin';
-
+import TabelaFormularioDashAdmin from '../DashAdminEquipe/tabelaFormularioDashAdmin';
 
 
 const Dashboard: React.FC = () => {
@@ -19,7 +19,7 @@ const Dashboard: React.FC = () => {
   
   const data2 = [
     { name: 'Categoria X', value: 500 },
-    { name: 'Categoria Y', value: 100 }, 
+    { name: 'Categoria Y', value: 100 },
     { name: 'Categoria Z', value: 200 },
   ];
   
@@ -126,6 +126,9 @@ const Dashboard: React.FC = () => {
         <TabelaDashAdmin />
       </Box>
 
+        <Box className="thin-card">
+          <TabelaFormularioDashAdmin />
+        </Box>
       </Box>
     </Box>
     </>
@@ -133,3 +136,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+

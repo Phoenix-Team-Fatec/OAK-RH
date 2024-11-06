@@ -29,6 +29,7 @@
     width: 32%;
     height: 250px;
   }
+
   
   .medium-card {
     width: 32%;
@@ -42,14 +43,14 @@
   }
   
   .bottom-card {
-    width: 100%; /* Card grande ocupa 75% da largura */
+    width: 75%; /* Card grande ocupa 75% da largura */
     height: 700px;
   }
   
-  /*.thin-card {
-    width: 23%; Card fino ocupa 23% da largura 
-   height: 700px; Mantém a mesma altura do card grande 
-  } */
+  .thin-card {
+    width: 23%; /*Card fino ocupa 23% da largura  */
+   height: 700px; /*Mantém a mesma altura do card grande */ 
+  } 
   
   .small-card:hover, .medium-card:hover, .bottom-card:hover, .thin-card:hover {
     transform: scale(1.01);
