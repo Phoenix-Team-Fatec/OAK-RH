@@ -5,31 +5,28 @@ import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
 import AdminNavbar from './AdminNavbar';
 import './DashAdmin.css';
 import TabelaDashAdmin from './TabelaDashAdmin';
+import TabelaFormularioDashAdmin from '../DashAdminEquipe/tabelaFormularioDashAdmin';
 
-import SmallCardChart from './SmallCardChart';
 
 const Dashboard: React.FC = () => {
   // Dados para os gráficos
   const data1 = [
-    { name: 'Grupo A', value: 100 },
-    { name: 'Grupo B', value: 80 },
-    { name: 'Grupo C', value: 30 },
-    { name: 'Grupo D', value: 20 },
+    { name: 'Grupo A', value: 400 },
+    { name: 'Grupo B', value: 300 },
+    { name: 'Grupo C', value: 300 },
+    { name: 'Grupo D', value: 200 },
   ];
   
   const data2 = [
-    { name: 'Categoria X', value: 50 },
-    { name: 'Categoria Y', value: 30 },
-    { name: 'Categoria Z', value: 80 },
-    { name: 'Categoria Z', value: 80 },
-    { name: 'Categoria Z', value: 100 },
-    { name: 'Categoria Z', value: 50 },
+    { name: 'Categoria X', value: 500 },
+    { name: 'Categoria Y', value: 100 },
+    { name: 'Categoria Z', value: 200 },
   ];
   
   const data3 = [
-    { name: 'Segmento 1', value: 35 },
-    { name: 'Segmento 2', value: 15 },
-    { name: 'Segmento 3', value: 50 },
+    { name: 'Segmento 1', value: 350 },
+    { name: 'Segmento 2', value: 150 },
+    { name: 'Segmento 3', value: 100 },
   ];
   
   const COLORS = ['#54334c', '#c46a7c', '#844164', '#e07b7b'];
@@ -41,17 +38,17 @@ const Dashboard: React.FC = () => {
     <Box className="dashboard-container">
       <Box className="top-cards">
         <Box className="small-card">
-         
-          <SmallCardChart  title = "Colaboradores" data={data1} />
+          <Typography variant="h6">Colaboradores</Typography>
+          <Typography variant="body2">150</Typography>
           
         </Box>
         <Box className="small-card">
-          
-          <SmallCardChart  title = "Equipes" data={data2} />
+          <Typography variant="h6">Equipes</Typography>
+          <Typography variant="body2">27</Typography>
         </Box>
         <Box className="small-card">
-
-          <SmallCardChart  title = "Formulários Criados" data={data3} />
+          <Typography variant="h6">Formulários Criados</Typography>
+          <Typography variant="body2">20</Typography>
         </Box>
       </Box>
 
@@ -129,6 +126,9 @@ const Dashboard: React.FC = () => {
         <TabelaDashAdmin />
       </Box>
 
+        <Box className="thin-card">
+          <TabelaFormularioDashAdmin />
+        </Box>
       </Box>
     </Box>
     </>
@@ -136,3 +136,4 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
