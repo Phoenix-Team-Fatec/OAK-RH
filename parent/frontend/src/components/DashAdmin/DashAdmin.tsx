@@ -1,14 +1,10 @@
 import React from 'react';
-import { Box, Typography } from '@mui/material';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
-import AdminNavbar from './AdminNavbar';
+import { Box } from '@mui/material';
 import './DashAdmin.css';
 import TabelaDashAdmin from './TabelaDashAdmin';
-
 import SmallCardChart from './SmallCardChart';
 
-const Dashboard: React.FC = () => {
+const DashboardAdminGeral: React.FC = () => {
   // Dados para os gráficos
   const data1 = [
     { name: 'Grupo A', value: 100 },
@@ -36,8 +32,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-    <AdminNavbar/>
-    <SidebarAdmin/>
+  
+   
     <Box className="dashboard-container">
       <Box className="top-cards">
         <Box className="small-card">
@@ -55,84 +51,21 @@ const Dashboard: React.FC = () => {
         </Box>
       </Box>
 
-      <Box className="middle-cards">
-        <Box className="medium-card">
-          <Typography variant="h6">Gráfico 1</Typography>
-          <ResponsiveContainer width="100%" height="80%">
-            <PieChart>
-              <Pie
-                data={data1}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {data1.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </Box>
+      
         
-        <Box className="medium-card">
-          <Typography variant="h6">Gráfico 2</Typography>
-          <ResponsiveContainer width="100%" height="80%">
-            <PieChart>
-              <Pie
-                data={data2}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {data2.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </Box>
-
-        <Box className="medium-card">
-          <Typography variant="h6">Gráfico 3</Typography>
-          <ResponsiveContainer width="100%" height="80%">
-            <PieChart>
-              <Pie
-                data={data3}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                outerRadius={80}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {data3.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </Box>
-      </Box>
+        
+      
 
                 
-      <Box className="bottom-cards">
+     
       <Box className="bottom-card">
         <TabelaDashAdmin />
       </Box>
 
       </Box>
-    </Box>
+  
     </>
   );
 };
 
-export default Dashboard;
+export default DashboardAdminGeral;

@@ -1,6 +1,8 @@
 import Formulario_user from "../models/formulario_user";
 import Formulario from "../models/formularioModels";
 import Formulario_equipe from "../models/formulario_equipeModels";
+import Equipe from "../models/equipeModels";
+import User from "../models/userModels";
 import Pergunta from "../models/perguntasModels";
 import Resposta from "../models/respostasModels";
 
@@ -84,6 +86,48 @@ export const listarFormulariosPendentes = async(user_id: number, equipe_id: numb
     }
 }
 
+//função para listar todos os formulários pendentes e respondidos, incluindo a equipe do usuário
+export async function listarUsuariosComFormularios(id_admin: number) {
+    try {
+        const usuarios = await User.findAll({
+            where: { id_admin: id_admin},
+            attributes: ['id', 'nome'],
+            include: [
+                {
+                    model: Formulario_user,
+                    as: 'users', // Alias definido no relacionamento de User com Formulario_user
+                    attributes: ['status'],
+                    include: [
+                        {
+                            model: Formulario,
+                            as: 'form', // Alias definido no relacionamento de Formulario_user com Formulario
+                            attributes: ['nome'],
+                            include: [
+                                {
+                                    model: Formulario_equipe,
+                                    as: 'formularios', // Alias definido no relacionamento de Formulario com Formulario_equipe
+                                    include: [
+                                        {
+                                            model: Equipe,
+                                            as: 'equipes', // Alias para o relacionamento de equipe
+                                            attributes: ['nome']
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        });
+        return usuarios;
+    } catch (error) {
+        console.error("Erro ao listar usuários do admin:", error);
+        throw error;
+    }
+}
+
+
 
 //Função para mudar status de pendente para respondido
 export const mudarStatus = async (user_id: number, formulario_id: number) => {
@@ -126,6 +170,11 @@ export const deletarFormulario = async (id:number) =>{
             return {message:"Formulario não encontrado"}
         }
 
+        await Resposta.destroy({
+            where: { formulario_id: id },
+          });
+
+        
         await formulario.destroy();
 
          return {message:"Formulario deletado com sucesso"}

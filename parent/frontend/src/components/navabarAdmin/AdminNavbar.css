@@ -1,5 +1,5 @@
-.admin-navbar {
-    position: fixed;
+.admin-navbar{
+    
     top: 0;
     width: 100%;
     background-color: #fff;
@@ -7,15 +7,26 @@
     padding: 10px 20px;
     display: flex;
     justify-content: space-between; /* Para empurrar o conteúdo à direita */
-    align-items: center;
-    z-index: 1000;
-    padding-left: 350px;  /* Espaçamento à esquerda */
-    padding-right: 350px; /* Espaçamento à direita */
+    align-items:center;
+    padding-left: 100px;  /* Espaçamento à esquerda */
+    padding-right: 50px; /* Espaçamento à direita */
     box-shadow: 0 6px 8px -2px rgb(202, 202, 202);
 }
 
+.admin-navbar button{
+    background-color: #A380A5;
+    width: 15%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+
 .navbar-title {
     font-weight: bold;
+    
+    
 }
 
 .team-select {
