@@ -10,6 +10,7 @@ class Formulario_user extends Model {
     public user_id!: number
     public status!: string;
     public respondido_em!: Date;
+  
 }
 
 Formulario_user.init(

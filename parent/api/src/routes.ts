@@ -3,7 +3,7 @@ import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, remo
 import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
-import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl } from "./controllers/formularioController";
+import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl, listarUsuariosComFormulariosControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
@@ -51,6 +51,7 @@ router.get('/formulario/:id', listarUmFormularioControl);
 router.put('/formulario/:id', atuaizarFormularioControl);
 router.put('/formulario/atualizar/:user_id/:formulario_id',mudarStatusControl)
 router.delete('/formulario/:id', deletarFormularioControl);
+router.get('/formulario/usuarios/:id_admin', listarUsuariosComFormulariosControl);
 
 
 // ROTAS DE FORMULÁRIO_EQUIPE
