@@ -167,10 +167,17 @@
     color: #333;
 }
 
-.dashboard-card-value-container {
-    display: flex;
-    justify-content: space-between; /* Spaces out the value and the bar chart */
+.dashboard-card-value-container1 {
+    position: relative;
+    display: flex; /* Spaces out the value and the bar chart */
     align-items: center; /* Vertically centers the items */
+}
+
+.dashboard-card-value-container2 {
+    position: relative;
+    display: flex; /* Spaces out the value and the bar chart */
+    align-items: center; /* Vertically centers the items */
+    margin-top: -20px;
 }
 
 .bar {
@@ -181,6 +188,7 @@
 .bar-chart {
     margin-right: 5px; /* Adjust to reduce space between bars */
     width: 250px; /* Narrowing the bars */
+    margin-left: 30px;
 }
 
 @keyframes rise {
@@ -200,6 +208,47 @@
 .bar:nth-child(5) { animation-delay: 0.8s; }
 .bar:nth-child(6) { animation-delay: 1s; } /* New bar delay */
 
-.pie-chart {
-    margin-right: 15%;
+.doughnut-chart {
+    margin-top: 30px; /* Ajuste conforme necessário */
+    margin-bottom: 10px;
+    margin-left: 100px;
+    padding: 5px; /* Para criar um espaçamento interno */
+    box-sizing: border-box;
 }
+
+/* Estilização card de formulários pendentes */
+.card-pending-forms-user {
+    list-style: none;
+    margin: 8px 0;
+}
+
+.form-card-pending {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 10px; /* Espaço entre nome e data */
+    margin-bottom: -20px;
+}
+
+/* Estilização para o nome com 80% do espaço */
+.form-name-pending-forms {
+    flex: 1 1 80%;
+    padding: 8px;
+    border: 1px solid #DFDFDF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #75AE49;
+}
+
+/* Estilização para a data com 15% do espaço */
+.form-date-pending-forms {
+    flex: 0 1 15%;
+    padding: 8px;
+    border: 1px solid #DFDFDF;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #75AE49;
+    text-align: center;
+}
+

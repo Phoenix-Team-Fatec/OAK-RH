@@ -20,7 +20,6 @@ export const listFormularios = async (id: number, equipe_id: number, status:stri
     }
 }
 
-
 export const listarPendentes = async (id: number, equipe_id: number) => {
     try{
     const response = await axios.get(`http://localhost:3000/formulario/listar_pendentes/${id}/${equipe_id}`);
@@ -29,7 +28,7 @@ export const listarPendentes = async (id: number, equipe_id: number) => {
         console.log(error)
         return {message:error}
     }
-}
+}       
 
 //função para ler os dados de um usuário
 export const listUser_Teams = async (id: number) => {
@@ -40,5 +39,27 @@ export const listUser_Teams = async (id: number) => {
         console.log(error)
         return {message:error}
         
+    }
+}
+
+// Função para listar formulários com base no status e calcular porcentagem
+export const getAnsweredFormsPercentage = async (id: number, equipe_id: number) => {
+    try {
+
+        // Obter formulários respondidos
+        const respondedForms = await listFormularios(id, equipe_id, 'Respondidos');
+
+        // Obter formulários pendentes
+        const pendingForms = await listFormularios(id, equipe_id, 'Pendentes');
+
+        // Calcular o total
+        const totalForms = respondedForms.length + pendingForms.length;
+
+        const percentage = totalForms > 0 ? (respondedForms.length / totalForms) * 100 : 0;
+
+        return { percentage, total: totalForms, aswered: respondedForms.length };
+    }catch (error) {
+        console.error("Erro ao calcular a porcentagem de formulários respondidos:", error);
+        return { percentage: 0, total: 0, aswered: 0}
     }
 }

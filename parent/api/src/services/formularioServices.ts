@@ -55,8 +55,6 @@ export const listarFormulariosRespondidos = async(user_id: number, equipe_id: nu
     }
 }
 
-
-
 export const listarFormulariosPendentes = async(user_id: number, equipe_id: number) => {
     try {
     
