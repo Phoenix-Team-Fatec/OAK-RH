@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
-import AdminNavbar from '../DashAdmin/AdminNavbar';
+import AdminNavbar from '../navabarAdmin/AdminNavbar';
 import TabelaFormularioDashAdmin from './tabelaFormularioDashAdmin';
 import TabelaDashAdminEquipe from './TabelaDashAdminEquipe';
 

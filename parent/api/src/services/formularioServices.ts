@@ -5,6 +5,8 @@ import Equipe from "../models/equipeModels";
 import User from "../models/userModels";
 import Pergunta from "../models/perguntasModels";
 import Resposta from "../models/respostasModels";
+import { Sequelize } from "sequelize";
+
 
 //Função de criar formulário
 export const createFormularioService = async (nome: string, descricao: string, admin_id: number) => {
@@ -31,6 +33,38 @@ export const listarFormularios =  async (admin_id:number) =>{
         console.log("Erro ao listar todos os formulário", error)
     }
 }
+
+// Função para listar a contagem de formulários por mês
+export const listarFormulariosPorMes = async (admin_id: number) => {
+    try {
+        const formulariosPorMes = await Formulario.findAll({
+            where: { admin_id },
+            attributes: [
+                [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('criado_em')), 'mes'],
+                [Sequelize.fn('COUNT', '*'), 'quantidade']
+            ],
+            group: ['mes'],
+            order: [['mes', 'ASC']]
+        });
+
+        return formulariosPorMes.map((f: any) => {
+            const mes = f.get('mes');
+            const quantidade = f.get('quantidade');
+            
+            // Converte o mês para o nome em português
+            const nomeMes = new Date(mes).toLocaleString('pt-BR', { month: 'long' });
+
+            return {
+                name: nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1), // Capitaliza a primeira letra
+                value: quantidade
+            };
+        });
+
+    } catch (error) {
+        console.log("Erro ao listar formulários por mês", error);
+        throw error;
+    }
+};
 
 export const listarFormulariosRespondidos = async(user_id: number, equipe_id: number) => {
     try {

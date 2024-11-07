@@ -1,4 +1,4 @@
-import { createFormularioService, listarFormularios, listarUmFormulario, deletarFormulario, atualizarFormulario, listarFormulariosRespondidos, listarFormulariosPendentes,mudarStatus, listarUsuariosComFormularios } from "../services/formularioServices";
+import { createFormularioService, listarFormularios, listarFormulariosPorMes, listarUmFormulario, deletarFormulario, atualizarFormulario, listarFormulariosRespondidos, listarFormulariosPendentes,mudarStatus, listarUsuariosComFormularios } from "../services/formularioServices";
 import { Request, Response } from "express";
 
 //criar formulário
@@ -30,6 +30,20 @@ export const listarFormularioControl = async (req: Request, res: Response) =>{
         return res.status(500).json({ messsage: error.message });
     }
 } 
+
+
+export const listarFormulariosPorMesControl = async (req: Request, res: Response) => {
+    try {
+        const { admin_id } = req.params;
+        const formulariosPorMes = await listarFormulariosPorMes(Number(admin_id));
+
+        return res.status(200).json(formulariosPorMes);
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
 
 
 //listar um formulário
