@@ -34,7 +34,11 @@ Equipe.init(
     descricao: {
       type: DataTypes.STRING,
       allowNull: true,
-    }
+    },
+    criado_em: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     sequelize,

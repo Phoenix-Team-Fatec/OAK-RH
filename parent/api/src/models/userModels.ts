@@ -39,7 +39,11 @@ User.init(
         key: 'id',
       },
       onDelete: 'CASCADE',
-    }
+    },
+    criado_em: {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+    },
     
   },
   {

@@ -53,11 +53,13 @@ export const listarFormulariosPorMes = async (admin_id: number) => {
             
             // Converte o mês para o nome em português
             const nomeMes = new Date(mes).toLocaleString('pt-BR', { month: 'long' });
-
+            
             return {
                 name: nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1), // Capitaliza a primeira letra
                 value: quantidade
+          
             };
+            
         });
 
     } catch (error) {

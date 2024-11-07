@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { setUsuarioEquipe, listEquipeUser, mudarEstadoLider, getEquipeUser, removerUsuario, listarUserEquipe } from "./controllers/equipe_userController";
-import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser } from "./controllers/userController";
-import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
+import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser, readUser, listarUserPorMesControl } from "./controllers/userController";
+import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe, listarEquipesPorMesControl } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, listarFormulariosPorMesControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl, listarUsuariosComFormulariosControl } from "./controllers/formularioController";
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
@@ -25,6 +25,7 @@ router.delete('/users/:id', deleteUser);
 router.get('/users/getId/:email', getIdUser);
 router.get('/users/listar_um/:id', readUser);
 router.put('/users/:id', updateUser);
+router.get('/users/porMes/:admin_id', listarUserPorMesControl);
 
 
 // ROTAS DE EQUIPE
@@ -33,6 +34,8 @@ router.get('/equipe/listar/:id_admin', getAllEquipes);
 router.get('/equipe/:id', getEquipeById);
 router.put('/equipe/:id', updateEquipe);
 router.delete('/equipe/:id', deleteEquipe);
+router.get('/equipes/porMes/:admin_id', listarEquipesPorMesControl);
+
 
 // ROTAS EQUIPE_USER
 router.post('/equipe_user/associar', setUsuarioEquipe);

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { loginService, createUserService, listUserService, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
+import { loginService, createUserService, listUserService, listarUserPorMes, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
 import { generateRandomPassword } from "../config/generateRandomPassword";
 import { admin, createUserWithEmailAndPassword, deleteUserByEmail, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
@@ -44,6 +44,16 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
+export const listarUserPorMesControl = async (req: Request, res: Response) => {
+  try {
+      const { admin_id } = req.params;
+      const userPorMes = await listarUserPorMes(Number(admin_id));
+
+      return res.status(200).json(userPorMes);
+  } catch (error) {
+      return res.status(500).json({ message: error.message });
+  }
+};
 
 //listar informações de um usuário
 export const readUser = async (req: Request, res: Response) => {

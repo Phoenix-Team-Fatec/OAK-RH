@@ -1,4 +1,5 @@
 import Equipe from "../models/equipeModels";
+import { Sequelize } from 'sequelize';
 
 // Função para criar equipe
 export const createEquipeService = async (nome: string, id_admin: number, descricao: string) => {
@@ -37,6 +38,39 @@ export const getEquipeByIdService = async (id: number) => {
         return equipe;
     } catch (error) {
         throw new Error("Erro ao buscar equipe");
+    }
+};
+
+// Função para listar a contagem de equipes por mês
+export const listarEquipesPorMes = async (id_admin: number) => {
+    try {
+        const equipesPorMes = await Equipe.findAll({
+            where: { id_admin },
+            attributes: [
+                [Sequelize.fn('DATE_TRUNC', 'month', Sequelize.col('criado_em')), 'mes'],
+                [Sequelize.fn('COUNT', '*'), 'quantidade']
+            ],
+            group: ['mes'],
+            order: [['mes', 'ASC']]
+        });
+
+        return equipesPorMes.map((e: any) => {
+            const mes = e.get('mes');
+            const quantidade = e.get('quantidade');
+            // Verifica se 'mes' não é null antes de converter para o nome do mês
+            if (mes) {
+                const nomeMes = new Date(mes).toLocaleString('pt-BR', { month: 'long' });
+                return {
+                    name: nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1), // Capitaliza a primeira letra
+                    value: quantidade
+                };
+            }
+            return null;
+        }).filter((item: any) => item !== null); // Filtra itens nulos
+
+    } catch (error) {
+        console.log("Erro ao listar equipes por mês", error);
+        throw error;
     }
 };
 

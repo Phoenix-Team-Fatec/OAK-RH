@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createEquipeService, getAllEquipesService, getEquipeByIdService, updateEquipeService, deleteEquipeService } from "../services/equipeService";
+import { createEquipeService, getAllEquipesService, getEquipeByIdService, updateEquipeService, deleteEquipeService, listarEquipesPorMes } from "../services/equipeService";
 import Equipe from "../models/equipeModels";
 
 // Função para criar equipe
@@ -28,6 +28,19 @@ export const getAllEquipes = async (req: Request, res: Response) => {
         res.status(500).json({ message: "Erro ao buscar equipes" });
     }
 }
+
+
+export const listarEquipesPorMesControl = async (req: Request, res: Response) => {
+    try {
+        const { admin_id } = req.params;
+        const equipesPorMes = await listarEquipesPorMes(Number(admin_id));
+
+        return res.status(200).json(equipesPorMes);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
+
 
 // Função para listar equipe por ID
 export const getEquipeById = async (req: Request, res: Response) => {

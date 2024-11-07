@@ -44,9 +44,9 @@ const SmallCardChart: React.FC<SmallCardChartProps> = ({ data, title }) => {
             Últimos 30 dias
           </Typography>
         </>
-      ) : (
-        <Typography variant="body1">Carregando...</Typography>
-      )}
+      ): null
+        
+      }
 
       <ResponsiveContainer width="95%" height={100}>
         <LineChart data={data} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
