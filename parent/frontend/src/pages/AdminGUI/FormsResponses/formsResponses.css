@@ -1,0 +1,35 @@
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .card-upper {
+    width: 900px;
+    height: 150px;
+    margin-bottom: 24px; /* Espaço entre cards */
+  }
+.button-responses {
+    margin-top: 20px;
+    background-color: #A380A5; /* #2A2033 */
+}
+
+.button-voltar {
+  margin-top: 10px !important;
+    margin-left: 18px !important;
+    background-color: #A380A5; /* #2A2033 */
+}
+
+.questions-text {
+    
+    font-weight: bold;
+    margin-top: -15px !important;
+}
+
+.card-additional {
+  width: 900px;
+  height: 400px;
+  margin-bottom: 24px;
+}
+  
