@@ -21,16 +21,16 @@ const DashboardAdminEquipe: React.FC = () => {
         {/* Cards Pequenos na Parte Superior */}
         <Box className="top-cards">
           <Box className="small-card" sx={{ height: '100px' }}>
-            <Typography variant="h5">Usuários Ativos</Typography>
-            <Typography variant="body2">1,200</Typography>
+            <Typography variant="h5">Membros</Typography>
+            <Typography variant="body2">120</Typography>
           </Box>
           <Box className="small-card" sx={{ height: '100px' }}>
-            <Typography variant="h5">Novos Cadastros</Typography>
-            <Typography variant="body2">350</Typography>
+            <Typography variant="h5">Formulários Pendentes</Typography>
+            <Typography variant="body2">40</Typography>
           </Box>
           <Box className="small-card" sx={{ height: '100px' }}>
-            <Typography variant="h5">Feedback Recebido</Typography>
-            <Typography variant="body2">89</Typography>
+            <Typography variant="h5">Formulários Respondidos</Typography>
+            <Typography variant="body2">80</Typography>
           </Box>
         </Box>
 
