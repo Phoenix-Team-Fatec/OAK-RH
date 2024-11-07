@@ -13,6 +13,7 @@ import DashboardUser from "./pages/UserGUI/DashboardUser/DashboardUser";
 import UserFormsResponse from "./pages/UserGUI/UserFormsResponse/UserFormsResponse";
 import UserFormsResponseView from "./pages/UserGUI/UserFormsViewResponse/UserFormsResponse";
 import DashboardAdminEquipe from "./components/DashAdminEquipe/DashAdminEquipe";
+import FormsResponses from "./pages/AdminGUI/FormsResponses/formsResponses";
 
 const App: React.FC = () => {
   return (
@@ -25,6 +26,15 @@ const App: React.FC = () => {
           element={
             <ProtectedRoute adminOnly={true}>
               <DashboardAdmin />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/forms-responses"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <FormsResponses />
             </ProtectedRoute>
           }
         />
