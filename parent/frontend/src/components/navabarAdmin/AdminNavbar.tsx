@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const AdminNavbar: React.FC = () => {
   const [teams, setTeams] = useState<any[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
-  const [titulo, setTitulo] = useState<string>("");
+
   
 
   const { id } = useUserData();
@@ -25,7 +25,7 @@ const AdminNavbar: React.FC = () => {
 
   const handleDashChange = () => {
     try{
-      setTitulo("");
+   
       navigate('/dashboard-admin');
     }catch(error){
       console.error(error);
@@ -39,17 +39,15 @@ const AdminNavbar: React.FC = () => {
 
   const handleTeamChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setSelectedTeam(event.target.value as string);
-    setTitulo(event.target.value as string);
+   
+    const teamId = teams.find((team) => team.nome === event.target.value)?.id;
+    navigate(`/dashboard-admin-equipe?equipe=${teamId}`);
   };
 
   return (
     <Box className="admin-navbar">  
     <Button variant="contained" onClick={() => handleDashChange()}>Dashboard Geral</Button>
-      {selectedTeam && (
-        <Typography variant="h6" className="navbar-title">
-          {titulo}
-        </Typography>
-      )}
+    
       <FormControl variant="outlined" className="team-select">
         <Select
           displayEmpty

@@ -1,4 +1,4 @@
-import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes } from "../services/formulario_equipeServices";
+import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes, listarUsuariosComFormulariosEquipe } from "../services/formulario_equipeServices";
 import { Request, Response } from 'express';
 
 //Função para associar formulário a equipes
@@ -64,4 +64,20 @@ export const deletarFormularioEquipeController = async (req: Request, res: Respo
         return res.status(400).json({message:"Erro ao deletar formulário de uma equipe"})
 
     }
+}
+
+
+//Função para listar usuários com formulários
+export const listarUsuariosComFormulariosEquipeController = async (req: Request, res: Response) => {
+    try{
+        const {formulario_id, equipe_id} = req.params;
+        const usuarios = await listarUsuariosComFormulariosEquipe(Number(formulario_id), Number(equipe_id));
+        return res.status(200).json(usuarios)
+
+    }catch(error){
+        console.log("Erro ao listar usuários com formulários da equipe", error)
+        return res.status(400).json({message:"Erro ao listar usuários com formulários da equipe"})
+
+    }
+
 }
