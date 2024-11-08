@@ -134,7 +134,7 @@ const ModalSendForm: React.FC<ModalProps> = ({ open, onClose, formId}) => {
       <Button
         variant="contained"
         color="primary"
-        className="button-submit"
+        className="button-submit-forms"
         onClick={handleSendForms}
         disabled={!nivel || (!sendToAll && selectedTeams.length === 0)}
       >

@@ -23,6 +23,7 @@ const DashboardUser: React.FC = () => {
   const [answeredFormsPercentage, setAnsweredFormsPercentage] =
     useState<number>(0);
   const [selectedEquipeId, setSelectedEquipeId] = useState<number | null>(null);
+  const [selectedEquipe, setSelectedEquipe] = useState<Equipe | null>(null);
   const [pendentes, setPendentes] = useState<any[]>([]);
   const navigate = useNavigate();
 
@@ -55,6 +56,10 @@ const DashboardUser: React.FC = () => {
           setSelectedEquipeId(initialEquipeId);
           fetchAnsweredFormsPercentage(initialEquipeId);
           fetchPendentes(id, initialEquipeId);
+          
+          // Encontrar equipe selecionada para exibir "Líder" ou "Liderado"
+          const equipe = equipesData.find((e) => e.id === initialEquipeId);
+          setSelectedEquipe(equipe || null);
         }
       } catch (error) {
         console.log(error);
@@ -92,6 +97,11 @@ const DashboardUser: React.FC = () => {
     setSelectedEquipeId(selectedId);
     sessionStorage.setItem("selectedEquipeId", selectedId.toString());
     fetchAnsweredFormsPercentage(selectedId);
+
+    // Encontra a equipe selecionada para definir sua função
+    const equipe = equipes.find((e) => e.id === selectedId);
+    setSelectedEquipe(equipe || null);
+
     if (selectedId) {
       fetchPendentes(id, selectedId); // Busca os formulários pendentes da equipe
     }
@@ -110,10 +120,18 @@ const DashboardUser: React.FC = () => {
     navigate(`/forms-user?tab=Respondidos&equipeId=${selectedEquipeId}`, {
       state: {
         equipeId: selectedEquipeId,
-        filter: 'Respondidos',
+        filter: "Respondidos",
       },
     });
   };
+
+  // Função para redirecionar para formulários pendentes
+  const handlePendingClick = (formId: number) => {
+    navigate(
+      `/forms-user/responder?id=${formId}&equipe_id=${selectedEquipeId}`
+    );
+  };
+
   return (
     <div className="dashboard-user-wrapper">
       <SidebarUser isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
@@ -123,7 +141,9 @@ const DashboardUser: React.FC = () => {
         }`}
       >
         <span className="navbar-title-user-dashboard">
-          {isExpanded ? "Dashboard" : "Dashboard"}
+          Dashboard{" "}
+          {selectedEquipe !== null &&
+            `- ${selectedEquipe.isLider ? "Líder" : "Liderado"}`}
         </span>
         <select
           className={`navbar-select-user-dashboard ${
@@ -216,7 +236,12 @@ const DashboardUser: React.FC = () => {
               <h3 className="dashboard-user-card-title">
                 Formulários respondidos
               </h3>
-              <button onClick={handleViewFormsAswered} className="dashboard-card-btn">Ver Todos</button>
+              <button
+                onClick={handleViewFormsAswered}
+                className="dashboard-card-btn"
+              >
+                Ver Todos
+              </button>
             </div>
             <hr className="divider-line" />
             <div className="dashboard-card-value-container2">
@@ -256,7 +281,7 @@ const DashboardUser: React.FC = () => {
                   x="18"
                   y="20.5"
                   textAnchor="middle"
-                  fontSize="8"
+                  fontSize="7"
                   fill="#333"
                   fontWeight={600}
                 >
@@ -285,7 +310,10 @@ const DashboardUser: React.FC = () => {
                 <ul>
                   {pendentes.map((form) => (
                     <li key={form.id} className="card-pending-forms-user">
-                      <div className="form-card-pending">
+                      <div
+                        className="form-card-pending"
+                        onClick={() => handlePendingClick(form.id)}
+                      >
                         <span className="form-name-pending-forms">
                           {form.nome}
                         </span>
