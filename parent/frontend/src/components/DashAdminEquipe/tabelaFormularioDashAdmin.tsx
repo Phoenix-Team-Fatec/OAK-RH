@@ -1,27 +1,51 @@
 import React, { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
+import { getFormulariosEquipe } from './index';
+
 
 interface TabelaFormularioDashAdminProps {
-  onFormSelect: (formulario: string) => void;
+  onFormSelect: (formulario_id: number) => void;
+  equipe_id: number;
 }
 
 const columns: GridColDef[] = [
+  { field: 'id', headerName: 'ID', width: 170, align: 'center', headerAlign: 'center' },
   { field: 'formulario', headerName: 'Formulário', width: 290, align: 'left', headerAlign: 'left' },
 ];
 
-const rows = [
-  { id: 1, formulario: 'Formulário de Inscrição' },
-  { id: 2, formulario: 'Formulário de Avaliação' },
-  { id: 3, formulario: 'Formulário de Feedback' },
-  { id: 4, formulario: 'Formulário de Registro' },
-  { id: 5, formulario: 'Formulário de Satisfação' },
-];
+
 
 const paginationModel = { page: 0, pageSize: 5 };
 
-const TabelaFormularioDashAdmin: React.FC<TabelaFormularioDashAdminProps> = ({ onFormSelect }) => {
+const TabelaFormularioDashAdmin: React.FC<TabelaFormularioDashAdminProps> = ({ onFormSelect, equipe_id }) => {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
+  const [rows, setRows] = useState([])
+
+
+  const fetchFormsEquipe = async () => {
+    try{
+      
+      const response = await getFormulariosEquipe(equipe_id)
+      console.log(equipe_id)
+      console.log(response)
+      setRows(response)
+
+    }catch(error){
+      console.log(error)
+    }
+
+  }
+
+
+
+  React.useEffect( () => {
+    setRows([])
+    fetchFormsEquipe()
+  }, [equipe_id])
+
+
+
 
   const handleRowSelection = (newSelection: number[]) => {
     const selectedId = newSelection.length > 0 ? newSelection[0] : null;
@@ -30,7 +54,7 @@ const TabelaFormularioDashAdmin: React.FC<TabelaFormularioDashAdminProps> = ({ o
     if (selectedId !== null) {
       const selectedRow = rows.find(row => row.id === selectedId);
       if (selectedRow) {
-        onFormSelect(selectedRow.formulario);
+        onFormSelect(selectedRow.formulario_id);
       }
     }
   };

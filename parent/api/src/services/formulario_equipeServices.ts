@@ -63,6 +63,47 @@ export const associarFormularioParaEquipes = async (
 };
 
 
+//Função para listar formulários pendentes e respoondidos de uma equipe, incluindo os usuários da equipe
+export async function listarUsuariosComFormulariosEquipe(formulario_id: number, equipe_id: number) {
+    try {
+        const usuarios = await User.findAll({
+            attributes: ['id', 'nome'],
+            include: [
+                {
+                    model: Formulario_user,
+                    as: 'users', // Alias definido no relacionamento de User com Formulario_user
+                    attributes: ['status'],
+                    where: {
+                        formulario_id
+                    },
+                    include: [
+                        {
+                            model: Formulario,
+                            as: 'form', // Alias definido no relacionamento de Formulario_user com Formulario
+                            attributes: ['nome'],
+                        }
+                    ]
+                },
+                {
+                    model: Equipe_user,
+                    as: 'user',
+                    where: {
+                        equipe_id
+                    },
+                    
+                }
+            ]
+        });
+        return usuarios;
+    } catch (error) {
+        console.error("Erro ao listar usuários com formulários da equipe:", error);
+        throw error;
+    }
+    
+}
+
+
+
 
 
 // Função para associar formulário a todas as equipes

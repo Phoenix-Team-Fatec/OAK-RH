@@ -4,7 +4,7 @@ import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser,
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl, listarUsuariosComFormulariosControl } from "./controllers/formularioController";
-import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
+import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, listarFormulariosEquipeController, listarUsuariosComFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
 import { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser } from "./controllers/respostaControllers";
@@ -59,6 +59,7 @@ router.post('/formulario_equipe/associar', associarFormularioEquipeController);
 router.post('/formulario_equipe/associar_todas/:id_admin', associarFormularioTodasEquipesController);
 router.get('/formulario_equipe/listar/:equipe_id', listarFormulariosEquipeController);
 router.delete('/formulario_equipe/:id', deletarFormularioEquipeController);
+router.get('/formulario_equipe/:formulario_id/:equipe_id', listarUsuariosComFormulariosEquipeController);
 
 // Rotas de Categoria
 router.post('/categorias', criarCategoriaControl);

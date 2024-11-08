@@ -1,21 +1,42 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import SidebarAdmin from '../ComponentsAdmin/SidebarAdmin/SidebarAdmin';
-import AdminNavbar from '../DashAdmin/AdminNavbar';
+import AdminNavbar from '../navabarAdmin/AdminNavbar';
 import TabelaFormularioDashAdmin from './tabelaFormularioDashAdmin';
 import TabelaDashAdminEquipe from './TabelaDashAdminEquipe';
 
 const DashboardAdminEquipe: React.FC = () => {
-  const [selectedForm, setSelectedForm] = useState<string | null>(null);
 
-  const handleFormSelect = (formulario: string) => {
-    setSelectedForm(formulario);
+  const [equipe_id] = useState(() => {
+    const params = new URLSearchParams(document.location.search);
+    const id = params.get("equipe");
+
+
+    return id !== null ? id : 0;
+  })
+
+
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+
+  const [selectedForm, setSelectedForm] = useState<number | null>(null);
+
+  const handleFormSelect = (formulario_id: number) => {
+    console.log(formulario_id)
+       
+
+    setSelectedForm(formulario_id);
   };
 
   return (
     <>
       <AdminNavbar />
-      <SidebarAdmin />
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
       <Box className="dashboard-container">
         
         {/* Cards Pequenos na Parte Superior */}
@@ -37,10 +58,10 @@ const DashboardAdminEquipe: React.FC = () => {
         {/* Estrutura de Outros Cards (Parte Inferior) */}
         <Box className="bottom-cards">
         <Box className="thin-card">
-            <TabelaFormularioDashAdmin onFormSelect={handleFormSelect} />
+            <TabelaFormularioDashAdmin onFormSelect={handleFormSelect} equipe_id={Number(equipe_id)} />
           </Box>
           <Box className="bottom-card">
-            <TabelaDashAdminEquipe selectedForm={selectedForm} />
+            <TabelaDashAdminEquipe selectedForm={Number(selectedForm)} equipe_id={Number(equipe_id)} />
           </Box>
         </Box>
       </Box>

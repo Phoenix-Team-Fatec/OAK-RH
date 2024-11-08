@@ -57,47 +57,6 @@ const TabelaDashAdmin: React.FC = () => {
         initialState={{ pagination: { paginationModel } }}
         pageSizeOptions={[3, 5]} //  3 ou 5 linhas por página
         checkboxSelection
-        localeText={{
-          // Traduções para português
-          noRowsLabel: 'Nenhuma linha',
-          noResultsOverlayLabel: 'Nenhum resultado encontrado',
-          errorOverlayDefaultLabel: 'Ocorreu um erro',
-          footerRowSelected: (count) => `${count} linha(s) selecionada(s)`,
-          footerTotalRows: 'Total de linhas:',
-          filterPanelInputLabel: 'Filtrar',
-          filterPanelAddFilter: 'Adicionar filtro',
-          filterPanelDeleteIconLabel: 'Excluir',
-          filterPanelOperators: 'Operadores',
-          filterPanelOperatorAnd: 'E',
-          filterPanelOperatorOr: 'Ou',
-          filterPanelOperatorLessThan: 'Menor que',
-          filterPanelOperatorLessThanOrEqual: 'Menor ou igual a',
-          filterPanelOperatorGreaterThan: 'Maior que',
-          filterPanelOperatorGreaterThanOrEqual: 'Maior ou igual a',
-          filterPanelOperatorEquals: 'Igual a',
-          filterPanelOperatorContains: 'Contém',
-          filterPanelOperatorStartsWith: 'Começa com',
-          filterPanelOperatorEndsWith: 'Termina com',
-          filterPanelOperatorIs: 'É',
-          filterPanelOperatorIsNot: 'Não é',
-          filterPanelClearButtonLabel: 'Limpar',
-          filterPanelSubmitButtonLabel: 'Aplicar',
-          filterPanelCloseButtonLabel: 'Fechar',
-          columnMenuLabel: 'Menu',
-          columnMenuShowColumns: 'Mostrar colunas',
-          columnMenuFilter: 'Filtrar',
-          columnMenuHideColumn: 'Ocultar coluna',
-          columnMenuUnsort: 'Desordenar',
-          columnMenuSortAsc: 'Ordenar Crescente',
-          columnMenuSortDesc: 'Ordenar Decrescente',
-          columnHeaderFiltersTooltip: 'Filtrar',
-          columnHeaderSortTooltip: 'Ordenar',
-          columnHeaderFilters: 'Filtros',
-          columnHeaderSort: 'Ordenação',
-          columnHeaderSortBy: 'Ordenar por',
-          columnHeaderSortAsc: 'Ordenar Crescente',
-          columnHeaderSortDesc: 'Ordenar Decrescente',
-        }}
         sx={{ border: 0 }}
       />
     </Paper>
