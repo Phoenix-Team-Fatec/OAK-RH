@@ -50,19 +50,19 @@ const DashboardAdminGeral: React.FC = () => {
   }, []);
 
   return (
-    <Box className="dashboard-container">
-      <Box className="top-cards">
-        <Box className="small-card">
+    <Box className="dashboard-container-geral">
+      <Box className="top-cards-geral">
+        <Box className="small-card-geral">
           <SmallCardChart title="Formulários Criados" data={data3} />
         </Box>
-        <Box className="small-card">
+        <Box className="small-card-geral">
           <SmallCardChart title="Equipes Criadas" data={data2} />
         </Box>
-        <Box className="small-card">
+        <Box className="small-card-geral">
           <SmallCardChart title="Usuarios Criados" data={data1} />
         </Box>
       </Box>
-      <Box className="bottom-card">
+      <Box className="bottom-card-geral">
         <TabelaDashAdmin />
       </Box>
     </Box>

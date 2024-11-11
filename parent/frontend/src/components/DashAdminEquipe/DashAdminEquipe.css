@@ -1,14 +1,17 @@
-.dashboard-container {
+.dashboard-container-equipe {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #F2EEF7;
-  margin-top: 60px; /* Ajuste o valor conforme necessário */
+  color: black;
+  background-color: #eae7eb;
+  margin-top: 1%; /* Ajuste o valor conforme necessário */
+  margin-bottom: 1%;
+  margin-right: 3%;
   padding: 30px;
 }
 
-.top-cards {
+.top-cards-equipe {
   display: flex;
   justify-content: space-between;
   gap: 20px;
@@ -17,7 +20,7 @@
 
 .small-card-equipe {
   width: 32%;
-  height: 10px !important;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,23 +33,23 @@
   transition: transform 0.3s ease-in-out;
 }
 
-.small-card:hover {
+.small-card-equipe:hover {
   transform: scale(1.01);
 }
 
-.bottom-cards {
+.bottom-cards-equipe {
   display: flex;
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 20px;
 }
 
-.bottom-card {
+.bottom-card-equipe {
   width: 68%;
   height: 700px;
 }
 
-.thin-card {
+.thin-card-equipe {
   width: 30%;
   height: 700px;
 }
