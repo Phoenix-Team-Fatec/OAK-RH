@@ -9,9 +9,9 @@ interface TabelaDashAdminEquipeProps {
 }
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 250, align: 'center', headerAlign: 'center' },
-  { field: 'user_nome', headerName: 'Nome', width: 250, align: 'center', headerAlign: 'center' },
-  { field: 'status', headerName: 'Status', width: 300, align: 'center', headerAlign: 'center' },
+  { field: 'id', headerName: 'ID', width: 240, align: 'center', headerAlign: 'center' },
+  { field: 'user_nome', headerName: 'Nome', width: 240, align: 'center', headerAlign: 'center' },
+  { field: 'status', headerName: 'Status', width: 245, align: 'center', headerAlign: 'center' },
 ];
 
 
