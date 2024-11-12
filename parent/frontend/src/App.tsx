@@ -13,6 +13,8 @@ import DashboardUser from "./pages/UserGUI/DashboardUser/DashboardUser";
 import UserFormsResponse from "./pages/UserGUI/UserFormsResponse/UserFormsResponse";
 import UserFormsResponseView from "./pages/UserGUI/UserFormsViewResponse/UserFormsResponse";
 import DashboardAdminEquipe from "./components/DashAdminEquipe/DashAdminEquipe";
+import AdminFormsIndividual from "./components/AdminFormsIndividual/AdminFormsIndividual"; {/*Rota TEMPORÁRIA PARA fORMULÁRIO DE RESPOSTAS DE CADA USUÁRIO (INDIVIDUAL) */}     
+       
 
 const App: React.FC = () => {
   return (
@@ -86,6 +88,8 @@ const App: React.FC = () => {
         <Route path="/forms-user/ver" element={<UserFormsResponseView />} />
 
         <Route path="/forms-user" element={<SelecaoFormularioMembro />} />
+
+        <Route path="/AdminFormsIndividual" element={<AdminFormsIndividual/>} />   {/*Rota TEMPORÁRIA PARA fORMULÁRIO DE RESPOSTAS DE CADA USUÁRIO (INDIVIDUAL) */}     
        
 
         <Route path="/dashboard-user"
