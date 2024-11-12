@@ -1,0 +1,134 @@
+
+.content-wrapper {
+    flex-grow: 1;
+    transition: margin-left 0.3s ease; 
+    display: flex;
+    background-color: #eae7eb;
+    min-height: 100vh; 
+    flex-grow: 1;
+    padding: 20px;
+    justify-content: center;
+  }
+  
+  .content-wrapper.collapsed {
+    margin-left: 0px; /* Adjust this value based on your sidebar width */
+  }
+  
+  .content-wrapper.expanded {
+    margin-left: 180px; /* Adjust this value based on your sidebar width */
+  }
+  
+  /* Adjust the main content area to be a flexbox as well */
+  .main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 70px;
+  }
+  
+  /* Grid for team cards */
+  .equipe-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .equipe-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    height: 200px; /* Adjusted height for description */
+  }
+  
+  .equipe-item:hover {
+    transform: scale(1.05);
+  }
+  
+  .equipe-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .equipe-description {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .team-buttons {
+    display: flex;
+    width: 110%;
+    gap: 3px;
+  }
+  
+  .team-buttons button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .team-buttons .delete-btn {
+    background-color: #9f60ba9c;
+    color: white;
+  }
+
+  .team-buttons .delete-btn:hover {
+    background-color: #5d23779c;
+  }
+  
+  .team-buttons .update-btn {
+    background-color: #52c2558e;
+    color: white;
+  }
+
+  .team-buttons .update-btn:hover{
+    background-color: #48834a8e;
+  }
+
+  .create-team-btn {
+    position: absolute;
+    top: 620px;
+    right: 40px;
+    background-color: #2f7c34;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+  
+  .create-team-btn:hover {
+    background-color: #00b318;
+  }
+  
+  .more-info-btn {
+  background-color: #2d80d892;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: auto; /* Aligns the button to the bottom */
+}
+
+.more-info-btn:hover {
+  background-color: #1760af92;
+}

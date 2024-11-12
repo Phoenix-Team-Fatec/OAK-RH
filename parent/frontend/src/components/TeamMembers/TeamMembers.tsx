@@ -4,7 +4,7 @@ import { Edit, Delete, Add } from '@mui/icons-material';
 import UserSelectionModal from '../UserSelectionModal/UserSelectionModal';
 import ConfirmDeleteModal from '../ConfirmDeleteModal/ConfirmDeleteModal'; // Importa o modal de confirmação de exclusão
 import EditMemberModal from '../EditMemberModal/EditMemberModal'; // Importa o modal de edição
-import { removeUserFromEquipe } from './index';// Importa a função para excluir membro da equipe
+import { removeUserFromEquipe, getEquipe_user } from './index';// Importa a função para excluir membro da equipe
 
 
 // Definição de tipo para Member
@@ -15,13 +15,48 @@ interface Member {
   role: 'Líder' | 'Liderado'; // Pode ser Líder ou Liderado
 }
 
-// Definição de tipo para as props recebidas
-interface TeamMembersProps {
-  members: Member[]; // Array de membros que é recebido inicialmente
-}
 
-const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) => {
-  const [members, setMembers] = useState<Member[]>(initialMembers); // Define estado para membros
+
+
+const equipes = async () => {
+  try {
+    const teamId = localStorage.getItem('teamId'); // Recupera o 'teamId' do localStorage
+    if (!teamId) {
+      console.log("teamId not found in localStorage");
+    }
+    const response = await getEquipe_user(Number(teamId)); // Chama a função getEquipe_user passando o 'teamId'
+    return response;
+  } catch (error) {
+    console.log("Error in equipe_user function:", error);
+    return error;
+  }
+};
+
+// Mapear os dados da resposta
+// Mapear os dados da resposta
+const listMembers = async () => {
+  try {
+    const response = await equipes();
+    
+    // Verifique se response.users existe
+    const members = response.users.map((user: any) => ({
+      id: user.user.id, // ID do membro
+      name: user.user.nome, // Nome do membro
+      role: user.is_lider ? 'Líder' : 'Liderado', // Definir o papel como 'Líder' ou 'Liderado'
+    }));
+ 
+    return members; // Retorna os membros diretamente
+  } catch (error) {
+    console.log('Error in listMembers function:', error);
+    return [];
+  }
+};
+
+
+
+
+const TeamMembers: React.FC = () => {
+  const [members, setMembers] = useState<Member[]>([]); // Define estado para membros
   const [selectedMember, setSelectedMember] = useState<Member | null>(null); // Define estado para o membro selecionado
   const [openModal, setOpenModal] = useState<boolean>(false); // Estado para controlar abertura do modal de seleção de membros
   const [roleToAdd, setRoleToAdd] = useState<'Líder' | 'Liderado'>(); // Estado para o papel do membro a ser adicionado
@@ -29,7 +64,15 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
   const [openEditModal, setOpenEditModal] = useState<boolean>(false); // Estado para controlar abertura do modal de edição
   const [lider, setLider] = useState(false); // Estado para controlar se o membro é líder
 
+  const fetchMembers = async () => {
+    const membersData = await listMembers();
+    setMembers(membersData); // Atualiza o estado com os dados retornados de listMembers
+  }
+
+
+
   useEffect(() => {
+    fetchMembers();
  
   }, []);
 
@@ -50,6 +93,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       await removeUserFromEquipe(Number(userId), Number(teamId));
     
       setOpenDeleteModal(false); // Fecha o modal de exclusão
+      fetchMembers()
 
     }catch(error){
       console.log('Erro ao excluir membro:', error);
@@ -62,6 +106,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       members.map(m => (m.name === updatedMember.name ? updatedMember : m))
     );
     setOpenEditModal(false); // Fecha o modal de edição
+    fetchMembers()
   };
 
   // Função para abrir o modal de exclusão
@@ -113,7 +158,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       <div className="team-led">
         <div className='team-members-cabecalho'>
           <h4>Liderados</h4>
-          <button onClick={() => { setRoleToAdd('Liderado'); setOpenModal(true);  }}>
+          <button onClick={() => { setRoleToAdd('Liderado'); setOpenModal(true); setLider(false) }}>
             <Add />
           </button>
         </div>
@@ -136,7 +181,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       {/* Modal para seleção de novo membro */}
       <UserSelectionModal
         open={openModal}
-        onClose={() => setOpenModal(false)}
+        onClose={() => {setOpenModal(false); fetchMembers()}}
         onSelect={handleAddMember}
         isLider={lider}
       />
@@ -144,7 +189,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       {/* Modal de confirmação de exclusão */}
       <ConfirmDeleteModal
         open={openDeleteModal}
-        onClose={() => setOpenDeleteModal(false)}
+        onClose={() => {setOpenDeleteModal(false); fetchMembers()}}
         onConfirm={handleConfirmDelete}
         member={selectedMember}
       />
@@ -152,7 +197,7 @@ const TeamMembers: React.FC<TeamMembersProps> = ({ members: initialMembers }) =>
       {/* Modal de edição */}
       <EditMemberModal
         open={openEditModal}
-        onClose={() => setOpenEditModal(false)}
+        onClose={() => {setOpenEditModal(false); fetchMembers()}}
         onSave={handleSaveEdit}
         member={selectedMember}
       />

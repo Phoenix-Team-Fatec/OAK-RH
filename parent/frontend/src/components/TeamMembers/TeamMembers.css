@@ -75,6 +75,7 @@
   }
   .team-members-container {
     max-height: 400px; /* Altura máxima da área de membros */
+    width: 400px;
     overflow-y: auto;  /* Adiciona scroll vertical quando necessário */
     padding: 10px;     /* Espaçamento interno */
     border: 1px solid #ddd; /* Borda para destacar o contêiner */

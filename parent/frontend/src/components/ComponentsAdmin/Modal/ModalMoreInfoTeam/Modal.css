@@ -1,0 +1,111 @@
+/* Modal Overlay */
+.modal-overlay-more-info {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(1px);
+}
+
+/* Modal Content */
+.modal-content-more-info {
+  background: #ffffff; 
+  border-radius: 12px; 
+  padding: 40px; 
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3); 
+  width: 600px; 
+  max-height: 80vh; 
+  overflow-y: auto; 
+  transition: transform 0.3s ease-out; 
+  transform: translateY(-20px);
+}
+
+/* Modal Header */
+.modal-header-more-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Modal Title */
+.modal-header-more-info h2 {
+  margin: 0;
+  font-size: 24px; 
+  font-weight: bold;
+  color: #444;
+}
+
+/* Modal Body */
+.modal-body {
+  margin-bottom: 20px; 
+}
+
+.modal-body p {
+  font-size: 1.1rem; 
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.modal-body h4 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-body ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+.modal-body ul li {
+  background: #f0f0f0; 
+  border: 1px solid #dcdcdc; 
+  padding: 12px; 
+  margin-bottom: 10px;
+  border-radius: 8px; 
+}
+
+.member-details {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; /
+}
+
+/* Modal Footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-footer .cancel-btn-team-more-info {
+  border: 2px solid #a380a5;
+  color: #a380a5;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+  height: 40px; 
+  width: 120px;
+}
+
+.cancel-btn-team-more-info {
+  background-color: #ebd9ec;
+  color: #8d5790;
+}
+
+.member-email {
+  display: block;
+  font-size: 0.9rem;
+  color: #888; 
+  margin-top: 5px; 
+}

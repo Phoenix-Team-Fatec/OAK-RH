@@ -1,0 +1,36 @@
+.modalConfirmFormulario .modal-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .modalConfirmFormulario .modal-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .modalConfirmFormulario .modal-box button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+  }
+  
+  .modalConfirmFormulario .modal-box button:focus {
+    outline: none;
+  }
+  
+  .modalConfirmFormulario .modal-box button.primary {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .modalConfirmFormulario .modal-box button.error {
+    background-color: #d32f2f;
+    color: white;
+  }
+  

@@ -1,0 +1,35 @@
+/* Wrapper to align sidebar and form side-by-side */
+.forms-admin-wrapper {
+    display: flex;
+    width: 100%;
+  }
+  
+  /* Sidebar styles (same as Dashboard) */
+  .sidebar-admin {
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .sidebar-admin.expanded {
+    width: 250px; /* Expanded width */
+  }
+  
+  .sidebar-admin.collapsed {
+    width: 60px; /* Collapsed width */
+  }
+  
+  /* Formulario content area */
+  .formulario-container {
+    flex-grow: 1;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .formulario-container.collapsed {
+    margin-left: 60px;
+  }
+  
+  .formulario-container.expanded {
+    margin-left: 250px;
+  }
+  

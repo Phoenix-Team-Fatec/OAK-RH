@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #eae7eb !important;
+}
+
+.sidebar {
+  width: 250px; /* Defina a largura da sidebar */
+  position: fixed; /* Fixa a sidebar na lateral */
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.content {
+  margin: 0 auto; /* Centraliza horizontalmente */
+  padding: 30px;
+  width: 72%; /* Define uma largura fixa */
+  transition: margin-left 0.3s ease; /* Smooth transition */
+  margin-left: 350px; /* Adjust this value to the width of your expanded sidebar */
+}
+
+.content.collapsed {
+  margin-left: 250px;
+}
+
+.h2-content-forms-admin {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.actions-forms-admin {
+  display: flex;
+  justify-content: space-between; /* Alinhamento dos botões */
+  margin-bottom: 20px;
+  width: 100%; /* Aumenta a largura para preencher a área */
+}
+
+.actions-forms-admin button {
+  flex: 1; /* Faz os botões ocuparem igual largura */
+  margin-right: 10px; /* Espaço entre os botões */
+  background-color: #A380A5;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 12px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.actions-forms-admin button:last-child {
+  margin-right: 0; /* Remove a margem do último botão */
+}
+
+.actions-forms-admin .button-enviar {
+  background-color: #A380A5;
+}
+
+.actions-forms-admin .button-enviar:hover {
+  background-color: #704772;
+}
+
+.actions-forms-admin button:hover {
+  background-color: #704772;
+}
+
+.tabela-formularios {
+  width: 100%;
+  margin: 0 auto; 
+}
+
+.tabela-formularios .MuiCheckbox-root .MuiSvgIcon-root {
+  color: #813585; /* Altere para a cor que você deseja */
+}
+
+
