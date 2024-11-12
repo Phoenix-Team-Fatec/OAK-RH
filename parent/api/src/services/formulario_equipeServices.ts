@@ -145,7 +145,7 @@ export const listarFormulariosEquipe = async (equipe_id: number) => {
                 {
                     model: Formulario,
                     as: 'formularios',
-                    attributes: ['nome', 'descricao']
+                    attributes: ['nome', 'descricao', 'criado_em']
                 }
             ]
         });
