@@ -51,6 +51,13 @@ export const associarFormularioParaEquipes = async (
     });
 
 
+        const form = await Formulario.findByPk(formulario_id);
+        if (!form) {
+            return { message: "Formulário não encontrado" };
+        }
+        form.enviado = true;
+        form.save()
+
 
 
        // Aguarda todas as associações serem realizadas
