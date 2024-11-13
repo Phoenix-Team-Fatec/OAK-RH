@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import './ModalConfirmDeleteTeam.css';
-import axios from 'axios';
-import SuccessNotification from '../ModalSuccessNotification/SuccessNotification';
+import './ModalConfirmDeleteForms.css';
 import ErrorNotification from '../ModalErrorNotifcation/ErrorNotification';
+import SuccessNotification from '../ModalSuccessNotification/SuccessNotification';
+import axios from 'axios';
 
-interface ModalConfirmDeleteTeamProps {
+interface ModalConfirmDeleteFormsProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
-    selectedTeamNames: string[];
-    selectedIds: number[]; 
+    selectedFormNames: string[];
+    selectedIds: number[];
 }
 
-const ModalConfirmDeleteTeam: React.FC<ModalConfirmDeleteTeamProps> = ({
+const ModalConfirmDeleteForms: React.FC<ModalConfirmDeleteFormsProps> = ({
     open,
     onClose,
     onConfirm,
-    selectedTeamNames,
+    selectedFormNames,
     selectedIds,
 }) => {
     const [showError, setShowError] = useState(false);
@@ -26,53 +26,44 @@ const ModalConfirmDeleteTeam: React.FC<ModalConfirmDeleteTeamProps> = ({
 
     if (!open) return null;
 
-    const message = selectedTeamNames.length === 1
-        ? `Tem certeza que deseja excluir a equipe ${selectedTeamNames[0]}?`
-        : `Tem certeza que deseja excluir essas ${selectedTeamNames.length} equipes?`;
+    const message = selectedFormNames.length === 1
+        ? `Tem certeza que deseja excluir o formulário ${selectedFormNames[0]}?`
+        : `Tem certeza que deseja excluir esses ${selectedFormNames.length} formulários?`;
 
     const handleConfirm = async () => {
         setIsLoading(true);
         setShowError(false);
-
         try {
             await Promise.all(
-                selectedIds.map(async (teamId) => {
-                    await axios.delete(`http://localhost:3000/equipe/${teamId}`);
+                selectedIds.map(async (formId) => {
+                    await axios.delete(`http://localhost:3000/forms/${formId}`);
                 })
             );
             setShowSuccess(true);
-            setTimeout(() => {
-                setIsLoading(false); // Mantém o spinner visível por mais tempo
-            }, 2000); 
-
-            setTimeout(() => {
-                setShowSuccess(false);
-                onConfirm(selectedIds);
-            }, 1000);
+            onConfirm();
         } catch (error) {
-            const message = error.response?.data?.message || 'Erro ao excluir equipe(s), tente novamente.';
-            setErrorMessage(message);
+            setErrorMessage('Erro ao excluir formulário(s), tente novamente.');
             setShowError(true);
-            setIsLoading(false); // Desativa o spinner em caso de erro
+        } finally {
+            setIsLoading(false);
         }
     };
 
     const closeModals = () => {
         onClose();
         setShowSuccess(false);
-        setShowError(false);
     };
 
     return (
         <>
-            <div className="modal-confirm-delete-team">
-                <div className="modal-delete-team">
-                    <h2 className="h2-modal-delete-team">Confirmação de Exclusão</h2>
+            <div className="modal-confirm-delete-forms">
+                <div className="modal-delete-forms">
+                    <h2 className="h2-modal-delete-forms">Confirmação de Exclusão</h2>
                     <p>{message}</p>
-                    <div className="modal-action-delete-team">
+                    <div className="modal-action-delete-forms">
                         <button
                             onClick={handleConfirm}
-                            className="confirm-button-delete-team"
+                            className="confirm-button-delete-forms"
                             disabled={isLoading}
                         >
                             {isLoading ? (
@@ -83,7 +74,7 @@ const ModalConfirmDeleteTeam: React.FC<ModalConfirmDeleteTeamProps> = ({
                         </button>
                         <button
                             onClick={closeModals}
-                            className="cancel-button-delete-team"
+                            className="cancel-button-delete-forms"
                             disabled={isLoading}
                         >
                             Cancelar
@@ -99,7 +90,7 @@ const ModalConfirmDeleteTeam: React.FC<ModalConfirmDeleteTeamProps> = ({
             )}
             {showSuccess && (
                 <SuccessNotification
-                    message="Equipe(s) excluída(s) com sucesso!"
+                    message="Formulário(s) excluído(s) com sucesso!"
                     onClose={closeModals}
                 />
             )}
@@ -107,4 +98,4 @@ const ModalConfirmDeleteTeam: React.FC<ModalConfirmDeleteTeamProps> = ({
     );
 };
 
-export default ModalConfirmDeleteTeam;
+export default ModalConfirmDeleteForms;

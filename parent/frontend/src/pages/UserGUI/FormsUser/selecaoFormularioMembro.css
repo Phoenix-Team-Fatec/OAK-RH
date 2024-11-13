@@ -74,7 +74,7 @@
   display: flex;
   gap: 10px;
   justify-content: center;
-  margin-bottom: 10px; /* Adicionada margem inferior reduzida */
+  margin-bottom: 10px;
 }
 
 /* Botão individual */
@@ -87,6 +87,7 @@
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
+  width: 150px;
 }
 
 .selecao-formulario-button:hover {
@@ -108,38 +109,71 @@
 
 /* Informações da equipe */
 .selecao-formulario-team-info {
-  font-size: 18px;
+  position: relative;
+  padding-left: 2.5%;
+  font-size: 20px;
   color: #333;
   text-align: left;
   width: 100%;
   margin-bottom: 0;
 }
 
+.selecao-formulario-team-info::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%); 
+  font-size: 24px;
+  color: #333; 
+}
+
 /* Cards */
 .selecao-formulario-card {
-  width: 180px;
-  height: 180px;
-  border-radius: 8px;
+  width: 250px;
+  height: 250px; /* Aumentei a altura para mais espaço */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin: 0; /* Removido para evitar espaçamento vertical */
+  margin: 15px; /* Adicionando espaçamento entre os cards */
+  border-radius: 10px; /* Bordas mais arredondadas */
+  background-color: #ffffff; /* Cor de fundo suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
   cursor: pointer;
 }
 
 .selecao-formulario-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Aumenta um pouco o tamanho do card */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Sombra mais intensa no hover */
 }
 
 .selecao-formulario-card-header {
-  all: unset;
-  padding: 10px;
-  background-color: #f0f0f0;
+  padding: 15px;
+  background-color: #4aaf6c; /* Cor de fundo mais vibrante */
+  color: white; /* Cor do texto */
   font-weight: bold;
   text-align: center;
-  height: 150px;
-  border-radius: 8px;
+  border-radius: 10px 10px 0 0; /* Bordas arredondadas apenas no topo */
+  font-size: 18px; /* Tamanho de fonte maior */
+  height: 100px; /* Ajustei a altura para que o texto tenha mais espaço */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize; /* Deixa as palavras com a primeira letra maiúscula */
+}
+
+.description-forms-card-user {
+  padding: 10px;
+  font-size: 14px;
+  color: #555; 
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+.selecao-formulario-card-header p {
+  margin: 0; /* Remove margens padrão */
+  font-size: 16px; /* Ajuste para o tamanho da descrição */
 }
 
 /* Adicionando contêiner para os cards */

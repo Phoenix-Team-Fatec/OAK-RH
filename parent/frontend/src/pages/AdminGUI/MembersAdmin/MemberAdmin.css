@@ -5,10 +5,12 @@
 
 .sidebar-admin.expanded {
   width: 250px; /* Expanded width */
+  height: 100vh;
 }
 
 .sidebar-admin.collapsed {
   width: 60px; /* Collapsed width */
+  
 }
 
 .admin_members_container {

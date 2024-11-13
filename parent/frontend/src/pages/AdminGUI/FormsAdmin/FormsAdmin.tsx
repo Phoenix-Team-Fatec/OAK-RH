@@ -9,8 +9,8 @@ import "./adminFormulario.css"; // Certifique-se de que o caminho do CSS está c
 import { getFormularios, deleteFormulario } from "./formsAdminBackend";
 import { useNavigate } from "react-router-dom";
 import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
-
 import useUserData from "../../../hooks/useUserData";
+import ModalConfirmDeleteForms from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteForms/ModalConfirmDeleteForms";
 
 interface Forms {
   id: number;
@@ -24,12 +24,14 @@ const FormsAdmin: React.FC = () => {
 
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
-  const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
-  const [showAlert, setShowAlert] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenSend, setIsModalOpenSend] = useState(false); 
+  const [alertModalOpen, setAlertModalOpen] = useState(false)
+  const [alertMessage, setAlertMessage] = useState("");
   const { id } = useUserData();
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   
-  const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
+  const [isExpanded, setIsExpanded] = useState(true); 
 
   const navigate = useNavigate();
 
@@ -80,45 +82,23 @@ const FormsAdmin: React.FC = () => {
     }
   };
 
+  const handleDelete = () => {
+    if (selectedIds.length === 0 ) {
+      setAlertMessage("Selecione pelo menos um formulário para deletar");
+      setAlertModalOpen(true);
+    } else {
+      setConfirmDeleteOpen(true);
+    }
+  }
+
+  const closeAlertModal = () => {
+    setAlertModalOpen(false);
+    setSelectedIds([]);
+  };
+
   const isAllSelected = rows?.length > 0 && selectedIds.length === rows.length;
   const isSomeSelected =
     selectedIds?.length > 0 && selectedIds.length < rows?.length;
-
-  // Deletando -
-  const handleDelete = async () => {
-    if (selectedIds.length === 0) {
-      setShowAlert(true)
-      return
-    }
-
-    if (
-      !confirm("Tem certeza que deseja deletar os formulários selecionados?")
-    ) {
-      return;
-    }
-
-    setIsDeleting(true);
-
-    try {
-      // Faz a requisição de deletar para cada formulário selecionado
-      await Promise.all(
-        selectedIds.map(async (formularioId) => {
-          await deleteFormulario(formularioId);
-        })
-      );
-
-      // Remove os formulários deletados da lista exibida na tabela
-      const updatedRows = rows.filter((row) => !selectedIds.includes(row.id));
-      setRows(updatedRows);
-      setSelectedIds([]); // Limpa as seleções
-      alert("Formulários deletados com sucesso.");
-    } catch (error) {
-      console.error("Erro ao deletar formulários", error);
-      alert("Erro ao deletar formulários. Tente novamente.");
-    } finally {
-      setIsDeleting(false);
-    }
-  };
 
   const columns: GridColDef[] = useMemo(
     () => [
@@ -245,12 +225,23 @@ const FormsAdmin: React.FC = () => {
           onClose={() => setIsModalOpenSend(false)}
           formId={selectedIds[0]}
         />
-
-        <AlertNotification
-          message="Selecione pelo menos um formulário para deletar"
-          open={showAlert}
-          onClose={() => setShowAlert(false)}
-        />
+        <ModalConfirmDeleteForms
+          open={confirmDeleteOpen}
+          onClose={() => {
+            setConfirmDeleteOpen(false);
+            setSelectedIds([]);
+          }}
+          onConfirm={() => fetchForms()}
+          selectedIds={selectedIds}
+          selectedFormNames={selectedIds.map(
+            (id) => rows.find((row) => row.id === id) ?.nome || ""
+          )}
+          />
+          <AlertNotification
+            open={alertModalOpen}
+            message={alertMessage}
+            onClose={closeAlertModal}
+          />
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import "./EquipeAdmin.css";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
 import Modal from "../../../components/ComponentsAdmin/Modal/ModalMoreInfoTeam/Modal";
 import UpdateModal from "../../../components/ComponentsAdmin/Modal/ModalUpdateTeam/UpdateModal";
-import AddTeamModal from "../../../components/AddTeamModal/AddTeamModal";
+import AddTeamModal from "../../../components/ComponentsAdmin/Modal/ModalAddTeam/ModalAddTeam";
 import ModalConfirmDeleteTeam from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteTeam/ModalConfirmDeleteTeam"; // Importando o novo modal
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";
@@ -38,8 +38,9 @@ function EquipeAdmin() {
   }, [id]);
 
   const handleDelete = async (teamIds) => {
+    // Filtra as equipes excluídas pelo ID e atualiza o estado
     setTeams(teams.filter((team) => !teamIds.includes(team.id)));
-    setIsDeleteModalOpen(false);
+    setIsDeleteModalOpen(false); // Fecha o modal de exclusão
   };
 
   const handleOpenDeleteModal = (team) => {
@@ -84,12 +85,15 @@ function EquipeAdmin() {
 
   return (
     <div style={{ display: "flex", position: "relative" }}>
-     
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
 
-      <div className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}>
+      <div
+        className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}
+      >
         <div className="main-content">
-          <h2 style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}>
+          <h2
+            style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}
+          >
             Gerenciamento de Equipes
           </h2>
 
@@ -143,7 +147,7 @@ function EquipeAdmin() {
         <Modal
           isOpen={isModalOpen}
           onClose={handleCloseModal}
-          team={selectedTeam} 
+          team={selectedTeam}
         />
       )}
 
@@ -170,7 +174,9 @@ function EquipeAdmin() {
           open={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
           onConfirm={handleDelete}
-          selectedTeamNames={selectedTeamIds.map(id => teams.find(team => team.id === id)?.nome)}
+          selectedTeamNames={selectedTeamIds.map(
+            (id) => teams.find((team) => team.id === id)?.nome
+          )}
           selectedIds={selectedTeamIds}
         />
       )}

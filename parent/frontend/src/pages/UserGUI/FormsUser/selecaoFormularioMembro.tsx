@@ -65,6 +65,16 @@ const SelecaoFormularioMembro: React.FC = () => {
         );
         setEquipes(equipesData);
 
+        // Carrega o ID da equipe do sessionStorage
+        const storedEquipeId = sessionStorage.getItem("selectedEquipeId");
+        const initialEquipeId = storedEquipeId
+          ? Number(storedEquipeId)
+          : equipesData[0]?.id;
+        
+          if (initialEquipeId) {
+            setSelectedEquipe(initialEquipeId);
+          }
+
         // Se uma equipe foi selecionada a partir da URL, definimos as informações da equipe
         if (selectedEquipe !== null) {
           const equipeSelecionada = equipesData.find((equipe) => equipe.id === selectedEquipe);
@@ -187,11 +197,14 @@ const SelecaoFormularioMembro: React.FC = () => {
             formularios.length > 0 ? (
               formularios.map((formulario) => (
                 <div key={formulario.id} className="selecao-formulario-card">
-                  <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>
-                    {formulario.nome}
-                    <p className="description-forms-card-user">Descrição: {formulario.descricao}</p>
-                  </div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>
+                  {formulario.nome}
                 </div>
+                <div>
+                  <p className="description-forms-card-user">Descrição: {formulario.descricao}</p>
+                </div>
+              </div>
+              
               ))
             ) : (
               <p className="selecao-formulario-no-data">Nenhum formulário pendente encontrado.</p>
@@ -200,11 +213,13 @@ const SelecaoFormularioMembro: React.FC = () => {
             formularios.length > 0 ? (
               formularios.map((formulario) => (
                 <div key={formulario.id} className="selecao-formulario-card">
-                  <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>
-                    {formulario.nome}
-                    <p className="description-forms-card-user">Descrição: {formulario.descricao}</p>
-                  </div>
+                <div className="selecao-formulario-card-header" onClick={() => handleFormularioClick(formulario.id)}>
+                  {formulario.nome}
                 </div>
+                <div>
+                  <p className="description-forms-card-user">Descrição: {formulario.descricao}</p>
+                </div>
+              </div>
               ))
             ) : (
               <p className="selecao-formulario-no-data">Nenhum formulário respondido encontrado.</p>

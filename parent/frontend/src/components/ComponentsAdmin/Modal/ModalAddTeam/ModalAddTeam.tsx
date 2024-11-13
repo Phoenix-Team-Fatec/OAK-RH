@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import useUserData from '../../hooks/useUserData';
-import SuccessNotification from '../ComponentsAdmin/Modal/ModalSuccessNotification/SuccessNotification';
-import './AddTeamModal.css'; // Importa o CSS
+import React, { useState } from "react";
+import axios from "axios";
+import useUserData from "../../../../hooks/useUserData";
+import SuccessNotification from "../ModalSuccessNotification/SuccessNotification";
+import "./ModalAddTeam.css";
 
 const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
-  const [teamName, setTeamName] = useState('');
-  const [teamDescription, setTeamDescription] = useState('');
+  const [teamName, setTeamName] = useState("");
+  const [teamDescription, setTeamDescription] = useState("");
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Estado para o carregamento
   const { id } = useUserData();
@@ -15,7 +15,7 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
 
   // Função para cadastrar uma nova equipe
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     if (!id) {
       alert("Admin ID not found. Please Login");
@@ -25,22 +25,22 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
     setIsLoading(true); // Inicia o carregamento
 
     try {
-      const response = await axios.post('http://localhost:3000/equipe/criar', {
+      const response = await axios.post("http://localhost:3000/equipe/criar", {
         nome: teamName,
         descricao: teamDescription,
         id_admin: id,
       });
 
       console.log("Team created", response.data);
-      setTeamName('');
-      setTeamDescription('');
+      setTeamName("");
+      setTeamDescription("");
       onAdd(response.data);
 
       setShowSuccessNotification(true);
       setTimeout(() => {
         setShowSuccessNotification(false);
         onClose();
-      }, 2000);
+      }, 1000);
     } catch (error) {
       console.log("Error creating team", error);
       alert("Erro ao criar equipe, tente novamente");
@@ -50,8 +50,8 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
   };
 
   const handleClose = () => {
-    setTeamName('');
-    setTeamDescription('');
+    setTeamName("");
+    setTeamDescription("");
     onClose();
   };
 
@@ -60,7 +60,7 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
       <div className="modal-overlay" onClick={handleClose}>
         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
           <div className="modal-header-add-team">
-            <h2 className='h2-modal-add-team'>Adicionar nova equipe</h2>
+            <h2 className="h2-modal-add-team">Adicionar nova equipe</h2>
           </div>
           <div className="modal-body">
             <input
@@ -78,14 +78,18 @@ const AddTeamModal = ({ isOpen, onClose, onAdd }) => {
             />
           </div>
           <div className="modal-footer-add-team">
-            <button className="save-btn-add-team" onClick={handleSubmit} disabled={isLoading}>
-              {isLoading ? (
-                <span className="spinner"></span>
-              ) : (
-                'Adicionar'
-              )}
+            <button
+              className="save-btn-add-team"
+              onClick={handleSubmit}
+              disabled={isLoading}
+            >
+              {isLoading ? <span className="spinner"></span> : "Adicionar"}
             </button>
-            <button className="cancel-btn-add-team" onClick={handleClose} disabled={isLoading}>
+            <button
+              className="cancel-btn-add-team"
+              onClick={handleClose}
+              disabled={isLoading}
+            >
               Fechar
             </button>
           </div>

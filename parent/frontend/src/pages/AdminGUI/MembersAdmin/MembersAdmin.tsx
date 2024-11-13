@@ -26,8 +26,8 @@ const MembersAdmin = () => {
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [alertModalOpen, setAlertModalOpen] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
-
   const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const fetchUsers = async () => {
     if (id) {
@@ -48,6 +48,10 @@ const MembersAdmin = () => {
       }
     };
     loadUserData();
+
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [id]);
 
   const handleAddMember = (data: { name: string; email: string }) => {
@@ -143,7 +147,7 @@ const MembersAdmin = () => {
             disabled={isDeleting}
           />
         ),
-        width: 80,
+        width: windowWidth <= 768 ? 60 : 80, // Responsive width
         sortable: false,
         filterable: false,
         disableColumnMenu: true,
@@ -157,10 +161,10 @@ const MembersAdmin = () => {
         ),
       },
       { field: "id", headerName: "ID", width: 80 },
-      { field: "nome", headerName: "Nome", width: 298 },
-      { field: "email", headerName: "Email", width: 340 },
+      { field: "nome", headerName: "Nome", width: windowWidth <= 768 ? 150 : 298 },
+      { field: "email", headerName: "Email", width: windowWidth <= 768 ? 180 : 340 },
     ],
-    [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
+    [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting, windowWidth]
   );
 
   const toggleSidebar = () => {
@@ -172,38 +176,16 @@ const MembersAdmin = () => {
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
 
       <div className={`admin_members_container ${isExpanded ? "expanded" : "collapsed"}`}>
-        
-        <h2 className="h2_admin_members_register">
-          Gerenciamento de Funcionários
-        </h2>
+        <h2 className="h2_admin_members_register">Gerenciamento de Funcionários</h2>
         <div style={{ marginBottom: "20px", width: "800px" }}>
-          <div
-            style={{
-              display: "flex",
-              gap: "10px",
-              justifyContent: "flex-start",
-              width: "100%",
-            }}
-          >
-            <button
-              className="button_register_user"
-              onClick={handleAddMemberOpen}
-              disabled={isDeleting}
-            >
+          <div style={{ display: "flex", gap: "10px", justifyContent: "flex-start" }}>
+            <button className="button_register_user" onClick={handleAddMemberOpen} disabled={isDeleting}>
               Cadastrar
             </button>
-            <button
-              className="button_edit_member"
-              onClick={handleEdit}
-              disabled={isDeleting}
-            >
+            <button className="button_edit_member" onClick={handleEdit} disabled={isDeleting}>
               Editar
             </button>
-            <button
-              className="button_delete_member"
-              onClick={handleDelete}
-              disabled={isDeleting}
-            >
+            <button className="button_delete_member" onClick={handleDelete} disabled={isDeleting}>
               Deletar
             </button>
           </div>
