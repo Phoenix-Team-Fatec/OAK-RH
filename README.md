@@ -110,15 +110,13 @@ https://www.figma.com/design/g9ZkBcQvA4WqrllBQUsATc/OAK-RH?node-id=0-1&t=3SuGwy7
 | :----: | :----: |
 | Criação e envio de formulário para equipe | :white_check_mark: |
 | Criação do Portal do usuário | :white_check_mark: |
-| Tela para exibir os formulários de cada equipe/usuário | :white_check_mark: |
+| Tela para exibição dos formulários de cada equipe/usuário | :white_check_mark: |
 | Telas para responder aos formulários | :white_check_mark: |
-| Visualização das respostas | :white_check_mark: |
-| Visualização por níveis (líder e liderado) | :white_check_mark: |
-| Dashboard Admin | :white_check_mark: |
+| Visualização das respostas(Própias) | :white_check_mark: |
 | Dashboard de Colaboradores (Líder/Liderado) | :white_check_mark: |
-| Exibição de resultados (respostas) de pesquisas | :white_check_mark: |
-| Implementar a exibição dos resultados de pesquisas, categorizados por tipo de pergunta e avaliação | :white_check_mark: |
-| Protótipo para o Dashboard Admin/Colaboradores + protótipo da interface do colaborador | :white_check_mark: |
+| Visualização por níveis,"Dashboard", (líder e liderado) | :white_check_mark: |
+| Dashboard Admin | :white_check_mark: |
+| Divisão entre formulários pendentes e respondidos para usuário | :white_check_mark: |
 
 
 ### Sprint 4 -
