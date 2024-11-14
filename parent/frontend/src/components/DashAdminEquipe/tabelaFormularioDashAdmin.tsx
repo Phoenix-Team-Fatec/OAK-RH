@@ -13,9 +13,6 @@ interface TabelaFormularioDashAdminProps {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 80, align: 'center', headerAlign: 'center' },
-<<<<<<< HEAD
-  { field: 'formulario', headerName: 'Formulário', width: 260, align: 'left', headerAlign: 'left' },
-=======
   { // Coluna que exibe o nome do formulário, clicavel e já puxando id do formulário a ser exibido
     field: 'formulario', 
     headerName: 'Formulário', 
@@ -35,7 +32,6 @@ const columns: GridColDef[] = [
 // </a>
     
   }, 
->>>>>>> fc0766c2dc0eb59d5343b8675c72dc21b7ac25e2
 ];
 
 
