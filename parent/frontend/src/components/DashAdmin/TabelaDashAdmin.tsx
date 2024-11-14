@@ -6,14 +6,14 @@ import useUserData from '../../hooks/useUserData';
 
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 150, align: 'center', headerAlign: 'center' },
-  { field: 'user_nome', headerName: 'Nome', width: 200, align: 'center', headerAlign: 'center' },
-  { field: 'equipe_nome', headerName: 'Equipe', width: 200, align: 'center', headerAlign: 'center' },
-  { field: 'status', headerName: 'Status', width: 150, align: 'center', headerAlign: 'center' },
+  { field: 'id', headerName: 'ID', width: 170, align: 'center', headerAlign: 'center' },
+  { field: 'user_nome', headerName: 'Nome', width: 220, align: 'center', headerAlign: 'center' },
+  { field: 'equipe_nome', headerName: 'Equipe', width: 220, align: 'center', headerAlign: 'center' },
+  { field: 'status', headerName: 'Status', width: 170, align: 'center', headerAlign: 'center' },
   { 
     field: 'formulario', 
     headerName: 'Formulário', 
-    width: 385, 
+    width: 470, 
     align: 'center', 
     headerAlign: 'center',
   },

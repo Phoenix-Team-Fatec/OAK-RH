@@ -11,7 +11,7 @@ interface TabelaFormularioDashAdminProps {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 80, align: 'center', headerAlign: 'center' },
-  { field: 'formulario', headerName: 'Formulário', width: 210, align: 'left', headerAlign: 'left' },
+  { field: 'formulario', headerName: 'Formulário', width: 260, align: 'left', headerAlign: 'left' },
 ];
 
 

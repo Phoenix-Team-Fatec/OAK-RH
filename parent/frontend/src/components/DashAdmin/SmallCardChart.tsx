@@ -49,12 +49,12 @@ const SmallCardChart: React.FC<SmallCardChartProps> = ({ data, title }) => {
       }
 
       <ResponsiveContainer width="95%" height={100}>
-        <LineChart data={data} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+        <LineChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Line type="monotone" dataKey="value" stroke="#00FF00" strokeWidth={2} />
+          <Line type="monotone" dataKey="value" stroke="#7F28CA" strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
     </Box>
