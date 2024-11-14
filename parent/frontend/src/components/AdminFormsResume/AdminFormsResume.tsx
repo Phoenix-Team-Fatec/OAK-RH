@@ -2,6 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { Card, Typography, List, ListItem, ListItemText } from '@mui/material';
 import './AdminFormsResume.css';
+import { Chip } from '@mui/material';
 
 // Dados de exemplo para as perguntas, puxar do back-end
 const singleChoiceData = [
@@ -17,15 +18,21 @@ const multipleChoiceData = [
   { name: 'Opção Z', value: 30 },
 ];
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#8C6A8B', '#8297d0', '#37cbfb', '#1afcf5'];
 
 const FormsAdminResume: React.FC = () => {
   return (  
     <Card className="main-card">
+      <div className='div-botao-pdf'>
       <Typography variant="h5" className="main-title">
         Resumo das Respostas de Escolha
       </Typography>
-
+      <Chip
+        label="Baixar PDF"
+        variant="outlined"
+        style={{ borderColor: 'red', color: 'red' }} //Linkar para deixar clicavel com a criação do PDF
+      />
+      </div>
       <div className="chart-container">
         {/* Gráfico de Pergunta de Escolha Única */}
         <div className="chart-section">

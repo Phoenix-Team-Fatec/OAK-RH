@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import { getFormulariosEquipe } from './index';
-
+import './tabelaFormularioDashAdmin.css';
+import Chip from '@mui/material/Chip';
 
 interface TabelaFormularioDashAdminProps {
   onFormSelect: (formulario_id: number) => void;
@@ -11,7 +13,29 @@ interface TabelaFormularioDashAdminProps {
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 80, align: 'center', headerAlign: 'center' },
+<<<<<<< HEAD
   { field: 'formulario', headerName: 'Formulário', width: 260, align: 'left', headerAlign: 'left' },
+=======
+  { // Coluna que exibe o nome do formulário, clicavel e já puxando id do formulário a ser exibido
+    field: 'formulario', 
+    headerName: 'Formulário', 
+    width: 210, 
+    align: 'left', 
+    // Integrar com back-end
+    renderCell: (params) => (
+      <Chip
+        label={params.value}
+        variant="outlined"
+        sx={{ color: 'black' }}
+        onClick={() => window.location.href = `/forms-responses/${params.row.id}`}
+      />
+    )
+//<a href={`/forms-responses/${params.row.id}`} target="_blank" rel="noopener noreferrer">
+//       {params.value}
+// </a>
+    
+  }, 
+>>>>>>> fc0766c2dc0eb59d5343b8675c72dc21b7ac25e2
 ];
 
 
