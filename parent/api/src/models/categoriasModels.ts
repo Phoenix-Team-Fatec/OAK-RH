@@ -1,6 +1,7 @@
 // models/categoriasModels.ts
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
+import Pergunta from './perguntasModels';
 
 class Categoria extends Model {
   public id!: number;
@@ -35,5 +36,9 @@ Categoria.init(
     timestamps: false,
   }
 );
+
+
+Categoria.hasMany(Pergunta, { foreignKey: 'categoria_id', as: 'perguntas' });
+Pergunta.belongsTo(Categoria, { foreignKey: 'categoria_id', as: 'categoria' });
 
 export default Categoria;

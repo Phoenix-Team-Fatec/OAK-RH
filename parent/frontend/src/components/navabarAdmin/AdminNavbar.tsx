@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, FormControl, Select, MenuItem, ListItemText, Button } from '@mui/material';
+import { Box,  FormControl, Select, MenuItem, ListItemText, Button } from '@mui/material';
 import useUserData from '../../hooks/useUserData';
 import './AdminNavbar.css';
 import { listAllTeams } from '../modalSendFormsTeam';

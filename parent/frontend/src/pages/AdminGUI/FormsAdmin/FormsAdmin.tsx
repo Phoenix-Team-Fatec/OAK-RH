@@ -120,6 +120,19 @@ const FormsAdmin: React.FC = () => {
     }
   };
 
+
+
+  const handleGoToEdit = () => {
+    if (selectedIds.length !== 1) {
+      alert("Selecione apenas um formulário para editar.");
+      return;
+    }else{
+      const formId = selectedIds[0];
+    navigate(`/forms-admin-edit?formulario_id=${formId}`);
+  }
+    
+  }
+
   const columns: GridColDef[] = useMemo(
     () => [
       {
@@ -177,7 +190,7 @@ const FormsAdmin: React.FC = () => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => alert("Redirecionar para página de edição")}
+            onClick={() => handleGoToEdit()}
             disabled={selectedIds.length !== 1 || isDeleting}
           >
             Editar

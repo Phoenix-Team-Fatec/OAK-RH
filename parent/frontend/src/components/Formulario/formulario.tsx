@@ -43,7 +43,6 @@ interface Form {
     const [modalOpen, setModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
     const [isError, setIsError] = useState(false);
-    const [isDraft, setIsDraft] = useState(false);
     const navigate = useNavigate();
 
     // Fetch categories and update default question category
