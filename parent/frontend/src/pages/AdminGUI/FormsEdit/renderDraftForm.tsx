@@ -7,10 +7,9 @@ import useUserData from "../../../hooks/useUserData";
 
 interface RenderDraftFormProps {
     formId: number;
-    questions: Question[];
     formName: string;
     formDescription: string;
-    categories: Category[];
+    
 }
 
 interface Category {
@@ -41,13 +40,13 @@ interface NewQuestion {
 }
 
 
-const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId, questions, formName, formDescription, categories }) => {
+const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formName, formDescription }) => {
 
     const {id} = useUserData();
     const [form, setForm] = useState<Form>({ title: '', description: '' });
     const [newQuestions, setNewQuestions] = useState<NewQuestion[]>([]);
-      const [oldQuestions, setOldQuestions] = useState<Question[]>(questions);
-    const [categoriesQuestion, setCategoriesQuestion] = useState<Category[]>(categories);
+      const [oldQuestions, setOldQuestions] = useState<Question[]>([]);
+    const [categories, setCategoriesQuestion] = useState<Category[]>([]);
 
     useEffect(() => {
 
@@ -97,23 +96,34 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId, questions, fo
     //Função para deletar uma pergunta
     const deleteQuestionHandler = async (questionId:number, qIndex:number) => {
 
-        await deleteQuestion(questionId)
+       
+        if (window.confirm(`Tem certeza que deseja deletar a pergunta?`)){
+            await deleteQuestion(questionId)
         const updateQuestions = [...oldQuestions]
         updateQuestions.splice(qIndex, 1)
         setOldQuestions(updateQuestions)
 
+        }
+        
+
     }
 
     const addQuestion = () => {
-      setNewQuestions([
-        ...questions,
-        {
-          type: "longQuestion",
-          value: "",
-          options: [],
-          category: categories[0].nome,
-        },
-      ]);
+        try{
+            setNewQuestions([
+                ...newQuestions,
+                {
+                  type: "longQuestion",
+                  value: "",
+                  options: [],
+                  category: categories[0].nome,
+                },
+              ]);
+
+        }catch(error){
+            console.log(error)
+        }
+    
     };
 
 
@@ -142,7 +152,7 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId, questions, fo
                   />
               </div>
 
-              {oldQuestions.map((question, qIndex) => (
+              {...oldQuestions.map((question, qIndex) => (
                
                   <div className="question-wrapper" key={question.id}>
                      <DeleteIcon
@@ -157,7 +167,7 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId, questions, fo
                                   handleQuestionChange(qIndex, "category", e.target.value)
                               }
                           >
-                              {categoriesQuestion.map((category) => (
+                              {categories.map((category) => (
                                   <option key={category.id} value={category.nome}>
                                       {category.nome}
                                   </option>
@@ -228,9 +238,14 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId, questions, fo
                   </div>
               ))}
 
-              <button type="button" className="add-question-button" >
+              
+           
+
+
+              <button type="button" className="add-question-button" onClick={() => addQuestion()}>
                   Adicionar Pergunta
               </button>
+              <br />
               <button type="submit" className="button-forms-create">
                   Salvar Rascunho
               </button>
