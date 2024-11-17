@@ -14,6 +14,9 @@ import UserFormsResponse from "./pages/UserGUI/UserFormsResponse/UserFormsRespon
 import UserFormsResponseView from "./pages/UserGUI/UserFormsViewResponse/UserFormsResponse";
 import DashboardAdminEquipe from "./components/DashAdminEquipe/DashAdminEquipe";
 import FormsResponses from "./pages/AdminGUI/FormsResponses/formsResponses";
+import FormsEdit from "./pages/AdminGUI/FormsEdit/formsEdit";
+
+
 
 const App: React.FC = () => {
   return (
@@ -81,6 +84,16 @@ const App: React.FC = () => {
           element={
             <ProtectedRoute adminOnly={true}>
               <FormsAdminCreate />
+            </ProtectedRoute>
+          }
+        />
+
+
+        <Route
+          path="/forms-admin-edit"
+          element={
+            <ProtectedRoute adminOnly={true}>
+              <FormsEdit />
             </ProtectedRoute>
           }
         />

@@ -1,5 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
+import Categoria from './categoriasModels';
+
 class Pergunta extends Model {
   public id!: number;
   public formulario_id!: number;
@@ -50,5 +52,9 @@ Pergunta.init(
     tableName: 'perguntas',
     timestamps: false,
   }
+
+
+
+
 );
 export default Pergunta;

@@ -9,6 +9,7 @@ class Formulario extends Model {
   public descricao: string;
   public criado_em!: Date;
   public admin_id!: number;
+  public enviado!: boolean;
 }
 Formulario.init(
   {
@@ -37,6 +38,10 @@ Formulario.init(
         key: 'id'
       },
       onDelete: 'cascade'
+    },
+    enviado:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   },
   {

@@ -1,4 +1,5 @@
 import Pergunta from "../models/perguntasModels";
+import Categoria from "../models/categoriasModels";
 
 
 //Função criar pergunta
@@ -24,7 +25,14 @@ export const criarPerguntaService = async(formulario_id:number, texto:string, ti
 //Função listar perguntas
 export const listarPerguntasService = async (formulario_id: number) =>{
     try{
-        const perguntas = await Pergunta.findAll({where:{formulario_id}});
+        const perguntas = await Pergunta.findAll({
+            where:{formulario_id},
+            include: {model: Categoria, as: 'categoria'}
+            
+
+            
+        
+        });
         return perguntas
 
     }catch(error){
