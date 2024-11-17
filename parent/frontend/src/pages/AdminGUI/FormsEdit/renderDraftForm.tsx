@@ -4,6 +4,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { getCategories, editForm, editQuestion, getQuestions , deleteQuestion, createQuestion} from ".";
 import useUserData from "../../../hooks/useUserData";
 import { useNavigate } from "react-router-dom";
+import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
+
 
 interface RenderDraftFormProps {
     formId: number;
@@ -45,11 +47,13 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
 
     const {id} = useUserData();
     const navigate = useNavigate();
-  
+    const [modalOpen, setModalOpen] = useState(false);
     const [form, setForm] = useState<Form>({ id: formId ,title: '', description: '' });
     const [newQuestions, setNewQuestions] = useState<NewQuestion[]>([]);
-      const [oldQuestions, setOldQuestions] = useState<Question[]>([]);
+    const [oldQuestions, setOldQuestions] = useState<Question[]>([]);
     const [categories, setCategoriesQuestion] = useState<Category[]>([]);
+
+
 
     useEffect(() => {
 
@@ -307,6 +311,20 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
       
     }
 
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        handleSaveDraft();
+          navigate("/formularios-admin");
+        
+      };
+
+      const handleOpenModal = () => {
+        setModalOpen(true);
+
+      }
+  
+  
+
 
 
    
@@ -506,11 +524,20 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
               <button type="submit" className="button-forms-create" onClick={() => {handleSaveDraft();  navigate("/formularios-admin");}}>
                   Salvar Rascunho
               </button>
-              <button type="button" className="button-forms-create">
+              <button type="button" className="button-forms-create" onClick={() => handleOpenModal()}>
                   Enviar Formulário
               </button>
           </form>
       </div>
+
+              
+        <ModalSendForm
+          open={modalOpen}
+          onClose={handleCloseModal}
+          formId={formId}
+        />
+
+
   </div>
     );
 };
