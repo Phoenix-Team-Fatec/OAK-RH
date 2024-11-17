@@ -45,7 +45,8 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
 
     const {id} = useUserData();
     const navigate = useNavigate();
-    const [form, setForm] = useState<Form>({ id:formId,title: '', description: '' });
+  
+    const [form, setForm] = useState<Form>({ id: formId ,title: '', description: '' });
     const [newQuestions, setNewQuestions] = useState<NewQuestion[]>([]);
       const [oldQuestions, setOldQuestions] = useState<Question[]>([]);
     const [categories, setCategoriesQuestion] = useState<Category[]>([]);
@@ -73,7 +74,7 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
     
         
 
-    },[formId]);
+    },[]);
 
     useEffect(() => {
       setForm({ id: formId,title: formTitle, description: formDescription });
@@ -219,27 +220,54 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
     }
 
     const saveQuestion = async () => {
-        try{
+        try {
             for (const question of newQuestions) {
                 const category = categories.find((c) => c.nome === question.category);
                 if (!category) {
                     throw new Error("Categoria inválida para nova pergunta.");
                 }
-                await createQuestion(form.id, question.value, question.type, question.options, category.id);
+                console.log("Criando pergunta com os dados:", {
+                    formId: form.id,
+                    value: question.value,
+                    type: question.type,
+                    options: question.options,
+                    categoryId: category.id,
+                });
+                await createQuestion(
+                    form.id,
+                    question.value,
+                    question.type,
+                    question.options,
+                    category.id
+                );
             }
-        }catch(error){
-            console.log(error)
-    }
-}
+            console.log("Novas perguntas salvas com sucesso!");
+        } catch (error) {
+            console.log("Erro ao salvar novas perguntas:", error);
+        }
+    };
 
 
     const editOldQuestions = async () => {
-        try{
-            await Promise.all(oldQuestions.map((q) => editQuestion(q.id, q)));
-        }catch(error){
-            console.log(error)
+        try {
+            await Promise.all(
+                oldQuestions.map((q) => {
+
+                    return editQuestion(q.id, {
+                        
+                        texto: q.value,
+                        tipo: q.type,
+                        descricao: q.options,
+                        categoria_id: categories.find((c) => c.nome === q.category)?.id,
+                    });
+                })
+            );
+            console.log("Perguntas antigas atualizadas com sucesso!");
+        } catch (error) {
+            console.log("Erro ao atualizar perguntas antigas:", error);
         }
-    }
+    };
+    
 
 
 
@@ -249,19 +277,32 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
       
         try {
            
-            alert("Passo 1 - Salvando Formulário")
-             updateForm();
-            alert("Passo 2 - Salvando novas Perguntas") 
-             saveQuestion();
-            alert("Passo 3 - Editando Perguntas Antigas")
-             editOldQuestions();
            
-            alert("Rascunho salvo com sucesso!");
-            navigate("/formularios-admin");
+            
+            await updateForm();
+          
+             if (newQuestions.length >= 1){
+            
+              
+                await  saveQuestion();
+             }
+        
+            
+            await editOldQuestions();
+            
+           
+            
+           
+            
            
         } catch (error) {
             console.error(error);
             alert("Erro ao salvar o rascunho. Por favor, tente novamente.");
+        }finally{
+            
+           
+            sessionStorage.removeItem("formulario_id");
+            
         }
       
     }
@@ -462,7 +503,7 @@ const RenderDraftForm: React.FC<RenderDraftFormProps> = ({ formId,  formTitle, f
                   Adicionar Pergunta
               </button>
               <br />
-              <button type="submit" className="button-forms-create" onClick={() => handleSaveDraft()}>
+              <button type="submit" className="button-forms-create" onClick={() => {handleSaveDraft();  navigate("/formularios-admin");}}>
                   Salvar Rascunho
               </button>
               <button type="button" className="button-forms-create">

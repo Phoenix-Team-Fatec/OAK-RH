@@ -71,7 +71,7 @@ export async function getCategories(id_admin:number){
         const response = await axios.get(`http://localhost:3000/categorias/${id_admin}`);
         const data = response.data.map((category:any) => {
             return {
-                
+                id: category.id,
                 nome: category.nome
             }
         })

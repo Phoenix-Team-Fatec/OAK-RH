@@ -127,8 +127,9 @@ const FormsAdmin: React.FC = () => {
       alert("Selecione apenas um formulário para editar.");
       return;
     }else{
-      const formId = selectedIds[0];
-    navigate(`/forms-admin-edit?formulario_id=${formId}`);
+       sessionStorage.setItem("formulario_id",selectedIds[0].toString());
+      
+    navigate(`/forms-admin-edit`);
   }
     
   }

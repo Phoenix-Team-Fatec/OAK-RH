@@ -11,11 +11,7 @@ const FormsEdit: React.FC = () => {
 
    
     
-    const [formulario_id] = useState( () =>{
-        const params = new URLSearchParams(document.location.search)
-        const id = params.get("formulario_id")
-        return id !== null ? id : 0
-    });
+    const formulario_id = sessionStorage.getItem("formulario_id");
 
     const [isExpanded, setIsExpanded] = useState(true);
     const[formTitle, setFormTitle] = useState("");
@@ -50,7 +46,7 @@ const FormsEdit: React.FC = () => {
         getFormInfo();
         
 
-    },[formulario_id]);
+    },[]);
 
 
     const toggleSidebar = () => {   
