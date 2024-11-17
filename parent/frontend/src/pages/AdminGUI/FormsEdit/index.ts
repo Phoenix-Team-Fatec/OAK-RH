@@ -3,7 +3,7 @@ import axios from "axios";
 //Função para editar formulário
 export async function editForm(formulario_id:number, formulario:any){
     try{
-        const response = await axios.put(`http://localhost:3000/formulario/atualizar/${formulario_id}`, ...formulario);
+        const response = await axios.put(`http://localhost:3000/formulario/${formulario_id}`, formulario);
         return response.data
     }catch(error){
         console.log(error)
@@ -47,6 +47,24 @@ export async function getQuestions(formulario_id:number){
     }
 }
 
+//Função para criar uma pergunta
+export async function createQuestion(formulario_id:number, texto:string, tipo:string, descricao:string[], categoria_id:number){
+    try{
+        const response = await axios.post('http://localhost:3000/perguntas', {
+            formulario_id: formulario_id,
+            texto: texto,
+            tipo: tipo,
+            descricao: descricao,
+            categoria_id: categoria_id
+        });
+        return response.data;
+    }catch(error){
+        console.log("Error in createQuestion function:", error);
+        return error;
+    }
+}
+
+
 //Função para listar as categorias
 export async function getCategories(id_admin:number){
     try{
@@ -78,7 +96,7 @@ export async function getCategory(categoria_id:number){
 //Função para editar as perguntas
 export async function editQuestion(pergunta_id:number, pergunta:any){
     try{
-        const response = await axios.put(`http://localhost:3000/perguntas/${pergunta_id}`, ...pergunta);
+        const response = await axios.put(`http://localhost:3000/perguntas/${pergunta_id}`, pergunta);
         return response.data
     }catch(error){
         console.log(error)

@@ -237,7 +237,9 @@ export const atualizarFormulario = async (id:number, nome?: string, descricao?: 
 
         if(nome){
             formulario.nome = nome;
-        }else if(descricao){
+        }
+        
+        if(descricao){
             formulario.descricao = descricao;
         }
 

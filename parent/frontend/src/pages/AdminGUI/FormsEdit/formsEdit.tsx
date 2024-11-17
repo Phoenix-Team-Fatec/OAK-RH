@@ -1,5 +1,5 @@
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
-import useUserData from "../../../hooks/useUserData";
+
 import { getForm } from ".";
 import React, { useEffect, useState } from "react";
 import RenderDraftForm from "./renderDraftForm";
@@ -24,8 +24,9 @@ const FormsEdit: React.FC = () => {
 
     const getFormInfo = async () => {
        try{
+        console.log("Buscando formulário com id: ", formulario_id);
         const form = await getForm(Number(formulario_id));
-        if (form === null){
+        if (!form){
             alert(`Formulário não encontrado`)
         }
             setFormTitle(form?.titulo);
@@ -44,13 +45,15 @@ const FormsEdit: React.FC = () => {
 
 
     useEffect(() => {
+
+        console.log("Formulario_id: ", formulario_id);
         getFormInfo();
         
 
     },[formulario_id]);
 
 
-    const toggleSidebar = () => {
+    const toggleSidebar = () => {   
       setIsExpanded((prevState) => !prevState);
     };
 
@@ -66,7 +69,7 @@ const FormsEdit: React.FC = () => {
 
         <>
            <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-           <RenderDraftForm formId={Number(formulario_id)} formName={formTitle} formDescription={formDescription}/>
+           <RenderDraftForm formId={Number(formulario_id)} formTitle={formTitle} formDescription={formDescription}/>
         </>
 
     )
