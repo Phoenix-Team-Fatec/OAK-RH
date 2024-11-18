@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { loginService, createUserService, listUserService, listarUserPorMes, readUserService, updateUserService, deleteUserService, getIdUserService } from "../services/userService";
+import { loginService, createUserService, listUserService, listarUserPorMes, readUserService, updateUserService, deleteUserService, getIdUserService, getUserDataService } from "../services/userService";
 import { generateRandomPassword } from "../config/generateRandomPassword";
 import { admin, createUserWithEmailAndPassword, deleteUserByEmail, getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from "../config/firebase.cjs";
 import { get } from "http";
@@ -12,11 +12,11 @@ export const loginUser = async (req: Request, res: Response) => {
     const userFind = await loginService(email);
     const userVerify = await signInWithEmailAndPassword(getAuth(), email, password);
 
-    
+
 
     const response = {
       user: userFind,
-      
+
     };
 
     return res.status(200).json(response);
@@ -44,14 +44,26 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserDataController = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const user = await getUserDataService(Number(id))
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log("Error in getUserData controller:", error);
+    return res.status(500).json({ message: error.message });
+  }
+}
+
 export const listarUserPorMesControl = async (req: Request, res: Response) => {
   try {
-      const { admin_id } = req.params;
-      const userPorMes = await listarUserPorMes(Number(admin_id));
+    const { admin_id } = req.params;
+    const userPorMes = await listarUserPorMes(Number(admin_id));
 
-      return res.status(200).json(userPorMes);
+    return res.status(200).json(userPorMes);
   } catch (error) {
-      return res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 

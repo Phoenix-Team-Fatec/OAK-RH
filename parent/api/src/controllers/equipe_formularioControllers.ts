@@ -1,4 +1,4 @@
-import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes, listarUsuariosComFormulariosEquipe } from "../services/formulario_equipeServices";
+import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes, listarUsuariosComFormulariosEquipe, getListOfUserToAnswerService } from "../services/formulario_equipeServices";
 import { Request, Response } from 'express';
 
 //Função para associar formulário a equipes
@@ -80,4 +80,16 @@ export const listarUsuariosComFormulariosEquipeController = async (req: Request,
 
     }
 
+}
+
+export const getListOfUserToAnswerController = async (req: Request, res: Response) => {
+    try {
+        const {formsId, userId} = req.params;
+        const users = await getListOfUserToAnswerService(Number(formsId), Number(userId));
+        
+        return res.status(200).json(users)
+    } catch(error) {
+        console.log("Error trying to get the array of users to answer controller", error)
+        return res.status(400).json({message:"Error trying to get the array of users to answer controller"})
+    }
 }

@@ -39,6 +39,9 @@ export default function UserFormsResponseView() {
     const [formsDescription, setFormsDescription] = useState("")
     const [answerData, setAnswerData] = useState<Resposta[]>([])
     const [isLoading, setIsLoading] = useState(true)
+    const [user, setUser] = useState("")
+    const [userArray, setUserArray] = useState<number[]>([])
+    const [userArrayIndex, setUserArrayIndex] = useState(0)
 
     const userData = useUserData()
 
@@ -56,11 +59,28 @@ export default function UserFormsResponseView() {
             setAnswerData(answer.data)
             setFormsDescription(forms.data.descricao)
 
+            const usersArray = await axios.get(`http://localhost:3000/formulario_equipe/get/arrayUserToAnswer/${formsId}/${userData.id}`)
+            setUserArray(usersArray.data)
+
+            const answeredUserData = await axios.get(`http://localhost:3000/user/getData/${usersArray.data[0]}`)
+            setUser(answeredUserData.data.nome)
+
             setIsLoading(false)
         }
 
         if (isLoading) fetchData()
     }, [isLoading]);
+
+    async function nextUser() {
+        if(userArrayIndex+1 >= userArray.length && userArrayIndex != 0){
+            alert("Fim");
+            return
+        }
+        setUserArrayIndex(userArrayIndex+1)
+
+        const answeredUserData = await axios.get(`http://localhost:3000/user/getData/${userArray[userArrayIndex+1]}`)
+        setUser(answeredUserData.data.nome)
+    }
 
     return (
         <div>
@@ -68,11 +88,13 @@ export default function UserFormsResponseView() {
                 <div>Carregando...</div>
             ) : (
                 <>
-                <div className="container-forms-ver-respostas-user">
-                    <h2>{formsName}</h2>
-                    <span>{formsDescription}</span>
-                    <UserRenderForms formsData={formsData} answerData={answerData} />
-                </div>
+                    <div className="container-forms-ver-respostas-user">
+                        <h2>{formsName}</h2>
+                        <span>{formsDescription}</span>
+                        <span>{user}</span>
+                        <UserRenderForms formsData={formsData} answerData={answerData} />
+                        <button onClick={nextUser}>A</button>
+                    </div>
                 </>
             )}
         </div>

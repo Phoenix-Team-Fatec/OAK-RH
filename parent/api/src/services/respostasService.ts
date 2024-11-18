@@ -7,6 +7,7 @@ export const createAnswerService = async (
     equipe_id: number,
     resposta: string | string[],
     tipo_resposta: string,
+    answered_for: number,
 ) => {
     try {
         const answer = await Resposta.create({
@@ -15,7 +16,8 @@ export const createAnswerService = async (
             respondido_por,
             equipe_id,
             resposta,
-            tipo_resposta
+            tipo_resposta,
+            answered_for
         })
 
         return answer

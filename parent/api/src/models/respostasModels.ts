@@ -60,6 +60,15 @@ Resposta.init(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
+    answered_for: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'usuario',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
   },
   {
     sequelize,
