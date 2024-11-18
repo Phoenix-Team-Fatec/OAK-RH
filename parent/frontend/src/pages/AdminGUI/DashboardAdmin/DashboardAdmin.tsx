@@ -17,8 +17,12 @@ const DashboardAdmin: React.FC = () => {
   return (
     <>
       <AdminNavbar />
-      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
+      <div className="dashboard-side">
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
+      <div className="dashboard-content">
       <DashboardAdminGeral />
+      </div>
     </>
   );
 };

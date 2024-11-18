@@ -89,3 +89,9 @@
     font-weight: bold;
   }
   
+  /* Hide dashboard content on small screens */
+  @media (max-width: 768px) {
+    .dashboard-side {
+      display: none;
+    }
+  }

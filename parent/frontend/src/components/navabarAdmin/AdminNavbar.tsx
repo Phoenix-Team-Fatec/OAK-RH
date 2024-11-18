@@ -50,6 +50,7 @@ const AdminNavbar: React.FC = () => {
     
       <FormControl variant="outlined" className="team-select">
         <Select
+          className='select-dropdown'
           displayEmpty
           value={selectedTeam || ''}
           onChange={handleTeamChange}

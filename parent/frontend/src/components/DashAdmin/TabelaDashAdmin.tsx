@@ -3,6 +3,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
 import { getFormsUserAdmin } from './index';
 import useUserData from '../../hooks/useUserData';
+import './DashAdmin.css';
 
 
 const columns: GridColDef[] = [
@@ -62,5 +63,7 @@ const TabelaDashAdmin: React.FC = () => {
     </Paper>
   );
 };
+
+
 
 export default TabelaDashAdmin;
