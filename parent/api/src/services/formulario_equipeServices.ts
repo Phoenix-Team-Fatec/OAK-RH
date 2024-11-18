@@ -58,13 +58,23 @@ export const associarFormularioParaEquipes = async (
 
             // Criar uma linha para cada usuário oposto
             for (const user of users) {
-                for (const opposite_user of opposite_level_users) {
-                    // Para cada combinação de usuário e oposto, cria uma nova linha na tabela Formulario_user
+                if (opposite_level_users.length > 0) {
+                    console.log("Aqui tá indo", opposite_level_users)
+                    for (const opposite_user of opposite_level_users) {
+                        // Para cada combinação de usuário e oposto, cria uma nova linha na tabela Formulario_user
+                        await Formulario_user.create({
+                            formulario_id,
+                            user_id: user.user_id, // o usuário relacionado ao formulário
+                            status: 'pendente',
+                            answered_for: opposite_user.user_id, // o ID do usuário oposto
+                        });
+                    }
+                } else {
                     await Formulario_user.create({
                         formulario_id,
                         user_id: user.user_id, // o usuário relacionado ao formulário
                         status: 'pendente',
-                        answered_for: opposite_user.user_id, // o ID do usuário oposto
+                        answered_for: user.user_id, // o ID do usuário oposto
                     });
                 }
             }
