@@ -37,7 +37,9 @@ const DashboardAdminEquipe: React.FC = () => {
   return (
     <>
       <AdminNavbar />
+      <div className='admin-side-equipe'>
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
+      </div>
       <Box className="dashboard-container-equipe">
         
         {/* Cards Pequenos na Parte Superior */}
