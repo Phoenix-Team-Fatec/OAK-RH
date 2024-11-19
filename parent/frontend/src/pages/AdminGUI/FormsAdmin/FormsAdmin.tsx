@@ -175,7 +175,9 @@ const FormsAdmin: React.FC = () => {
 
   return (
     <>
+      <div className="Sidebar-Formularios-Admin">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
       <div className={`content ${isExpanded ? "expanded" : "collapsed"}`}>
         <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
 

@@ -132,3 +132,58 @@
 .more-info-btn:hover {
   background-color: #1760af92;
 }
+
+
+
+@media (max-width: 768px) {
+  /* Content Wrapper */
+  .content-wrapper {
+    padding: 10px;
+    flex-direction: column; /* Empilha os blocos */
+    display: flex; /* Garante que o flexbox seja aplicado */
+    margin-left: 0;
+  }
+
+  /* Main Content */
+  .main-content {
+    margin-left: 0;
+    align-items: center; /* Centraliza os elementos no eixo principal */
+    width: 100%; /* Garante que o conteúdo principal ocupe toda a largura */
+  }
+
+  /* Container de Equipes */
+  .equipe-container {
+    display: flex; /* Troque grid por flex para controle mais direto */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    gap: 15px; /* Espaçamento entre os itens */
+    width: 100%;
+    
+  }
+
+  /* Itens da Equipe */
+  .equipe-item {
+    
+    height: auto;
+    width: 100%; /* Garante que os itens ocupem toda a largura */
+    padding: 15px;
+    box-sizing: border-box; /* Inclui padding dentro da largura */
+  }
+
+  /* Botão de Criar Equipe */
+  .create-team-btn {
+    position: static; /* Remove posicionamento absoluto/relativo */
+    width: 100%; /* Ocupa toda a largura disponível */
+    margin: 20px 0; /* Espaçamento vertical para separar o botão */
+  }
+  .Sidebar-Equipe-Admin{
+    display: none;
+  }
+  
+  .team-buttons {
+    display: flex;
+    width: 100%;
+    gap: 3px;
+    justify-content: center;
+  }
+}
+

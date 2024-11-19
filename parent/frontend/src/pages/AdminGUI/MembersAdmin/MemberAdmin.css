@@ -94,6 +94,7 @@
   
   .h2_admin_members_register {
     font-size: 20px; /* Smaller font size for headings */
+    margin-left: -20%;
   }
 
   .button_register_user,
@@ -101,4 +102,18 @@
   .button_delete_member {
     font-size: 10px; /* Smaller font size for buttons */
   }
+
+  .Sidebar-Funcionarios-Mobile {
+    display: none; /* Hide sidebar on smaller screens */
+  }
+
+  .Tabela-Funcionarios {
+    width: 400px !important; /* Full width for data grid */
+    margin-left: -20%;
+  }
+}
+
+.Tabela-Funcionarios {
+  width: 800px;
+  margin-bottom: 20px;
 }

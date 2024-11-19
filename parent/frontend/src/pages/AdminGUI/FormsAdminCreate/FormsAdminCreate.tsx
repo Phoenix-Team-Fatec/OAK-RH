@@ -12,7 +12,9 @@ const FormsAdminCreate: React.FC = () => {
 
   return (
     <div className="forms-admin-wrapper">
+      <div className="Sidebar-Criar-Formulario">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
       <div className={`formulario-container ${isExpanded ? "expanded" : "collapsed"}`}>
         <Formulario />
       </div>

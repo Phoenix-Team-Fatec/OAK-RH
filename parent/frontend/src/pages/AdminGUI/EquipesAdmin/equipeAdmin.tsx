@@ -84,9 +84,9 @@ function EquipeAdmin() {
 
   return (
     <div style={{ display: "flex", position: "relative" }}>
-     
+      <div className="Sidebar-Equipe-Admin">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-
+      </div>
       <div className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="main-content">
           <h2 style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}>

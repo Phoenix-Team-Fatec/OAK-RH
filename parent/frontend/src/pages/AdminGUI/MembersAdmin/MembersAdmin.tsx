@@ -169,14 +169,15 @@ const MembersAdmin = () => {
 
   return (
     <>
+      <div className="Sidebar-Funcionarios-Mobile">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-
+      </div>
       <div className={`admin_members_container ${isExpanded ? "expanded" : "collapsed"}`}>
         
         <h2 className="h2_admin_members_register">
           Gerenciamento de Funcionários
         </h2>
-        <div style={{ marginBottom: "20px", width: "800px" }}>
+        <div className="Tabela-Funcionarios">
           <div
             style={{
               display: "flex",
