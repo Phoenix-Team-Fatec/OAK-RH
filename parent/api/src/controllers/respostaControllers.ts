@@ -14,12 +14,15 @@ export const createAnswer = async (req: Request, res: Response) => {
     try {
         const answers = req.body;
 
+        const { userId } = req.params
+
         const createdAnswers: Resposta[] = [];
 
         await Promise.all(answers.map(async (answer) => {
+
             const { formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta } = answer;
 
-            const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta);
+            const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta, Number(userId));
             createdAnswers.push(createdAnswer);
         }));
 

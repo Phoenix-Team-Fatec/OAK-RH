@@ -7,6 +7,7 @@ export const createAnswerService = async (
     equipe_id: number,
     resposta: string | string[],
     tipo_resposta: string,
+    answered_for: number,
 ) => {
     try {
         const answer = await Resposta.create({
@@ -15,7 +16,8 @@ export const createAnswerService = async (
             respondido_por,
             equipe_id,
             resposta,
-            tipo_resposta
+            tipo_resposta,
+            answered_for
         })
 
         return answer
@@ -63,5 +65,24 @@ export const findAnswerByUserService = async (userId: number) => {
         return answer
     } catch (error) {
         console.log("Error finding anser by user id", error)
+    }
+}
+
+export async function getListOfUserAlredyAnsweredService(formsId: number, userId: number) {
+    try {
+        const userIdsToAnswer = await Resposta.findAll({
+            where: { formulario_id: formsId, respondido_por: userId }
+        });
+
+        if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
+            return { message: "No users to answer" };
+        }
+
+        const answeredForArray = userIdsToAnswer.map((user) => user.dataValues.answered_for);
+
+        return answeredForArray;
+    } catch (error) {
+        console.error("Error trying to get the user to answer service ", error)
+        throw error;
     }
 }

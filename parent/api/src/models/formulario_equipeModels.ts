@@ -1,7 +1,5 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../database/connectionDB';
-import Formulario from './formularioModels';
-
 
 class Formulario_equipe extends Model {
   public id!: number;

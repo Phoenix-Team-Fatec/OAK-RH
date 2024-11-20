@@ -10,7 +10,7 @@ class Formulario_user extends Model {
     public user_id!: number
     public status!: string;
     public respondido_em!: Date;
-  
+
 }
 
 Formulario_user.init(
@@ -40,6 +40,16 @@ Formulario_user.init(
             onUpdate: 'CASCADE',
             onDelete: 'CASCADE'
         },
+        answered_for: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'usuario',
+                key: 'id'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
+            },
         status: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -48,7 +58,7 @@ Formulario_user.init(
         respondido_em: {
             type: DataTypes.DATE,
             defaultValue: DataTypes.NOW
-        }
+        },
     },
     {
         sequelize,
@@ -59,10 +69,10 @@ Formulario_user.init(
 )
 
 //associações de tabela
-Formulario_user.belongsTo(User, {foreignKey: 'user_id', as: 'users', onDelete: 'CASCADE'})
-Formulario_user.belongsTo(Formulario, {foreignKey: 'formulario_id', as: 'form', onDelete: 'CASCADE'})
+Formulario_user.belongsTo(User, { foreignKey: 'user_id', as: 'users', onDelete: 'CASCADE' })
+Formulario_user.belongsTo(Formulario, { foreignKey: 'formulario_id', as: 'form', onDelete: 'CASCADE' })
 
-User.hasMany(Formulario_user, {foreignKey: 'user_id', as: 'users', onDelete: 'CASCADE'})
-Formulario.hasMany(Formulario_user, {foreignKey: 'formulario_id', as: 'form', onDelete: 'CASCADE'})
+User.hasMany(Formulario_user, { foreignKey: 'user_id', as: 'users', onDelete: 'CASCADE' })
+Formulario.hasMany(Formulario_user, { foreignKey: 'formulario_id', as: 'form', onDelete: 'CASCADE' })
 
 export default Formulario_user
