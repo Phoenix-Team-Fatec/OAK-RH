@@ -7,6 +7,7 @@ import Equipe_user from "../models/equipe_userModel";
 import User from "../models/userModels";
 import { admin } from "../config/firebase.cjs";
 import { where } from "sequelize";
+import Resposta from "../models/respostasModels";
 
 
 
