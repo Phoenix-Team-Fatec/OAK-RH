@@ -9,7 +9,7 @@
     "dev": "tsnd .",
     "build": "tsc",
     "create": "npx sequelize-cli db:migrate",
-    "destroy": "cd parent/api/src, npx sequelize-cli db:migrate:undo"
+    "destroy": "cd parent/api/src, npx sequelize-cli db:migrate:undo:all"
   },
   "author": "",
   "license": "ISC",

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import UserRenderForms from "./UserRenderForms";
 import useUserData from "../../../hooks/useUserData";
 import './UserViewResponse.css';
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface Question {
     categoria_id: number;
@@ -42,6 +43,10 @@ export default function UserFormsResponseView() {
     const [user, setUser] = useState("")
     const [userArray, setUserArray] = useState<number[]>([])
     const [userArrayIndex, setUserArrayIndex] = useState(0)
+    const [disablePrev, setDisablePrev] = useState(false)
+    const [disableNext, setDisableNext] = useState(false)
+
+    const navigate = useNavigate()
 
     const userData = useUserData()
 
@@ -68,18 +73,24 @@ export default function UserFormsResponseView() {
             setIsLoading(false)
         }
 
+        changeUser(0)
         if (isLoading) fetchData()
     }, [isLoading]);
 
-    async function nextUser() {
-        if(userArrayIndex+1 >= userArray.length && userArrayIndex != 0){
-            alert("Fim");
-            return
-        }
-        setUserArrayIndex(userArrayIndex+1)
+    async function changeUser(number: number) {
+        const newIndex = userArrayIndex + number
 
-        const answeredUserData = await axios.get(`http://localhost:3000/user/getData/${userArray[userArrayIndex+1]}`)
+        setDisableNext(newIndex + 1 >= userArray.length)
+        setDisablePrev(newIndex <= 0)
+        
+        setUserArrayIndex(newIndex)
+
+        const answeredUserData = await axios.get(`http://localhost:3000/user/getData/${userArray[newIndex]}`)
         setUser(answeredUserData.data.nome)
+    }
+
+    function handleBackButton(){
+        navigate('/forms-user')
     }
 
     return (
@@ -89,11 +100,18 @@ export default function UserFormsResponseView() {
             ) : (
                 <>
                     <div className="container-forms-ver-respostas-user">
+                        <button className="userResponseBackButton view-forms-hover" onClick={handleBackButton}>Voltar</button>
                         <h2>{formsName}</h2>
                         <span>{formsDescription}</span>
-                        <span>{user}</span>
-                        <UserRenderForms formsData={formsData} answerData={answerData} />
-                        <button onClick={nextUser}>A</button>
+                        <span className="view-response-forms-username">{user}</span>
+                        <UserRenderForms formsData={formsData} 
+                        answerData={answerData} 
+                        />
+                        
+                        <div className="responseNavigationButtonContainer">
+                            <button onClick={() => changeUser(-1)} disabled={disablePrev} className="view-forms-hover">Anterior</button>
+                            <button onClick={() => changeUser(1)} disabled={disableNext} className="view-forms-hover">Próximo</button>
+                        </div>
                     </div>
                 </>
             )}

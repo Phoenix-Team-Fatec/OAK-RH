@@ -39,3 +39,16 @@
     border-radius: 4px;
   }
   
+.view-response-forms-username {
+  display: flex;
+  padding: 0px 12px;
+  margin: 0px auto 0px 0px;
+  border: 1px black solid;
+  border-radius: 20px;
+  color: white;
+  background-color: #177035;
+}
+
+.view-forms-hover:hover{
+  background-color: #177035 !important;
+}

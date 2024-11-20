@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 interface UserRenderFormsProps {
     data: Question[];
@@ -111,7 +110,6 @@ export default function UserRenderForms({ data, equipe_id, formsId, onSubmit }: 
 
     const userData = useUserData();
     const { id } = useUserData();
-    const navigate = useNavigate();
 
     const handleChangeFormStatus = async () => {
         try {
@@ -147,7 +145,6 @@ export default function UserRenderForms({ data, equipe_id, formsId, onSubmit }: 
 
         onSubmit(novasRespostas);
         handleChangeFormStatus();
-        navigate('/forms-user');
     };
 
     return (
