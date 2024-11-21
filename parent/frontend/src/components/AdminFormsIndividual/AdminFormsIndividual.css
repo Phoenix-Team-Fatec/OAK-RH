@@ -1,0 +1,157 @@
+.admin-forms-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 900px;
+    background-color: #f8f9fa;
+  }
+  
+  /* Card centralizado */
+  .form-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 900px; /* Largura máxima para telas maiores */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .botao-pdf {
+    margin-left: 85%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-direction: row;
+    gap: 20%;
+    justify-content: center;
+    margin-top: 0px;
+  }
+  
+  /* Título do formulário */
+  .form-card h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em; /* Unidade relativa para responsividade */
+    color: #333;
+    text-align: center; /* Centralização para melhor visualização */
+  }
+  
+  /* Usuário */
+  .form-card p {
+    font-size: 1em; /* Unidade relativa */
+    margin-bottom: 20px;
+    color: #555;
+    text-align: center; /* Ajuste para centralizar */
+  }
+  
+  /* Perguntas */
+  .form-questions .question-block {
+    margin-bottom: 20px;
+  }
+  
+  .form-questions h3 {
+    font-size: 1.2em; /* Ajuste relativo */
+    color: #444;
+    margin-bottom: 10px;
+  }
+  
+  .form-questions .answers-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .form-questions .answers-list li {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: #555;
+  }
+  
+  /* Separador visual */
+  .question-separator {
+    border: none;
+    border-top: 2px solid #ddd;
+    margin-top: 15px;
+  }
+  
+  /* Botões de navegação */
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 10px; /* Espaçamento entre botões */
+  }
+  
+  .navigation-buttons button {
+    background-color: #8C6A8B;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    flex: 1; /* Botões com largura igual */
+  }
+  
+  .navigation-buttons button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .navigation-buttons button:hover:not(:disabled) {
+    background-color:#60325e;
+  }
+  
+  /* Media Queries para responsividade */
+  @media (max-width: 768px) {
+    .form-card {
+      padding: 15px; /* Ajuste do espaçamento interno */
+    }
+  
+    .form-card h2 {
+      font-size: 1.3em; /* Reduz tamanho do título */
+    }
+  
+    .form-card p {
+      font-size: 0.9em; /* Texto menor para usuários */
+    }
+  
+    .form-questions h3 {
+      font-size: 1.1em; /* Texto menor para perguntas */
+    }
+  
+    .form-questions .answers-list li {
+      padding: 8px; /* Redução no espaçamento interno */
+    }
+  
+    .navigation-buttons button {
+      padding: 8px 10px; /* Botões menores */
+    }
+  }
+  
+  @media (max-width: 768px) {
+  
+    .form-card {
+      max-width: 100%; /* Usar 100% da largura disponível */
+      border-radius: 5px; /* Bordas menores */
+    }
+  
+    .form-card h2 {
+      font-size: 1.2em; /* Redução adicional no tamanho do texto */
+    }
+  
+    .form-card p {
+      font-size: 0.8em; /* Ajuste de fontes menores */
+    }
+  
+    .navigation-buttons {
+      flex-direction: column; /* Botões empilhados verticalmente */
+    }
+  
+    .navigation-buttons button {
+      margin-bottom: 10px; /* Espaçamento entre botões empilhados */
+    }
+  }
+  

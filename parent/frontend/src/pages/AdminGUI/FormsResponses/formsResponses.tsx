@@ -4,6 +4,7 @@ import './FormsResponses.css';
 import FormsAdminResume from '../../../components/AdminFormsResume/AdminFormsResume';
 import SidebarAdmin from '../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin';
 import NavbarMobileAdmin from '../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin';
+import AdminFormsIndividual from '../../../components/AdminFormsIndividual/AdminFormsIndividual';
 
 const FormsResponses: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Resumo');
@@ -18,7 +19,7 @@ const FormsResponses: React.FC = () => {
       case 'Resumo':
         return <FormsAdminResume />;
       case 'Individual':
-        return <FormsAdminResume />;
+        return <AdminFormsIndividual />;
       case 'Baixar PDF':
         return <FormsAdminResume />;
       default:
