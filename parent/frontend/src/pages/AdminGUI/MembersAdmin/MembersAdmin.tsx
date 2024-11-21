@@ -10,6 +10,7 @@ import ModalEditUser from "../../../components/ComponentsAdmin/Modal/ModalEditUs
 import ModalConfirmDeleteUser from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteUser/ModalConfirmDeleteUser";
 import { Checkbox } from "@mui/material";
 import useUserData from "../../../hooks/useUserData";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 const MembersAdmin = () => {
   const [rows, setRows] = useState<any[]>([]);
@@ -171,6 +172,9 @@ const MembersAdmin = () => {
     <>
       <div className="Sidebar-Funcionarios-Mobile">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
       </div>
       <div className={`admin_members_container ${isExpanded ? "expanded" : "collapsed"}`}>
         

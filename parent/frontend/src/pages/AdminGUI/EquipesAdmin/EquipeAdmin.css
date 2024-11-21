@@ -133,15 +133,24 @@
   background-color: #1760af92;
 }
 
+.Navbar-Equipe-Admin{
+  display: none;
+}
+
 
 
 @media (max-width: 768px) {
   /* Content Wrapper */
+ .Navbar-Equipe-Admin{
+    display: block;;
+  }
+
   .content-wrapper {
+    margin-top: 12%;
     padding: 10px;
     flex-direction: column; /* Empilha os blocos */
     display: flex; /* Garante que o flexbox seja aplicado */
-    margin-left: 0;
+    margin-left: 0 !important;
   }
 
   /* Main Content */

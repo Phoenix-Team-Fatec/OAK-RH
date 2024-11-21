@@ -10,6 +10,7 @@
     padding-left: 100px;  /* Espaçamento à esquerda */
     padding-right: 50px; /* Espaçamento à direita */
     box-shadow: 0 6px 8px -2px rgb(202, 202, 202);
+    
 }
 
 .admin-navbar button {
@@ -36,6 +37,7 @@
         align-items: flex-start;
         padding-left: 20px; /* Adjust padding for mobile */
         padding-right: 20px; /* Adjust padding for mobile */
+        margin-top: 15%;
     }
 
     .admin-navbar button {

@@ -34,7 +34,6 @@ body {
   display: flex;
   justify-content: space-between; /* Alinhamento dos botões */
   margin-bottom: 20px;
-  width: 100%; /* Aumenta a largura para preencher a área */
 }
 
 .actions-forms-admin button {
@@ -46,6 +45,7 @@ body {
   font-size: 12px;
   box-sizing: border-box;
   font-weight: bold;
+  width: 100%;
 }
 
 .actions-forms-admin button:last-child {
@@ -81,8 +81,9 @@ body {
 
   .content {
     width: 90%;
-    margin-left: 0;
+    margin-left: 5%;
     padding: 15px;
+    margin-top: 15%;
   }
 
   .actions-forms-admin {
@@ -101,7 +102,5 @@ body {
     font-size: 20px;
   }
 
-  .tabela-formularios {
-    
-  }
+  
 }

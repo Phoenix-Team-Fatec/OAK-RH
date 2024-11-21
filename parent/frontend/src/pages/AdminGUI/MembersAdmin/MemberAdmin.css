@@ -22,6 +22,7 @@
   align-items: center;
   padding: 40px;
   margin-left: 70px; /* Default margin for expanded sidebar */
+  
 }
 
 /* Adjust margin based on sidebar state */
@@ -90,6 +91,7 @@
 @media (max-width: 768px) {
   .admin_members_container {
     padding: 10px; /* Adjust padding for smaller screens */
+    margin-top: 15%;
   }
   
   .h2_admin_members_register {

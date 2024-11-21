@@ -3,6 +3,7 @@ import { Box, Card, CardContent, Typography, Button, ButtonGroup } from '@mui/ma
 import './FormsResponses.css';
 import FormsAdminResume from '../../../components/AdminFormsResume/AdminFormsResume';
 import SidebarAdmin from '../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin';
+import NavbarMobileAdmin from '../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin';
 
 const FormsResponses: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Resumo');
@@ -27,7 +28,12 @@ const FormsResponses: React.FC = () => {
 
   return (
     <div>
+      <div>
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
       <Box className="forms-container">
         <Card className="card-upper">
           <CardContent>

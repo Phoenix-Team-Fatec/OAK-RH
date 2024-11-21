@@ -37,6 +37,7 @@
   @media (max-width: 768px) {
     .forms-admin-wrapper {
       flex-direction: column;
+      margin-top: 10%;
     }
 
     .Sidebar-Criar-Formulario {

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
 
 import useUserData from "../../../hooks/useUserData";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 interface Forms {
   id: number;
@@ -178,6 +179,9 @@ const FormsAdmin: React.FC = () => {
       <div className="Sidebar-Formularios-Admin">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
       </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
       <div className={`content ${isExpanded ? "expanded" : "collapsed"}`}>
         <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
 
@@ -216,7 +220,6 @@ const FormsAdmin: React.FC = () => {
 
           <Button
             variant="contained"
-            className="button-enviar"
             color="secondary"
             onClick={() => {
               if (selectedIds.length > 1) {

@@ -2,7 +2,7 @@
 
 .dashboard-admin-wrapper {
   display: flex;
-  width: 100%;
+  width: 100%;;
 }
 
 /* Sidebar styles */
@@ -88,10 +88,19 @@
     color: #2d80d8;
     font-weight: bold;
   }
+
+  .Navbar-Equipe-Admin{
+    display: none;
+  }
+  
   
   /* Hide dashboard content on small screens */
   @media (max-width: 768px) {
     .dashboard-side {
       display: none;
+    }
+
+    .Navbar-Equipe-Admin{
+      display: block;
     }
   }
