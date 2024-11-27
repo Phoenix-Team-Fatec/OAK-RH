@@ -211,7 +211,7 @@ export const deletarFormularioEquipe = async (id: number) => {
 export async function getListOfUserToAnswerService(formsId: number, userId: number) {
     try {
         const userIdsToAnswer = await Formulario_user.findAll({
-            where: { formulario_id: formsId, user_id: userId }
+            where: { formulario_id: formsId, user_id: userId, status: "pendente" }
         });
 
         if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
@@ -221,6 +221,28 @@ export async function getListOfUserToAnswerService(formsId: number, userId: numb
         const answeredForArray = userIdsToAnswer.map((user) => user.dataValues.answered_for);
 
         return answeredForArray;
+    } catch (error) {
+        console.error("Error trying to get the user to answer service ", error)
+        throw error;
+    }
+}
+
+export async function updateAnswerStatus(formsId: number, answered_for: number) {
+    try {
+        const userIdsToAnswer = await Formulario_user.findAll({
+            where: { formulario_id: formsId, answered_for: answered_for }
+        });
+
+        if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
+            return { message: "No row founded" };
+        }
+
+        const updatedRows = await Formulario_user.update(
+            { status: 'respondido' },
+            { where: { formulario_id: formsId, answered_for: answered_for, status: 'pendente' } }
+        );
+        
+        return updatedRows;
     } catch (error) {
         console.error("Error trying to get the user to answer service ", error)
         throw error;
