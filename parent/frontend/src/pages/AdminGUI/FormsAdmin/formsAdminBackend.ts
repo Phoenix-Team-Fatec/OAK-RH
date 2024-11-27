@@ -6,8 +6,15 @@ import axios from 'axios';
 export async function getFormularios(admin_id: number) {
   try {
     const response = await axios.get(`http://localhost:3000/formulario/listar/${admin_id}`);
-   
-    return response.data;
+    const data = response.data.map((item: any) => ({
+      id: item.id,
+      nome: item.nome,
+      descricao: item.descricao,
+      enviado: item.enviado? "Enviado" : "Não enviado",
+      criado_em: item.criado_em,
+    }))
+    return data 
+    
     
   } catch (error) {
     console.error("Erro ao buscar formulários", error);

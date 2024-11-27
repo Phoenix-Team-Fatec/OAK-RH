@@ -9,7 +9,7 @@ import "./adminFormulario.css"; // Certifique-se de que o caminho do CSS está c
 import { getFormularios, deleteFormulario } from "./formsAdminBackend";
 import { useNavigate } from "react-router-dom";
 import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
-
+import {Chip} from "@mui/material";
 import useUserData from "../../../hooks/useUserData";
 import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
@@ -28,6 +28,7 @@ const FormsAdmin: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
   const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
   const [showAlert, setShowAlert] = useState(false)
+  const [showAlertDelete, setShowAlertDelete] = useState(false)
   const { id } = useUserData();
   
   const [isExpanded, setIsExpanded] = useState(true); // State for sidebar
@@ -112,7 +113,8 @@ const FormsAdmin: React.FC = () => {
       const updatedRows = rows.filter((row) => !selectedIds.includes(row.id));
       setRows(updatedRows);
       setSelectedIds([]); // Limpa as seleções
-      alert("Formulários deletados com sucesso.");
+      
+      setShowAlertDelete(true)
     } catch (error) {
       console.error("Erro ao deletar formulários", error);
       alert("Erro ao deletar formulários. Tente novamente.");
@@ -124,6 +126,12 @@ const FormsAdmin: React.FC = () => {
 
 
   const handleGoToEdit = () => {
+    //Não navegar para a página se o formulário já foi enviado
+    const formulario = rows.find((row) => row.id === selectedIds[0]);
+    if (formulario.enviado === "Enviado") {
+      alert("Formulário já enviado, não é possível editar.");
+      return;
+    }
     if (selectedIds.length !== 1) {
       alert("Selecione apenas um formulário para editar.");
       return;
@@ -133,6 +141,14 @@ const FormsAdmin: React.FC = () => {
     navigate(`/forms-admin-edit`);
   }
     
+  }
+
+  const colorChip = (enviado: string) => {
+    if (enviado === "Enviado") {
+      return "#80ed99";
+    } else {
+      return "#f9626c";
+    }
   }
 
   const columns: GridColDef[] = useMemo(
@@ -162,10 +178,35 @@ const FormsAdmin: React.FC = () => {
           />
         ),
       },
-      { field: "id", headerName: "ID", width: 100 },
-      { field: "nome", headerName: "Título", width: 300 },
-      { field: "descricao", headerName: "Descrição", width: 300 },
-      { field: "criado_em", headerName: "Criado em", width: 264 },
+      { field: "id", headerName: "ID", width: 100,
+        headerAlign: "center",
+        align: "center",
+       },
+      { field: "nome", headerName: "Título", width: 300,
+        headerAlign: "center",
+        align: "center",
+       },
+      { field: "descricao", headerName: "Descrição", width: 300,
+       
+       },
+      {field:"enviado",
+       headerName:"Enviado", 
+       width:200,
+       headerAlign: "center",
+        align: "center",
+      renderCell: (params) => (
+        <Chip
+        label={params.value}
+        variant="outlined"
+        sx={{ backgroundColor: `${colorChip(params.value)}`, color:"white" }}
+        />
+      )
+      
+      },
+      { field: "criado_em", headerName: "Criado em", width: 264,
+        headerAlign: "center",
+        align: "center",
+       },
     ],
     [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
   );
@@ -234,7 +275,7 @@ const FormsAdmin: React.FC = () => {
           </Button>
         </div>
 
-        <Paper style={{ height: 500, width: "100%" }}>
+        <Paper style={{ height: 600, width: "100%" }}>
           <DataGrid
             className="tabela-formularios"
             rows={rows}
@@ -269,6 +310,12 @@ const FormsAdmin: React.FC = () => {
           message="Selecione pelo menos um formulário para deletar"
           open={showAlert}
           onClose={() => setShowAlert(false)}
+        />
+
+        <AlertNotification
+          message="Formulário deletado com sucesso"
+          open={showAlertDelete}
+          onClose={() => setShowAlertDelete(false)}
         />
       </div>
     </>
