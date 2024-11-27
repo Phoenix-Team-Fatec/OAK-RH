@@ -14,6 +14,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-svg-core": "^6.7.1",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^6.1.1",
@@ -25,8 +26,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
-    "recharts": "^2.13.0",
-    "react-select": "^5.8.2"
+    "react-select": "^5.8.2",
+    "recharts": "^2.13.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",

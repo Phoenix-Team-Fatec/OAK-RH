@@ -67,3 +67,22 @@ export const findAnswerByUserService = async (userId: number) => {
         console.log("Error finding anser by user id", error)
     }
 }
+
+export async function getListOfUserAlredyAnsweredService(formsId: number, userId: number) {
+    try {
+        const userIdsToAnswer = await Resposta.findAll({
+            where: { formulario_id: formsId, respondido_por: userId }
+        });
+
+        if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
+            return { message: "No users to answer" };
+        }
+
+        const answeredForArray = userIdsToAnswer.map((user) => user.dataValues.answered_for);
+
+        return answeredForArray;
+    } catch (error) {
+        console.error("Error trying to get the user to answer service ", error)
+        throw error;
+    }
+}
