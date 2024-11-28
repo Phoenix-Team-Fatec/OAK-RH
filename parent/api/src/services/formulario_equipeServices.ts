@@ -215,12 +215,13 @@ export async function getListOfUserToAnswerService(formsId: number, userId: numb
             where: { formulario_id: formsId, user_id: userId, status: "pendente" }
         });
 
+        
         if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
             return { message: "No users to answer" };
         }
-
+        
         const answeredForArray = userIdsToAnswer.map((user) => user.dataValues.answered_for);
-
+        
         return answeredForArray;
     } catch (error) {
         console.error("Error trying to get the user to answer service ", error)
