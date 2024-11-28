@@ -1,3 +1,4 @@
+import { updateAnswerStatus } from "../services/formulario_equipeServices";
 import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService } from "../services/respostasService";
 import { Request, Response } from "express";
 
@@ -23,6 +24,10 @@ export const createAnswer = async (req: Request, res: Response) => {
             const { formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta } = answer;
 
             const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta, Number(userId));
+            
+            updateAnswerStatus(formulario_id, Number(userId))
+
+            const updateUserForms = await 
             createdAnswers.push(createdAnswer);
         }));
 

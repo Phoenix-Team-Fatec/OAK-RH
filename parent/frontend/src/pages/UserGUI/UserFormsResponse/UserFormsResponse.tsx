@@ -3,7 +3,6 @@ import axios from "axios";
 import UserRenderForms from "./UserRenderForms";
 import './UserFormResponse.css';
 import useUserData from "../../../hooks/useUserData";
-import { useNavigate } from "react-router-dom";
 
 interface Question {
     categoria_id: number;
@@ -33,153 +32,172 @@ export default function UserFormsResponse() {
     const [formulario_id] = useState(() => {
         const params = new URLSearchParams(document.location.search);
         const id = params.get("id");
-
         return id !== null ? id : 0;
     });
 
     const [equipe_id] = useState(() => {
         const params = new URLSearchParams(document.location.search);
         const id = params.get("equipe_id");
-
         return id !== null ? id : 0;
     });
 
-    const navigate = useNavigate()
+    const { id } = useUserData();
 
-    const { id } = useUserData()
+    const [data, setData] = useState<Question[]>([]);
+    const [formsName, setFormsName] = useState("");
+    const [formsDescription, setFormsDescription] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState("");
+    const [userArray, setUserArray] = useState<number[]>([]);
+    const [userArrayIndex, setUserArrayIndex] = useState(0);
+    const [userId, setUserId] = useState(0);
 
-    const [data, setData] = useState<Question[]>([])
-    const [formsName, setFormsName] = useState("")
-    const [formsDescription, setFormsDescription] = useState("")
-    const [isLoading, setIsLoading] = useState(true)
-    const [user, setUser] = useState("")
-    const [userArray, setUserArray] = useState<number[]>([])
-    const [userArrayIndex, setUserArrayIndex] = useState(0)
-    const [userId, setUserId] = useState(0)
-    const [disablePrev, setDisablePrev] = useState(false)
-    const [disableNext, setDisableNext] = useState(false)
-    const [respostasByUser, setRespostasByUser] = useState<{ [key: number]: Resposta[] }>({});
+    const [userResponses, setUserResponses] = useState<{ [key: number]: Resposta[] }>({});
+
+    const [respostasAtuais, setRespostasAtuais] = useState<Resposta[]>([]);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                // Buscar perguntas
-                const questionsResponse = await axios.get(`http://localhost:3000/perguntas/listar/${formulario_id}`)
-                const questions = questionsResponse.data
-                setData(questions)
-                const formsId = questions[0].formulario_id
+                const questionsResponse = await axios.get(`http://localhost:3000/perguntas/listar/${formulario_id}`);
+                setData(questionsResponse.data);
+                const formsId = questionsResponse.data[0]?.formulario_id || 0;
 
-                // Buscar formulário
-                const formsResponse = await axios.get(`http://localhost:3000/formulario/${formsId}`)
-                setFormsName(formsResponse.data.nome)
-                setFormsDescription(formsResponse.data.descricao)
+                const formsResponse = await axios.get(`http://localhost:3000/formulario/${formsId}`);
+                setFormsName(formsResponse.data.nome);
+                setFormsDescription(formsResponse.data.descricao);
 
-                // Buscar usuários
-                const usersArrayResponse = await axios.get(`http://localhost:3000/formulario_equipe/get/arrayUserToAnswer/${formsId}/${id}`)
-                const users = usersArrayResponse.data
-                console.log(users)
-                setUserArray(users)
+                const usersArrayResponse = await axios.get(`http://localhost:3000/formulario_equipe/get/arrayUserToAnswer/${formsId}/${id}`);
+                setUserArray(usersArrayResponse.data);
 
-                if (users.length > 0) {
-                    const firstUserId = users[0]
-                    setUserId(firstUserId)
-                    const userDataResponse = await axios.get(`http://localhost:3000/user/getData/${firstUserId}`)
-                    setUser(userDataResponse.data.nome)
-
+                if (usersArrayResponse.data.length > 0) {
+                    const firstUserId = usersArrayResponse.data[0];
+                    const userDataResponse = await axios.get(`http://localhost:3000/user/getData/${firstUserId}`);
+                    setUser(userDataResponse.data.nome);
+                    setUserId(firstUserId);
                 }
 
-                setIsLoading(false)
+                setIsLoading(false);
             } catch (error) {
-                console.error("Erro ao buscar dados:", error)
-                setIsLoading(false)
+                console.error("Erro ao buscar dados:", error);
+                setIsLoading(false);
             }
         }
 
-        if (isLoading) fetchData()
+        if (isLoading) fetchData();
     }, [isLoading, formulario_id, id]);
 
-    useEffect(() => {
-        if (userArray.length === 0 && userId != 0) {
-            navigate('/forms-user')
-            return
+    function nextUser() {
+        if (userArrayIndex + 1 >= userArray.length) {
+            alert("Fim da lista de usuários.");
+            return;
         }
-        setUserArrayIndex(0)
-        changeUser(0)
-    }, [userArray])
 
-    async function changeUser(number: number) {
-        // Antes de mudar, salvar as respostas atuais (opcional, se necessário)
+        setUserResponses(prev => ({
+            ...prev,
+            [userId]: respostasAtuais
+        }));
 
-        const newIndex = userArrayIndex + number;
+        const nextIndex = userArrayIndex + 1;
+        const nextUserId = userArray[nextIndex];
+        setUserArrayIndex(nextIndex);
+        setUserId(nextUserId);
 
-        setDisableNext(newIndex + 1 >= userArray.length);
-        setDisablePrev(newIndex <= 0);
+        axios.get(`http://localhost:3000/user/getData/${nextUserId}`)
+            .then(userDataResponse => {
+                setUser(userDataResponse.data.nome);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar dados do próximo usuário:", error);
+                setUser("");
+            });
 
-        setUserArrayIndex(newIndex);
-
-        const newUserId = userArray[newIndex];
-        setUserId(newUserId);
-
-        try {
-            const userDataResponse = await axios.get(`http://localhost:3000/user/getData/${newUserId}`);
-            setUser(userDataResponse.data.nome);
-
-        } catch (error) {
-            console.error("Erro ao buscar dados do usuário:", error);
-            setRespostasByUser(prev => ({ ...prev, [newUserId]: [] }));
+        if (userResponses[nextUserId]) {
+            setRespostasAtuais(userResponses[nextUserId]);
+        } else {
+            setRespostasAtuais([]);
         }
     }
 
+    function previousUser() {
+        if (userArrayIndex - 1 < 0) {
+            alert("Você está no primeiro usuário.");
+            return;
+        }
+
+        setUserResponses(prev => ({
+            ...prev,
+            [userId]: respostasAtuais
+        }));
+
+        const prevIndex = userArrayIndex - 1;
+        const prevUserId = userArray[prevIndex];
+        setUserArrayIndex(prevIndex);
+        setUserId(prevUserId);
+
+        axios.get(`http://localhost:3000/user/getData/${prevUserId}`)
+            .then(userDataResponse => {
+                setUser(userDataResponse.data.nome);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar dados do usuário anterior:", error);
+                setUser("");
+            });
+
+        // Carregar respostas existentes do usuário anterior do estado
+        if (userResponses[prevUserId]) {
+            setRespostasAtuais(userResponses[prevUserId]);
+        } else {
+            setRespostasAtuais([]);
+        }
+    }
 
     async function handleSubmit(answers: Resposta[]) {
         try {
-            await axios.post(`http://localhost:3000/respostas/${userId}`, answers)
+            await axios.post(`http://localhost:3000/respostas/${userId}`, answers);
             alert("Resposta enviada com sucesso");
-            setRespostasByUser(prev => ({ ...prev, [userId]: answers }))
+
+            setUserResponses(prev => ({
+                ...prev,
+                [userId]: answers
+            }));
+
+            setRespostasAtuais(answers);
         } catch (error) {
-            alert("Erro ao enviar resposta")
-            console.error(error)
-            return
+            alert("Erro ao enviar resposta");
+            console.error(error);
         }
-        setUserArray(prevArr => prevArr.filter(id => id !== userId))
     }
 
-    function handleBackButton() {
-        navigate('/forms-user')
+    function handleNavigation(direction: 'next' | 'previous') {
+        if (direction === 'next') {
+            nextUser();
+        } else {
+            previousUser();
+        }
     }
-
-
-
 
     return (
         <div>
             {isLoading ? (
                 <div>Carregando...</div>
             ) : (
-                <>
-                    <div className="container-forms-responder-user">
-                        <button className="userResponseBackButton view-forms-hover" onClick={handleBackButton}>Voltar</button>
-                        <h2>Título do Formulário - {formsName}</h2>
-                        <span className="description-forms-user">Descrição do Formulário: {formsDescription}</span>
-                        <div className="response-user-name-container">
-                            <span className="">Usuário: </span>
-                            <span className="description-forms-user-name"> {user} </span>
-                        </div>
-
-                        <UserRenderForms data={data}
-                            equipe_id={Number(equipe_id)}
-                            onSubmit={handleSubmit}
-                            formsId={Number(formulario_id)}
-                            respostas={respostasByUser[userId] || []}
-                            setRespostas={(respostas: Resposta[]) => setRespostasByUser(prev => ({ ...prev, [userId]: respostas }))}
-                        />
-
-                        <div className="responseNavigationButtonContainer">
-                            <button onClick={() => changeUser(-1)} disabled={disablePrev} className="view-forms-hover">Anterior</button>
-                            <button onClick={() => changeUser(1)} disabled={disableNext} className="view-forms-hover">Próximo</button>
-                        </div>
-                    </div>
-                </>
+                <div className="container-forms-responder-user">
+                    <h2>Título do Formulário - {formsName}</h2>
+                    <span className="description-forms-user">Descrição do Formulário: {formsDescription}</span>
+                    <span className="description-forms-user">Usuário: {user}</span>
+                    <UserRenderForms
+                        data={data}
+                        equipe_id={Number(equipe_id)}
+                        onSubmit={handleSubmit}
+                        formsId={Number(formulario_id)}
+                        userId={userId}
+                        existingResponses={respostasAtuais}
+                        setRespostasAtuais={setRespostasAtuais}
+                    />
+                    <button onClick={() => handleNavigation('previous')}>Anterior</button>
+                    <button onClick={() => handleNavigation('next')}>Próximo</button>
+                </div>
             )}
         </div>
     );
