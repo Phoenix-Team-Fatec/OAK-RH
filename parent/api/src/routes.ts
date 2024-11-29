@@ -7,7 +7,7 @@ import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioCon
 import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, getListOfUserToAnswerController, listarFormulariosEquipeController, listarUsuariosComFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
-import { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser } from "./controllers/respostaControllers";
+import { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser, getAnswersByFormIdAndEquipeIdController } from "./controllers/respostaControllers";
 
 
 const router = Router();
@@ -87,6 +87,7 @@ router.get('/respostas/:answerId', findAnswerById);
 router.get('/respostas/listar/:answerId', findAnswerByQuestionsId);
 router.get('/resposta/usuario/:questionId/:userId', findAnswerByQuestionsAndUserId)
 router.get('/respostas/user/:userId', findAnswerByUser)
+router.get('/respostas/:formId/:equipeId', getAnswersByFormIdAndEquipeIdController)
 
 
 export default router;

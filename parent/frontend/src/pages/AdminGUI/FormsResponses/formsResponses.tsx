@@ -6,9 +6,15 @@ import SidebarAdmin from '../../../components/ComponentsAdmin/SidebarAdmin/Sideb
 import NavbarMobileAdmin from '../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin';
 import AdminFormsIndividual from '../../../components/AdminFormsIndividual/AdminFormsIndividual';
 
+
+
+
 const FormsResponses: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Resumo');
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  
+  
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -38,10 +44,7 @@ const FormsResponses: React.FC = () => {
       <Box className="forms-container">
         <Card className="card-upper">
           <CardContent>
-            <Typography className="questions-text" variant="h6" align="center">
-              18 respostas
-            </Typography>
-
+           <br />
             <ButtonGroup className="button-responses" variant="contained" fullWidth>
               <Button onClick={() => setActiveComponent('Resumo')}>Resumo</Button>
               <Button onClick={() => setActiveComponent('Individual')}>Individual</Button>

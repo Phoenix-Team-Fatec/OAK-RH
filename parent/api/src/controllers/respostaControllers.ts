@@ -1,5 +1,5 @@
 import { updateAnswerStatus } from "../services/formulario_equipeServices";
-import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService } from "../services/respostasService";
+import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService, getAnswersByFormIdAndEquipeIdService } from "../services/respostasService";
 import { Request, Response } from "express";
 
 interface Resposta {
@@ -79,6 +79,18 @@ export const findAnswerByUser = async (req: Request, res: Response) => {
         const { userId } = req.params;
 
         const answer = await findAnswerByUserService(Number(userId));
+        return res.status(200).json(answer)
+    } catch (error) {
+        console.log("Error finding anser by user id", error)
+        return res.status(400).json({ message: "Error finding anser by user id" })
+    }
+}
+
+export const getAnswersByFormIdAndEquipeIdController = async (req: Request, res: Response) => {
+    try {
+        const { formId, equipeId } = req.params;
+
+        const answer = await getAnswersByFormIdAndEquipeIdService(Number(formId), Number(equipeId));
         return res.status(200).json(answer)
     } catch (error) {
         console.log("Error finding anser by user id", error)
