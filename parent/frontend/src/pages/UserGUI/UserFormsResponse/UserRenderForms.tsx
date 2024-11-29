@@ -1,6 +1,5 @@
 import { FC, useEffect } from "react";
 import useUserData from "../../../hooks/useUserData";
-import { useNavigate } from "react-router-dom";
 
 interface UserRenderFormsProps {
     data: Question[];
@@ -39,7 +38,7 @@ enum QuestionType {
 const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void; value?: string }> = ({ question, index, onAnswer, value }) => (
     <div className="unique-choice-question">
         <label className="unique-choice-question-text">
-            {`${index + 1}) ${question.texto}`}  
+            {`${index + 1}) ${question.texto}`}
         </label>
         {question.descricao.map((answer, idx) => (
             <label key={`${question.id}-${idx}`} className="unique-choice-answer">
@@ -75,7 +74,7 @@ const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: num
     return (
         <div className="multiple-choice-question">
             <label className="multiple-choice-question-text">
-                {`${index + 1}) ${question.texto}`}  
+                {`${index + 1}) ${question.texto}`}
             </label>
             {question.descricao.map((answer, idx) => (
                 <label key={`${question.id}-${idx}`} className="multiple-choice-answer">
@@ -98,7 +97,7 @@ const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: numbe
     return (
         <div className="long-question">
             <label className="long-question-text">
-                {`${index + 1}) ${question.texto}`} 
+                {`${index + 1}) ${question.texto}`}
             </label>
             <input
                 type="text"
@@ -111,10 +110,42 @@ const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: numbe
     );
 };
 
+const GradeQuestion: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void; value?: string }> = ({ question, index, onAnswer, value = "" }) => {
+    const handleGradeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let inputValue = parseInt(e.target.value, 10);
+        if (isNaN(inputValue)) {
+            inputValue = 0;
+        }
+        if (inputValue < 0) {
+            inputValue = 0;
+        } else if (inputValue > 10) {
+            inputValue = 10;
+        }
+        onAnswer(question.id, inputValue.toString());
+    };
+
+    return (
+        <div className="grade-question">
+            <label className="grade-question-text">
+                {`${index + 1}) ${question.texto}`}
+            </label>
+            <input
+                type="number"
+                min="0"
+                max="10"
+                value={value}
+                onChange={handleGradeChange}
+                className="grade-question-input"
+            />
+            <hr className="question-separator" />
+        </div>
+    );
+};
+
+
 export default function UserRenderForms({ data, equipe_id, formsId, onSubmit, existingResponses, setRespostasAtuais }: UserRenderFormsProps) {
 
     const userData = useUserData();
-    const navigate = useNavigate();
 
     useEffect(() => {
         // Atualiza as respostasAtuais no pai sempre que existingResponses muda
@@ -127,13 +158,13 @@ export default function UserRenderForms({ data, equipe_id, formsId, onSubmit, ex
             if (existing) {
                 return prev.map(r => r.pergunta_id === id ? { ...r, resposta } : r);
             }
-            return [...prev, { 
-                formulario_id: formsId, 
-                pergunta_id: id, 
-                respondido_por: userData.id, 
-                equipe_id: equipe_id, 
-                resposta, 
-                tipo_resposta: "" 
+            return [...prev, {
+                formulario_id: formsId,
+                pergunta_id: id,
+                respondido_por: userData.id,
+                equipe_id: equipe_id,
+                resposta,
+                tipo_resposta: ""
             }];
         });
     };
@@ -159,7 +190,6 @@ export default function UserRenderForms({ data, equipe_id, formsId, onSubmit, ex
         }));
 
         onSubmit(novasRespostas);
-        navigate('/forms-user');
     };
 
     return (
@@ -171,32 +201,42 @@ export default function UserRenderForms({ data, equipe_id, formsId, onSubmit, ex
                     switch (question.tipo) {
                         case "uniqueChoice":
                             return (
-                                <UniqueChoice 
-                                    key={question.id} 
-                                    question={question} 
-                                    index={index} 
-                                    onAnswer={handleAnswer} 
-                                    value={typeof respostaExistente === 'string' ? respostaExistente : undefined} 
+                                <UniqueChoice
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : undefined}
                                 />
                             );
                         case "multipleChoice":
                             return (
-                                <MultipleChoice 
-                                    key={question.id} 
-                                    question={question} 
-                                    index={index} 
-                                    onAnswer={handleAnswer} 
-                                    value={Array.isArray(respostaExistente) ? respostaExistente : []} 
+                                <MultipleChoice
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={Array.isArray(respostaExistente) ? respostaExistente : []}
                                 />
                             );
                         case "longQuestion":
                             return (
-                                <LongQuestion 
-                                    key={question.id} 
-                                    question={question} 
-                                    index={index} 
-                                    onAnswer={handleAnswer} 
-                                    value={typeof respostaExistente === 'string' ? respostaExistente : ""} 
+                                <LongQuestion
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : ""}
+                                />
+                            );
+                        case "grade":
+                            return (
+                                <GradeQuestion
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : ""}
                                 />
                             );
                         default:

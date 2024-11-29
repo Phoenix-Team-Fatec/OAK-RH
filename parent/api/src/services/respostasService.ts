@@ -1,12 +1,12 @@
 import Resposta from "../models/respostasModels"
 
 type RespostaAgrupada = {
-  pergunta_id: number;
-  respostas: {
-    respondido_por: number;
-    resposta: string | string[];
-  }[];
-  contagem_respostas: Record<string, number>;
+    pergunta_id: number;
+    respostas: {
+        respondido_por: number;
+        resposta: string | string[];
+    }[];
+    contagem_respostas: Record<string, number>;
 }
 
 
@@ -80,27 +80,6 @@ export const findAnswerByUserService = async (userId: number) => {
     }
 }
 
-export async function getListOfUserAlredyAnsweredService(formsId: number, userId: number) {
-    try {
-        const userIdsToAnswer = await Resposta.findAll({
-            where: { formulario_id: formsId, respondido_por: userId }
-        });
-
-        if (!userIdsToAnswer || userIdsToAnswer.length === 0) {
-            return { message: "No users to answer" };
-        }
-
-        const answeredForArray = userIdsToAnswer.map((user) => user.dataValues.answered_for);
-
-        return answeredForArray;
-    } catch (error) {
-        console.error("Error trying to get the user to answer service ", error)
-        throw error;
-    }
-}
-
-
-
 //função para pegar todas as respostas de um formulário, com base na equipe
 export async function getAnswersByFormIdAndEquipeIdService(formId: number, equipeId: number) {
     try {
@@ -113,11 +92,11 @@ export async function getAnswersByFormIdAndEquipeIdService(formId: number, equip
         }
 
 
-       
+
         const respostasAgrupadas: RespostaAgrupada[] = Object.values(
             answers.reduce((acc, curr) => {
 
-                if(!acc[curr.pergunta_id]){
+                if (!acc[curr.pergunta_id]) {
                     acc[curr.pergunta_id] = {
                         pergunta_id: curr.pergunta_id,
                         respostas: [],
@@ -132,26 +111,39 @@ export async function getAnswersByFormIdAndEquipeIdService(formId: number, equip
 
                 //Atualiza a contagem de respostas
                 const respostaAtual = curr.resposta;
-                if (Array.isArray(respostaAtual)){
+                if (Array.isArray(respostaAtual)) {
                     //Caso a resposta seja múltipla, conta cada uma separadamente
                     respostaAtual.forEach((res) => {
                         acc[curr.pergunta_id].contagem_respostas[res] =
-                        (acc[curr.pergunta_id].contagem_respostas[res] || 0) + 1;
+                            (acc[curr.pergunta_id].contagem_respostas[res] || 0) + 1;
                     })
-                }else{
+                } else {
                     //Caso seja única, incremente a contagem diretamente
                     acc[curr.pergunta_id].contagem_respostas[respostaAtual] =
-                    (acc[curr.pergunta_id].contagem_respostas[respostaAtual] || 0) + 1;
+                        (acc[curr.pergunta_id].contagem_respostas[respostaAtual] || 0) + 1;
                 }
 
                 return acc
 
-            }, {} as Record<number, RespostaAgrupada>) 
+            }, {} as Record<number, RespostaAgrupada>)
         )
 
         return respostasAgrupadas;
     } catch (error) {
         console.error("Error trying to get the answers by form id and equipe id service ", error)
+        throw error;
+    }
+}
+
+export async function getAnswersByFormIdAndAnsweredForService(formId: number, answeredFor: number) {
+    try {
+        const answers = await Resposta.findAll({
+            where: { formulario_id: formId, answered_for: answeredFor }
+        });
+
+        return answers
+    } catch (error) {
+        console.error("Error trying to get the answers by form id and answered for service ", error)
         throw error;
     }
 }

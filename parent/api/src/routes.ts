@@ -4,10 +4,10 @@ import { createUser, deleteUser, getIdUser, loginUser, readAllUsers, updateUser,
 import { createEquipe, deleteEquipe, getAllEquipes, getEquipeById, updateEquipe, listarEquipesPorMesControl } from "./controllers/equipeController";
 import { createAdmin, loginAdm } from "./controllers/adminController";
 import { criarFormularioControl, atuaizarFormularioControl, deletarFormularioControl, listarFormularioControl, listarUmFormularioControl, listarPendentesControl, listarRespondidosControl, mudarStatusControl, listarUsuariosComFormulariosControl, listarFormulariosPorMesControl } from "./controllers/formularioController";
-import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, getListOfUserToAnswerController, listarFormulariosEquipeController, listarUsuariosComFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
+import { associarFormularioEquipeController, associarFormularioTodasEquipesController, deletarFormularioEquipeController, getListOfUserAnsweredController, getListOfUserToAnswerController, listarFormulariosEquipeController, listarUsuariosComFormulariosEquipeController } from "./controllers/equipe_formularioControllers";
 import { criarCategoriaControl, listarCategoriasControl, listarUmaCategoriaControl, atualizarCategoriaControl, deletarCategoriaControl } from "./controllers/categoriasController"
 import { criarPergunta, deletarPergunta, listarPerguntas, listarUmaPergunta, atualizarPergunta } from "./controllers/perguntasControllers";
-import { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser, getAnswersByFormIdAndEquipeIdController } from "./controllers/respostaControllers";
+import getAnswersByFormIdAndAnsweredForController, { createAnswer, findAnswerById, findAnswerByQuestionsAndUserId, findAnswerByQuestionsId, findAnswerByUser, getAnswersByFormIdAndEquipeIdController } from "./controllers/respostaControllers";
 
 
 const router = Router();
@@ -65,6 +65,7 @@ router.get('/formulario_equipe/listar/:equipe_id', listarFormulariosEquipeContro
 router.delete('/formulario_equipe/:id', deletarFormularioEquipeController);
 router.get('/formulario_equipe/:formulario_id/:equipe_id', listarUsuariosComFormulariosEquipeController);
 router.get('/formulario_equipe/get/arrayUserToAnswer/:formsId/:userId', getListOfUserToAnswerController)
+router.get('/formulario_equipe/get/arrayUserAnswered/:formsId/:userId', getListOfUserAnsweredController)
 
 // Rotas de Categoria
 router.post('/categorias', criarCategoriaControl);
@@ -87,6 +88,7 @@ router.get('/respostas/:answerId', findAnswerById);
 router.get('/respostas/listar/:answerId', findAnswerByQuestionsId);
 router.get('/resposta/usuario/:questionId/:userId', findAnswerByQuestionsAndUserId)
 router.get('/respostas/user/:userId', findAnswerByUser)
+router.get('/respostas/forms/user/:formId/:answeredFor', getAnswersByFormIdAndAnsweredForController)
 router.get('/respostas/:formId/:equipeId', getAnswersByFormIdAndEquipeIdController)
 
 

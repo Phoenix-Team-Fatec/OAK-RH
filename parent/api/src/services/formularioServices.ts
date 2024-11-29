@@ -254,3 +254,22 @@ export const atualizarFormulario = async (id:number, nome?: string, descricao?: 
     }
 
 }
+
+export async function getListOfUserAlredyAnsweredService(formsId: number, userId: number) {
+    try {
+        const userIdsAnswered = await Formulario_user.findAll({
+            where: { formulario_id: formsId, status: "respondido", user_id: userId }
+        });
+
+        if (!userIdsAnswered || userIdsAnswered.length === 0) {
+            return { message: "No users to answered" };
+        }
+
+        const answeredForArray = userIdsAnswered.map((user) => user.dataValues.answered_for);
+
+        return answeredForArray;
+    } catch (error) {
+        console.error("Error trying to get the user to answer service ", error)
+        throw error;
+    }
+}

@@ -1,5 +1,5 @@
 import { updateAnswerStatus } from "../services/formulario_equipeServices";
-import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService, getAnswersByFormIdAndEquipeIdService } from "../services/respostasService";
+import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService, getAnswersByFormIdAndAnsweredForService, getAnswersByFormIdAndEquipeIdService } from "../services/respostasService";
 import { Request, Response } from "express";
 
 interface Resposta {
@@ -24,11 +24,11 @@ export const createAnswer = async (req: Request, res: Response) => {
             const { formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta } = answer;
 
             const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta, Number(userId));
-            
+
             updateAnswerStatus(formulario_id, Number(userId))
 
-            const updateUserForms = await 
-            createdAnswers.push(createdAnswer);
+            const updateUserForms = await
+                createdAnswers.push(createdAnswer);
         }));
 
         return res.status(201).json(createdAnswers);
@@ -95,5 +95,19 @@ export const getAnswersByFormIdAndEquipeIdController = async (req: Request, res:
     } catch (error) {
         console.log("Error finding anser by user id", error)
         return res.status(400).json({ message: "Error finding anser by user id" })
+    }
+}
+
+export default async function getAnswersByFormIdAndAnsweredForController(req: Request, res: Response) {
+    try {
+        const { formId, answeredFor } = req.params;
+
+        console.log(formId, answeredFor)
+
+        const answers = await getAnswersByFormIdAndAnsweredForService(Number(formId), Number(answeredFor));
+        return res.status(200).json(answers)
+    } catch (error) {
+        console.log("Error finding answer by forms id and answered for", error)
+        return res.status(400).json({ message: "Error finding answer by forms id and answered for" })
     }
 }

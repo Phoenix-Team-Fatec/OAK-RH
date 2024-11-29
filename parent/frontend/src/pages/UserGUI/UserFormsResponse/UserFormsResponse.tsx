@@ -3,6 +3,7 @@ import axios from "axios";
 import UserRenderForms from "./UserRenderForms";
 import './UserFormResponse.css';
 import useUserData from "../../../hooks/useUserData";
+import { useNavigate } from "react-router-dom";
 
 interface Question {
     categoria_id: number;
@@ -55,6 +56,8 @@ export default function UserFormsResponse() {
     const [userResponses, setUserResponses] = useState<{ [key: number]: Resposta[] }>({});
 
     const [respostasAtuais, setRespostasAtuais] = useState<Resposta[]>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -163,11 +166,23 @@ export default function UserFormsResponse() {
             }));
 
             setRespostasAtuais(answers);
+
+            if (userArrayIndex + 1 < userArray.length) {
+                nextUser();
+                setUserArray(prevArray => {
+                    const updatedArray = prevArray.filter((_, index) => index !== userArrayIndex);
+                    return updatedArray;
+                });
+            } else {
+                alert("Todas as respostas foram enviadas!");
+                navigate('/forms-user');
+            }
         } catch (error) {
             alert("Erro ao enviar resposta");
             console.error(error);
         }
     }
+
 
     function handleNavigation(direction: 'next' | 'previous') {
         if (direction === 'next') {

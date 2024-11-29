@@ -12,6 +12,11 @@ interface Question {
     id: number;
     texto: string;
     tipo: QuestionType;
+    categoria?: {
+        id: number;
+        id_admin: number;
+        nome: string;
+    };
 }
 
 interface Resposta {
@@ -21,12 +26,14 @@ interface Resposta {
     equipe_id: number;
     resposta: string | string[];
     tipo_resposta: QuestionType;
+    answered_for: number;
 }
 
 enum QuestionType {
     UniqueChoice = "uniqueChoice",
     MultipleChoice = "multipleChoice",
     LongQuestion = "longQuestion",
+    Grade = "grade"
 }
 
 const UniqueChoiceView: FC<{ question: Question; answer: string; index: number }> = ({ question, answer, index }) => (
@@ -76,23 +83,99 @@ const LongQuestionView: FC<{ question: Question; answer: string; index: number }
     </div>
 );
 
-export default function UserViewForms({ formsData, answerData }: UserViewFormsProps) {
+const UserViewForms: FC<UserViewFormsProps> = ({ formsData, answerData }) => {
+    // Agrupa as respostas por "answered_for"
+    const groupedAnswers = answerData.reduce((acc, answer) => {
+        const answeredForId = answer.answered_for;
+
+        if (!acc[answeredForId]) {
+            acc[answeredForId] = {
+                answered_for: answeredForId,
+                respostas: []
+            };
+        }
+        acc[answeredForId].respostas.push(answer);
+
+        return acc;
+    }, {} as Record<number, { answered_for: number; respostas: Resposta[] }>);
+
+    const GradeQuestionView: FC<{ question: Question; answer: string; index: number }> = ({ question, answer, index }) => {
+        return (
+            <div className="grade-question-view">
+                <label className="grade-question-text">
+                    {`${index + 1}) ${question.texto}`}
+                </label>
+                <input
+                    type="number"
+                    min="0"
+                    max="10"
+                    value={answer}
+                    readOnly
+                    className="grade-question-input-view"
+                />
+                <hr className="question-separator" />
+            </div>
+        );
+    };
+
+
     return (
         <div className="container-forms-view-user">
-            {formsData.map((question, index) => {
-                const answer = answerData.find(a => a.pergunta_id === question.id)?.resposta;
+            {Object.entries(groupedAnswers).map(([answeredForId, group]) => (
+                <div key={answeredForId} className="answered-group">
+                    <h3>Respostas para o usuário ID: {group.answered_for}</h3>
+                    {formsData.map((question, index) => {
+                        const answer = group.respostas.find(a => a.pergunta_id === question.id)?.resposta;
 
-                switch (question.tipo) {
-                    case "uniqueChoice":
-                        return <UniqueChoiceView key={question.id} question={question} answer={answer as string} index={index} />;
-                    case "multipleChoice":
-                        return <MultipleChoiceView key={question.id} question={question} answer={answer as string[]} index={index} />;
-                    case "longQuestion":
-                        return <LongQuestionView key={question.id} question={question} answer={answer as string} index={index} />;
-                    default:
-                        return <div key={question.id}><h3>Type of question undefined</h3></div>;
-                }
-            })}
+                        switch (question.tipo) {
+                            case "uniqueChoice":
+                                return (
+                                    <UniqueChoiceView
+                                        key={question.id}
+                                        question={question}
+                                        answer={answer as string}
+                                        index={index}
+                                    />
+                                );
+                            case "multipleChoice":
+                                return (
+                                    <MultipleChoiceView
+                                        key={question.id}
+                                        question={question}
+                                        answer={answer as string[]}
+                                        index={index}
+                                    />
+                                );
+                            case "longQuestion":
+                                return (
+                                    <LongQuestionView
+                                        key={question.id}
+                                        question={question}
+                                        answer={answer as string}
+                                        index={index}
+                                    />
+                                );
+                            case "grade":
+                                return (
+                                    <GradeQuestionView
+                                        key={question.id}
+                                        question={question}
+                                        index={index}
+                                        answer={answer as string}
+                                    />
+                                );
+                            default:
+                                return (
+                                    <div key={question.id}>
+                                        <h3>Tipo de pergunta indefinido</h3>
+                                    </div>
+                                );
+                        }
+                    })}
+                </div>
+            ))}
         </div>
     );
-}
+};
+
+export default UserViewForms;
