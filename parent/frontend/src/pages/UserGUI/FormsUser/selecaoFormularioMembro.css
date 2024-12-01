@@ -130,37 +130,37 @@
 
 /* Cards */
 .selecao-formulario-card {
-  width: 250px;
-  height: 250px; /* Aumentei a altura para mais espaço */
+  width: 200px;
+  height: 200px; 
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin: 15px; /* Adicionando espaçamento entre os cards */
-  border-radius: 10px; /* Bordas mais arredondadas */
-  background-color: #ffffff; /* Cor de fundo suave */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito suave ao passar o mouse */
+  margin: 15px; 
+  border-radius: 10px; 
+  background-color: #ffffff; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   cursor: pointer;
 }
 
 .selecao-formulario-card:hover {
-  transform: scale(1.05); /* Aumenta um pouco o tamanho do card */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Sombra mais intensa no hover */
+  transform: scale(1.05); 
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .selecao-formulario-card-header {
   padding: 15px;
-  background-color: #4aaf6c; /* Cor de fundo mais vibrante */
-  color: white; /* Cor do texto */
+  background-color: #4aaf6c; 
+  color: white; 
   font-weight: bold;
   text-align: center;
-  border-radius: 10px 10px 0 0; /* Bordas arredondadas apenas no topo */
-  font-size: 18px; /* Tamanho de fonte maior */
-  height: 100px; /* Ajustei a altura para que o texto tenha mais espaço */
+  border-radius: 10px 10px 0 0; 
+  font-size: 16px; 
+  height: 70px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  text-transform: capitalize; /* Deixa as palavras com a primeira letra maiúscula */
+  text-transform: capitalize; 
 }
 
 .description-forms-card-user {
@@ -172,8 +172,8 @@
 }
 
 .selecao-formulario-card-header p {
-  margin: 0; /* Remove margens padrão */
-  font-size: 16px; /* Ajuste para o tamanho da descrição */
+  margin: 0; 
+  font-size: 18px; 
 }
 
 /* Adicionando contêiner para os cards */
