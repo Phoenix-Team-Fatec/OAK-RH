@@ -1,30 +1,46 @@
 .forms-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .card-upper {
-    width: 900px;
-    height: 150px;
-    margin-bottom: 24px; /* Espaço entre cards */
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.card-upper {
+  width: 900px;
+  height: 150px;
+  margin-bottom: 24px;
+}
+
 .button-responses {
-    margin-top: 20px;
-    background-color: #A380A5; /* #2A2033 */
+  margin-top: 20px;
+}
+
+.button-responses .MuiButton-root {
+  background-color: #8C6A8B;
+  color: hsl(0, 0%, 100%);
+  border: 1px solid #7a5e79  !important;
+}
+
+.button-responses .MuiButton-root:hover {
+  background-color: #644c63;
+}
+
+/* Remove a borda azul entre os botões */
+.button-responses .MuiButton-root:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 .button-voltar {
   margin-top: 10px !important;
-    margin-left: 18px !important;
-    background-color: #A380A5; /* #2A2033 */
+  margin-left: 18px !important;
+  background-color: #A380A5;
+  color: #bebebe !important;
 }
 
 .questions-text {
-    
-    font-weight: bold;
-    margin-top: -15px !important;
+  font-weight: bold;
+  margin-top: 15px !important;
 }
 
 .card-additional {
@@ -32,4 +48,3 @@
   height: 400px;
   margin-bottom: 24px;
 }
-  

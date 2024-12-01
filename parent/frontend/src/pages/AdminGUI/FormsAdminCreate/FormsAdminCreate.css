@@ -33,3 +33,29 @@
     margin-left: 250px;
   }
   
+  /* Responsive styles for mobile devices */
+  @media (max-width: 768px) {
+    .forms-admin-wrapper {
+      flex-direction: column;
+      margin-top: 10%;
+    }
+
+    .Sidebar-Criar-Formulario {
+      display: none;
+    }
+
+    .sidebar-admin.expanded,
+    .sidebar-admin.collapsed {
+      width: 100%;
+    }
+
+    .formulario-container {
+      margin-left: 0;
+      padding: 10px;
+    }
+
+    .formulario-container.collapsed,
+    .formulario-container.expanded {
+      margin-left: 0;
+    }
+  }

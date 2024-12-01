@@ -9,8 +9,9 @@ import "./adminFormulario.css"; // Certifique-se de que o caminho do CSS está c
 import { getFormularios, deleteFormulario } from "./formsAdminBackend";
 import { useNavigate } from "react-router-dom";
 import ModalSendForm from "../../../components/modalSendFormsTeam/ModalSendFormsTeam";
+import {Chip} from "@mui/material";
 import useUserData from "../../../hooks/useUserData";
-import ModalConfirmDeleteForms from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteForms/ModalConfirmDeleteForms";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 interface Forms {
   id: number;
@@ -24,10 +25,10 @@ const FormsAdmin: React.FC = () => {
 
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenSend, setIsModalOpenSend] = useState(false); 
-  const [alertModalOpen, setAlertModalOpen] = useState(false)
-  const [alertMessage, setAlertMessage] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar o modal
+  const [isModalOpenSend, setIsModalOpenSend] = useState(false); // Estado para controlar o modal de envio
+  const [showAlert, setShowAlert] = useState(false)
+  const [showAlertDelete, setShowAlertDelete] = useState(false)
   const { id } = useUserData();
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   
@@ -100,6 +101,71 @@ const FormsAdmin: React.FC = () => {
   const isSomeSelected =
     selectedIds?.length > 0 && selectedIds.length < rows?.length;
 
+  // Deletando -
+  const handleDelete = async () => {
+    if (selectedIds.length === 0) {
+      setShowAlert(true)
+      return
+    }
+
+    if (
+      !confirm("Tem certeza que deseja deletar os formulários selecionados?")
+    ) {
+      return;
+    }
+
+    setIsDeleting(true);
+
+    try {
+      // Faz a requisição de deletar para cada formulário selecionado
+      await Promise.all(
+        selectedIds.map(async (formularioId) => {
+          await deleteFormulario(formularioId);
+        })
+      );
+
+      // Remove os formulários deletados da lista exibida na tabela
+      const updatedRows = rows.filter((row) => !selectedIds.includes(row.id));
+      setRows(updatedRows);
+      setSelectedIds([]); // Limpa as seleções
+      
+      setShowAlertDelete(true)
+    } catch (error) {
+      console.error("Erro ao deletar formulários", error);
+      alert("Erro ao deletar formulários. Tente novamente.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+
+
+  const handleGoToEdit = () => {
+    //Não navegar para a página se o formulário já foi enviado
+    const formulario = rows.find((row) => row.id === selectedIds[0]);
+    if (formulario.enviado === "Enviado") {
+      alert("Formulário já enviado, não é possível editar.");
+      return;
+    }
+    if (selectedIds.length !== 1) {
+      alert("Selecione apenas um formulário para editar.");
+      return;
+    }else{
+       sessionStorage.setItem("formulario_id",selectedIds[0].toString());
+      
+    navigate(`/forms-admin-edit`);
+  }
+    
+  }
+
+  const colorChip = (enviado: string) => {
+    if (enviado === "Enviado") {
+      return "#80ed99";
+    } else {
+      return "#f9626c";
+    }
+  }
+
   const columns: GridColDef[] = useMemo(
     () => [
       {
@@ -127,10 +193,35 @@ const FormsAdmin: React.FC = () => {
           />
         ),
       },
-      { field: "id", headerName: "ID", width: 100 },
-      { field: "nome", headerName: "Título", width: 300 },
-      { field: "descricao", headerName: "Descrição", width: 300 },
-      { field: "criado_em", headerName: "Criado em", width: 264 },
+      { field: "id", headerName: "ID", width: 100,
+        headerAlign: "center",
+        align: "center",
+       },
+      { field: "nome", headerName: "Título", width: 300,
+        headerAlign: "center",
+        align: "center",
+       },
+      { field: "descricao", headerName: "Descrição", width: 300,
+       
+       },
+      {field:"enviado",
+       headerName:"Enviado", 
+       width:200,
+       headerAlign: "center",
+        align: "center",
+      renderCell: (params) => (
+        <Chip
+        label={params.value}
+        variant="outlined"
+        sx={{ backgroundColor: `${colorChip(params.value)}`, color:"white" }}
+        />
+      )
+      
+      },
+      { field: "criado_em", headerName: "Criado em", width: 264,
+        headerAlign: "center",
+        align: "center",
+       },
     ],
     [selectedIds, rows, isAllSelected, isSomeSelected, isDeleting]
   );
@@ -141,7 +232,12 @@ const FormsAdmin: React.FC = () => {
 
   return (
     <>
+      <div className="Sidebar-Formularios-Admin">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
       <div className={`content ${isExpanded ? "expanded" : "collapsed"}`}>
         <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
 
@@ -157,7 +253,7 @@ const FormsAdmin: React.FC = () => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => alert("Redirecionar para página de edição")}
+            onClick={() => handleGoToEdit()}
             disabled={selectedIds.length !== 1 || isDeleting}
           >
             Editar
@@ -180,7 +276,6 @@ const FormsAdmin: React.FC = () => {
 
           <Button
             variant="contained"
-            className="button-enviar"
             color="secondary"
             onClick={() => {
               if (selectedIds.length > 1) {
@@ -195,7 +290,7 @@ const FormsAdmin: React.FC = () => {
           </Button>
         </div>
 
-        <Paper style={{ height: 500, width: "100%" }}>
+        <Paper style={{ height: 600, width: "100%" }}>
           <DataGrid
             className="tabela-formularios"
             rows={rows}
@@ -225,23 +320,18 @@ const FormsAdmin: React.FC = () => {
           onClose={() => setIsModalOpenSend(false)}
           formId={selectedIds[0]}
         />
-        <ModalConfirmDeleteForms
-          open={confirmDeleteOpen}
-          onClose={() => {
-            setConfirmDeleteOpen(false);
-            setSelectedIds([]);
-          }}
-          onConfirm={() => fetchForms()}
-          selectedIds={selectedIds}
-          selectedFormNames={selectedIds.map(
-            (id) => rows.find((row) => row.id === id) ?.nome || ""
-          )}
-          />
-          <AlertNotification
-            open={alertModalOpen}
-            message={alertMessage}
-            onClose={closeAlertModal}
-          />
+
+        <AlertNotification
+          message="Selecione pelo menos um formulário para deletar"
+          open={showAlert}
+          onClose={() => setShowAlert(false)}
+        />
+
+        <AlertNotification
+          message="Formulário deletado com sucesso"
+          open={showAlertDelete}
+          onClose={() => setShowAlertDelete(false)}
+        />
       </div>
     </>
   );

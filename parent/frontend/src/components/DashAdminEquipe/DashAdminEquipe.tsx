@@ -5,6 +5,7 @@ import AdminNavbar from '../navabarAdmin/AdminNavbar';
 import TabelaFormularioDashAdmin from './tabelaFormularioDashAdmin';
 import TabelaDashAdminEquipe from './TabelaDashAdminEquipe';
 import './DashAdminEquipe.css';
+import NavbarMobileAdmin from '../ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin';
 
 const DashboardAdminEquipe: React.FC = () => {
 
@@ -37,7 +38,12 @@ const DashboardAdminEquipe: React.FC = () => {
   return (
     <>
       <AdminNavbar />
+      <div className='admin-side-equipe'>
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
       <Box className="dashboard-container-equipe">
         
         {/* Cards Pequenos na Parte Superior */}

@@ -3,6 +3,7 @@ import "./DashboardAdmin.css";
 import SidebarAdmin from "../../../components/ComponentsAdmin/SidebarAdmin/SidebarAdmin";
 import AdminNavbar from "../../../components/navabarAdmin/AdminNavbar";
 import DashboardAdminGeral from "../../../components/DashAdmin/DashAdmin";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 const DashboardAdmin: React.FC = () => {
 
@@ -17,8 +18,15 @@ const DashboardAdmin: React.FC = () => {
   return (
     <>
       <AdminNavbar />
-      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />  
+      <div className="dashboard-side">
+      <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
+      <div className="dashboard-content">
       <DashboardAdminGeral />
+      </div>
     </>
   );
 };

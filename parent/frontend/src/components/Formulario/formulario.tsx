@@ -170,6 +170,16 @@ const Formulario: React.FC = () => {
       }
     }
 
+
+    const gradeQuestion: Question = {
+      type: "grade",
+      value: "De 0 a 10 qual seria sua nota?",
+      options: [],
+      category: categories[0].nome,
+    };
+
+    const updatedQuestions = [...questions, gradeQuestion];
+
     try {
       // Cria o formulário
       const formResponse = await createForm(form.title, form.description, form.adminId);
@@ -177,7 +187,7 @@ const Formulario: React.FC = () => {
       setFormId(formulario_id)
 
       // Cria as perguntas associadas ao formulário
-      for (const question of questions) {
+      for (const question of updatedQuestions) {
         const category = categories.find(c => c.nome === question.category);
         if (!category) {
           setModalMessage(`Categoria não encontrada para a pergunta: ${question.value}`);
@@ -197,13 +207,18 @@ const Formulario: React.FC = () => {
 
       setModalMessage('Formulário e perguntas criados com sucesso!');
       setIsError(false); // Sinaliza que é sucesso
-      setModalOpen(true);
+
     } catch (error) {
       setModalMessage('Erro ao criar o formulário ou perguntas.');
       setIsError(true); // Sinaliza que é um erro
       setModalOpen(true);
     }
   };
+
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  }
 
   return (
     <div className="formulario-wrapper">
@@ -215,7 +230,7 @@ const Formulario: React.FC = () => {
               type="text"
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              placeholder="Título do Formulário" 
+              placeholder="Título do Formulário"
             />
           </div>
 
@@ -278,33 +293,33 @@ const Formulario: React.FC = () => {
 
               {(question.type === "multipleChoice" ||
                 question.type === "uniqueChoice") && (
-                <div className="options-wrapper">
-                  <label>Opções</label>
-                  {question.options.map((option, optIndex) => (
-                    <div className="option-wrapper" key={optIndex}>
-                      <input
-                        type="text"
-                        value={option}
-                        className="option-input"
-                        onChange={(e) =>
-                          handleOptionChange(qIndex, optIndex, e.target.value)
-                        }
-                      />
-                      <DeleteIcon
-                        className="delete-icon delete-option"
-                        onClick={() => deleteOption(qIndex, optIndex)}
-                      />
-                    </div>
-                  ))}
-                  <button
-                    type="button"
-                    className="add-option-button"
-                    onClick={() => handleAddOption(qIndex)}
-                  >
-                    + Adicionar Opção
-                  </button>
-                </div>
-              )}
+                  <div className="options-wrapper">
+                    <label>Opções</label>
+                    {question.options.map((option, optIndex) => (
+                      <div className="option-wrapper" key={optIndex}>
+                        <input
+                          type="text"
+                          value={option}
+                          className="option-input"
+                          onChange={(e) =>
+                            handleOptionChange(qIndex, optIndex, e.target.value)
+                          }
+                        />
+                        <DeleteIcon
+                          className="delete-icon delete-option"
+                          onClick={() => deleteOption(qIndex, optIndex)}
+                        />
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      className="add-option-button"
+                      onClick={() => handleAddOption(qIndex)}
+                    >
+                      + Adicionar Opção
+                    </button>
+                  </div>
+                )}
             </div>
           ))}
 
@@ -315,7 +330,9 @@ const Formulario: React.FC = () => {
           >
             Adicionar Pergunta
           </button>
-          <button type="submit" className="button-forms-create">Enviar Formulário</button>
+          <br />
+          <button type="submit" className="button-forms-create" onClick={(e) => { navigate('/formularios-admin'); handleSubmit(e) }}>Salvar Rascunho</button>
+          <button type="submit" className="button-forms-create" onClick={() => handleOpenModal()}>Enviar Formulário</button>
         </form>
       </div>
 

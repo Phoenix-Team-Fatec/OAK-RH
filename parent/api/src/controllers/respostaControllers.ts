@@ -1,4 +1,5 @@
-import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService } from "../services/respostasService";
+import { updateAnswerStatus } from "../services/formulario_equipeServices";
+import { createAnswerService, findAnswerByIdService, findAnswerByQuestionsAndUserIdService, findAnswerByQuestionsIdService, findAnswerByUserService, getAnswersByFormIdAndAnsweredForService, getAnswersByFormIdAndEquipeIdService } from "../services/respostasService";
 import { Request, Response } from "express";
 
 interface Resposta {
@@ -14,13 +15,20 @@ export const createAnswer = async (req: Request, res: Response) => {
     try {
         const answers = req.body;
 
+        const { userId } = req.params
+
         const createdAnswers: Resposta[] = [];
 
         await Promise.all(answers.map(async (answer) => {
+
             const { formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta } = answer;
 
-            const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta);
-            createdAnswers.push(createdAnswer);
+            const createdAnswer = await createAnswerService(formulario_id, pergunta_id, respondido_por, equipe_id, resposta, tipo_resposta, Number(userId));
+
+            updateAnswerStatus(formulario_id, Number(userId))
+
+            const updateUserForms = await
+                createdAnswers.push(createdAnswer);
         }));
 
         return res.status(201).json(createdAnswers);
@@ -75,5 +83,31 @@ export const findAnswerByUser = async (req: Request, res: Response) => {
     } catch (error) {
         console.log("Error finding anser by user id", error)
         return res.status(400).json({ message: "Error finding anser by user id" })
+    }
+}
+
+export const getAnswersByFormIdAndEquipeIdController = async (req: Request, res: Response) => {
+    try {
+        const { formId, equipeId } = req.params;
+
+        const answer = await getAnswersByFormIdAndEquipeIdService(Number(formId), Number(equipeId));
+        return res.status(200).json(answer)
+    } catch (error) {
+        console.log("Error finding anser by user id", error)
+        return res.status(400).json({ message: "Error finding anser by user id" })
+    }
+}
+
+export default async function getAnswersByFormIdAndAnsweredForController(req: Request, res: Response) {
+    try {
+        const { formId, answeredFor } = req.params;
+
+        console.log(formId, answeredFor)
+
+        const answers = await getAnswersByFormIdAndAnsweredForService(Number(formId), Number(answeredFor));
+        return res.status(200).json(answers)
+    } catch (error) {
+        console.log("Error finding answer by forms id and answered for", error)
+        return res.status(400).json({ message: "Error finding answer by forms id and answered for" })
     }
 }

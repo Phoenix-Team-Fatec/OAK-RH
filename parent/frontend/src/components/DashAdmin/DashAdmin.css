@@ -1,53 +1,72 @@
 .dashboard-container-geral {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    color: black;
-    background-color: #eae7eb;
-    margin-top: 1%; /* Ajuste o valor conforme necessário */
-    margin-bottom: 1%;
-    margin-right: 3%;
-    padding: 30px;
+  width: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  color: black;
+  background-color: #eae7eb;
+  margin-top: 1%; /* Ajuste o valor conforme necessário */
+  margin-bottom: 1%;
+  margin-right: 3%;
+  padding: 30px;
+}
+
+.top-cards-geral {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.small-card-geral, .bottom-card-geral {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.small-card-geral {
+  width: 32%;
+  height: 250px;
+}
+
+.bottom-cards-geral {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.bottom-card-geral {
+  width: 100%; /* Card grande ocupa 75% da largura */
+  height: 700px;
+}
+
+.small-card-geral:hover, .bottom-card-geral:hover {
+  transform: scale(1.01);
+}
+
+/* Responsividade para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Certifique-se de que essas classes são flex containers */
+  .small-card-geral, .top-cards-geral {
+    display: flex;           /* Adiciona flex container */
+    flex-direction: column;   /* Alinha itens verticalmente */
+    align-items: center;      /* Centraliza itens horizontalmente */
+    justify-content: center;  /* Centraliza itens verticalmente */
+    width: 110%;              /* Ajusta para caber dentro do contêiner */
+    margin-bottom: 20px;      /* Espaço entre os elementos */
+    margin-right: 10%;
   }
-  
-  .top-cards-geral {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .small-card-geral, .bottom-card-geral {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #ffffff;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .small-card-geral {
-    width: 32%;
-    height: 250px;
-  }
-  
-  .bottom-cards-geral {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
   .bottom-card-geral {
-    width: 100%; /* Card grande ocupa 75% da largura */
-    height: 700px;
+    width: 120%;
+    margin-left: -10%;              /* Card grande ocupa 100% da largura */
+    height: 700px;            /* Altura do card grande */
   }
-  
-  .small-card-geral:hover, .bottom-card-geral:hover{
-    transform: scale(1.01);
-  }
- 
+}
+
   

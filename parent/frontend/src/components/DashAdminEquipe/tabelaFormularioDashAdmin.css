@@ -10,3 +10,8 @@
     border-bottom: 1px solid #ddd; /* Borda inferior das células */
   }
   
+  .botao-formulario {
+    background-color: #8C6A8B; /* Cor de fundo do botão */
+    color: black !important;
+
+  }

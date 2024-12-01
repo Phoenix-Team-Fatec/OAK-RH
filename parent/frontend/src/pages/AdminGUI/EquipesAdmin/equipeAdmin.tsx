@@ -7,6 +7,7 @@ import AddTeamModal from "../../../components/ComponentsAdmin/Modal/ModalAddTeam
 import ModalConfirmDeleteTeam from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteTeam/ModalConfirmDeleteTeam"; // Importando o novo modal
 import useUserData from "../../../hooks/useUserData";
 import axios from "axios";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 function EquipeAdmin() {
   const [teams, setTeams] = useState([]);
@@ -85,11 +86,13 @@ function EquipeAdmin() {
 
   return (
     <div style={{ display: "flex", position: "relative" }}>
+      <div className="Sidebar-Equipe-Admin">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-
-      <div
-        className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}
-      >
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
+      <div className={`content-wrapper ${isExpanded ? "expanded" : "collapsed"}`}>
         <div className="main-content">
           <h2
             style={{ textAlign: "center", margin: "20px 0", fontSize: "24px" }}

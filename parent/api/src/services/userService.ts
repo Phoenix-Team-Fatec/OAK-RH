@@ -50,6 +50,19 @@ export const readUserService = async (id: number) => {
     }
 };
 
+export const getUserDataService = async (id: number) => {
+    try {
+        const user = await User.findOne({ where: {id}});
+
+        if(!user) {
+            throw new Error("User not found");
+        }
+        return user
+    }catch (error) {
+        throw new Error(error.message || "Internal Server Error");
+    }
+};
+
 // Função de listar todos os usuários de um admin
 export const listUserService = async (id_admin: number) => {
     try {

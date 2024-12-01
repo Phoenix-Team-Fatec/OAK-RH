@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import { getFormulariosEquipe } from './index';
-
+import './tabelaFormularioDashAdmin.css';
+import Chip from '@mui/material/Chip';
+import { useNavigate } from 'react-router-dom';
 
 interface TabelaFormularioDashAdminProps {
   onFormSelect: (formulario_id: number) => void;
   equipe_id: number;
 }
 
-const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 80, align: 'center', headerAlign: 'center' },
-  { field: 'formulario', headerName: 'Formulário', width: 210, align: 'left', headerAlign: 'left' },
-];
+
+
+
 
 
 
@@ -21,6 +23,10 @@ const paginationModel = { page: 0, pageSize: 5 };
 const TabelaFormularioDashAdmin: React.FC<TabelaFormularioDashAdminProps> = ({ onFormSelect, equipe_id }) => {
   const [selectedRowId, setSelectedRowId] = useState<number | null>(null);
   const [rows, setRows] = useState([])
+  const [equipeId, setEquipeId] = useState(equipe_id)
+  
+  const navigate = useNavigate();
+
 
 
   const fetchFormsEquipe = async () => {
@@ -57,7 +63,30 @@ const TabelaFormularioDashAdmin: React.FC<TabelaFormularioDashAdminProps> = ({ o
         onFormSelect(selectedRow.formulario_id);
       }
     }
-  };
+  };  
+
+  const columns: GridColDef[] = [
+    { field: 'formulario_id', headerName: 'ID', width: 80, align: 'center', headerAlign: 'center' },
+    { // Coluna que exibe o nome do formulário, clicavel e já puxando id do formulário a ser exibido
+      field: 'formulario', 
+      headerName: 'Formulário', 
+      width: 210, 
+      align: 'left', 
+      // Integrar com back-end
+      renderCell: (params) => (
+        <Chip
+          label={params.value}
+          variant="outlined"
+          sx={{ color: 'black' }}
+          onClick={() => navigate(`/forms-responses?form=${params.row.id}&equipe=${equipeId}`)}
+        />
+      )
+  //<a href={`/forms-responses/${params.row.id}`} target="_blank" rel="noopener noreferrer">
+  //       {params.value}
+  // </a>
+      
+    }, 
+  ];
 
   return (
     <Paper sx={{ height: 700, width: '100%' }}>

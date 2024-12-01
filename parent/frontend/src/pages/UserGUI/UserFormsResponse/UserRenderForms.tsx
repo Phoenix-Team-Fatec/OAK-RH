@@ -1,13 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useEffect } from "react";
 import useUserData from "../../../hooks/useUserData";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 interface UserRenderFormsProps {
     data: Question[];
     formsId: number;
     equipe_id: number;
     onSubmit: (respostas: Resposta[]) => void;
+    userId: number;
+    existingResponses: Resposta[];
+    setRespostasAtuais: React.Dispatch<React.SetStateAction<Resposta[]>>;
 }
 
 interface Question {
@@ -34,17 +35,18 @@ enum QuestionType {
     LongQuestion = "longQuestion",
 }
 
-const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void }> = ({ question, index, onAnswer }) => (
+const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void; value?: string }> = ({ question, index, onAnswer, value }) => (
     <div className="unique-choice-question">
         <label className="unique-choice-question-text">
-            {`${index + 1} ) ${question.texto}`}  
+            {`${index + 1}) ${question.texto}`}
         </label>
-        {question.descricao.map((answer, index) => (
-            <label key={`${question.id}-${index}`} className="unique-choice-answer">
+        {question.descricao.map((answer, idx) => (
+            <label key={`${question.id}-${idx}`} className="unique-choice-answer">
                 <input
                     type="radio"
                     name={question.id.toString()}
                     value={answer}
+                    checked={value === answer}
                     onChange={() => onAnswer(question.id, answer)}
                     className="unique-choice-input"
                 />
@@ -55,31 +57,32 @@ const UniqueChoice: FC<{ question: Question; index: number; onAnswer: (id: numbe
     </div>
 );
 
-const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string[]) => void }> = ({ question, index, onAnswer }) => {
-    const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-
+const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string[]) => void; value?: string[] }> = ({ question, index, onAnswer, value = [] }) => {
     const handleCheckboxChange = (answer: string): string[] => {
-        const updated = selectedAnswers.includes(answer)
-            ? selectedAnswers.filter(a => a !== answer)
-            : [...selectedAnswers, answer];
-        setSelectedAnswers(updated);
-        return updated;
+        if (value.includes(answer)) {
+            return value.filter(a => a !== answer)
+        } else {
+            return [...value, answer]
+        }
     };
+
+    const handleChange = (answer: string) => {
+        const updated = handleCheckboxChange(answer)
+        onAnswer(question.id, updated)
+    }
 
     return (
         <div className="multiple-choice-question">
             <label className="multiple-choice-question-text">
-                {`${index + 1} ) ${question.texto}`}  
+                {`${index + 1}) ${question.texto}`}
             </label>
-            {question.descricao.map((answer, index) => (
-                <label key={`${question.id}-${index}`} className="multiple-choice-answer">
+            {question.descricao.map((answer, idx) => (
+                <label key={`${question.id}-${idx}`} className="multiple-choice-answer">
                     <input
                         type="checkbox"
                         value={answer}
-                        onChange={() => {
-                            const updatedAnswers = handleCheckboxChange(answer);
-                            onAnswer(question.id, updatedAnswers);
-                        }}
+                        checked={value.includes(answer)}
+                        onChange={() => handleChange(answer)}
                         className="multiple-choice-input"
                     />
                     {answer}
@@ -90,14 +93,15 @@ const MultipleChoice: FC<{ question: Question; index: number; onAnswer: (id: num
     );
 };
 
-const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void }> = ({ question, index, onAnswer }) => {
+const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void; value?: string }> = ({ question, index, onAnswer, value = "" }) => {
     return (
         <div className="long-question">
             <label className="long-question-text">
-                {`${index + 1} ) ${question.texto}`} 
+                {`${index + 1}) ${question.texto}`}
             </label>
             <input
                 type="text"
+                value={value}
                 onChange={(e) => onAnswer(question.id, e.target.value)}
                 className="long-question-input"
             />
@@ -106,68 +110,144 @@ const LongQuestion: FC<{ question: Question; index: number; onAnswer: (id: numbe
     );
 };
 
-export default function UserRenderForms({ data, equipe_id, formsId, onSubmit }: UserRenderFormsProps) {
-    const [respostas, setRespostas] = useState<{ formulario_id: number, pergunta_id: number; respondido_por: number; equipe_id: number; resposta: string | string[]; tipo_resposta: string; }[]>([]);
-
-    const userData = useUserData();
-    const { id } = useUserData();
-    const navigate = useNavigate();
-
-    const handleChangeFormStatus = async () => {
-        try {
-            await axios.put(`http://localhost:3000/formulario/atualizar/${id}/${formsId}`);
-        } catch (error) {
-            alert("Erro ao mudar status do formulário");
-            console.log(error);
+const GradeQuestion: FC<{ question: Question; index: number; onAnswer: (id: number, resposta: string) => void; value?: string }> = ({ question, index, onAnswer, value = "" }) => {
+    const handleGradeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let inputValue = parseInt(e.target.value, 10);
+        if (isNaN(inputValue)) {
+            inputValue = 0;
         }
+        if (inputValue < 0) {
+            inputValue = 0;
+        } else if (inputValue > 10) {
+            inputValue = 10;
+        }
+        onAnswer(question.id, inputValue.toString());
     };
 
+    return (
+        <div className="grade-question">
+            <label className="grade-question-text">
+                {`${index + 1}) ${question.texto}`}
+            </label>
+            <input
+                type="number"
+                min="0"
+                max="10"
+                value={value}
+                onChange={handleGradeChange}
+                className="grade-question-input"
+            />
+            <hr className="question-separator" />
+        </div>
+    );
+};
+
+
+export default function UserRenderForms({ data, equipe_id, formsId, onSubmit, existingResponses, setRespostasAtuais }: UserRenderFormsProps) {
+
+    const userData = useUserData();
+
+    useEffect(() => {
+        // Atualiza as respostasAtuais no pai sempre que existingResponses muda
+        setRespostasAtuais(existingResponses);
+    }, [existingResponses, setRespostasAtuais]);
+
     const handleAnswer = (id: number, resposta: string | string[]) => {
-        setRespostas(prev => {
+        setRespostasAtuais(prev => {
             const existing = prev.find(r => r.pergunta_id === id);
             if (existing) {
                 return prev.map(r => r.pergunta_id === id ? { ...r, resposta } : r);
             }
-            return [...prev, { formulario_id: formsId, pergunta_id: id, respondido_por: userData.id, equipe_id: equipe_id, resposta, tipo_resposta: "" }];
+            return [...prev, {
+                formulario_id: formsId,
+                pergunta_id: id,
+                respondido_por: userData.id,
+                equipe_id: equipe_id,
+                resposta,
+                tipo_resposta: ""
+            }];
         });
     };
 
     const handleSubmit = () => {
-        const allAnswered = data.every(question => respostas.some(r => r.pergunta_id === question.id && r.resposta !== ""));
+        const allAnswered = data.every(question => {
+            const resposta = existingResponses.find(r => r.pergunta_id === question.id);
+            if (!resposta) return false;
+            if (typeof resposta.resposta === 'string') {
+                return resposta.resposta.trim() !== "";
+            }
+            return resposta.resposta.length > 0;
+        });
 
         if (!allAnswered) {
             alert('Por favor, responda a todas as perguntas antes de enviar.');
             return;
         }
 
-        const novasRespostas: Resposta[] = respostas.map(r => ({
+        const novasRespostas: Resposta[] = existingResponses.map(r => ({
             ...r,
             tipo_resposta: data.find(q => q.id === r.pergunta_id)?.tipo as QuestionType || "unknown"
         }));
 
         onSubmit(novasRespostas);
-        handleChangeFormStatus();
-        navigate('/forms-user');
     };
 
     return (
         <>
-            <form className="user-render-forms">
+            <form className="user-render-forms" onSubmit={(e) => { e.preventDefault(); handleSubmit(); }}>
                 {data.map((question, index) => {
-                    const { tipo } = question;
+                    const respostaExistente = existingResponses.find(r => r.pergunta_id === question.id)?.resposta;
 
-                    switch (tipo) {
+                    switch (question.tipo) {
                         case "uniqueChoice":
-                            return <UniqueChoice key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
+                            return (
+                                <UniqueChoice
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : undefined}
+                                />
+                            );
                         case "multipleChoice":
-                            return <MultipleChoice key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
+                            return (
+                                <MultipleChoice
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={Array.isArray(respostaExistente) ? respostaExistente : []}
+                                />
+                            );
                         case "longQuestion":
-                            return <LongQuestion key={question.id} question={question} index={index} onAnswer={handleAnswer} />;
+                            return (
+                                <LongQuestion
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : ""}
+                                />
+                            );
+                        case "grade":
+                            return (
+                                <GradeQuestion
+                                    key={question.id}
+                                    question={question}
+                                    index={index}
+                                    onAnswer={handleAnswer}
+                                    value={typeof respostaExistente === 'string' ? respostaExistente : ""}
+                                />
+                            );
                         default:
-                            return <div key={question.id}><h3>Type of question undefined</h3></div>;
+                            return (
+                                <div key={question.id}>
+                                    <h3>Tipo de pergunta indefinido</h3>
+                                </div>
+                            );
                     }
                 })}
-                <button type="button" onClick={handleSubmit} className="submit-button">Enviar Respostas</button>
+                <button type="submit" className="submit-button">Enviar Respostas</button>
             </form>
         </>
     );

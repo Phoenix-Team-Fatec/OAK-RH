@@ -10,6 +10,7 @@ import ModalEditUser from "../../../components/ComponentsAdmin/Modal/ModalEditUs
 import ModalConfirmDeleteUser from "../../../components/ComponentsAdmin/Modal/ModalConfirmDeleteUser/ModalConfirmDeleteUser";
 import { Checkbox } from "@mui/material";
 import useUserData from "../../../hooks/useUserData";
+import NavbarMobileAdmin from "../../../components/ComponentsAdmin/NavbarMobileAdmin/NavbarMobileAdmin";
 
 const MembersAdmin = () => {
   const [rows, setRows] = useState<any[]>([]);
@@ -173,13 +174,31 @@ const MembersAdmin = () => {
 
   return (
     <>
+      <div className="Sidebar-Funcionarios-Mobile">
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
-
+      </div>
+      <div className="Navbar-Equipe-Admin">
+      <NavbarMobileAdmin />
+      </div>
       <div className={`admin_members_container ${isExpanded ? "expanded" : "collapsed"}`}>
-        <h2 className="h2_admin_members_register">Gerenciamento de Funcionários</h2>
-        <div style={{ marginBottom: "20px", width: "800px" }}>
-          <div style={{ display: "flex", gap: "10px", justifyContent: "flex-start" }}>
-            <button className="button_register_user" onClick={handleAddMemberOpen} disabled={isDeleting}>
+        
+        <h2 className="h2_admin_members_register">
+          Gerenciamento de Funcionários
+        </h2>
+        <div className="Tabela-Funcionarios">
+          <div
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "flex-start",
+              width: "100%",
+            }}
+          >
+            <button
+              className="button_register_user"
+              onClick={handleAddMemberOpen}
+              disabled={isDeleting}
+            >
               Cadastrar
             </button>
             <button className="button_edit_member" onClick={handleEdit} disabled={isDeleting}>

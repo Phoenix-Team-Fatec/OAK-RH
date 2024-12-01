@@ -1,6 +1,6 @@
 .dashboard-container-equipe {
   width: 100%;
-  max-width: 1200px;
+  max-width: 90%;
   margin: 0 auto;
   padding: 20px;
   color: black;
@@ -52,4 +52,31 @@
 .thin-card-equipe {
   width: 30%;
   height: 700px;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container-equipe {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .top-cards-equipe,
+  .bottom-cards-equipe {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .small-card-equipe{
+    width: 100%;
+    height: 100px;
+  }
+
+  .bottom-card-equipe,
+  .thin-card-equipe {
+    width: 100%;
+    height: auto;
+  }
+  .admin-side-equipe{
+    display: none;
+  }
 }

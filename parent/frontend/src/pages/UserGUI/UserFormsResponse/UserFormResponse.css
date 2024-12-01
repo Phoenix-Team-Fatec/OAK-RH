@@ -126,3 +126,27 @@ input[type="checkbox"] {
   margin: 16px 0;
   width: 100%;
 }
+
+.response-user-name-container{
+  display: flex;
+}
+
+.responseNavigationButtonContainer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.userResponseBackButton{
+  display: flex;
+  margin: 0 auto 0 0;
+}
+
+.description-forms-user-name{
+  display: flex;
+  padding: 0px 12px;
+  margin: 0px auto 0px 10px;
+  border: 1px black solid;
+  border-radius: 20px;
+  color: white;
+  background-color: #177035;
+}

@@ -109,3 +109,36 @@
     background-color: #555; /* Cor mais escura ao passar o mouse */
   }
   
+  @media (max-width: 600px) {
+  .team-members {
+    max-width: 100%;
+    padding: 4px;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  li {
+    flex-direction: column;
+    padding: 12px;
+  }
+
+  .member-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .team-members-cabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .team-members-container {
+    width: 100%;
+    max-height: none;
+    padding: 8px;
+  }
+}
