@@ -86,11 +86,6 @@ const FormsAdminResume: React.FC = () => {
         <Typography variant="h5" className="main-title">
           Resumo das Respostas
         </Typography>
-        <Chip
-          label="Baixar PDF"
-          variant="outlined"
-          style={{ borderColor: 'red', color: 'red' }}
-        />
       </div>
       <div className="chart-container">
         {perguntas.map((pergunta, index) => (
