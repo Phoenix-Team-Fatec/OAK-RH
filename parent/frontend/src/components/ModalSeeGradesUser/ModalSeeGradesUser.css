@@ -1,0 +1,77 @@
+.self-assessment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.self-assessment-modal-container {
+  background: white;
+  border-radius: 8px;
+  width: 500px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.self-assessment-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.download-pdf {
+  all: unset;
+  font-size: 12px;
+  padding: 10px 20px;
+  border: 1px solid #333;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-left: 10%;
+  color: black;
+}
+
+.download-pdf:hover {
+  background-color: transparent;
+}
+
+.self-assessment-modal-close-button {
+  all: unset;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.self-assessment-modal-close-button:hover {
+  background-color: transparent;
+}
+
+.self-assessment-modal-content {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.self-assessment-modal-chart {
+  margin: 20px auto;
+}
+
+.self-assessment-modal-footer {
+  text-align: right;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

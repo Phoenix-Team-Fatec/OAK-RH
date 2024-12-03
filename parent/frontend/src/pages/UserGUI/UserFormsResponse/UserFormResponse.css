@@ -150,3 +150,34 @@ input[type="checkbox"] {
   color: white;
   background-color: #177035;
 }
+
+.container-forms-responder-user {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button-next-previous {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-forms-responder-user .button-anterior-forms,
+.container-forms-responder-user .button-proximo-forms {
+  background-color: #177035;
+  color: white; 
+  padding: 10px 20px; 
+  border-radius: 5px; 
+  border: none;
+  cursor: pointer; 
+  font-size: 14px; 
+  text-align: center; 
+}
+
+.container-forms-responder-user .button-anterior-forms {
+  margin-right: auto; 
+}
+
+.container-forms-responder-user .button-proximo-forms {
+  margin-left: auto; 
+}

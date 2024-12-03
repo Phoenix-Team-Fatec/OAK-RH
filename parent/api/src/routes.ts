@@ -91,5 +91,4 @@ router.get('/respostas/user/:userId', findAnswerByUser)
 router.get('/respostas/forms/user/:formId/:answeredFor', getAnswersByFormIdAndAnsweredForController)
 router.get('/respostas/:formId/:equipeId', getAnswersByFormIdAndEquipeIdController)
 
-
 export default router;

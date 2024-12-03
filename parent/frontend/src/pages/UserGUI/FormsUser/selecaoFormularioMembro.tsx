@@ -65,16 +65,6 @@ const SelecaoFormularioMembro: React.FC = () => {
         );
         setEquipes(equipesData);
 
-        // Carrega o ID da equipe do sessionStorage
-        const storedEquipeId = sessionStorage.getItem("selectedEquipeId");
-        const initialEquipeId = storedEquipeId
-          ? Number(storedEquipeId)
-          : equipesData[0]?.id;
-        
-          if (initialEquipeId) {
-            setSelectedEquipe(initialEquipeId);
-          }
-
         // Se uma equipe foi selecionada a partir da URL, definimos as informações da equipe
         if (selectedEquipe !== null) {
           const equipeSelecionada = equipesData.find((equipe) => equipe.id === selectedEquipe);
@@ -201,7 +191,7 @@ const SelecaoFormularioMembro: React.FC = () => {
                   {formulario.nome}
                 </div>
                 <div>
-                  <p className="description-forms-card-user">Descrição: {formulario.descricao}</p>
+                  <p className="description-forms-card-user" onClick={() => handleFormularioClick(formulario.id)}>Descrição: {formulario.descricao}</p>
                 </div>
               </div>
               
