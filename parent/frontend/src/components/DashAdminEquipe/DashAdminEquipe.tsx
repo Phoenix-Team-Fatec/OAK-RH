@@ -46,21 +46,8 @@ const DashboardAdminEquipe: React.FC = () => {
       </div>
       <Box className="dashboard-container-equipe">
         
-        {/* Cards Pequenos na Parte Superior */}
-        <Box className="top-cards-equipe">
-          <Box className="small-card-equipe">
-            <Typography variant="h5">Membros</Typography>
-            <Typography variant="body2">120</Typography>
-          </Box>
-          <Box className="small-card-equipe" >
-            <Typography variant="h5">Formulários Pendentes</Typography>
-            <Typography variant="body2">40</Typography>
-          </Box>
-          <Box className="small-card-equipe">
-            <Typography variant="h5">Formulários Respondidos</Typography>
-            <Typography variant="body2">80</Typography>
-          </Box>
-        </Box>
+    
+       
 
         {/* Estrutura de Outros Cards (Parte Inferior) */}
         <Box className="bottom-cards-equipe">

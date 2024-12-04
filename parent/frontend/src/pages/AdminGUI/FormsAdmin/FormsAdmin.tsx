@@ -128,13 +128,13 @@ const FormsAdmin: React.FC = () => {
         />
       ),
     },
-    { field: "id", headerName: "ID", width: 100, align: "center", headerAlign: "center" },
-    { field: "nome", headerName: "Título", width: 300, align: "center", headerAlign: "center" },
-    { field: "descricao", headerName: "Descrição", width: 300 },
+    { field: "id", headerName: "ID", width: 70, align: "center", headerAlign: "center" },
+    { field: "nome", headerName: "Título", width: 250, align: "center", headerAlign: "center" },
+    { field: "descricao", headerName: "Descrição", width: 250 },
     {
       field: "enviado",
       headerName: "Enviado",
-      width: 200,
+      width: 150,
       align: "center",
       headerAlign: "center",
       renderCell: (params) => (
@@ -148,7 +148,7 @@ const FormsAdmin: React.FC = () => {
     {
       field: "criado_em",
       headerName: "Criado em",
-      width: 264,
+      width: 205,
       align: "center",
       headerAlign: "center",
     },
@@ -157,7 +157,10 @@ const FormsAdmin: React.FC = () => {
   return (
     <>
       <SidebarAdmin isExpanded={isExpanded} toggleSidebar={() => setIsExpanded(!isExpanded)} />
-      <NavbarMobileAdmin />
+      <div style={{display:"none"}}>
+      <NavbarMobileAdmin/>
+      </div>
+    
       <div className={`content ${isExpanded ? "expanded" : "collapsed"}`}>
         <h2 className="h2-content-forms-admin">Gerenciamento de Formulários</h2>
         <div className="actions-forms-admin">
