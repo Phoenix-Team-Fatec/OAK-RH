@@ -119,7 +119,15 @@ https://www.figma.com/design/g9ZkBcQvA4WqrllBQUsATc/OAK-RH?node-id=0-1&t=3SuGwy7
 | Divisão entre formulários pendentes e respondidos para usuário | :white_check_mark: |
 
 
-### Sprint 4 -
+### Sprint 4 -  Refinamento , Análise e Exibição de Resultados
+
+| ITEM   | STATUS |
+| :----: | :----: |
+| Implementação da Responsividade  | :white_check_mark: |
+| Implementação da Geração do arquivo PDF | :white_check_mark: |
+| Exibição de resultados (respostas) das pesquisas | :white_check_mark: |
+| Implementação para Líder avaliar cada usuário | :white_check_mark: |
+|Implementação de exibição de resultados de pesquisas, categorizados por <br> tipo de pergunta e avaliação | :white_check_mark: |
 
 ## 🛠️ Tecnologias
 
@@ -169,7 +177,10 @@ As seguintes ferramentas, linguagens, bibliotecas e tecnologias foram usadas na 
    TypeScript - Linguagem de programação de código aberto
  </p>
 
-
+ * <p>
+   <img align="left" title="firebase" height="30px" src="https://github.com/devicons/devicon/blob/master/icons/firebase/firebase-plain.svg"/> 
+   FireBase - Linguagem de programação de código aberto
+ </p>
 
 <span id="equipe">
 
