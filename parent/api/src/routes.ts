@@ -57,7 +57,6 @@ router.delete('/formulario/:id', deletarFormularioControl);
 router.get('/formulario/usuarios/:id_admin', listarUsuariosComFormulariosControl);
 router.get('/formularios/porMes/:admin_id', listarFormulariosPorMesControl);
 
-
 // ROTAS DE FORMULÁRIO_EQUIPE
 router.post('/formulario_equipe/associar', associarFormularioEquipeController);
 router.post('/formulario_equipe/associar_todas/:id_admin', associarFormularioTodasEquipesController);

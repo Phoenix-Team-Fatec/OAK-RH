@@ -9,6 +9,8 @@ import {
 import useUserData from "../../../hooks/useUserData";
 import { useNavigate } from "react-router-dom";
 import SelfAssessmentModal from "../../../components/ModalSeeGradesUser/ModalSeeGradesUser";
+import AllMemberDashboard from "../../../components/AllMembersDashboard/AllMembersDashboard";
+import axios from "axios";
 
 interface Equipe {
   id: number;
@@ -27,6 +29,8 @@ const DashboardUser: React.FC = () => {
   const [selectedEquipe, setSelectedEquipe] = useState<Equipe | null>(null);
   const [pendentes, setPendentes] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [isModalMembersOpen, setIsModalMembersOpen] = useState(false);
   const navigate = useNavigate();
 
   const toggleSidebar = () => {
@@ -44,7 +48,14 @@ const DashboardUser: React.FC = () => {
             isLider: userTeam.is_lider,
           }))
         );
-        setEquipes(equipesData);
+
+        const sortedEquipes = equipesData.sort((a, b) => {
+          if (a.isLider && !b.is_lider) return -1;
+          if (!a.is_lider && b.is_lider) return -1;
+          return 0;
+        });
+
+        setEquipes(sortedEquipes);
 
         const storedEquipeId = sessionStorage.getItem("selectedEquipeId");
         const initialEquipeId = storedEquipeId
@@ -87,6 +98,35 @@ const DashboardUser: React.FC = () => {
     }
   };
 
+  const handleOpenModalMembers = async () => {
+    if (!selectedEquipeId) return;
+
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/equipe_user/${selectedEquipeId}`
+      );
+      console.log(response.data);
+
+      // Assuming the response structure contains a 'users' property
+      if (response.data && Array.isArray(response.data.users)) {
+        const members = response.data.users.map((userData: any) => ({
+          teamMemberId: userData.user.id,
+          teamMemberName: userData.user.nome,
+          isTeamLeader: userData.is_lider,
+        }));
+        setTeamMembers(members);
+        setIsModalMembersOpen(true);
+      } else {
+        console.error(
+          "Response does not contain a valid 'users' array:",
+          response.data
+        );
+      }
+    } catch (error) {
+      console.error("Failed to fetch team members:", error);
+    }
+  };
+
   const handleEquipeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = Number(event.target.value);
     setSelectedEquipeId(selectedId);
@@ -124,11 +164,15 @@ const DashboardUser: React.FC = () => {
   };
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);  
+    setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false); 
+    setIsModalOpen(false);
+  };
+
+  const handleCloseModalMembers = () => {
+    setIsModalMembersOpen(false);
   };
 
   return (
@@ -172,10 +216,13 @@ const DashboardUser: React.FC = () => {
             <>
               <div className="upper-dashboard-user-card">
                 <div className="dashboard-card-header">
-                  <h3 className="dashboard-user-card-title">
-                    Autoavaliação
-                  </h3>
-                  <button className="dashboard-card-btn" onClick={handleOpenModal}>Ver Todos</button>
+                  <h3 className="dashboard-user-card-title">Autoavaliação</h3>
+                  <button
+                    className="dashboard-card-btn"
+                    onClick={handleOpenModal}
+                  >
+                    Ver Todos
+                  </button>
                 </div>
                 <hr className="divider-line" />
                 <div className="dashboard-card-value-container1">
@@ -296,11 +343,28 @@ const DashboardUser: React.FC = () => {
               <div className="dashboard-user-card">
                 <div className="dashboard-card-header">
                   <h3 className="dashboard-user-card-title">
-                    Projetos Concluídos
+                    Lista Completa de Membros da Equipe
                   </h3>
+                  <button
+                    className="dashboard-card-btn"
+                    onClick={handleOpenModalMembers}
+                  >
+                    Ver integrantes
+                  </button>
                 </div>
                 <hr className="divider-line" />
-                <p className="dashboard-user-card-value">120</p>
+                <div className="content-members-dashboard-user">
+                <p className="dashboard-user-card-value-members">
+                  Aqui você pode visualizar <br></br> a lista detalhada de todos os
+                  membros <br></br> que fazem parte da sua equipe, com <br></br> informações sobre
+                  suas funções. <br></br>Clique no botão acima <br></br>para acessar a lista completa
+                </p>
+                <img
+                src="./group.png"
+                className="image-members"
+                >
+                </img>
+                </div>
               </div>
             </>
           ) : null}
@@ -400,9 +464,11 @@ const DashboardUser: React.FC = () => {
           )}
         </div>
       </div>
-      <SelfAssessmentModal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
+      <SelfAssessmentModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <AllMemberDashboard
+        isOpen={isModalMembersOpen}
+        onClose={handleCloseModalMembers}
+        members={teamMembers}
       />
     </div>
   );

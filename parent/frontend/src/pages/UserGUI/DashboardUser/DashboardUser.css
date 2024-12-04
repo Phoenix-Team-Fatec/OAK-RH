@@ -120,6 +120,17 @@
   flex: 1;
 }
 
+.content-members-dashboard-user {
+  display: flex;
+  gap: 50px;
+
+}
+
+.image-members {
+  width: 120px;
+  margin-top: 10%;
+}
+
 /* Card title styling */
 .dashboard-user-card-title {
   font-size: 18px;
@@ -162,6 +173,10 @@
   margin-top: 20px;
   font-size: 16px;
   color: #333;
+}
+
+.dashboard-user-card-value-members {
+  margin-top: 10%;
 }
 
 .dashboard-card-value-container1 {

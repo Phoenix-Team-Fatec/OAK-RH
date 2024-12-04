@@ -3,8 +3,8 @@ import axios from "axios";
 import "./ModalSeeGradesUser.css";
 import useUserData from "../../hooks/useUserData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDownload } from "@fortawesome/free-solid-svg-icons"; // The download icon
-import { jsPDF } from "jspdf"; // Import jsPDF
+import { faDownload } from "@fortawesome/free-solid-svg-icons"; 
+import { jsPDF } from "jspdf"; 
 
 interface ModalSeeGradesUserProps {
   isOpen: boolean;

@@ -51,19 +51,21 @@
 
 .button-back-forms-user-view {
   background-color: #177035;
-  color: white; 
-  padding: 10px 20px; 
-  border-radius: 5px; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
   border: none;
-  cursor: pointer; 
-  font-size: 14px; 
-  text-align: center; 
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
   width: 12%;
 }
 
-.button-back-forms-user-view :hover {
-  background-color: #0e632a !important;
+.button-back-forms-user-view:hover {
+  background-color: #145a2b; 
+  color: #ffffff; 
 }
+
 
 .button-next-previous {
   display: flex;
@@ -80,6 +82,11 @@
   cursor: pointer; 
   font-size: 14px; 
   text-align: center; 
+}
+
+.container-forms-ver-respostas-user .button-anterior-forms:hover,
+.container-forms-ver-respostas-user .button-proximo-forms:hover {
+  background-color: #145a2b;
 }
 
 .container-forms-ver-respostas-user .button-anterior-forms {

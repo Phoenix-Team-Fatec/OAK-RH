@@ -13,7 +13,6 @@ export const setUsuarioEquipe = async (req: Request, res: Response) => {
   }
 };
 
-
 export const listarUserEquipe = async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
 

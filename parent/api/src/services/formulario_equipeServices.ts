@@ -8,8 +8,7 @@ import User from "../models/userModels";
 import { admin } from "../config/firebase.cjs";
 import { where } from "sequelize";
 import Resposta from "../models/respostasModels";
-
-
+import { Sequelize } from "sequelize";
 
 // Função para associar formulário a múltiplas equipes
 export const associarFormularioParaEquipes = async (
@@ -139,9 +138,6 @@ export async function listarUsuariosComFormulariosEquipe(formulario_id: number, 
 }
 
 
-
-
-
 // Função para associar formulário a todas as equipes
 export const associarFormularioParaTodasEquipes = async (
 
@@ -250,3 +246,7 @@ export async function updateAnswerStatus(formsId: number, answered_for: number) 
         throw error;
     }
 }
+
+
+
+

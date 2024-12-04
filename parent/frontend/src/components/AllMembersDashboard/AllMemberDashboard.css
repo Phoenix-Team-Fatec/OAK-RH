@@ -1,0 +1,58 @@
+.team-members-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.team-members-modal-container {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.team-members-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.team-members-modal-close-btn {
+  all: unset;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.team-members-modal-close-btn:hover {
+    background-color: transparent;
+}
+
+.team-members-modal-content {
+  font-size: 1rem;
+  color: #333;
+}
+
+.team-members-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.team-member-item {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #333;
+}

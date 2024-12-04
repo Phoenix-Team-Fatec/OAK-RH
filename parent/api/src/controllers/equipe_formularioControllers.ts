@@ -1,4 +1,4 @@
-import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes, listarUsuariosComFormulariosEquipe, getListOfUserToAnswerService } from "../services/formulario_equipeServices";
+import { associarFormularioParaEquipes, deletarFormularioEquipe, listarFormulariosEquipe, associarFormularioParaTodasEquipes, listarUsuariosComFormulariosEquipe, getListOfUserToAnswerService} from "../services/formulario_equipeServices";
 import { Request, Response } from 'express';
 import { getListOfUserAlredyAnsweredService } from "../services/formularioServices";
 
@@ -66,7 +66,6 @@ export const deletarFormularioEquipeController = async (req: Request, res: Respo
 
     }
 }
-
 
 //Função para listar usuários com formulários
 export const listarUsuariosComFormulariosEquipeController = async (req: Request, res: Response) => {
