@@ -120,7 +120,7 @@ https://www.figma.com/design/g9ZkBcQvA4WqrllBQUsATc/OAK-RH?node-id=0-1&t=3SuGwy7
 | Divisão entre formulários pendentes e respondidos para usuário | :white_check_mark: |
 
 
-### Sprint 4 -
+### Sprint 4 -  Refinamento , Análise e Exibição de Resultados
 
 | ITEM   | STATUS |
 | :----: | :----: |
